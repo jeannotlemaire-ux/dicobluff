@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Dicobluff — Générateur d'icônes</title>
+<style>
+  body { font-family: system-ui, sans-serif; background: #0E1A22; color: #F5EDD8; display: flex; flex-direction: column; align-items: center; padding: 48px 24px; gap: 24px; min-height: 100vh; }
+  h1 { font-size: 1.4rem; margin: 0; }
+  p { color: #A0937A; font-size: .9rem; margin: 0; text-align: center; max-width: 480px; }
+  #preview { border-radius: 22px; box-shadow: 0 8px 40px rgba(0,0,0,.5); }
+  button { background: linear-gradient(135deg,#B8720A,#C8860A,#E5A820); color: #0E1A22; font-weight: 800; font-size: .9rem; letter-spacing: .04em; text-transform: uppercase; border: none; border-radius: 100px; padding: 14px 36px; cursor: pointer; }
+  button:hover { filter: brightness(1.1); }
+  #status { color: #A0937A; font-size: .85rem; min-height: 1.4em; }
+  canvas { display: none; }
+</style>
+</head>
+<body>
+<h1>Générateur d'icônes Dicobluff</h1>
+<p>Ouvre ce fichier dans un navigateur. Clique sur le bouton pour télécharger toutes les icônes PNG nécessaires à la PWA.</p>
+<img id="preview" src="assets/icon.svg" width="160" height="160" alt="Aperçu icône Dicobluff">
+<button onclick="generateAll()">Générer toutes les icônes</button>
+<p id="status"></p>
+<canvas id="c"></canvas>
+
+<script>
+const SVG_PATH = 'assets/icon.svg';
+const ICONS = [
+  { size: 16,   name: 'favicon-16.png' },
+  { size: 32,   name: 'favicon-32.png' },
+  { size: 48,   name: 'favicon-48.png' },
+  { size: 72,   name: 'icon-72.png' },
+  { size: 96,   name: 'icon-96.png' },
+  { size: 128,  name: 'icon-128.png' },
+  { size: 144,  name: 'icon-144.png' },
+  { size: 152,  name: 'icon-152.png' },
+  { size: 167,  name: 'icon-167.png' },
+  { size: 180,  name: 'icon-180.png' },
+  { size: 192,  name: 'icon-192.png' },
+  { size: 192,  name: 'icon-maskable-192.png' },
+  { size: 256,  name: 'icon-256.png' },
+  { size: 384,  name: 'icon-384.png' },
+  { size: 512,  name: 'icon-512.png' },
+  { size: 512,  name: 'icon-maskable-512.png' },
+  { size: 1024, name: 'icon-1024.png' },
+];
+
+async function generateAll() {
+  const btn = document.querySelector('button');
+  const status = document.getElementById('status');
+  btn.disabled = true;
+
+  const svgText = await fetch(SVG_PATH).then(r => r.text());
+
+  for (let i = 0; i < ICONS.length; i++) {
+    const { size, name } = ICONS[i];
+    status.textContent = `Génération ${i + 1}/${ICONS.length} — ${name}`;
+    await exportPNG(svgText, size, name);
+    await delay(120); // laisser le temps au navigateur entre chaque téléchargement
+  }
+
+  status.textContent = `Terminé — ${ICONS.length} icônes générées. Déplace les fichiers dans assets/icons/.`;
+  btn.disabled = false;
+}
+
+function exportPNG(svgText, size, filename) {
+  return new Promise(resolve => {
+    const canvas = document.getElementById('c');
+    canvas.width = size;
+    canvas.height = size;
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, size, size);
+
+    const blob = new Blob([svgText], { type: 'image/svg+xml;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const img = new Image();
+
+    img.onload = () => {
+      ctx.drawImage(img, 0, 0, size, size);
+      URL.revokeObjectURL(url);
+      canvas.toBlob(pngBlob => {
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(pngBlob);
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+        resolve();
+      }, 'image/png');
+    };
+
+    img.src = url;
+  });
+}
+
+function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
+</script>
+</body>
+</html>

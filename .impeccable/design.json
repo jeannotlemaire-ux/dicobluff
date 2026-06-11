@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-06-01T00:00:00Z",
+  "title": "Design System : Dicobluff",
+  "extensions": {
+    "colorMeta": {
+      "bg-ink":        { "role": "neutral",   "displayName": "Marine d'Encre",   "canonical": "#0E1A22", "tonalRamp": ["#050a0d","#0a131a","#0e1a22","#162430","#1c2e3a","#243848","#2e4a5e","#3a6070"] },
+      "gold-primary":  { "role": "primary",   "displayName": "Or Sourd",         "canonical": "#C8860A", "tonalRamp": ["#3a2502","#6b4504","#996107","#c8860a","#e5a820","#e5c170","#f0d690","#faefc8"] },
+      "coral":         { "role": "secondary", "displayName": "Coral d'Enjeu",    "canonical": "#D94F3F", "tonalRamp": ["#3d0e09","#7a1c14","#b02b1f","#d94f3f","#e8645a","#ef8c86","#f5b4b0","#fad8d6"] },
+      "teal":          { "role": "tertiary",  "displayName": "Teal de Progrès",  "canonical": "#2A9D8F", "tonalRamp": ["#051f1c","#0d3d38","#1a6b62","#2a9d8f","#3db8a9","#6dccc0","#9addd6","#c5eeeb"] },
+      "cream":         { "role": "neutral",   "displayName": "Crème",            "canonical": "#F5EDD8", "tonalRamp": ["#2a2419","#4a3e2b","#7a6843","#a89066","#c9bc9c","#e5d9bb","#f0e8d0","#f5edd8"] },
+      "text-muted":    { "role": "neutral",   "displayName": "Crème Sourde",     "canonical": "#A0937A", "tonalRamp": ["#1e1a13","#3a3021","#5c4c33","#806a4a","#a0937a","#c4b49a","#ddd0bb","#f0e8d8"] }
+    },
+    "typographyMeta": {
+      "display":  { "displayName": "Display",  "purpose": "Mots rares affichés pendant la partie. Cormorant Garamond italic/bold uniquement." },
+      "headline": { "displayName": "Headline", "purpose": "Titres d'écran, noms de personnages IA. Cormorant." },
+      "body":     { "displayName": "Body",     "purpose": "Corps de texte, descriptions, définitions. Manrope 400." },
+      "label":    { "displayName": "Label",    "purpose": "Tags, badges, microlabels nav. Manrope 700 uppercase." }
+    },
+    "shadows": [
+      { "name": "shadow-sm",   "value": "0 1px 3px rgba(0,0,0,.18)",          "purpose": "Micro-élévation, séparateurs." },
+      { "name": "shadow-md",   "value": "0 4px 14px rgba(0,0,0,.22)",         "purpose": "Cards actives, menus flottants." },
+      { "name": "shadow-lg",   "value": "0 8px 28px rgba(0,0,0,.32)",         "purpose": "Overlays et modales." },
+      { "name": "shadow-gold", "value": "0 4px 18px rgba(200,134,10,.28)",    "purpose": "Bouton primaire et éléments actifs dorés uniquement." },
+      { "name": "shadow-coral","value": "0 4px 18px rgba(217,79,63,.22)",     "purpose": "Bouton d'enjeu (coral) uniquement." }
+    ],
+    "motion": [
+      { "name": "ease-expo",     "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Easing standard pour toutes les transitions UI. Seul easing autorisé hors linear." },
+      { "name": "ease-out-soft", "value": "cubic-bezier(.2,.8,.3,1)",       "purpose": "Transitions douces pour éléments de layout." },
+      { "name": "duration-fast", "value": "150ms",  "purpose": "Feedback immédiat : hover, active." },
+      { "name": "duration-base", "value": "250ms",  "purpose": "Transitions UI standard." },
+      { "name": "duration-slow", "value": "400ms",  "purpose": "Entrées d'éléments importants." }
+    ],
+    "breakpoints": [
+      { "name": "mobile-max", "value": "430px",  "purpose": "Largeur max du cadre de jeu." },
+      { "name": "tablet",     "value": "768px",  "purpose": "Décor éditorial desktop activé au-delà." },
+      { "name": "desktop",    "value": "1100px", "purpose": "Citations et ornements de desktop large." }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Action principale dorée. Toujours pill, toujours pleine largeur sur mobile.",
+      "html": "<button class=\"ds-btn-primary\">Commencer la partie</button>",
+      "css": ".ds-btn-primary { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 15px 32px; background: linear-gradient(135deg, #B8720A, #C8860A, #E5A820); color: #0E1A22; font-family: 'Manrope', system-ui, sans-serif; font-weight: 800; font-size: 0.92rem; letter-spacing: 0.04em; text-transform: uppercase; border: none; border-radius: 100px; cursor: pointer; box-shadow: 0 6px 24px rgba(200,134,10,.35), inset 0 1px 0 rgba(255,255,255,.15); transition: filter 0.2s ease, transform 0.15s ease; } .ds-btn-primary:hover { filter: brightness(1.08); } .ds-btn-primary:active { transform: scale(0.98); } .ds-btn-primary:focus-visible { outline: 2px solid #E5C170; outline-offset: 3px; }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Action secondaire ou retour. Contour crème atténué, fond transparent.",
+      "html": "<button class=\"ds-btn-ghost\">Retour</button>",
+      "css": ".ds-btn-ghost { display: flex; align-items: center; justify-content: center; width: 100%; padding: 15px 32px; background: transparent; color: #C9BC9C; font-family: 'Manrope', system-ui, sans-serif; font-weight: 600; font-size: 0.92rem; border: 1.5px solid rgba(242,236,216,0.15); border-radius: 100px; cursor: pointer; transition: background 0.18s ease, color 0.18s ease; } .ds-btn-ghost:hover { background: #162430; color: #F5EDD8; } .ds-btn-ghost:focus-visible { outline: 2px solid #E5C170; outline-offset: 3px; }"
+    },
+    {
+      "name": "Base Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Conteneur de surface pour toute information structurée.",
+      "html": "<div class=\"ds-card\"><p>Contenu</p></div>",
+      "css": ".ds-card { background: #162430; border-radius: 22px; padding: 20px 18px; border: 1px solid rgba(242,236,216,0.08); box-shadow: 0 4px 14px rgba(0,0,0,.22); }"
+    },
+    {
+      "name": "Quiz Option",
+      "kind": "custom",
+      "refersTo": "button-quiz-opt",
+      "description": "Bouton de choix de définition. Full-width, typography display (Cormorant), états riches.",
+      "html": "<button class=\"ds-quiz-opt\">Une substance extraite de la résine de certains arbres tropicaux</button>",
+      "css": ".ds-quiz-opt { display: block; width: 100%; background: #162430; border: 1.5px solid rgba(242,236,216,0.08); border-radius: 16px; color: #F5EDD8; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1rem; line-height: 1.5; padding: 14px 16px; margin-bottom: 10px; text-align: left; cursor: pointer; transition: background 0.18s, border-color 0.18s, color 0.18s; } .ds-quiz-opt:hover { background: #1C2E3A; border-color: rgba(242,236,216,0.15); } .ds-quiz-opt:focus-visible { outline: 2px solid #E5C170; outline-offset: 2px; }"
+    },
+    {
+      "name": "Nav Button",
+      "kind": "nav",
+      "refersTo": "nav-side",
+      "description": "Bouton latéral fixe (Carnet / Profil). Pill compact, icône + label uppercase.",
+      "html": "<button class=\"ds-nav-side\" type=\"button\" aria-label=\"Carnet de mots\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 19.5A2.5 2.5 0 0 1 6.5 17H20\"/><path d=\"M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z\"/></svg><span class=\"ds-nav-side__label\">Carnet</span></button>",
+      "css": ".ds-nav-side { display: flex; flex-direction: column; align-items: center; gap: 5px; padding: 12px 0; flex: 1; background: #162430; border: 1px solid rgba(242,236,216,0.15); border-radius: 20px; cursor: pointer; transition: transform 0.18s ease, opacity 0.18s ease, background 0.18s ease; box-shadow: 0 4px 20px rgba(0,0,0,.25); color: #C9BC9C; font-family: 'Manrope', system-ui, sans-serif; } .ds-nav-side__label { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; } .ds-nav-side:hover .ds-nav-side__label, .ds-nav-side:hover svg { opacity: 0.8; } .ds-nav-side:active { transform: scale(0.95); } .ds-nav-side:focus-visible { outline: 2px solid #E5C170; outline-offset: 2px; border-radius: 20px; }"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Champ de saisie standard. Fond surface, focus doré, placeholder italic.",
+      "html": "<input class=\"ds-input\" type=\"text\" placeholder=\"Ton pseudo…\" />",
+      "css": ".ds-input { width: 100%; background: #162430; border: 1.5px solid rgba(242,236,216,0.15); border-radius: 16px; color: #F5EDD8; font-family: 'Manrope', system-ui, sans-serif; font-size: 1rem; padding: 14px 16px; transition: border-color 0.2s, box-shadow 0.2s, background 0.2s; outline: none; } .ds-input::placeholder { color: #A0937A; font-style: italic; } .ds-input:focus { border-color: #C8860A; background: #1C2E3A; box-shadow: 0 0 0 3px rgba(160,106,0,.15); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "La Plume et le Masque",
+    "overview": "Dicobluff oppose deux symboles : la plume de l'écrivain, outil de vérité, et le masque du théâtre, instrument du mensonge. Le système visuel porte cette tension. Chaque surface est sombre et concentrée — une scène où la lumière tombe uniquement sur ce qui compte. L'or n'est jamais décoratif ; il signale une action, une révélation, un moment de jeu.\n\nCe n'est pas un jeu de quiz. C'est un salon littéraire clandestin. La typographie Cormorant Garamond donne aux mots rares leur dignité ; Manrope structure l'interface sans jamais prendre le dessus.\n\nL'ennemi de ce design : tout ce qui ressemble à une application mobile ordinaire. Pas de fond blanc, pas d'icônes colorées multiples, pas de gradients violets, pas de confettis.",
+    "keyCharacteristics": [
+      "Palette marine-or-coral-teal : quatre rôles, zéro décoration",
+      "Deux familles typographiques sur un axe de contraste précis (serif display / sans-serif UI)",
+      "Grain de film à 4% d'opacité pour briser le plat digital",
+      "Animations uniquement en transform et opacity — jamais de propriétés de layout",
+      "Easing expo-out exclusif (cubic-bezier(0.16, 1, 0.3, 1)) : fluidité sans rebond"
+    ],
+    "rules": [
+      { "name": "La Règle de l'Or Rare",       "body": "L'or primaire occupe moins de 10% de toute surface donnée. Sa rareté est son signal. Un écran entièrement doré serait un écran sans signification.", "section": "colors" },
+      { "name": "La Règle des Quatre Rôles",   "body": "Coral = enjeu. Teal = progression. Or = action primaire. Marine = espace. Chaque couleur a un rôle unique. Ne pas croiser les rôles par souci d'harmonie décorative.", "section": "colors" },
+      { "name": "La Règle des Deux Voix",      "body": "Cormorant porte l'éditorial, Manrope porte l'UI. Une troisième famille est interdite.", "section": "typography" },
+      { "name": "La Règle du Descender",       "body": "En italic display, tout mot contenant y g j p q nécessite un line-height ≥ 1.1 et un padding-bottom: 2px pour ne pas couper les jambages.", "section": "typography" },
+      { "name": "La Règle de l'Ombre Teintée", "body": "Toutes les ombres sont teintées selon leur contexte chromatique. Aucune box-shadow en noir pur au-delà de rgba(0,0,0,0.35).", "section": "elevation" }
+    ],
+    "dos": [
+      "Do utiliser var(--ease-expo) pour toutes les transitions UI",
+      "Do animer exclusivement transform et opacity pour les performances GPU",
+      "Do utiliser var(--ink-fixed) pour tout texte sur fond clair ou doré",
+      "Do mettre aria-label sur tout bouton icon-only, role='dialog aria-modal' sur tout overlay",
+      "Do accéder au localStorage exclusivement via LS.get/LS.set",
+      "Do incrémenter CACHE_VERSION dans sw.js à chaque déploiement"
+    ],
+    "donts": [
+      "Don't utiliser de fond crème, sable ou beige — ce design est marine par définition",
+      "Don't utiliser background-clip: text avec un gradient — interdit absolument",
+      "Don't utiliser border-left ou border-right coloré > 1px comme accent sur une card",
+      "Don't animer width, height, top, left, margin, ou padding — propriétés de layout",
+      "Don't utiliser des easings avec rebond (cubic-bezier(.34,1.56,.64,1) ou similaire)",
+      "Don't introduire une troisième famille de polices",
+      "Don't utiliser l'or comme couleur de fond décoratif",
+      "Don't utiliser transition: all sur un composant — lister les propriétés explicitement",
+      "Don't simuler Duolingo, une appli de quiz, ou un jeu mobile coloré"
+    ]
+  }
+}

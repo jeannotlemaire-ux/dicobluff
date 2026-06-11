@@ -1,0 +1,29 @@
+{
+  "rules": {
+    "queue": {
+      ".read": "auth != null",
+      "$uid": {
+        ".write": "auth != null && auth.uid === $uid"
+      }
+    },
+    "matchInvite": {
+      "$uid": {
+        ".read": "auth != null && auth.uid === $uid",
+        ".write": "auth != null"
+      }
+    },
+    "rooms": {
+      "$roomId": {
+        ".read": "auth != null",
+        ".write": "auth != null",
+        "players": {
+          "$uid": {
+            "score": {
+              ".write": "auth != null && auth.uid === data.parent().parent().parent().child('host').val()"
+            }
+          }
+        }
+      }
+    }
+  }
+}

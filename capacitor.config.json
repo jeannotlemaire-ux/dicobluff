@@ -1,0 +1,19 @@
+{
+  "appId": "com.dicobluff.app",
+  "appName": "Dicobluff",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  },
+  "android": {
+    "buildOptions": {
+      "keystorePath": "release.keystore",
+      "keystoreAlias": "dicobluff"
+    }
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  }
+}

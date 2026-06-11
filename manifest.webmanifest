@@ -1,0 +1,47 @@
+{
+  "id": "./",
+  "name": "Dicobluff",
+  "short_name": "Dicobluff",
+  "description": "Le jeu de bluff littéraire — invente la définition la plus convaincante pour piéger tes adversaires.",
+  "lang": "fr",
+  "dir": "ltr",
+  "start_url": "./?source=pwa",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "portrait",
+  "background_color": "#0E1A22",
+  "theme_color": "#0E1A22",
+  "prefer_related_applications": false,
+  "categories": ["games", "education", "entertainment"],
+  "shortcuts": [
+    {
+      "name": "Jouer Solo",
+      "short_name": "Solo",
+      "description": "Lancer une partie solo contre l'IA",
+      "url": "./?mode=solo",
+      "icons": [{ "src": "assets/icons/icon-96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Mot du jour",
+      "short_name": "Mot du jour",
+      "description": "Voir le mot du jour",
+      "url": "./?wod=1",
+      "icons": [{ "src": "assets/icons/icon-96.png", "sizes": "96x96" }]
+    }
+  ],
+  "icons": [
+    { "src": "assets/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "assets/icons/icon-72.png",  "sizes": "72x72",   "type": "image/png", "purpose": "any" },
+    { "src": "assets/icons/icon-96.png",  "sizes": "96x96",   "type": "image/png", "purpose": "any" },
+    { "src": "assets/icons/icon-128.png", "sizes": "128x128", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icons/icon-144.png", "sizes": "144x144", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icons/icon-152.png", "sizes": "152x152", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icons/icon-256.png", "sizes": "256x256", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icons/icon-384.png", "sizes": "384x384", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icons/icon-maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "assets/icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

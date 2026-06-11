@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="30%" y1="0%" x2="70%" y2="100%">
+      <stop offset="0%" stop-color="#14263A"/>
+      <stop offset="100%" stop-color="#080E15"/>
+    </linearGradient>
+    <linearGradient id="vane" x1="5%" y1="5%" x2="95%" y2="95%">
+      <stop offset="0%"   stop-color="#F5E098"/>
+      <stop offset="38%"  stop-color="#D4940E"/>
+      <stop offset="100%" stop-color="#7A4A04"/>
+    </linearGradient>
+    <linearGradient id="vane2" x1="5%" y1="5%" x2="95%" y2="95%">
+      <stop offset="0%"   stop-color="#C8860A"/>
+      <stop offset="100%" stop-color="#4E2E02"/>
+    </linearGradient>
+    <linearGradient id="nib" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#B07208"/>
+      <stop offset="100%" stop-color="#3A2002"/>
+    </linearGradient>
+    <filter id="feather-shadow" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="2" dy="8" stdDeviation="14" flood-color="#000" flood-opacity="0.55"/>
+    </filter>
+    <filter id="tip-glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+  <!-- Subtle inner glow at top-left (light source) -->
+  <radialGradient id="light" cx="28%" cy="25%" r="50%">
+    <stop offset="0%" stop-color="#1E3A52" stop-opacity="1"/>
+    <stop offset="100%" stop-color="#080E15" stop-opacity="0"/>
+  </radialGradient>
+  <rect width="512" height="512" rx="112" fill="url(#light)"/>
+
+  <!-- ── PLUME ── -->
+  <!-- Vane principale (côté large, vers bas-droite) -->
+  <path filter="url(#feather-shadow)"
+    d="M 162,372
+       C 200,338 248,308 296,280
+       C 344,252 388,218 408,138
+       C 416,105 408,85 394,88
+       C 370,93 342,118 312,148
+       C 282,178 252,214 222,252
+       C 192,290 170,330 155,372
+       Z"
+    fill="url(#vane)"/>
+
+  <!-- Vane secondaire (côté étroit, vers haut-gauche — plus sombre) -->
+  <path
+    d="M 162,372
+       C 175,338 194,300 222,264
+       C 250,228 280,194 310,164
+       C 340,134 368,110 390,96
+       C 408,85 416,105 408,138
+       C 388,218 344,252 296,280
+       C 248,308 200,338 162,372
+       Z"
+    fill="url(#vane2)" opacity="0.72"/>
+
+  <!-- Rachis / nervure centrale -->
+  <path d="M 155,372 Q 282,228 394,90"
+    fill="none" stroke="rgba(60,30,4,0.45)" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- Barbes (lignes de détail) -->
+  <g fill="none" stroke="rgba(245,224,130,0.22)" stroke-width="1.8" stroke-linecap="round">
+    <line x1="234" y1="246" x2="292" y2="300"/>
+    <line x1="258" y1="218" x2="316" y2="272"/>
+    <line x1="284" y1="190" x2="338" y2="244"/>
+    <line x1="312" y1="160" x2="362" y2="212"/>
+    <line x1="342" y1="130" x2="384" y2="178"/>
+  </g>
+
+  <!-- Reflet lumineux sur la vane haute -->
+  <path
+    d="M 394,90 C 380,96 354,120 326,150 C 318,158 310,167 302,176
+       L 314,166 C 344,136 372,110 390,98 Z"
+    fill="rgba(255,242,180,0.30)"/>
+
+  <!-- Calamus (bout de la plume, avant le bec) -->
+  <path
+    d="M 155,372 C 148,382 138,394 128,408 L 118,426
+       C 125,424 136,418 148,410
+       C 157,402 162,390 162,372 Z"
+    fill="url(#nib)"/>
+
+  <!-- Pointe du bec -->
+  <path d="M 118,426 L 148,410 L 156,374 L 140,388 Z"
+    fill="#5A3004" filter="url(#tip-glow)"/>
+  <circle cx="116" cy="428" r="3.5" fill="#C8860A" opacity="0.7"/>
+</svg>
