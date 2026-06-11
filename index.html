@@ -579,7 +579,7 @@ body.on-home #profile-btn { display: flex; }
   scrollbar-width: none;
 }
 .screen::-webkit-scrollbar { display: none; }
-.screen.active { display: flex; animation: screenIn .55s var(--ease-expo) both; }
+.screen.active { display: flex; animation: screenIn .3s var(--ease-expo) both; }
 
 /* Bouton sticky en bas de l'écran (au-dessus de la safe-area) */
 .btn-sticky-bottom {
@@ -986,7 +986,7 @@ input::placeholder, textarea::placeholder { color: var(--text3); font-style: ita
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: .8rem;
+  font-size: .875rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: .07em;
@@ -997,7 +997,7 @@ input::placeholder, textarea::placeholder { color: var(--text3); font-style: ita
 .def-card.wrong {
   border-color: rgba(217,79,63,.3);
   background: rgba(217,79,63,.07);
-  opacity: .65;
+  filter: saturate(0.55);
 }
 .def-card.my-def {
   border-color: var(--gold-a30);
@@ -1125,7 +1125,7 @@ input::placeholder, textarea::placeholder { color: var(--text3); font-style: ita
    TIMER
 ═══════════════════════════════════════════════════════════════ */
 .timer-bar-wrap {
-  height: 4px;
+  height: 6px;
   background: var(--surface2);
   border-radius: 3px; overflow: hidden;
   margin-bottom: 18px;
@@ -1151,6 +1151,23 @@ input::placeholder, textarea::placeholder { color: var(--text3); font-style: ita
 }
 @keyframes timer-warn-pulse { 0%,100%{opacity:1;} 50%{opacity:.78;} }
 @keyframes timer-urgent-pulse { 0%,100%{opacity:1;transform:scaleY(1);} 50%{opacity:.55;transform:scaleY(1.35);} }
+
+/* Barre de progression minimum 15 caractères (screen-word) */
+.def-min-progress {
+  height: 3px;
+  background: var(--surface2);
+  border-radius: 3px;
+  margin-top: 5px;
+  overflow: hidden;
+}
+.def-min-progress-fill {
+  height: 100%;
+  background: var(--gold);
+  border-radius: 3px;
+  width: 0%;
+  transition: width .12s var(--ease-expo), background .2s var(--ease-expo);
+}
+.def-min-progress-fill.done { background: var(--teal2); }
 
 .timer-num {
   font-family: 'Cormorant Garamond', serif;
@@ -1610,7 +1627,7 @@ input::placeholder, textarea::placeholder { color: var(--text3); font-style: ita
 .ai-player-card:hover { background: var(--surface2); transform: translateY(-1px); }
 .ai-name { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.05rem; letter-spacing: .01em; }
 .ai-tag  { font-size: .85rem; color: var(--text3); margin-top: 1px; font-family: 'Cormorant Garamond', serif; font-style: italic; line-height: 1.35; }
-.ai-status { font-size: .78rem; }
+.ai-status { font-size: .875rem; }
 
 /* Sophie */
 .sophie-card { border-color: var(--gold-a30)!important; background: var(--gold-a04)!important; }
@@ -2306,8 +2323,8 @@ input::placeholder, textarea::placeholder { color: var(--text3); font-style: ita
 .center { text-align: center; }
 .muted  { color: var(--text2); }
 .small  { font-size: .88rem; font-family: 'Manrope', sans-serif; }
-.small2 { font-size: .78rem; font-family: 'Manrope', sans-serif; }
-.char-count { text-align: right; font-size: .72rem; color: var(--text3); margin-top: 5px; font-family: 'Manrope', sans-serif; }
+.small2 { font-size: .875rem; font-family: 'Manrope', sans-serif; }
+.char-count { text-align: right; font-size: .875rem; color: var(--text3); margin-top: 5px; font-family: 'Manrope', sans-serif; }
 
 .gap-8 {height:8px;} .gap-10{height:10px;} .gap-12{height:12px;} .gap-14{height:14px;}
 .gap-16{height:16px;} .gap-20{height:20px;} .gap-24{height:24px;} .gap-32{height:32px;}
@@ -5443,7 +5460,7 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
       <h3>Joueurs</h3>
       <div class="badge badge-accent" id="lobby-count">0/10</div>
     </div>
-    <div class="muted small" style="margin-bottom:12px;font-size:.72rem;">Minimum 3 joueurs pour démarrer</div>
+    <div class="muted small" style="margin-bottom:12px;">Minimum 3 joueurs pour démarrer</div>
     <div id="lobby-players"></div>
   </div>
   <div class="gap-14"></div>
@@ -5464,7 +5481,7 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
         <div class="host-settings-row-label"><span data-icon="mask-fun" data-icon-size="14"></span> Mode</div>
         <div class="host-settings-row-options">
           <button class="diff-btn active" id="mode-classic" onclick="App.setGameMode('classic')"><span data-icon="dictionary" data-icon-size="12" style="display:inline-flex;margin-right:3px;"></span>Classique</button>
-          <button class="diff-btn is-locked" id="mode-decale" onclick="App.setGameMode('decale')"><span data-icon="mask-fun" data-icon-size="12" style="display:inline-flex;margin-right:3px;"></span>Décalé <span class="badge-premium" style="margin-left:4px;">Pro</span><span class="feature-lock-overlay">🔒 Premium</span></button>
+          <button class="diff-btn is-locked" id="mode-decale" onclick="App.setGameMode('decale')" aria-disabled="true"><span data-icon="mask-fun" data-icon-size="12" style="display:inline-flex;margin-right:3px;"></span>Décalé <span class="badge-premium" style="margin-left:4px;">Pro</span><span class="feature-lock-overlay">🔒 Premium</span></button>
         </div>
       </div>
 
@@ -5508,6 +5525,7 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
     <div class="muted small center" style="margin-bottom:12px;font-family:'Manrope',sans-serif;">Invente une <strong style="color:var(--gold2);">fausse définition</strong> convaincante !</div>
     <textarea id="input-def" placeholder="Action de… / Personne qui… / Région où l'on…" maxlength="220" minlength="15" oninput="App.onDefInput()" onkeydown="if((event.key==='Enter'&&(event.ctrlKey||event.metaKey))||(event.key==='Enter'&&!event.shiftKey&&this.value.trim().length>=15)){event.preventDefault();const b=document.getElementById('btn-submit-def');if(b&&!b.disabled)App.submitDefinition();}" aria-label="Invente une fausse définition (Entrée pour soumettre, Maj+Entrée pour aller à la ligne)" aria-describedby="def-char-hint"></textarea>
     <div class="char-count" id="def-char-hint"><span id="def-chars">0</span>/220 <span id="def-min-hint" style="margin-left:6px;color:var(--text3);">· minimum 15</span></div>
+    <div class="def-min-progress" id="def-min-progress" aria-hidden="true"><div class="def-min-progress-fill" id="def-min-progress-fill"></div></div>
     <div class="gap-16"></div>
     <button id="btn-submit-def" class="btn btn-primary" onclick="App.submitDefinition()" disabled>Soumettre</button>
   </div>
@@ -5536,11 +5554,15 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
 <div id="screen-vote" class="screen">
   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
     <div class="badge badge-accent" id="vote-round-label">Manche 1</div>
-    <button onclick="App.quitGame()" class="btn-quit-game" aria-label="Quitter la partie"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    <div class="row">
+      <span class="timer-num" id="vote-timer-display" role="timer" aria-label="Temps restant pour voter" style="display:none;">0:45</span>
+      <button onclick="App.quitGame()" class="btn-quit-game" aria-label="Quitter la partie"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
   </div>
+  <div class="timer-bar-wrap" id="vote-timer-bar-wrap" style="display:none;"><div class="timer-bar" id="vote-timer-bar" style="transform:scaleX(1);"></div></div>
 
   <div class="center" style="margin-bottom:6px;">
-    <div class="word-main" id="vote-word-text" style="font-size:2rem;">—</div>
+    <div class="word-main" id="vote-word-text">—</div>
   </div>
   <div class="gap-14"></div>
 
@@ -5594,7 +5616,7 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
       <div style="flex:1;min-width:0;">
         <div class="t-label tx-teal" style="margin-bottom:5px;">Vraie définition</div>
         <div id="true-def-text" style="line-height:1.6;font-size:.98rem;font-family:'Cormorant Garamond',serif;"></div>
-        <div id="true-def-vote-tag" style="display:none;margin-top:8px;font-size:.78rem;font-weight:700;font-family:'Manrope',sans-serif;"></div>
+        <div id="true-def-vote-tag" style="display:none;margin-top:8px;font-size:.875rem;font-weight:700;font-family:'Manrope',sans-serif;"></div>
         <div id="true-def-finders" style="margin-top:10px;display:none;align-items:center;gap:10px;flex-wrap:wrap;">
           <span style="font-size:.78rem;color:var(--teal2);font-family:'Cormorant Garamond',serif;font-style:italic;">Trouvée par</span>
           <div id="true-def-finders-cluster"></div>
@@ -5609,7 +5631,7 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
   <div class="center">
     <div style="font-size:.78rem;color:var(--text3);margin-bottom:4px;font-family:'Manrope',sans-serif;">Tes points ce tour</div>
     <div id="my-round-points" class="score-big">+0</div>
-    <div id="bluff-penalty-notice" style="display:none;margin-top:8px;font-size:.78rem;color:var(--text3);font-style:italic;font-family:'Cormorant Garamond',serif;line-height:1.4;max-width:320px;margin-left:auto;margin-right:auto;">Ta définition n'a convaincu personne cette fois — tu y arriveras au prochain tour</div>
+    <div id="bluff-penalty-notice" style="display:none;margin-top:8px;font-size:.875rem;color:var(--text3);font-style:italic;font-family:'Cormorant Garamond',serif;line-height:1.4;max-width:320px;margin-left:auto;margin-right:auto;">Ta définition n'a convaincu personne cette fois — tu y arriveras au prochain tour</div>
   </div>
   <div class="gap-12"></div>
 
@@ -10385,6 +10407,12 @@ const App = {
     btn.textContent='Soumettre';
     const hint=document.getElementById('def-min-hint');
     if(hint) hint.style.display = (v.length>=15) ? 'none' : 'inline';
+    const fill=document.getElementById('def-min-progress-fill');
+    if(fill){
+      const pct=Math.min(100,Math.round((v.length/15)*100));
+      fill.style.width=pct+'%';
+      fill.classList.toggle('done',v.length>=15);
+    }
   },
 
   submitDefinition(){
@@ -10673,6 +10701,8 @@ function startSoloRound(){
   document.getElementById('input-def').value='';
   document.getElementById('def-chars').textContent='0';
   document.getElementById('btn-submit-def').disabled=true;
+  const _fill=document.getElementById('def-min-progress-fill');if(_fill){_fill.style.width='0%';_fill.classList.remove('done');}
+  const _hint=document.getElementById('def-min-hint');if(_hint)_hint.style.display='inline';
 
   const bar=document.getElementById('ai-opponents-bar'),writing=document.getElementById('ai-opponents-writing');
   bar.style.display='block';
@@ -11620,6 +11650,24 @@ function showVoteScreen(word,defs){
     ];
     initVoteProgress(pipPlayers);
     soloTrickleVotes(solo.aiOpponents);
+
+    // Vote countdown (45s) — auto-confirm on expiry
+    const vtDisp=document.getElementById('vote-timer-display');
+    const vtWrap=document.getElementById('vote-timer-bar-wrap');
+    if(vtDisp) vtDisp.style.display='inline-block';
+    if(vtWrap) vtWrap.style.display='block';
+    startTimer('vote-timer-bar','vote-timer-display',45,()=>{
+      if(!selectedVote){
+        const pickable=document.querySelectorAll('#vote-definitions .def-card:not(.my-def)');
+        if(pickable.length){ selectVote(pickable[Math.floor(Math.random()*pickable.length)].id.replace('def-','')); }
+      }
+      if(selectedVote) App.confirmVote();
+    },(rem,urg)=>{ if(urg) SFX.tickUrgent&&SFX.tickUrgent(); });
+  } else {
+    const vtDisp=document.getElementById('vote-timer-display');
+    const vtWrap=document.getElementById('vote-timer-bar-wrap');
+    if(vtDisp) vtDisp.style.display='none';
+    if(vtWrap) vtWrap.style.display='none';
   }
 
   showScreen('vote');
@@ -11873,7 +11921,7 @@ function renderWritingPhase(d){
     : 'Action de… / Personne qui… / Région où l\'on…';
 
   document.getElementById('player-def-section').style.display='block';
-  document.getElementById('input-def').value='';document.getElementById('def-chars').textContent='0';document.getElementById('btn-submit-def').disabled=true;
+  document.getElementById('input-def').value='';document.getElementById('def-chars').textContent='0';document.getElementById('btn-submit-def').disabled=true;const _f2=document.getElementById('def-min-progress-fill');if(_f2){_f2.style.width='0%';_f2.classList.remove('done');}const _h2=document.getElementById('def-min-hint');if(_h2)_h2.style.display='inline';
   showScreen('word');
   startTimer('timer-bar','timer-display',d.timerDuration||120,()=>{if(d.host===myUID)triggerVotingPhase();},(rem,urg)=>{if(urg)SFX.tickUrgent();});
 }
