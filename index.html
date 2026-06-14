@@ -723,21 +723,10 @@ h3 {
   position: absolute; top: 0; left: 0; right: 0; height: 1px;
   background: linear-gradient(90deg, transparent, rgba(200,134,10,.4), transparent);
 }
-.word-hero-card::after {
-  content: '';
-  position: absolute;
-  top: 0; left: 50%; transform: translateX(-50%);
-  width: 80%; height: 50%;
-  background: radial-gradient(ellipse 100% 80% at 50% 0%, rgba(200,134,10,.10) 0%, transparent 100%);
-  pointer-events: none;
-}
 [data-theme="light"] .word-hero-card {
   background: var(--surface);
   border: 1px solid rgba(160,106,0,.18);
   box-shadow: none;
-}
-[data-theme="light"] .word-hero-card::after {
-  background: radial-gradient(ellipse 100% 80% at 50% 0%, rgba(160,106,0,.06) 0%, transparent 100%);
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -5587,7 +5576,7 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
   </div>
 
   <!-- AI opponents writing bar (footer compact) -->
-  <div id="ai-opponents-bar" style="display:none;margin-top:18px;padding-top:14px;border-top:1px solid var(--border);opacity:.7;">
+  <div id="ai-opponents-bar" style="display:none;margin-top:18px;padding-top:14px;border-top:1px solid var(--border);">
     <div class="t-label center-text" style="margin-bottom:6px;font-size:var(--text-xs);letter-spacing:.05em;">Adversaires en train d'écrire</div>
     <div id="ai-opponents-writing" style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap;"></div>
   </div>
