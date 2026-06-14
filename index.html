@@ -5357,7 +5357,7 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
   <div class="t-label-lg center-text" style="margin:22px 0 8px;">Mode</div>
   <div class="host-settings-row-options" style="justify-content:center;gap:10px;margin-bottom:4px;">
     <button class="diff-btn active" id="solo-mode-classic" onclick="App.setSoloMode('classic')"><span data-icon="dictionary" data-icon-size="12" style="display:inline-flex;margin-right:3px;"></span>Classique</button>
-    <button class="diff-btn is-locked" id="solo-mode-decale" onclick="App.setSoloMode('decale')">🃏 Loufoque <span class="badge-premium" style="margin-left:4px;">Pro</span><span class="feature-lock-overlay">🔒 Premium</span></button>
+    <button class="diff-btn is-locked" id="solo-mode-decale" onclick="App.setSoloMode('decale')"><span data-icon="loufoque" data-icon-size="12" style="display:inline-flex;margin-right:4px;"></span>Loufoque <span class="badge-premium" style="margin-left:4px;">Pro</span><span class="feature-lock-overlay">🔒 Premium</span></button>
   </div>
   <div id="solo-mode-hint" class="muted small" style="text-align:center;margin-bottom:4px;">Mots du dictionnaire, registre soutenu.</div>
 
@@ -5528,7 +5528,7 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
         <div class="host-settings-row-label"><span data-icon="mask-fun" data-icon-size="14"></span> Mode</div>
         <div class="host-settings-row-options">
           <button class="diff-btn active" id="mode-classic" onclick="App.setGameMode('classic')"><span data-icon="dictionary" data-icon-size="12" style="display:inline-flex;margin-right:3px;"></span>Classique</button>
-          <button class="diff-btn is-locked" id="mode-decale" onclick="App.setGameMode('decale')" aria-disabled="true">🃏 Loufoque <span class="badge-premium" style="margin-left:4px;">Pro</span><span class="feature-lock-overlay">🔒 Premium</span></button>
+          <button class="diff-btn is-locked" id="mode-decale" onclick="App.setGameMode('decale')" aria-disabled="true"><span data-icon="loufoque" data-icon-size="12" style="display:inline-flex;margin-right:4px;"></span>Loufoque <span class="badge-premium" style="margin-left:4px;">Pro</span><span class="feature-lock-overlay">🔒 Premium</span></button>
         </div>
       </div>
 
@@ -5550,7 +5550,7 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
     <div style="display:flex;align-items:center;gap:7px;">
       <div class="badge badge-accent" id="round-label">Manche 1</div>
-      <div id="solo-mode-tag" style="display:none;align-items:center;gap:4px;padding:3px 9px;border-radius:20px;background:rgba(217,79,63,.15);border:1px solid rgba(217,79,63,.35);font-size:.72rem;font-weight:700;font-family:'Manrope',sans-serif;color:var(--coral);letter-spacing:.03em;">🃏 Loufoque</div>
+      <div id="solo-mode-tag" style="display:none;align-items:center;gap:4px;padding:3px 9px;border-radius:20px;background:rgba(217,79,63,.15);border:1px solid rgba(217,79,63,.35);font-size:.72rem;font-weight:700;font-family:'Manrope',sans-serif;color:var(--coral);letter-spacing:.03em;"><span data-icon="loufoque" data-icon-size="12" style="display:inline-flex;"></span> Loufoque</div>
     </div>
     <div class="row">
       <span class="timer-num" id="timer-display" role="timer" aria-label="Temps restant">2:00</span>
@@ -6271,118 +6271,120 @@ const SFX = (() => {
     click() {
       if (muted) return;
       const t = ac().currentTime;
-      noise(0.18, t, 0.022, 2200);
-      osc(700, 'sine', 0.07, t, 0.055);
-      osc(350, 'sine', 0.04, t + 0.012, 0.04);
+      noise(0.09, t, 0.016, 1800);
+      osc(580, 'sine', 0.04, t, 0.045);
     },
 
     submit() {
       if (muted) return;
       const c = ac(), t = c.currentTime;
-      // Rising sweep
       const o = c.createOscillator(), g = c.createGain();
       o.connect(g); g.connect(c.destination);
       o.type = 'sine';
-      o.frequency.setValueAtTime(280, t);
-      o.frequency.exponentialRampToValueAtTime(880, t + 0.16);
-      g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(0.09, t + 0.03);
-      g.gain.exponentialRampToValueAtTime(0.0001, t + 0.2);
-      o.start(t); o.stop(t + 0.22);
-      // Sparkle chord
-      [67, 71, 74].forEach((n, i) => setTimeout(() => warm(hz(n), 0.08, ac().currentTime, 0.4), 90 + i * 55));
+      o.frequency.setValueAtTime(300, t);
+      o.frequency.exponentialRampToValueAtTime(720, t + 0.14);
+      g.gain.setValueAtTime(0, t);
+      g.gain.linearRampToValueAtTime(0.07, t + 0.025);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + 0.22);
+      o.start(t); o.stop(t + 0.24);
     },
 
     vote() {
       if (muted) return;
       const t = ac().currentTime;
-      warm(hz(69), 0.10, t, 0.4);
-      osc(hz(73), 'sine', 0.04, t + 0.015, 0.3);
+      warm(hz(65), 0.08, t, 0.55);
+      warm(hz(69), 0.06, t + 0.02, 0.50);
     },
 
     correct() {
       if (muted) return;
-      // Ascending major arpeggio C-E-G-C'-E'
-      [60, 64, 67, 72, 76].forEach((n, i) => {
-        setTimeout(() => warm(hz(n), 0.13 - i * 0.012, ac().currentTime, 0.5), i * 65);
-      });
+      const t = ac().currentTime;
+      // Accord chaud joué en masse, pas en arpège
+      warm(hz(60), 0.10, t, 0.75);
+      warm(hz(64), 0.08, t + 0.018, 0.70);
+      warm(hz(67), 0.07, t + 0.033, 0.65);
+      warm(hz(72), 0.05, t + 0.055, 0.60);
     },
 
     wrong() {
       if (muted) return;
-      const c = ac(), t = c.currentTime;
-      noise(0.12, t, 0.04, 400);
-      osc(160, 'sine', 0.11, t, 0.22);
-      osc(130, 'sine', 0.07, t + 0.06, 0.28);
-      const o = c.createOscillator(), g = c.createGain();
-      o.connect(g); g.connect(c.destination);
-      o.type = 'triangle';
-      o.frequency.setValueAtTime(260, t + 0.07);
-      o.frequency.exponentialRampToValueAtTime(110, t + 0.38);
-      g.gain.setValueAtTime(0, t + 0.07); g.gain.linearRampToValueAtTime(0.07, t + 0.09);
-      g.gain.exponentialRampToValueAtTime(0.0001, t + 0.42);
-      o.start(t + 0.07); o.stop(t + 0.44);
+      const t = ac().currentTime;
+      noise(0.07, t, 0.04, 320);
+      osc(170, 'sine', 0.09, t, 0.20);
+      osc(135, 'sine', 0.06, t + 0.05, 0.25);
     },
 
     points() {
       if (muted) return;
-      [67, 71, 74].forEach((n, i) => setTimeout(() => warm(hz(n), 0.09, ac().currentTime, 0.4), i * 60));
+      const t = ac().currentTime;
+      warm(hz(64), 0.07, t, 0.45);
+      warm(hz(67), 0.06, t + 0.02, 0.42);
+      warm(hz(71), 0.05, t + 0.04, 0.38);
     },
 
     newRound() {
       if (muted) return;
-      [60, 64, 67].forEach((n, i) => setTimeout(() => warm(hz(n), 0.09, ac().currentTime, 0.3), i * 75));
-      setTimeout(() => warm(hz(72), 0.12, ac().currentTime, 0.55), 250);
+      // Une seule note de cloche, sobre
+      warm(hz(69), 0.10, ac().currentTime, 0.90);
+      setTimeout(() => warm(hz(72), 0.06, ac().currentTime, 0.75), 160);
     },
 
     tick() {
       if (muted) return;
-      osc(880, 'sine', 0.04, ac().currentTime, 0.06);
+      osc(760, 'sine', 0.025, ac().currentTime, 0.055);
     },
 
     tickUrgent() {
       if (muted) return;
       const t = ac().currentTime;
-      noise(0.1, t, 0.03, 1200);
-      osc(200, 'sine', 0.09, t, 0.09);
-      osc(170, 'sine', 0.06, t + 0.11, 0.09);
+      noise(0.07, t, 0.025, 1100);
+      osc(210, 'sine', 0.07, t, 0.08);
+      osc(175, 'sine', 0.05, t + 0.10, 0.08);
     },
 
     timeUp() {
       if (muted) return;
-      [72, 67, 64, 60].forEach((n, i) => setTimeout(() => warm(hz(n), 0.10, ac().currentTime, 0.35), i * 85));
+      const t = ac().currentTime;
+      // Deux notes descendantes sobres
+      warm(hz(67), 0.09, t, 0.45);
+      warm(hz(62), 0.09, t + 0.18, 0.50);
+      warm(hz(57), 0.07, t + 0.38, 0.55);
     },
 
     win() {
       if (muted) return;
-      [60, 64, 67, 72, 76, 79, 84].forEach((n, i) => {
-        setTimeout(() => warm(hz(n), 0.14 - i * 0.008, ac().currentTime, 0.6), i * 75);
-      });
-      // Harmony
+      const t = ac().currentTime;
+      // Accord de résolution, pas d'arpège
+      [60, 64, 67, 72].forEach((n, i) => warm(hz(n), 0.10 - i * 0.008, t + i * 0.028, 1.1));
       setTimeout(() => {
-        [67, 72, 76].forEach((n, i) => setTimeout(() => warm(hz(n), 0.07, ac().currentTime, 0.65), i * 75));
-      }, 380);
+        const t2 = ac().currentTime;
+        [67, 71, 74].forEach((n, i) => warm(hz(n), 0.06, t2 + i * 0.02, 0.9));
+      }, 420);
     },
 
     lobby() {
       if (muted) return;
-      [60, 64, 67].forEach((n, i) => setTimeout(() => warm(hz(n), 0.08, ac().currentTime, 0.55), i * 45));
+      const t = ac().currentTime;
+      warm(hz(60), 0.07, t, 0.55);
+      warm(hz(64), 0.06, t + 0.03, 0.50);
+      warm(hz(67), 0.05, t + 0.06, 0.45);
     },
 
     ready() {
       if (muted) return;
-      warm(hz(67), 0.09, ac().currentTime, 0.22);
-      setTimeout(() => warm(hz(72), 0.10, ac().currentTime, 0.35), 110);
+      warm(hz(64), 0.08, ac().currentTime, 0.30);
+      setTimeout(() => warm(hz(69), 0.09, ac().currentTime, 0.40), 120);
     },
 
     copy() {
       if (muted) return;
-      osc(hz(76), 'sine', 0.07, ac().currentTime, 0.13);
-      setTimeout(() => osc(hz(79), 'sine', 0.05, ac().currentTime, 0.10), 65);
+      osc(hz(74), 'sine', 0.06, ac().currentTime, 0.12);
+      setTimeout(() => osc(hz(77), 'sine', 0.04, ac().currentTime, 0.10), 70);
     },
 
     aiThinking() {
       if (muted) return;
-      osc(hz(62), 'triangle', 0.03, ac().currentTime, 0.18);
+      osc(hz(60), 'triangle', 0.025, ac().currentTime, 0.20);
     },
 
     toggle() {
@@ -7586,6 +7588,9 @@ const ICONS = {
   'chat-notif': `<path d="M22 5C22 6.38071 20.8807 7.5 19.5 7.5C18.1193 7.5 17 6.38071 17 5C17 3.61929 18.1193 2.5 19.5 2.5C20.8807 2.5 22 3.61929 22 5Z" fill="currentColor"/><path d="M21.7896 10.0023C21.9274 10.6464 22 11.3147 22 12C22 17.2467 17.7467 21.5 12.5 21.5C10.8719 21.5 9.3394 21.0904 8 20.3687C6.13177 19.362 4.87462 20.2979 3.76592 20.4658C3.59774 20.4913 3.43024 20.4302 3.30997 20.31C3.12741 20.1274 3.09266 19.8451 3.1935 19.6074C3.62865 18.5818 4.0282 16.6382 3.48341 15C3.1698 14.057 3 13.0483 3 12C3 6.75329 7.25329 2.5 12.5 2.5C13.1853 2.5 13.8536 2.57256 14.4978 2.71042"/><circle cx="8.5" cy="12" r=".5" fill="currentColor" stroke="none"/><circle cx="12.5" cy="12" r=".5" fill="currentColor" stroke="none"/><circle cx="16.5" cy="12" r=".5" fill="currentColor" stroke="none"/>`,
 
   hourglass: `<path d="M4 3H20"/><path d="M5.5 3V5.03039C5.5 6.27227 6.07682 7.4437 7.06116 8.20089L12 12L16.9388 8.20089C17.9232 7.44371 18.5 6.27227 18.5 5.03039V3"/><path d="M5.5 21V18.9696C5.5 17.7277 6.07682 16.5563 7.06116 15.7991L12 12L16.9388 15.7991C17.9232 16.5563 18.5 17.7277 18.5 18.9696V21"/><path d="M4 21H20"/>`,
+
+  /* Chapeau de bouffon à 3 pointes — iconographie Mode Loufoque */
+  loufoque: `<path d="M4.5 16.5Q12 20 19.5 16.5"/><path d="M7 15.5C6 12 6.5 9.5 8.5 7.5"/><path d="M17 15.5C18 12 17.5 9.5 15.5 7.5"/><path d="M11.5 8.5C11 6 11.5 4 12 2.5"/><circle cx="8.5" cy="7" r="1.4" fill="currentColor" stroke="none"/><circle cx="15.5" cy="7" r="1.4" fill="currentColor" stroke="none"/><circle cx="12" cy="2.5" r="1.4" fill="currentColor" stroke="none"/>`,
 };
 
 /* Helper : génère le <svg> complet pour une icône à une taille donnée.
