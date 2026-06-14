@@ -2217,10 +2217,15 @@ input::placeholder, textarea::placeholder { color: var(--text3); font-style: ita
   display: grid;
   grid-template-rows: 0fr;
   overflow: hidden;
-  transition: grid-template-rows .35s var(--ease-expo);
+  visibility: hidden;
+  transition: grid-template-rows .35s var(--ease-expo), visibility 0s .35s;
   background: var(--bg);
 }
-.ai-chat.open .ai-chat-body { grid-template-rows: 1fr; }
+.ai-chat.open .ai-chat-body {
+  grid-template-rows: 1fr;
+  visibility: visible;
+  transition: grid-template-rows .35s var(--ease-expo), visibility 0s 0s;
+}
 .ai-chat-messages {
   min-height: 0;
   overflow: hidden;
@@ -4240,7 +4245,7 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
 }
 #daily-limit-modal.open { display: flex; animation: screenIn .35s var(--ease-expo) both; }
 
-/* Mode Décalé — ambiance visuelle */
+/* Mode Loufoque — ambiance visuelle */
 .mode-decale-active #screen-word .word-hero-card {
   border-color: rgba(217,79,63,.35);
   background: linear-gradient(135deg, rgba(217,79,63,.07) 0%, rgba(200,134,10,.05) 100%);
@@ -5088,7 +5093,7 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
     <div class="premium-sheet-body">Débloquez les fonctionnalités avancées pour aller plus loin dans le jeu.</div>
     <div class="premium-features">
       <div class="premium-feature-row">Mode Difficile — adversaires IA au sommet de leur art</div>
-      <div class="premium-feature-row">Mode Décalé — définitions absurdes et loufoques</div>
+      <div class="premium-feature-row">Mode Loufoque — mots grivois, définitions absurdes</div>
       <div class="premium-feature-row">Mode Révision — quiz, consolidation, légendaires</div>
     </div>
     <button class="premium-btn-unlock" onclick="triggerPremiumPurchase()">Débloquer — 2,99 €</button>
@@ -5108,7 +5113,7 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
     <div class="premium-features">
       <div class="premium-feature-row">Parties illimitées chaque jour</div>
       <div class="premium-feature-row">Mode Difficile — adversaires IA redoutables</div>
-      <div class="premium-feature-row">Mode Décalé — définitions absurdes et loufoques</div>
+      <div class="premium-feature-row">Mode Loufoque — mots grivois, définitions absurdes</div>
       <div class="premium-feature-row">Mode Révision — consolide ton vocabulaire</div>
     </div>
     <button class="premium-btn-unlock" onclick="closeDailyLimitModal();showPremiumModal();">Débloquer Premium — 2,99 €</button>
@@ -5352,7 +5357,7 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
   <div class="t-label-lg center-text" style="margin:22px 0 8px;">Mode</div>
   <div class="host-settings-row-options" style="justify-content:center;gap:10px;margin-bottom:4px;">
     <button class="diff-btn active" id="solo-mode-classic" onclick="App.setSoloMode('classic')"><span data-icon="dictionary" data-icon-size="12" style="display:inline-flex;margin-right:3px;"></span>Classique</button>
-    <button class="diff-btn is-locked" id="solo-mode-decale" onclick="App.setSoloMode('decale')"><span data-icon="mask-fun" data-icon-size="12" style="display:inline-flex;margin-right:3px;"></span>Décalé <span class="badge-premium" style="margin-left:4px;">Pro</span><span class="feature-lock-overlay">🔒 Premium</span></button>
+    <button class="diff-btn is-locked" id="solo-mode-decale" onclick="App.setSoloMode('decale')">🃏 Loufoque <span class="badge-premium" style="margin-left:4px;">Pro</span><span class="feature-lock-overlay">🔒 Premium</span></button>
   </div>
   <div id="solo-mode-hint" class="muted small" style="text-align:center;margin-bottom:4px;">Mots du dictionnaire, registre soutenu.</div>
 
@@ -5523,7 +5528,7 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
         <div class="host-settings-row-label"><span data-icon="mask-fun" data-icon-size="14"></span> Mode</div>
         <div class="host-settings-row-options">
           <button class="diff-btn active" id="mode-classic" onclick="App.setGameMode('classic')"><span data-icon="dictionary" data-icon-size="12" style="display:inline-flex;margin-right:3px;"></span>Classique</button>
-          <button class="diff-btn is-locked" id="mode-decale" onclick="App.setGameMode('decale')" aria-disabled="true"><span data-icon="mask-fun" data-icon-size="12" style="display:inline-flex;margin-right:3px;"></span>Décalé <span class="badge-premium" style="margin-left:4px;">Pro</span><span class="feature-lock-overlay">🔒 Premium</span></button>
+          <button class="diff-btn is-locked" id="mode-decale" onclick="App.setGameMode('decale')" aria-disabled="true">🃏 Loufoque <span class="badge-premium" style="margin-left:4px;">Pro</span><span class="feature-lock-overlay">🔒 Premium</span></button>
         </div>
       </div>
 
@@ -5545,7 +5550,7 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
     <div style="display:flex;align-items:center;gap:7px;">
       <div class="badge badge-accent" id="round-label">Manche 1</div>
-      <div id="solo-mode-tag" style="display:none;align-items:center;gap:4px;padding:3px 9px;border-radius:20px;background:rgba(217,79,63,.15);border:1px solid rgba(217,79,63,.35);font-size:.72rem;font-weight:700;font-family:'Manrope',sans-serif;color:var(--coral);letter-spacing:.03em;">🎭 Décalé</div>
+      <div id="solo-mode-tag" style="display:none;align-items:center;gap:4px;padding:3px 9px;border-radius:20px;background:rgba(217,79,63,.15);border:1px solid rgba(217,79,63,.35);font-size:.72rem;font-weight:700;font-family:'Manrope',sans-serif;color:var(--coral);letter-spacing:.03em;">🃏 Loufoque</div>
     </div>
     <div class="row">
       <span class="timer-num" id="timer-display" role="timer" aria-label="Temps restant">2:00</span>
@@ -10377,7 +10382,7 @@ const App = {
     document.getElementById('solo-mode-decale')?.classList.toggle('active', gm==='decale');
     const modeHint = document.getElementById('solo-mode-hint');
     if(modeHint) modeHint.textContent = gm==='decale'
-      ? 'Mots grivois, defs absurdes — définitions loufoques garanties !'
+      ? 'Mots savoureux et absurdes — bienvenue dans le Loufoque !'
       : 'Mots du dictionnaire, registre soutenu.';
 
     // 3) Carte des 3 adversaires
@@ -10416,7 +10421,7 @@ const App = {
     document.getElementById('solo-mode-decale')?.classList.toggle('active', m==='decale');
     const hint = document.getElementById('solo-mode-hint');
     if(hint) hint.textContent = m==='decale'
-      ? 'Mots grivois, defs absurdes — définitions loufoques garanties !'
+      ? 'Mots savoureux et absurdes — bienvenue dans le Loufoque !'
       : 'Mots du dictionnaire, registre soutenu.';
     SFX.click();
   },
@@ -11998,7 +12003,7 @@ function renderLobby(d){
     if(mc)mc.classList.toggle('active',gm==='classic');
     if(mf)mf.classList.toggle('active',gm==='decale');
     const hint=document.getElementById('mode-hint');
-    if(hint)hint.textContent = gm==='decale' ? 'Décalé : tout le monde invente des définitions absurdes — la vraie est aussi délirante que les fausses. Objectif : trouver l\'absurde officiel !' : 'Classique : invente la fausse définition la plus académique et convaincante.';
+    if(hint)hint.textContent = gm==='decale' ? 'Loufoque : mots grivois, defs absurdes — la vraie est aussi délirante que les fausses. Trouve l\'absurde officiel !' : 'Classique : invente la fausse définition la plus académique et convaincante.';
   }
   const cont=document.getElementById('lobby-players'); cont.innerHTML='';
   const onlinePlayers=plist.filter(([,p])=>p.online!==false);
