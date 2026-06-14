@@ -43,9 +43,9 @@
    Typo : Cormorant Garamond (titres, mots, italique éditorial) + Manrope (UI, chiffres, microcopy)
 ═══════════════════════════════════════════════════════════════ */
 :root {
-  /* Backgrounds */
-  --bg:       #1A2A36;
-  --bg2:      #1F303D;
+  /* Backgrounds — légèrement réchauffés : moins de dominante teal, plus encre marine */
+  --bg:       #1B2534;
+  --bg2:      #1F2B3C;
   --bg3:      #243748;
 
   /* Surfaces */
@@ -1153,8 +1153,9 @@ input::placeholder, textarea::placeholder { color: var(--text3); font-style: ita
   height: 100%;
   background: var(--gold);
   border-radius: 3px;
-  width: 0%;
-  transition: width .12s var(--ease-expo), background .2s var(--ease-expo);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform .12s var(--ease-expo), background .2s var(--ease-expo);
 }
 .def-min-progress-fill.done { background: var(--teal2); }
 
@@ -1278,7 +1279,7 @@ input::placeholder, textarea::placeholder { color: var(--text3); font-style: ita
   min-width: 110px;
 }
 .results-tab.active {
-  color: #0E1A22;
+  color: var(--ink-fixed);
 }
 .results-tab-indicator {
   position: absolute;
@@ -4861,6 +4862,10 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
   flex-wrap: nowrap;
   transition: opacity .18s var(--ease-expo), transform .18s var(--ease-expo);
 }
+@media (max-width: 340px) {
+  .solo-ai-preview { gap: 8px; }
+  .solo-ai-card { flex-basis: calc((100% - 16px) / 3); }
+}
 .solo-ai-preview.shuffle-out { opacity: 0; transform: translateY(-4px) scale(.97); }
 .solo-ai-preview.shuffle-in { animation: solo-ai-shuffle-in .3s var(--ease-expo) both; }
 @keyframes solo-ai-shuffle-in {
@@ -5131,11 +5136,11 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
     <p class="starter-sub">Tu pourras en débloquer d'autres en jouant.</p>
     <div class="starter-grid">
       <button type="button" class="starter-choice" data-key="georgesand" aria-label="Choisir George Sand">
-        <div class="starter-img-wrap"><img id="starter-img-georgesand" alt="George Sand"></div>
+        <div class="starter-img-wrap"><img id="starter-img-georgesand" src="./new-avatars/georgesand.png" alt="George Sand" loading="lazy"></div>
         <div class="starter-name">George Sand</div>
       </button>
       <button type="button" class="starter-choice" data-key="lafontaine" aria-label="Choisir La Fontaine">
-        <div class="starter-img-wrap"><img id="starter-img-lafontaine" alt="La Fontaine"></div>
+        <div class="starter-img-wrap"><img id="starter-img-lafontaine" src="./new-avatars/lafontaine.png" alt="La Fontaine" loading="lazy"></div>
         <div class="starter-name">La Fontaine</div>
       </button>
     </div>
@@ -8216,12 +8221,12 @@ const AV_DEFS = [
   { e:'georgesand',  label:'George Sand',  color:'#e8845a', cond:null,        hint:'Disponible',           gender:'f', starter:true },
   { e:'lafontaine',  label:'La Fontaine',  color:'#2d8a4e', cond:null,        hint:'Disponible',           gender:'m', starter:true },
   // À débloquer
-  { e:'beauvoir',    label:'Simone de Beauvoir', color:'#c8860a', cond:'games3',    hint:'Finir 3 parties',      gender:'f' },
-  { e:'duras',       label:'Marguerite Duras',   color:'#d94f4f', cond:'wins3',     hint:'Gagner 3 parties',     gender:'f' },
-  { e:'moliere',     label:'Molière',     color:'#7c5cfc', cond:'carnet15',  hint:'15 mots au carnet',    gender:'m' },
+  { e:'beauvoir',    label:'Simone de Beauvoir', color:'#5A6E8A', cond:'games3',    hint:'Finir 3 parties',      gender:'f' },
+  { e:'duras',       label:'Marguerite Duras',   color:'#8A5A70', cond:'wins3',     hint:'Gagner 3 parties',     gender:'f' },
+  { e:'moliere',     label:'Molière',     color:'#6A4A90', cond:'carnet15',  hint:'15 mots au carnet',    gender:'m' },
   { e:'flaubert',    label:'Flaubert',    color:'#c8860a', cond:'correct30', hint:'30 vraies définitions',gender:'m' },
-  { e:'hugo',        label:'Hugo',        color:'#5b3fd4', cond:'streak10',  hint:'Streak de 10',         gender:'m' },
-  { e:'guitry',      label:'Guitry',      color:'#2c2c2c', cond:'daily15',   hint:'15 jours d\'affilée',  gender:'m' },
+  { e:'hugo',        label:'Hugo',        color:'#4A3A8A', cond:'streak10',  hint:'Streak de 10',         gender:'m' },
+  { e:'guitry',      label:'Guitry',      color:'#3A4A5C', cond:'daily15',   hint:'15 jours d\'affilée',  gender:'m' },
   { e:'voltaire',    label:'Voltaire',    color:'#d94f4f', cond:'wins25',    hint:'Gagner 25 parties',    gender:'m' },
 ];
 
@@ -9347,7 +9352,7 @@ function closeQuizComplete() {
 ══════════════════════════════════════════════════════ */
 const AI_CHARACTERS = [
   {
-    id:'tartuffe', name:'Tartuffe', color:'#4A3220',
+    id:'tartuffe', name:'Tartuffe', color:'#7A4028',
     title:'Le Faux Dévot',
     desc:"Hypocrite de génie, il dissimule ses ruses derrière des dehors vertueux — le bluffeur né.",
     bank:'absurde',
@@ -9364,7 +9369,7 @@ const AI_CHARACTERS = [
     }
   },
   {
-    id:'cyrano', name:'Cyrano', color:'#d94f4f',
+    id:'cyrano', name:'Cyrano', color:'#B83830',
     title:'Le Maître du Verbe',
     desc:"Éloquent et flamboyant, ses fausses définitions sont des chefs-d'œuvre.",
     bank:'litteraire',
@@ -9398,7 +9403,7 @@ const AI_CHARACTERS = [
     }
   },
   {
-    id:'arseneluppin', name:'Arsène Lupin', color:'#8B4513',
+    id:'arseneluppin', name:'Arsène Lupin', color:'#8A5030',
     title:'Le Gentleman Cambrioleur',
     desc:'Rusé et élégant, maître du déguisement et de la ruse, il brouille les pistes avec finesse.',
     bank:'litteraire',
@@ -9415,7 +9420,7 @@ const AI_CHARACTERS = [
     }
   },
   {
-    id:'petitprince', name:'Le Petit Prince', color:'#FFD700',
+    id:'petitprince', name:'Le Petit Prince', color:'#855418',
     title:"L'Enfant Poète et Logique",
     desc:"Naïf en apparence, mais d'une logique implacable et poétique, il voit au-delà des apparences.",
     bank:'philosophique',
@@ -9432,7 +9437,7 @@ const AI_CHARACTERS = [
     }
   },
   {
-    id:'esmeralda', name:'Esmeralda', color:'#DC143C',
+    id:'esmeralda', name:'Esmeralda', color:'#A82030',
     title:'La Bohémienne Intuitive',
     desc:'Intuitive et passionnée, elle décèle les émotions cachées derrière les mots.',
     bank:'litteraire',
@@ -9467,7 +9472,7 @@ const AI_CHARACTERS = [
     }
   },
   {
-    id:'nemo', name:'Capitaine Nemo', color:'#1F4E5F',
+    id:'nemo', name:'Capitaine Nemo', color:'#2A7090',
     title:'Le Savant Solitaire',
     desc:"Érudit et ténébreux, il décortique chaque définition comme un instrument de précision.",
     bank:'scientifique',
@@ -9484,7 +9489,7 @@ const AI_CHARACTERS = [
     }
   },
   {
-    id:'dantes', name:'Edmond Dantès', color:'#5B2E4A',
+    id:'dantes', name:'Edmond Dantès', color:'#7A3858',
     title:'Le Comte Vengeur',
     desc:"Calculateur et patient, il avance masqué et démasque les fausses pistes une à une.",
     bank:'litteraire',
@@ -9501,7 +9506,7 @@ const AI_CHARACTERS = [
     }
   },
   {
-    id:'fogg', name:'Phileas Fogg', color:'#2C3E50',
+    id:'fogg', name:'Phileas Fogg', color:'#4A6075',
     title:'Le Gentleman Flegmatique',
     desc:"Précis et imperturbable, il évalue chaque définition avec la rigueur d'une montre suisse.",
     bank:'scientifique',
@@ -9535,7 +9540,7 @@ const AI_CHARACTERS = [
     }
   },
   {
-    id:'donjuan', name:'Don Juan', color:'#7B3F4E',
+    id:'donjuan', name:'Don Juan', color:'#803450',
     title:'Le Séducteur Insolent',
     desc:"Charmeur et provocateur, il se laisse séduire par les définitions qui ont du panache.",
     bank:'absurde',
@@ -10508,8 +10513,8 @@ const App = {
     if(hint) hint.style.display = (v.length>=15) ? 'none' : 'inline';
     const fill=document.getElementById('def-min-progress-fill');
     if(fill){
-      const pct=Math.min(100,Math.round((v.length/15)*100));
-      fill.style.width=pct+'%';
+      const pct=Math.min(1,v.length/15);
+      fill.style.transform='scaleX('+pct+')';
       fill.classList.toggle('done',v.length>=15);
     }
   },
@@ -10801,7 +10806,7 @@ function startSoloRound(){
   document.getElementById('input-def').value='';
   document.getElementById('def-chars').textContent='0';
   document.getElementById('btn-submit-def').disabled=true;
-  const _fill=document.getElementById('def-min-progress-fill');if(_fill){_fill.style.width='0%';_fill.classList.remove('done');}
+  const _fill=document.getElementById('def-min-progress-fill');if(_fill){_fill.style.transform='scaleX(0)';_fill.classList.remove('done');}
   const _hint=document.getElementById('def-min-hint');if(_hint)_hint.style.display='inline';
 
   const bar=document.getElementById('ai-opponents-bar'),writing=document.getElementById('ai-opponents-writing');
@@ -11508,9 +11513,9 @@ function renderPodium(players){
   const top3=players.slice(0,3);
   // Ordre visuel : argent (gauche), or (centre), bronze (droite).
   const order=[
-    {p:top3[1], cls:'silver', medal:'<span style="color:#9CA3AF;display:inline-flex;">'+icon('medal-silver',26)+'</span>'},
+    {p:top3[1], cls:'silver', medal:'<span style="color:var(--podium-silver);display:inline-flex;">'+icon('medal-silver',26)+'</span>'},
     {p:top3[0], cls:'gold',   medal:'<span style="color:var(--gold2);display:inline-flex;">'+icon('medal-gold',28)+'</span>'},
-    {p:top3[2], cls:'bronze', medal:'<span style="color:#A87A4F;display:inline-flex;">'+icon('medal-bronze',24)+'</span>'},
+    {p:top3[2], cls:'bronze', medal:'<span style="color:var(--podium-bronze);display:inline-flex;">'+icon('medal-bronze',24)+'</span>'},
   ].filter(s=>s.p);
   podiumEl.innerHTML=order.map(s=>{
     const p=s.p;
@@ -12029,7 +12034,7 @@ function renderWritingPhase(d){
     : 'Action de… / Personne qui… / Région où l\'on…';
 
   document.getElementById('player-def-section').style.display='block';
-  document.getElementById('input-def').value='';document.getElementById('def-chars').textContent='0';document.getElementById('btn-submit-def').disabled=true;const _f2=document.getElementById('def-min-progress-fill');if(_f2){_f2.style.width='0%';_f2.classList.remove('done');}const _h2=document.getElementById('def-min-hint');if(_h2)_h2.style.display='inline';
+  document.getElementById('input-def').value='';document.getElementById('def-chars').textContent='0';document.getElementById('btn-submit-def').disabled=true;const _f2=document.getElementById('def-min-progress-fill');if(_f2){_f2.style.transform='scaleX(0)';_f2.classList.remove('done');}const _h2=document.getElementById('def-min-hint');if(_h2)_h2.style.display='inline';
   showScreen('word');
   startTimer('timer-bar','timer-display',d.timerDuration||120,()=>{if(d.host===myUID)triggerVotingPhase();},(rem,urg)=>{if(urg)SFX.tickUrgent();});
 }
