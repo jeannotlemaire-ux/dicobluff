@@ -6241,12 +6241,13 @@ const SFX = (() => {
     } catch(e) {}
   }
 
-  // Warm double-oscillator (detuned pair + octave harmonic)
-  function warm(freq, vol, t, dur) {
+  // Cloche inharmonique — partials naturels, sonnent comme du métal (pas NES)
+  function bell(freq, vol, t, dur) {
     if (muted) return;
-    osc(freq, 'triangle', vol * 0.55, t, dur, 0);
-    osc(freq, 'triangle', vol * 0.35, t, dur, 7);
-    osc(freq * 2, 'sine', vol * 0.12, t, dur * 0.5, 0);
+    osc(freq,        'sine', vol * 0.65, t, dur);
+    osc(freq * 2.76, 'sine', vol * 0.20, t, dur * 0.35);
+    osc(freq * 5.40, 'sine', vol * 0.07, t, dur * 0.18);
+    osc(freq * 0.5,  'sine', vol * 0.12, t, dur * 0.70);
   }
 
   // Noise burst (for clicks/hits)
@@ -6268,123 +6269,112 @@ const SFX = (() => {
   }
 
   const s = {
+    // Tap sec — bruit filtré, pas de note musicale
     click() {
       if (muted) return;
       const t = ac().currentTime;
-      noise(0.09, t, 0.016, 1800);
-      osc(580, 'sine', 0.04, t, 0.045);
+      noise(0.12, t, 0.008, 2800);
+      noise(0.04, t + 0.005, 0.018, 700);
     },
 
+    // Glissement vers le haut, pas d'accord
     submit() {
       if (muted) return;
       const c = ac(), t = c.currentTime;
       const o = c.createOscillator(), g = c.createGain();
       o.connect(g); g.connect(c.destination);
       o.type = 'sine';
-      o.frequency.setValueAtTime(300, t);
-      o.frequency.exponentialRampToValueAtTime(720, t + 0.14);
+      o.frequency.setValueAtTime(260, t);
+      o.frequency.exponentialRampToValueAtTime(520, t + 0.12);
       g.gain.setValueAtTime(0, t);
-      g.gain.linearRampToValueAtTime(0.07, t + 0.025);
-      g.gain.exponentialRampToValueAtTime(0.0001, t + 0.22);
-      o.start(t); o.stop(t + 0.24);
+      g.gain.linearRampToValueAtTime(0.055, t + 0.018);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + 0.20);
+      o.start(t); o.stop(t + 0.22);
     },
 
     vote() {
       if (muted) return;
       const t = ac().currentTime;
-      warm(hz(65), 0.08, t, 0.55);
-      warm(hz(69), 0.06, t + 0.02, 0.50);
+      noise(0.07, t, 0.009, 1500);
+      osc(hz(65), 'sine', 0.032, t + 0.008, 0.26);
     },
 
+    // Cloche unique E5 — un seul son, long decay, inharmonique
     correct() {
       if (muted) return;
-      const t = ac().currentTime;
-      // Accord chaud joué en masse, pas en arpège
-      warm(hz(60), 0.10, t, 0.75);
-      warm(hz(64), 0.08, t + 0.018, 0.70);
-      warm(hz(67), 0.07, t + 0.033, 0.65);
-      warm(hz(72), 0.05, t + 0.055, 0.60);
+      bell(hz(76), 0.12, ac().currentTime, 1.0);
     },
 
+    // Choc sourd — bruit grave, pas de mélodie
     wrong() {
       if (muted) return;
       const t = ac().currentTime;
-      noise(0.07, t, 0.04, 320);
-      osc(170, 'sine', 0.09, t, 0.20);
-      osc(135, 'sine', 0.06, t + 0.05, 0.25);
+      noise(0.14, t, 0.06, 190);
+      osc(90, 'sine', 0.07, t, 0.18);
     },
 
     points() {
       if (muted) return;
       const t = ac().currentTime;
-      warm(hz(64), 0.07, t, 0.45);
-      warm(hz(67), 0.06, t + 0.02, 0.42);
-      warm(hz(71), 0.05, t + 0.04, 0.38);
+      noise(0.05, t, 0.007, 2200);
+      osc(hz(69), 'sine', 0.038, t + 0.006, 0.22);
     },
 
+    // Une seule cloche D5
     newRound() {
       if (muted) return;
-      // Une seule note de cloche, sobre
-      warm(hz(69), 0.10, ac().currentTime, 0.90);
-      setTimeout(() => warm(hz(72), 0.06, ac().currentTime, 0.75), 160);
+      bell(hz(74), 0.09, ac().currentTime, 0.85);
     },
 
     tick() {
       if (muted) return;
-      osc(760, 'sine', 0.025, ac().currentTime, 0.055);
+      noise(0.04, ac().currentTime, 0.010, 2600);
     },
 
     tickUrgent() {
       if (muted) return;
       const t = ac().currentTime;
-      noise(0.07, t, 0.025, 1100);
-      osc(210, 'sine', 0.07, t, 0.08);
-      osc(175, 'sine', 0.05, t + 0.10, 0.08);
+      noise(0.09, t, 0.016, 950);
+      osc(190, 'sine', 0.05, t, 0.075);
     },
 
     timeUp() {
       if (muted) return;
       const t = ac().currentTime;
-      // Deux notes descendantes sobres
-      warm(hz(67), 0.09, t, 0.45);
-      warm(hz(62), 0.09, t + 0.18, 0.50);
-      warm(hz(57), 0.07, t + 0.38, 0.55);
+      noise(0.07, t, 0.08, 230);
+      osc(hz(60), 'sine', 0.07, t + 0.04, 0.40);
+      osc(hz(55), 'sine', 0.05, t + 0.28, 0.45);
     },
 
+    // Deux cloches — E5 puis A5, quinte, pas d'accord
     win() {
       if (muted) return;
-      const t = ac().currentTime;
-      // Accord de résolution, pas d'arpège
-      [60, 64, 67, 72].forEach((n, i) => warm(hz(n), 0.10 - i * 0.008, t + i * 0.028, 1.1));
-      setTimeout(() => {
-        const t2 = ac().currentTime;
-        [67, 71, 74].forEach((n, i) => warm(hz(n), 0.06, t2 + i * 0.02, 0.9));
-      }, 420);
+      bell(hz(76), 0.11, ac().currentTime, 1.4);
+      setTimeout(() => bell(hz(81), 0.08, ac().currentTime, 1.1), 320);
     },
 
     lobby() {
       if (muted) return;
-      const t = ac().currentTime;
-      warm(hz(60), 0.07, t, 0.55);
-      warm(hz(64), 0.06, t + 0.03, 0.50);
-      warm(hz(67), 0.05, t + 0.06, 0.45);
+      bell(hz(69), 0.07, ac().currentTime, 0.65);
     },
 
     ready() {
       if (muted) return;
-      warm(hz(64), 0.08, ac().currentTime, 0.30);
-      setTimeout(() => warm(hz(69), 0.09, ac().currentTime, 0.40), 120);
+      const t = ac().currentTime;
+      noise(0.05, t, 0.008, 1800);
+      bell(hz(72), 0.07, t + 0.01, 0.45);
     },
 
     copy() {
       if (muted) return;
-      osc(hz(74), 'sine', 0.06, ac().currentTime, 0.12);
-      setTimeout(() => osc(hz(77), 'sine', 0.04, ac().currentTime, 0.10), 70);
+      const t = ac().currentTime;
+      noise(0.06, t, 0.007, 2400);
+      osc(hz(76), 'sine', 0.03, t + 0.005, 0.10);
     },
 
     aiThinking() {
       if (muted) return;
-      osc(hz(60), 'triangle', 0.025, ac().currentTime, 0.20);
+      noise(0.022, ac().currentTime, 0.032, 850);
     },
 
     toggle() {
@@ -6405,59 +6395,53 @@ const SFX = (() => {
         : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg> Son : ON';
     },
 
-    // ─── Reveal : crescendo dramatique révélation vraie définition ──
+    // ─── Reveal : whoosh bruit + 3 cloches simultanées ──────────
     reveal() {
       if (muted) return;
-      // Montée chromatique mystérieuse puis accord illuminé
-      [60, 62, 64, 65, 67].forEach((n, i) => {
-        setTimeout(() => warm(hz(n), 0.045 + i * 0.012, ac().currentTime, 0.5), i * 115);
-      });
+      const t = ac().currentTime;
+      noise(0.04, t, 0.15, 2800);
       setTimeout(() => {
         const t2 = ac().currentTime;
-        [60, 64, 67, 72].forEach((n) => {
-          warm(hz(n), 0.08, t2, 1.0);
-          osc(hz(n + 12), 'sine', 0.02, t2, 0.85);
-        });
-        noise(0.04, t2, 0.06, 4200);
-      }, 650);
+        bell(hz(69), 0.085, t2, 1.2);
+        bell(hz(76), 0.055, t2 + 0.04, 1.0);
+        bell(hz(81), 0.035, t2 + 0.08, 0.8);
+      }, 290);
     },
 
-    // ─── Level up XP ────────────────────────────────────────────
+    // ─── Level up XP : bruit + 2 cloches espacées ───────────────
     levelUp() {
       if (muted) return;
-      // Arpège ascendant + bloom final
-      [60, 64, 67, 72, 76, 79, 84].forEach((n, i) => {
-        setTimeout(() => warm(hz(n), 0.11 - i * 0.008, ac().currentTime, 0.62), i * 55);
-      });
+      const t = ac().currentTime;
+      noise(0.06, t, 0.025, 1800);
+      bell(hz(72), 0.09, t + 0.04, 1.0);
       setTimeout(() => {
-        const t2 = ac().currentTime;
-        [84, 88, 91].forEach((m, j) => {
-          warm(hz(m), 0.08, t2, 1.0);
-          osc(hz(m), 'sine', 0.025, t2 + j * 0.04, 0.85);
-        });
-      }, 420);
+        bell(hz(81), 0.08, ac().currentTime, 1.2);
+        bell(hz(76), 0.05, ac().currentTime + 0.06, 0.9);
+      }, 300);
     },
 
-    // ─── Found : j'ai trouvé la vraie définition ────────────────
+    // ─── Found : deux cloches espacées ──────────────────────────
     found() {
       if (muted) return;
       const t = ac().currentTime;
-      // Shimmer ascendant puis accord chaud
-      [72, 76, 79].forEach((n, i) => osc(hz(n), 'sine', 0.045, t + i * 0.06, 0.22));
-      setTimeout(() => {
-        const t2 = ac().currentTime;
-        [67, 72, 76, 79].forEach((n, i) => warm(hz(n), 0.085 - i * 0.012, t2, 0.58));
-      }, 190);
+      bell(hz(76), 0.10, t, 0.90);
+      bell(hz(81), 0.06, t + 0.18, 0.70);
     },
 
-    // ─── Fooled : j'ai trompé un adversaire ─────────────────────
+    // ─── Fooled : bruit + glissement grave→aigu ──────────────────
     fooled() {
       if (muted) return;
       const t = ac().currentTime;
-      // Descente espiègle + noise wink + résolution satisfaite
-      [76, 71, 67].forEach((n, i) => osc(hz(n), 'sine', 0.065, t + i * 0.085, 0.14));
-      noise(0.045, t + 0.24, 0.04, 3400);
-      warm(hz(64), 0.065, t + 0.31, 0.42);
+      noise(0.06, t, 0.025, 1600);
+      const c = ac(), o = c.createOscillator(), g = c.createGain();
+      o.connect(g); g.connect(c.destination);
+      o.type = 'sine';
+      o.frequency.setValueAtTime(180, t + 0.03);
+      o.frequency.exponentialRampToValueAtTime(480, t + 0.22);
+      g.gain.setValueAtTime(0, t + 0.03);
+      g.gain.linearRampToValueAtTime(0.055, t + 0.07);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + 0.30);
+      o.start(t + 0.03); o.stop(t + 0.32);
     },
 
     startMusic() {},
@@ -7589,8 +7573,8 @@ const ICONS = {
 
   hourglass: `<path d="M4 3H20"/><path d="M5.5 3V5.03039C5.5 6.27227 6.07682 7.4437 7.06116 8.20089L12 12L16.9388 8.20089C17.9232 7.44371 18.5 6.27227 18.5 5.03039V3"/><path d="M5.5 21V18.9696C5.5 17.7277 6.07682 16.5563 7.06116 15.7991L12 12L16.9388 15.7991C17.9232 16.5563 18.5 17.7277 18.5 18.9696V21"/><path d="M4 21H20"/>`,
 
-  /* Chapeau de bouffon à 3 pointes — iconographie Mode Loufoque */
-  loufoque: `<path d="M4.5 16.5Q12 20 19.5 16.5"/><path d="M7 15.5C6 12 6.5 9.5 8.5 7.5"/><path d="M17 15.5C18 12 17.5 9.5 15.5 7.5"/><path d="M11.5 8.5C11 6 11.5 4 12 2.5"/><circle cx="8.5" cy="7" r="1.4" fill="currentColor" stroke="none"/><circle cx="15.5" cy="7" r="1.4" fill="currentColor" stroke="none"/><circle cx="12" cy="2.5" r="1.4" fill="currentColor" stroke="none"/>`,
+  /* Chapeau de bouffon 3 pointes : contour silhouette + bord + grelots */
+  loufoque: `<path d="M2.5 17C1.5 14.5 2.5 9.5 7.5 13C8 10.5 10 5.5 12 3.5C14 5.5 16 10.5 16.5 13C21.5 9.5 22.5 14.5 21.5 17"/><path d="M1.5 18.5Q12 21 22.5 18.5"/><circle cx="2.5" cy="17" r="1.3" fill="currentColor" stroke="none"/><circle cx="21.5" cy="17" r="1.3" fill="currentColor" stroke="none"/><circle cx="12" cy="3.5" r="1.3" fill="currentColor" stroke="none"/>`,
 };
 
 /* Helper : génère le <svg> complet pour une icône à une taille donnée.
