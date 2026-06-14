@@ -5022,6 +5022,7 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
 <div id="settings-menu" class="settings-menu" role="menu" aria-label="Paramètres">
   <button id="theme-toggle-btn" onclick="App.toggleTheme()" class="row" role="menuitem"><span id="theme-toggle-icon" data-icon="moon" data-icon-size="16" class="icon-inline"></span> <span id="theme-toggle-label">Mode Sombre</span></button>
   <button id="sfx-toggle-btn" onclick="App.toggleSFX()" class="row" role="menuitem"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg> Son : ON</button>
+  <button id="notif-toggle-btn" onclick="App.toggleNotif()" class="row" role="menuitem"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> Notifs : —</button>
   <button onclick="App.closeSettings();App.showRules();" class="row" role="menuitem"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Comment jouer ?</button>
   <button onclick="App.closeSettings();App.showCGU();" class="row" role="menuitem"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg> Conditions d'utilisation</button>
 </div>
@@ -5254,7 +5255,7 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
     </button>
 
     <!-- Hero : Mot du jour — éphéméride avec carrousel horizontal (30 jours) -->
-    <div class="home-wod-block">
+    <div id="home-wod-block" class="home-wod-block">
       <div class="home-wod-eyebrow" id="home-wod-eyebrow">✦ Mot du jour</div>
       <div class="home-divider home-wod-top-divider" aria-hidden="true">
         <span class="home-wod-top-glyph">
@@ -9768,6 +9769,7 @@ function renderHomeExtras() {
       d.setDate(d.getDate() - offset);
       const isToday = offset === 0;
       const isTomorrow = offset === -1;
+      if(isToday) storeDailyWordForNotif(w);
       let label;
       if(isTomorrow) {
         label = '✦ Demain';
@@ -9913,6 +9915,53 @@ function renderHomeExtras() {
   if(nextEl) nextEl.textContent = prog.isMax ? 'Niveau maximum atteint' : ('→ ' + nextName);
 }
 
+
+/* ══════════════════════════════════════════════════════
+   🔔 NOTIFICATIONS — IDB + Periodic Background Sync
+══════════════════════════════════════════════════════ */
+function idbOpen() {
+  return new Promise((res, rej) => {
+    const r = indexedDB.open('dicobluff', 1);
+    r.onupgradeneeded = e => {
+      const db = e.target.result;
+      if (!db.objectStoreNames.contains('sw-data')) db.createObjectStore('sw-data');
+    };
+    r.onsuccess = e => res(e.target.result);
+    r.onerror   = () => rej(r.error);
+  });
+}
+
+async function storeDailyWordForNotif(word) {
+  try {
+    const db = await idbOpen();
+    const tx = db.transaction('sw-data', 'readwrite');
+    tx.objectStore('sw-data').put(word, 'wod');
+  } catch(e) {}
+}
+
+function updateNotifBtn() {
+  const btn = document.getElementById('notif-toggle-btn');
+  if (!btn) return;
+  if (!('Notification' in window)) { btn.style.display = 'none'; return; }
+  btn.style.display = '';
+  const perm = Notification.permission;
+  const svgBell = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> ';
+  if (perm === 'granted')     btn.innerHTML = svgBell + 'Notifs : ON';
+  else if (perm === 'denied') btn.innerHTML = svgBell + 'Notifs : bloquées';
+  else                        btn.innerHTML = svgBell + 'Activer les notifs';
+}
+
+async function registerPeriodicSync() {
+  try {
+    if (!('serviceWorker' in navigator)) return;
+    const reg = await navigator.serviceWorker.ready;
+    if (!('periodicSync' in reg)) return;
+    const status = await navigator.permissions.query({ name: 'periodic-background-sync' });
+    if (status.state === 'granted') {
+      await reg.periodicSync.register('mot-du-jour', { minInterval: 24 * 60 * 60 * 1000 });
+    }
+  } catch(e) {}
+}
 
 /* ══════════════════════════════════════════════════════════
    LOTTIE MICRO-ANIMATIONS — burst · success · loading dots
@@ -10779,6 +10828,39 @@ const App = {
   },
 };
 window.App=App;
+
+App.toggleNotif = async function() {
+  if (!('Notification' in window)) {
+    notify('Notifications non supportées sur cet appareil.', 3000);
+    return;
+  }
+  const perm = Notification.permission;
+  if (perm === 'granted') {
+    App.closeSettings();
+    notify('Pour désactiver : paramètres de ton navigateur.', 3500);
+    return;
+  }
+  if (perm === 'denied') {
+    App.closeSettings();
+    notify('Notifs bloquées — autorise-les dans les paramètres.', 3500);
+    return;
+  }
+  App.closeSettings();
+  try {
+    const result = await Notification.requestPermission();
+    if (result === 'granted') {
+      notify('✓ Notifications activées !', 3000);
+      registerPeriodicSync();
+      const n = new Date();
+      const dIdx = Math.floor((n.getTime() - n.getTimezoneOffset() * 60000) / 86400000);
+      const wIdx = ((Math.imul(dIdx + 1, 2654435761) ^ Math.imul(dIdx ^ 0xDEAD, 1000003)) >>> 0) % WORDS.length;
+      storeDailyWordForNotif(WORDS[wIdx]);
+    } else {
+      notify('Notifications refusées.', 2500);
+    }
+    updateNotifBtn();
+  } catch(e) {}
+};
 
 /* ══════════════════════════════════════════════════════
    🎮 SOLO ROUND ENGINE
@@ -12649,6 +12731,8 @@ updateNotifDots();
 document.body.classList.add('on-home');
 const _initNav=document.getElementById("bottom-nav");if(_initNav)_initNav.classList.add("visible");
 renderHomeExtras();
+updateNotifBtn();
+if('Notification' in window && Notification.permission === 'granted') registerPeriodicSync();
 // Theme init : respecte le choix utilisateur s'il existe, sinon suit la préférence système
 const savedTheme = LS.get('theme', null);
 let initialTheme = savedTheme;

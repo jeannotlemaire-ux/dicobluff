@@ -7,7 +7,7 @@
    - Versioning : incrémente CACHE_VERSION pour forcer l'invalidation de tous les caches
 */
 
-const CACHE_VERSION = 'dicobluff-v9';
+const CACHE_VERSION = 'dicobluff-v10';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
@@ -147,3 +147,69 @@ async function staleWhileRevalidate(req) {
 self.addEventListener('message', (event) => {
   if (event.data === 'SKIP_WAITING') self.skipWaiting();
 });
+
+// ─── PERIODIC BACKGROUND SYNC — mot du jour ─────────────────────
+self.addEventListener('periodicsync', (event) => {
+  if (event.tag === 'mot-du-jour') {
+    event.waitUntil(showWordOfDayNotification());
+  }
+});
+
+// ─── WEB PUSH (réservé à un futur backend) ───────────────────────
+self.addEventListener('push', (event) => {
+  const d = event.data ? event.data.json() : {};
+  event.waitUntil(
+    self.registration.showNotification(d.title || 'Dicobluff', {
+      body:    d.body  || 'Le mot du jour t\'attend.',
+      icon:    './assets/icons/icon-192.png',
+      badge:   './assets/icons/favicon-32.png',
+      tag:     'mot-du-jour',
+      data:    { url: d.url || './?wod=1' }
+    })
+  );
+});
+
+// ─── NOTIFICATION CLICK ──────────────────────────────────────────
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+  const url = (event.notification.data && event.notification.data.url) || './';
+  event.waitUntil(
+    clients.matchAll({ type: 'window', includeUncontrolled: true }).then((wcs) => {
+      const w = wcs.find((c) => c.url.includes('dicobluff') || c.url.includes(self.registration.scope));
+      if (w) { w.focus(); return w.navigate(url); }
+      return clients.openWindow(url);
+    })
+  );
+});
+
+// ─── HELPERS SW ─────────────────────────────────────────────────
+async function showWordOfDayNotification() {
+  const word  = await getWordFromIDB();
+  const title = word ? 'Mot du jour : ' + word.w.toUpperCase() : 'Dicobluff — Mot du jour';
+  const body  = word ? (word.h || 'Connais-tu sa vraie définition ?') : 'Découvre le mot du jour !';
+  await self.registration.showNotification(title, {
+    body,
+    icon:     './assets/icons/icon-192.png',
+    badge:    './assets/icons/favicon-32.png',
+    tag:      'mot-du-jour',
+    renotify: false,
+    data:     { url: './?wod=1' }
+  });
+}
+
+function getWordFromIDB() {
+  return new Promise((resolve) => {
+    try {
+      const req = indexedDB.open('dicobluff', 1);
+      req.onsuccess = (e) => {
+        const db = e.target.result;
+        if (!db.objectStoreNames.contains('sw-data')) return resolve(null);
+        const tx = db.transaction('sw-data', 'readonly');
+        const get = tx.objectStore('sw-data').get('wod');
+        get.onsuccess = () => resolve(get.result || null);
+        get.onerror   = () => resolve(null);
+      };
+      req.onerror = () => resolve(null);
+    } catch (e) { resolve(null); }
+  });
+}
