@@ -4238,6 +4238,32 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
 }
 .premium-btn-close:hover { color: var(--text2); }
 
+/* Daily limit modal */
+#daily-limit-modal {
+  position: fixed; inset: 0;
+  z-index: var(--z-modal);
+  background: rgba(14,26,34,.82);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: none;
+  align-items: flex-end; justify-content: center;
+  padding: 20px;
+}
+#daily-limit-modal.open { display: flex; animation: screenIn .35s var(--ease-expo) both; }
+
+/* Mode Décalé — ambiance visuelle */
+.mode-decale-active #screen-word .word-hero-card {
+  border-color: rgba(217,79,63,.35);
+  background: linear-gradient(135deg, rgba(217,79,63,.07) 0%, rgba(200,134,10,.05) 100%);
+}
+.mode-decale-active #screen-word .word-hero-card .ornament {
+  color: var(--coral);
+  opacity: .7;
+}
+.mode-decale-active #screen-word .timer-bar {
+  background: linear-gradient(90deg, var(--coral), rgba(217,79,63,.6));
+}
+
 /* Barre de progression carnet */
 .carnet-progress-bar-wrap {
   height: 6px;
@@ -5082,6 +5108,26 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
 </div>
 
 <!-- ═══════════════════════════════════════════════
+     DAILY LIMIT MODAL
+═══════════════════════════════════════════════ -->
+<div id="daily-limit-modal" role="dialog" aria-modal="true" aria-labelledby="daily-limit-title">
+  <div class="premium-sheet">
+    <button type="button" class="modal-close-btn" onclick="closeDailyLimitModal()" aria-label="Fermer"></button>
+    <div class="premium-sheet-icon">🌙</div>
+    <div class="premium-sheet-title" id="daily-limit-title">À demain !</div>
+    <div class="premium-sheet-body">Tu as joué tes <strong>3 parties gratuites</strong> du jour. Reviens demain pour 3 nouvelles parties — ou passe à Premium pour jouer sans limite.</div>
+    <div class="premium-features">
+      <div class="premium-feature-row">Parties illimitées chaque jour</div>
+      <div class="premium-feature-row">Mode Difficile — adversaires IA redoutables</div>
+      <div class="premium-feature-row">Mode Décalé — définitions absurdes et loufoques</div>
+      <div class="premium-feature-row">Mode Révision — consolide ton vocabulaire</div>
+    </div>
+    <button class="premium-btn-unlock" onclick="closeDailyLimitModal();showPremiumModal();">Débloquer Premium — 2,99 €</button>
+    <button class="premium-btn-close" onclick="closeDailyLimitModal()">Revenir demain</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
      STARTER PICKER — première ouverture uniquement
 ═══════════════════════════════════════════════ -->
 <div id="starter-overlay" role="dialog" aria-modal="true" aria-labelledby="starter-title" aria-hidden="true">
@@ -5306,13 +5352,20 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
       <div class="solo-diff-label">Normal</div>
       <div class="solo-diff-desc">L'équilibre Dicobluff</div>
     </button>
-    <button class="solo-diff-card is-locked" data-diff="hard" onclick="App.setDiff('hard')">
+    <button class="solo-diff-card" data-diff="hard" onclick="App.setDiff('hard')">
       <div class="solo-diff-icon" data-icon="hard"></div>
       <div class="solo-diff-label">Difficile</div>
       <div class="solo-diff-desc">Bluffer un dictionnaire</div>
-      <span class="feature-lock-overlay">🔒 Premium</span>
     </button>
   </div>
+
+  <!-- Sélecteur MODE -->
+  <div class="t-label-lg center-text" style="margin:22px 0 8px;">Mode</div>
+  <div class="host-settings-row-options" style="justify-content:center;gap:10px;margin-bottom:4px;">
+    <button class="diff-btn active" id="solo-mode-classic" onclick="App.setSoloMode('classic')"><span data-icon="dictionary" data-icon-size="12" style="display:inline-flex;margin-right:3px;"></span>Classique</button>
+    <button class="diff-btn is-locked" id="solo-mode-decale" onclick="App.setSoloMode('decale')"><span data-icon="mask-fun" data-icon-size="12" style="display:inline-flex;margin-right:3px;"></span>Décalé <span class="badge-premium" style="margin-left:4px;">Pro</span><span class="feature-lock-overlay">🔒 Premium</span></button>
+  </div>
+  <div id="solo-mode-hint" class="muted small" style="text-align:center;margin-bottom:4px;">Mots du dictionnaire, registre soutenu.</div>
 
   <!-- Sélecteur NOMBRE DE MANCHES -->
   <div class="t-label-lg center-text" style="margin:22px 0 8px;">Manches</div>
@@ -5501,7 +5554,10 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
 ══════════════════════════════════════════ -->
 <div id="screen-word" class="screen">
   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-    <div class="badge badge-accent" id="round-label">Manche 1</div>
+    <div style="display:flex;align-items:center;gap:7px;">
+      <div class="badge badge-accent" id="round-label">Manche 1</div>
+      <div id="solo-mode-tag" style="display:none;align-items:center;gap:4px;padding:3px 9px;border-radius:20px;background:rgba(217,79,63,.15);border:1px solid rgba(217,79,63,.35);font-size:.72rem;font-weight:700;font-family:'Manrope',sans-serif;color:var(--coral);letter-spacing:.03em;">🎭 Décalé</div>
+    </div>
     <div class="row">
       <span class="timer-num" id="timer-display" role="timer" aria-label="Temps restant">2:00</span>
       <button onclick="App.quitGame()" class="btn-quit-game" aria-label="Quitter la partie"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
@@ -8092,7 +8148,19 @@ function stopTimer(){ if(timerIv){clearInterval(timerIv);timerIv=null;} }
 let fbApp, fbDb, fbAuth;
 let myUID=null;
 let isOnline=false;
-const _aiUsedDefs = {}; // aiId → Set of definition strings already used this session
+// Persiste les définitions IA déjà utilisées pour éviter les répétitions entre parties
+function _loadAIUsedDefs(){
+  const saved = LS.get('aiUsedDefs', {});
+  const result = {};
+  for(const key in saved){ result[key] = new Set(saved[key]); }
+  return result;
+}
+function _saveAIUsedDefs(obj){
+  const serialized = {};
+  for(const key in obj){ serialized[key] = [...obj[key]]; }
+  LS.set('aiUsedDefs', serialized);
+}
+const _aiUsedDefs = _loadAIUsedDefs();
 let roomId=null,roomRef=null,roomListener=null,gameState=null;
 const _reconnTimers={};    // uid → timeoutId (30s avant abandon)
 let _prevOnlineState={};   // uid → bool (pour détecter les changements)
@@ -8702,6 +8770,31 @@ function tickDailyStreak() {
   LS.set('dailyStreak', updated);
   return updated;
 }
+
+/* ── Quota quotidien de parties gratuites ── */
+const DAILY_FREE_GAMES = 3;
+function getDailyGames(){
+  const d = LS.get('dailyGames', {date:'', count:0});
+  if(d.date !== todayKey()) return {date:todayKey(), count:0};
+  return d;
+}
+function tickDailyGame(){
+  const d = getDailyGames();
+  LS.set('dailyGames', {date:todayKey(), count:(d.count||0)+1});
+}
+function canPlayToday(){
+  return isPremium() || getDailyGames().count < DAILY_FREE_GAMES;
+}
+function showDailyLimitModal(){
+  const m = document.getElementById('daily-limit-modal');
+  if(m) m.classList.add('open');
+  SFX.click();
+}
+function closeDailyLimitModal(){
+  const m = document.getElementById('daily-limit-modal');
+  if(m) m.classList.remove('open');
+}
+
 function getDailyStreakDisplay() {
   // Retourne le streak actuel en tenant compte d'une rupture éventuelle.
   const ds = getDailyStreak();
@@ -9646,7 +9739,7 @@ function pickAIOpponents(_playerAvatarKey) {
 ══════════════════════════════════════════════════════ */
 let solo = {
   active:false, name:'', avatar:'georgesand', color:'',
-  difficulty:'easy', aiOpponents:[],
+  difficulty:'easy', gameMode:'classic', aiOpponents:[],
   scores:{}, round:0, maxRounds:5, usedWords:[], sessionWordObjs:[], wordObj:null, allDefs:[],
   votes:{}, streak:0, maxStreak:0, sessionCorrect:0, sessionFooled:0, sessionRounds:0,
 };
@@ -10256,10 +10349,13 @@ const App = {
     // Restaure les préférences sauvegardées si elles existent
     const savedDiff = LS.get('solo_difficulty', null);
     const savedRounds = LS.get('solo_maxRounds', null);
+    const savedMode = LS.get('solo_gameMode', null);
     if(['easy','medium','hard'].includes(savedDiff)) solo.difficulty = savedDiff;
     else if(!['easy','medium','hard'].includes(solo.difficulty)) solo.difficulty = 'medium';
     if([5,7,10].includes(savedRounds)) solo.maxRounds = savedRounds;
     else if(![5,7,10].includes(solo.maxRounds)) solo.maxRounds = 5;
+    if(['classic','decale'].includes(savedMode)) solo.gameMode = savedMode;
+    else solo.gameMode = 'classic';
     // Tire 3 IA initiales si vide
     if(!solo.aiOpponents || !solo.aiOpponents.length) solo.aiOpponents = pickAIOpponents();
     showScreen('solo-setup');
@@ -10287,6 +10383,13 @@ const App = {
     document.querySelectorAll('.solo-rounds-chip').forEach(b=>{
       b.classList.toggle('active', String(b.dataset.rounds) === String(solo.maxRounds));
     });
+    const gm = solo.gameMode || 'classic';
+    document.getElementById('solo-mode-classic')?.classList.toggle('active', gm==='classic');
+    document.getElementById('solo-mode-decale')?.classList.toggle('active', gm==='decale');
+    const modeHint = document.getElementById('solo-mode-hint');
+    if(modeHint) modeHint.textContent = gm==='decale'
+      ? 'Mots grivois, defs absurdes — définitions loufoques garanties !'
+      : 'Mots du dictionnaire, registre soutenu.';
 
     // 3) Carte des 3 adversaires
     const el = document.getElementById('ai-opponents-preview');
@@ -10307,12 +10410,25 @@ const App = {
 
   setDiff(d){
     if(!['easy','medium','hard'].includes(d)) return;
-    if(d === 'hard' && !isPremium()) { showPremiumModal(); return; }
     solo.difficulty = d;
     LS.set('solo_difficulty', d);
     document.querySelectorAll('.solo-diff-card').forEach(b=>{
       b.classList.toggle('active', b.dataset.diff === d);
     });
+    SFX.click();
+  },
+
+  setSoloMode(m){
+    if(!['classic','decale'].includes(m)) return;
+    if(m === 'decale' && !isPremium()){ showPremiumModal(); return; }
+    solo.gameMode = m;
+    LS.set('solo_gameMode', m);
+    document.getElementById('solo-mode-classic')?.classList.toggle('active', m==='classic');
+    document.getElementById('solo-mode-decale')?.classList.toggle('active', m==='decale');
+    const hint = document.getElementById('solo-mode-hint');
+    if(hint) hint.textContent = m==='decale'
+      ? 'Mots grivois, defs absurdes — définitions loufoques garanties !'
+      : 'Mots du dictionnaire, registre soutenu.';
     SFX.click();
   },
 
@@ -10381,6 +10497,7 @@ const App = {
   toggleAIOpponent(id){ /* auto-pick, no manual toggle */ },
 
   startSoloGame(){
+    if(!canPlayToday()){ showDailyLimitModal(); return; }
     // Le pseudo et l'avatar viennent du profil ; les choix de la page sont déjà dans solo.*
     const name = (LS.get('pseudo','').trim()) || 'Joueur';
     solo.name = name;
@@ -10390,11 +10507,10 @@ const App = {
     if(!solo.aiOpponents || !solo.aiOpponents.length) solo.aiOpponents = pickAIOpponents();
     if(!solo.maxRounds || ![5,7,10].includes(solo.maxRounds)) solo.maxRounds = 5;
     if(!solo.difficulty || !['easy','medium','hard'].includes(solo.difficulty)) solo.difficulty = 'medium';
+    if(!solo.gameMode || !['classic','decale'].includes(solo.gameMode)) solo.gameMode = 'classic';
     solo.round=0; solo.usedWords=[]; solo.sessionWordObjs=[]; solo.streak=0; solo.maxStreak=0;
     solo.sessionCorrect=0; solo.sessionFooled=0; solo.sessionRounds=0;
     solo.scores={player:0}; solo.aiOpponents.forEach(ai=>solo.scores[ai.id]=0);
-    // Réinitialise l'historique des defs IA pour éviter les répétitions
-    Object.keys(_aiUsedDefs).forEach(k => delete _aiUsedDefs[k]);
     SFX.newRound(); startSoloRound();
   },
 
@@ -10601,6 +10717,7 @@ const App = {
 
   async startGame(){
     if(!roomRef)return;
+    if(!canPlayToday()){ showDailyLimitModal(); return; }
     const ps=gameState?.players||{};
     const onlinePlayers=Object.entries(ps).filter(([,p])=>p.online!==false);
     if(onlinePlayers.length<2){notify('Il faut au moins 2 joueurs en ligne !');return;}
@@ -10682,7 +10799,7 @@ function startSoloRound(){
   solo.round++;
   if(!solo.maxRounds) solo.maxRounds = 5;
   if(solo.round>solo.maxRounds){showSoloFinal();return;}
-  solo.wordObj=pickWord(solo.usedWords);solo.usedWords.push(solo.wordObj.w);markWordSeen(solo.wordObj.w);
+  solo.wordObj=pickWord(solo.usedWords,{gameMode:solo.gameMode||'classic'});solo.usedWords.push(solo.wordObj.w);markWordSeen(solo.wordObj.w);
   // Trace pour le récap quiz de fin de partie
   if(!solo.sessionWordObjs) solo.sessionWordObjs = [];
   solo.sessionWordObjs.push({w:solo.wordObj.w, d:solo.wordObj.d, r:solo.wordObj.r||'rare', h:solo.wordObj.h||''});
@@ -10726,6 +10843,11 @@ function startSoloRound(){
   }
 
   // Hint button reset
+
+  // Ambiance visuelle mode décalé
+  document.body.classList.toggle('mode-decale-active', solo.gameMode === 'decale');
+  const modeTag = document.getElementById('solo-mode-tag');
+  if(modeTag) modeTag.style.display = (solo.gameMode === 'decale') ? 'inline-flex' : 'none';
 
   showScreen('word');SFX.newRound();
 
@@ -10909,6 +11031,7 @@ function aiGenerateDef(aiChar, wordObj, gameMode) {
   const shuffled = [...candidates].sort(() => Math.random() - 0.5);
   const base = shuffled[0];
   used.add(base);
+  _saveAIUsedDefs(_aiUsedDefs);
   const suffix = rand(suffixes);
   return base + suffix;
 }
@@ -11013,15 +11136,16 @@ function levenshteinClose(a, b, threshold) {
 }
 
 function processSoloVotePhase(myDef){
-  const usedTexts = [myDef.toLowerCase().trim(), solo.wordObj.d.toLowerCase().trim()];
+  const _realDef = (solo.gameMode==='decale'&&solo.wordObj.funDef)?solo.wordObj.funDef:solo.wordObj.d;
+  const usedTexts = [myDef.toLowerCase().trim(), _realDef.toLowerCase().trim()];
   const aiDefs = [];
   
   solo.aiOpponents.forEach(ai => {
-    let text = aiGenerateDef(ai, solo.wordObj);
+    let text = aiGenerateDef(ai, solo.wordObj, solo.gameMode||'classic');
     let attempts = 0;
     // Éviter tout doublon exact ou trop proche (20 tentatives max)
     while (attempts < 20 && usedTexts.some(u => u === text.toLowerCase().trim() || levenshteinClose(u, text.toLowerCase().trim(), 30))) {
-      text = aiGenerateDef(ai, solo.wordObj);
+      text = aiGenerateDef(ai, solo.wordObj, solo.gameMode||'classic');
       attempts++;
     }
     usedTexts.push(text.toLowerCase().trim());
@@ -11030,7 +11154,7 @@ function processSoloVotePhase(myDef){
     });
   });
   solo.allDefs=shuffle([
-    {id:'real',text:solo.wordObj.d,isReal:true,authorName:'Vrai dictionnaire'},
+    {id:'real',text:(solo.gameMode==='decale'&&solo.wordObj.funDef)?solo.wordObj.funDef:solo.wordObj.d,isReal:true,authorName:'Vrai dictionnaire'},
     {id:'player',text:myDef,authorName:solo.name,authorAvatar:solo.avatar,isMe:true},
     ...aiDefs,
   ]);
@@ -11283,7 +11407,7 @@ function showSoloResults(playerPts,reactions){
   try {
   switchResultsTab('round');
   document.getElementById('results-word').textContent=solo.wordObj.w;
-  document.getElementById('true-def-text').textContent=solo.wordObj.d;
+  document.getElementById('true-def-text').textContent=(solo.gameMode==='decale'&&solo.wordObj.funDef)?solo.wordObj.funDef:solo.wordObj.d;
   setRoundPoints(playerPts);
   // Avertissement anti-charabia
   const penaltyEl = document.getElementById('bluff-penalty-notice');
@@ -11516,7 +11640,8 @@ function showSoloFinal(){
   // Persist stats
   const prevSt=getStats();
   const newSt={games:(prevSt.games||0)+1,wins:(prevSt.wins||0)+(playerWon?1:0),correct:(prevSt.correct||0)+solo.sessionCorrect,fooled:(prevSt.fooled||0)+solo.sessionFooled,streak:Math.max(prevSt.streak||0,solo.maxStreak),quizPerfect:prevSt.quizPerfect||0};
-  saveStats(newSt);checkAvatarUnlocks(prevSt);tickDailyStreak();
+  saveStats(newSt);checkAvatarUnlocks(prevSt);tickDailyStreak();tickDailyGame();
+  document.body.classList.remove('mode-decale-active');
   if(typeof PWA !== 'undefined') PWA.maybePromptAfterGame();
   const _xpGain = solo.sessionCorrect*10+(playerWon?25:0)+solo.sessionFooled*5;
   addXP(_xpGain);
@@ -12328,7 +12453,7 @@ function renderFinalPhase(d){
 
   const prevSt=getStats();
   const newSt={games:(prevSt.games||0)+1,wins:(prevSt.wins||0)+(playerWon?1:0),correct:(prevSt.correct||0)+myMultiStats.correct,fooled:(prevSt.fooled||0)+myMultiStats.fooled,streak:Math.max(prevSt.streak||0,myMultiStats.maxStreak),quizPerfect:prevSt.quizPerfect||0};
-  saveStats(newSt);checkAvatarUnlocks(prevSt);tickDailyStreak();
+  saveStats(newSt);checkAvatarUnlocks(prevSt);tickDailyStreak();tickDailyGame();
   if(typeof PWA !== 'undefined') PWA.maybePromptAfterGame();
   const _xpGainMulti = myMultiStats.correct*10+(playerWon?25:0)+myMultiStats.fooled*5;
   addXP(_xpGainMulti);
