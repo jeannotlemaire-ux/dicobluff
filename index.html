@@ -2616,6 +2616,84 @@ input::placeholder, textarea::placeholder { color: var(--text3); font-style: ita
   .desktop-signature { display: block; }
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   🖥️  MODE PC — Shell large + layouts 2 colonnes (≥ 900px)
+   Shell élargi, home CTAs côte à côte, vote en grille,
+   résultats avec sidebar chat toujours ouvert.
+═══════════════════════════════════════════════════════════════ */
+@media (min-width: 900px) {
+  /* Shell et éléments fixes alignés sur la nouvelle largeur */
+  #app,
+  #bottom-nav,
+  #game-progress-container { max-width: 680px; }
+
+  /* Bouton paramètres et profil alignés sur le bord du cadre 680px */
+  #settings-btn { right: max(20px, calc(50vw - 340px + 20px)); }
+  #profile-btn  { left:  max(20px, calc(50vw - 340px + 20px)); }
+  .settings-menu { right: max(20px, calc(50vw - 340px + 20px)); }
+
+  /* Padding latéral plus généreux */
+  .screen { padding-left: 28px; padding-right: 28px; }
+
+  /* Home : CTAs Solo / En ligne côte à côte */
+  .home-ctas-stack {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .home-cta-card { height: 100%; }
+
+  /* Vote : définitions en grille 2 colonnes */
+  #vote-definitions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    align-items: start;
+  }
+  #vote-definitions .def-card { margin-bottom: 0; }
+
+  /* Résultats : panneau principal | chat IA en sidebar */
+  #screen-results {
+    display: grid;
+    grid-template-columns: 1fr 240px;
+    column-gap: 20px;
+    align-content: start;
+  }
+  /* En-tête (mot + titre) s'étend sur toute la largeur */
+  #screen-results > div:first-child { grid-column: 1 / -1; }
+  /* Tout le contenu principal en colonne 1 */
+  #screen-results .results-tabs,
+  #screen-results .results-tab-panel,
+  #screen-results #next-round-btn-wrap { grid-column: 1; }
+  /* Chat IA en sidebar colonne 2 */
+  #screen-results #ai-chat {
+    grid-column: 2;
+    grid-row: 2 / span 10;
+    margin: 0;
+    align-self: start;
+    position: sticky;
+    top: 22px;
+  }
+
+  /* Chat IA toujours développé sur desktop — plus besoin du toggle */
+  #ai-chat .ai-chat-body { display: flex !important; }
+  #ai-chat .ai-chat-toggle-arrow { display: none; }
+  #ai-chat .ai-chat-header { cursor: default; pointer-events: none; }
+}
+
+@media (min-width: 1100px) {
+  #app,
+  #bottom-nav,
+  #game-progress-container { max-width: 780px; }
+
+  #settings-btn { right: max(20px, calc(50vw - 390px + 20px)); }
+  #profile-btn  { left:  max(20px, calc(50vw - 390px + 20px)); }
+  .settings-menu { right: max(20px, calc(50vw - 390px + 20px)); }
+
+  /* Résultats : sidebar chat légèrement plus large */
+  #screen-results { grid-template-columns: 1fr 280px; }
+}
+
 /* Paysage mobile : compacte les paddings pour éviter que le contenu critique passe sous le fold */
 @media (orientation: landscape) and (max-height: 500px) {
   .screen {
@@ -12935,6 +13013,24 @@ document.addEventListener('keydown', (e)=>{
       if(ta && document.activeElement === ta && btn && !btn.disabled){
         e.preventDefault();
         App.submitDefinition();
+      }
+    }
+  }
+  // Raccourcis clavier phase de vote (desktop) : 1-9 pour sélectionner, Entrée pour confirmer
+  if(!e.ctrlKey && !e.metaKey && !e.altKey){
+    const tag = e.target.tagName;
+    if(tag !== 'TEXTAREA' && tag !== 'INPUT'){
+      const active = document.querySelector('.screen.active');
+      if(active && active.id === 'screen-vote'){
+        if(e.key >= '1' && e.key <= '9'){
+          const idx = parseInt(e.key) - 1;
+          const cards = document.querySelectorAll('#vote-definitions .def-card:not(.correct):not(.wrong)');
+          if(cards[idx]){ e.preventDefault(); cards[idx].click(); }
+        }
+        if(e.key === 'Enter' && !e.shiftKey){
+          const btn = document.getElementById('btn-confirm-vote');
+          if(btn && !btn.disabled){ e.preventDefault(); App.confirmVote(); }
+        }
       }
     }
   }
