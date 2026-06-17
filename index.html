@@ -5250,10 +5250,10 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
 ══════════════════════════════════════════ -->
 <div id="screen-home" class="screen active fade-in">
 
-  <!-- Wordmark Dicobluff — lockup icône D+masque + texte -->
+  <!-- Wordmark Dicobluff — icône carrée + texte complet -->
   <div class="home-wordmark-fixed" aria-hidden="true">
     <span class="home-wordmark-inner">
-      <span class="home-wordmark-icon-wrap" aria-hidden="true"><svg class="home-wordmark-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <span class="home-wordmark-icon-wrap"><svg class="home-wordmark-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="wm-gold" x1="10%" y1="0%" x2="90%" y2="100%">
             <stop offset="0%"  stop-color="#F5D97A"/>
@@ -5262,16 +5262,15 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
           </linearGradient>
           <mask id="wm-mask">
             <rect width="100" height="100" fill="white"/>
-            <!-- masque vénitien : deux yeux + pont central -->
             <ellipse cx="34" cy="52" rx="9.5" ry="6.5" fill="black"/>
             <ellipse cx="66" cy="52" rx="9.5" ry="6.5" fill="black"/>
             <rect x="42.5" y="49" width="15" height="5" rx="2.5" fill="black"/>
             <path d="M 20,45 Q 34,35 50,40 Q 66,35 80,45 Q 80,62 66,58 Q 50,66 34,58 Q 20,62 20,45 Z" fill="black"/>
           </mask>
         </defs>
-        <rect width="100" height="100" rx="22" fill="var(--bg)"/>
+        <rect width="100" height="100" rx="22" fill="var(--surface,#1a2a3a)"/>
         <path d="M 22,18 L 22,82 L 46,82 Q 80,82 80,50 Q 80,18 46,18 Z" fill="url(#wm-gold)" mask="url(#wm-mask)"/>
-      </svg></span>ico<span>bluff</span>
+      </svg></span>Dico<span>bluff</span>
     </span>
     <div class="home-tagline">Invente · Trompe · Révèle</div>
   </div>
