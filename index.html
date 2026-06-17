@@ -3055,8 +3055,22 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
   pointer-events: none;
   user-select: none;
 }
-.home-wordmark-fixed .home-wordmark-inner { position: relative; display: inline-block; }
+.home-wordmark-fixed .home-wordmark-inner { position: relative; display: inline-flex; align-items: center; gap: .08em; }
 .home-wordmark-fixed .home-wordmark-inner span { color: var(--gold); }
+.home-wordmark-icon-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 1.2em;
+  width: 1.2em;
+  flex-shrink: 0;
+}
+.home-wordmark-icon {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
 .home-wordmark-fixed .home-wordmark-inner::after {
   content: '';
   position: absolute;
@@ -5236,9 +5250,29 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
 ══════════════════════════════════════════ -->
 <div id="screen-home" class="screen active fade-in">
 
-  <!-- Wordmark Dicobluff (absolu, centré — chip profil retiré, gérée via la nav du bas) -->
+  <!-- Wordmark Dicobluff — lockup icône D+masque + texte -->
   <div class="home-wordmark-fixed" aria-hidden="true">
-    <span class="home-wordmark-inner">Dico<span>bluff</span></span>
+    <span class="home-wordmark-inner">
+      <span class="home-wordmark-icon-wrap" aria-hidden="true"><svg class="home-wordmark-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="wm-gold" x1="10%" y1="0%" x2="90%" y2="100%">
+            <stop offset="0%"  stop-color="#F5D97A"/>
+            <stop offset="40%" stop-color="#D4940E"/>
+            <stop offset="100%" stop-color="#7A4A04"/>
+          </linearGradient>
+          <mask id="wm-mask">
+            <rect width="100" height="100" fill="white"/>
+            <!-- masque vénitien : deux yeux + pont central -->
+            <ellipse cx="34" cy="52" rx="9.5" ry="6.5" fill="black"/>
+            <ellipse cx="66" cy="52" rx="9.5" ry="6.5" fill="black"/>
+            <rect x="42.5" y="49" width="15" height="5" rx="2.5" fill="black"/>
+            <path d="M 20,45 Q 34,35 50,40 Q 66,35 80,45 Q 80,62 66,58 Q 50,66 34,58 Q 20,62 20,45 Z" fill="black"/>
+          </mask>
+        </defs>
+        <rect width="100" height="100" rx="22" fill="var(--bg)"/>
+        <path d="M 22,18 L 22,82 L 46,82 Q 80,82 80,50 Q 80,18 46,18 Z" fill="url(#wm-gold)" mask="url(#wm-mask)"/>
+      </svg></span>ico<span>bluff</span>
+    </span>
     <div class="home-tagline">Invente · Trompe · Révèle</div>
   </div>
 
