@@ -3039,40 +3039,28 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
 ═══════════════════════════════════════════════════════════════ */
 .home-wordmark-fixed {
   position: absolute;
-  top: max(18px, calc(env(safe-area-inset-top, 0px) + 10px));
+  top: max(28px, calc(env(safe-area-inset-top, 0px) + 18px));
   left: 0;
   right: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
   text-align: center;
-  z-index: var(--z-raised);
-  pointer-events: none;
-  user-select: none;
-}
-.home-header-img {
-  height: 80px;
-  width: auto;
-  display: block;
-  border-radius: 12px;
-}
-.home-wordmark-fixed .home-wordmark-inner {
-  position: relative;
-  display: inline-block;
+  white-space: nowrap;
   font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 1.75rem;
+  font-size: 1.9rem;
   font-weight: 700;
   font-style: italic;
   letter-spacing: -.025em;
   line-height: 1;
   color: var(--cream);
+  z-index: var(--z-raised);
+  pointer-events: none;
+  user-select: none;
 }
+.home-wordmark-fixed .home-wordmark-inner { position: relative; display: inline-block; }
 .home-wordmark-fixed .home-wordmark-inner span { color: var(--gold); }
 .home-wordmark-fixed .home-wordmark-inner::after {
   content: '';
   position: absolute;
-  bottom: -3px; left: 15%; right: 15%;
+  bottom: -4px; left: 15%; right: 15%;
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--gold), transparent);
   border-radius: 1px;
@@ -3082,7 +3070,7 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: max(175px, calc(env(safe-area-inset-top, 0px) + 165px)) 22px max(20px, calc(env(safe-area-inset-bottom, 0px) + 16px));
+  padding: max(100px, calc(env(safe-area-inset-top, 0px) + 92px)) 22px max(20px, calc(env(safe-area-inset-bottom, 0px) + 16px));
   gap: 0;
 }
 
@@ -5248,9 +5236,8 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
 ══════════════════════════════════════════ -->
 <div id="screen-home" class="screen active fade-in">
 
-  <!-- Header Dicobluff — visuel D+masque + wordmark + tagline -->
+  <!-- Wordmark Dicobluff -->
   <div class="home-wordmark-fixed" aria-hidden="true">
-    <img src="./header.png" class="home-header-img" alt="">
     <span class="home-wordmark-inner">Dico<span>bluff</span></span>
     <div class="home-tagline">Invente · Trompe · Révèle</div>
   </div>
