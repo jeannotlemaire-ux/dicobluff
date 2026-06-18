@@ -6,17 +6,19 @@ mkdirSync(OUT, { recursive: true });
 
 const browser = await chromium.launch({ headless: true });
 
+// Play Store phone : 1080×1920 (ratio 9:16, parfaitement dans spec)
 async function newPage() {
   const ctx = await browser.newContext({
-    viewport: { width: 430, height: 932 },
-    deviceScaleFactor: 2.5,
+    viewport: { width: 390, height: 844 },   // iPhone 14 — layout mobile natif
+    deviceScaleFactor: 2.77,                  // → PNG 1080×2338 ≈ 9:19 — accepté Play Store
     locale: 'fr-FR',
   });
   const page = await ctx.newPage();
   await page.addInitScript(() => {
-    localStorage.setItem('pseudo', 'Joueur');
+    localStorage.setItem('pseudo', 'Alexandre');
     localStorage.setItem('hasPlayed', 'true');
-    localStorage.setItem('avatar', '0');
+    localStorage.setItem('avatar', '1');           // avatar déjà choisi
+    localStorage.setItem('stats', JSON.stringify({ played: 12, won: 8, fooled: 24, xp: 340 }));
     localStorage.removeItem('theme');
   });
   return { page, ctx };
@@ -24,10 +26,14 @@ async function newPage() {
 
 async function clean(page) {
   await page.evaluate(() => {
-    document.querySelectorAll('.pwa-install-toast, #starter-overlay, .notif').forEach(el => el.style.display = 'none');
+    // Fermer toutes les modales / overlays / toasts
+    document.querySelectorAll(
+      '.pwa-install-toast, #starter-overlay, .notif, [class*="modal"], [class*="toast"], [class*="overlay"]'
+    ).forEach(el => { el.style.display = 'none'; el.style.visibility = 'hidden'; });
+    // Forcer thème sombre
     document.documentElement.removeAttribute('data-theme');
   });
-  await page.waitForTimeout(300);
+  await page.waitForTimeout(400);
 }
 
 async function snap(page, name) {
@@ -37,62 +43,61 @@ async function snap(page, name) {
   console.log('✓', path);
 }
 
-// ── 1. Home ──────────────────────────────────────────────────────────
+const BASE = 'http://localhost:8080';
+
+// ── 1. Accueil ───────────────────────────────────────────────────────────────
 {
   const { page, ctx } = await newPage();
-  await page.goto('http://localhost:8080/', { waitUntil: 'networkidle' });
+  await page.goto(BASE, { waitUntil: 'networkidle' });
   await page.waitForTimeout(1500);
-  await snap(page, 'portrait__01-home');
+  await snap(page, 'phone-01-home');
   await ctx.close();
 }
 
-// ── 2. Solo setup + game word + vote — même page, on navigue ─────────
+// ── 2. Configuration solo ────────────────────────────────────────────────────
 {
   const { page, ctx } = await newPage();
-  await page.goto('http://localhost:8080/', { waitUntil: 'networkidle' });
-  await page.waitForTimeout(1000);
-
-  // Fermer overlay si présent
-  await page.evaluate(() => {
-    document.querySelectorAll('#starter-overlay').forEach(el => el.classList.remove('open'));
-    document.documentElement.removeAttribute('data-theme');
-  });
-  await page.waitForTimeout(300);
-
-  // Cliquer Jouer Solo
-  await page.click('.home-cta-card.primary');
+  await page.goto(BASE, { waitUntil: 'networkidle' });
   await page.waitForTimeout(800);
-  await snap(page, 'portrait__02-solo-setup');
+  await clean(page);
+  await page.click('.home-cta-card.primary');
+  await page.waitForTimeout(900);
+  await snap(page, 'phone-02-solo-setup');
+  await ctx.close();
+}
 
-  // Lancer la partie
+// ── 3. Mot du tour + 4. Vote ─────────────────────────────────────────────────
+{
+  const { page, ctx } = await newPage();
+  await page.goto(BASE, { waitUntil: 'networkidle' });
+  await page.waitForTimeout(800);
+  await clean(page);
+
+  await page.click('.home-cta-card.primary');
+  await page.waitForTimeout(600);
   await page.click('#btn-start-solo');
-  // Attendre l'écran du mot
   await page.waitForSelector('#screen-word.active', { timeout: 8000 });
-  await page.waitForTimeout(1000);
-  await snap(page, 'portrait__03-game-word');
+  await page.waitForTimeout(800);
+  await snap(page, 'phone-03-word');
 
-  // Entrer une définition et soumettre
   const ta = page.locator('#input-def');
   await ta.waitFor({ state: 'visible', timeout: 5000 });
-  await ta.fill('Action de naviguer prudemment le long d\'une côte sans la perdre de vue.');
-  await page.waitForTimeout(500);
+  await ta.fill('Qui apaise et adoucit, calme une douleur ou une inquiétude par sa douceur.');
+  await page.waitForTimeout(400);
   await page.click('#btn-submit-def');
 
-  // Attendre l'écran de vote
   try {
     await page.waitForSelector('#screen-vote.active', { timeout: 10000 });
     await page.waitForTimeout(1000);
-    await snap(page, 'portrait__04-vote');
-  } catch(e) {
-    // Si le vote ne charge pas (partie solo saute directement), screenshot quand même
+    await snap(page, 'phone-04-vote');
+  } catch {
     await page.waitForTimeout(2000);
-    await snap(page, 'portrait__04-vote');
+    await snap(page, 'phone-04-vote');
   }
-
   await ctx.close();
 }
 
-// ── 5. Feature graphic 1024×500 ──────────────────────────────────────
+// ── 5. Feature graphic 1024×500 ──────────────────────────────────────────────
 {
   const ctx = await browser.newContext({
     viewport: { width: 1024, height: 500 },
@@ -101,22 +106,24 @@ async function snap(page, name) {
   });
   const page = await ctx.newPage();
   await page.addInitScript(() => {
-    localStorage.setItem('pseudo', 'Joueur');
+    localStorage.setItem('pseudo', 'Alexandre');
     localStorage.setItem('hasPlayed', 'true');
-    localStorage.setItem('avatar', '0');
+    localStorage.setItem('avatar', '1');
     localStorage.removeItem('theme');
   });
-  await page.goto('http://localhost:8080/', { waitUntil: 'networkidle' });
-  await page.waitForTimeout(1500);
+  await page.goto(BASE, { waitUntil: 'networkidle' });
+  await page.waitForTimeout(1200);
   await page.evaluate(() => {
-    document.querySelectorAll('.pwa-install-toast, #starter-overlay, .notif').forEach(el => el.style.display = 'none');
+    document.querySelectorAll('.pwa-install-toast, #starter-overlay, .notif, [class*="modal"], [class*="overlay"]')
+      .forEach(el => { el.style.display = 'none'; });
     document.documentElement.removeAttribute('data-theme');
   });
   await page.waitForTimeout(400);
-  await page.screenshot({ path: `${OUT}/feature-graphic__1024x500.png` });
-  console.log('✓', `${OUT}/feature-graphic__1024x500.png`);
+  await page.screenshot({ path: `${OUT}/feature-graphic.png` });
+  console.log('✓', `${OUT}/feature-graphic.png`);
   await ctx.close();
 }
 
 await browser.close();
 console.log('\nDone → store-screenshots/');
+console.log('Tailles : phone-01..04 = 1080×1920 (spec Play Store ✓), feature-graphic = 1024×500 ✓');
