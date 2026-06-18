@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://jeannotlemaire-ux.github.io/dicobluff/sitemap.xml

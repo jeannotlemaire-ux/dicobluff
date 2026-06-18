@@ -14,6 +14,36 @@
   "theme_color": "#0E1A22",
   "prefer_related_applications": false,
   "categories": ["games", "education", "entertainment"],
+  "screenshots": [
+    {
+      "src": "store-screenshots/portrait-1080x1920__home.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Écran d'accueil"
+    },
+    {
+      "src": "store-screenshots/portrait-1080x1920__game-word.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Le mot à deviner"
+    },
+    {
+      "src": "store-screenshots/portrait-1080x1920__vote.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Phase de vote"
+    },
+    {
+      "src": "store-screenshots/portrait-1080x1920__results.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Résultats"
+    }
+  ],
   "shortcuts": [
     {
       "name": "Jouer Solo",
