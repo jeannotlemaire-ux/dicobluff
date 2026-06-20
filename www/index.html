@@ -3061,57 +3061,11 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
 /* ═══════════════════════════════════════════════════════════════
    🏠 HOME — éditorial, salon littéraire
 ═══════════════════════════════════════════════════════════════ */
-.home-wordmark-fixed {
-  position: absolute;
-  top: max(28px, calc(env(safe-area-inset-top, 0px) + 18px));
-  left: 0;
-  right: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  white-space: nowrap;
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 1.9rem;
-  font-weight: 700;
-  font-style: italic;
-  letter-spacing: -.025em;
-  line-height: 1;
-  color: var(--cream);
-  z-index: var(--z-raised);
-  pointer-events: none;
-  user-select: none;
-}
-.home-wordmark-icon-wrap {
-  width: 36px;
-  height: 36px;
-  border-radius: 9px;
-  flex-shrink: 0;
-  display: inline-flex;
-  overflow: hidden;
-}
-.home-wordmark-icon-wrap img {
-  display: block;
-  width: 110%;
-  height: 110%;
-  margin: -5%;
-}
-.home-wordmark-fixed .home-wordmark-inner { position: relative; display: inline-block; }
-.home-wordmark-fixed .home-wordmark-inner span { color: var(--gold); }
-.home-wordmark-fixed .home-wordmark-inner::after {
-  content: '';
-  position: absolute;
-  bottom: -4px; left: 15%; right: 15%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  border-radius: 1px;
-  opacity: .35;
-}
 .home-inner {
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: max(100px, calc(env(safe-area-inset-top, 0px) + 92px)) 22px max(20px, calc(env(safe-area-inset-bottom, 0px) + 16px));
+  padding: max(32px, calc(env(safe-area-inset-top, 0px) + 24px)) 22px max(20px, calc(env(safe-area-inset-bottom, 0px) + 16px));
   gap: 0;
 }
 
@@ -5326,15 +5280,6 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
      HOME
 ══════════════════════════════════════════ -->
 <div id="screen-home" class="screen active fade-in">
-
-  <!-- Wordmark Dicobluff -->
-  <div class="home-wordmark-fixed" aria-hidden="true">
-    <span class="home-wordmark-icon-wrap"><img src="assets/icons/icon-384.png" alt=""></span>
-    <div>
-      <span class="home-wordmark-inner">Dico<span>bluff</span></span>
-      <div class="home-tagline">Invente · Trompe · Révèle</div>
-    </div>
-  </div>
 
   <!-- Corps de la home -->
   <div class="home-inner">

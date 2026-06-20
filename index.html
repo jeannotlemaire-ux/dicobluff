@@ -73,22 +73,16 @@
     }
 
     .nav-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.55rem;
-      font-weight: 600;
-      color: var(--cream);
       text-decoration: none;
       margin-right: auto;
-      letter-spacing: .02em;
       display: flex;
       align-items: center;
-      gap: 10px;
+      flex-shrink: 0;
     }
-    .nav-logo em { font-style: italic; color: var(--gold); }
-    .nav-logo .icon-clip {
-      height: 38px;
-      width: 38px;
-      border-radius: 10px;
+    .nav-logo img {
+      height: 42px;
+      width: auto;
+      display: block;
     }
 
     .nav-links {
@@ -168,45 +162,14 @@
 
     .hero-content { position: relative; z-index: 1; }
 
-    .hero-icon {
-      width: 80px;
-      height: 80px;
-      border-radius: 20px;
-      margin-bottom: 24px;
+    .hero-logo {
       display: block;
-      overflow: hidden;
-      box-shadow: 0 12px 40px rgba(200,134,10,.25);
+      width: clamp(200px, 34vw, 310px);
+      height: auto;
+      margin-bottom: 36px;
+      filter: drop-shadow(0 4px 28px rgba(200,134,10,.2));
     }
-    .hero-icon img { display: block; width: 110%; height: 110%; margin: -5%; }
 
-    .icon-clip {
-      display: inline-flex;
-      overflow: hidden;
-      flex-shrink: 0;
-    }
-    .icon-clip img { display: block; width: 110%; height: 110%; margin: -5%; }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(200,134,10,.1);
-      border: 1px solid rgba(200,134,10,.28);
-      border-radius: 999px;
-      padding: 5px 16px;
-      font-size: .7rem;
-      font-weight: 700;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--gold-lt);
-      margin-bottom: 28px;
-    }
-    .eyebrow-dot {
-      width: 6px; height: 6px;
-      background: var(--gold);
-      border-radius: 50%;
-      animation: blink 2s ease-in-out infinite;
-    }
     @keyframes blink {
       0%,100% { opacity: 1; transform: scale(1); }
       50%      { opacity: .4; transform: scale(.65); }
@@ -713,17 +676,14 @@
     }
 
     .footer-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.25rem;
-      font-weight: 600;
-      color: var(--cream-dim);
       text-decoration: none;
       display: flex;
       align-items: center;
-      gap: 10px;
+      opacity: .65;
+      transition: opacity .2s;
     }
-    .footer-logo em { font-style: italic; color: var(--gold); }
-    .footer-logo .icon-clip { height: 32px; width: 32px; border-radius: 8px; }
+    .footer-logo:hover { opacity: 1; }
+    .footer-logo img { height: 36px; width: auto; display: block; }
 
     .dl-trust {
       font-size: .72rem;
@@ -775,7 +735,7 @@
       .hero-badge { display: none; }
       .pills { justify-content: center; }
       .store-row { justify-content: center; }
-      .hero-icon { margin-left: auto; margin-right: auto; }
+      .hero-logo { margin-left: auto; margin-right: auto; }
       .steps-grid { grid-template-columns: 1fr; }
       .step-arrow { display: none; }
       .modes-grid { grid-template-columns: 1fr; max-width: 420px; }
@@ -810,9 +770,8 @@
 
 <!-- ════ NAV ════ -->
 <nav id="nav">
-  <a href="#" class="nav-logo">
-    <span class="icon-clip"><img src="assets/icons/icon-384.png" alt="" width="38" height="38"></span>
-    Dico<em>bluff</em>
+  <a href="#" class="nav-logo" aria-label="Dicobluff — accueil">
+    <img src="assets/logo.svg" alt="Dicobluff" height="42">
   </a>
   <ul class="nav-links" id="nav-links">
     <li><a href="#gameplay">Gameplay</a></li>
@@ -832,8 +791,7 @@
   <div class="hero-noise" aria-hidden="true"></div>
 
   <div class="hero-content">
-    <span class="hero-icon"><img src="assets/icons/icon-384.png" alt="Dicobluff" fetchpriority="high" width="88" height="88"></span>
-    <div class="eyebrow"><span class="eyebrow-dot"></span>Jeu de bluff littéraire</div>
+    <img src="assets/logo.svg" alt="Dicobluff" class="hero-logo" fetchpriority="high" width="310" height="82">
     <h1 class="hero-title">
       Invente.<br>
       <em>Bluffe.</em><br>
@@ -1241,9 +1199,8 @@
 
 <!-- ════ FOOTER ════ -->
 <footer>
-  <a href="#" class="footer-logo">
-    <span class="icon-clip"><img src="assets/icons/icon-384.png" alt="" width="32" height="32"></span>
-    Dico<em>bluff</em>
+  <a href="#" class="footer-logo" aria-label="Dicobluff — retour en haut">
+    <img src="assets/logo.svg" alt="Dicobluff" height="36">
   </a>
   <ul class="footer-links">
     <li><a href="game.html">Jouer en ligne</a></li>
