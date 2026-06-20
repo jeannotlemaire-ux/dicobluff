@@ -70,8 +70,7 @@
   --surface:  #243748;
   --surface2: #2D4254;
   --surface3: #374D62;
-  --surface-mid: var(--surface2);   /* alias DESIGN.md */
-  --border-subtle: var(--border);   /* alias DESIGN.md */
+  --surface-mid: var(--surface2);
 
   /* Borders */
   --border:   rgba(242,236,216,0.08);
@@ -566,8 +565,6 @@ body.on-home #profile-btn { display: flex; }
 .settings-menu button:hover  { background: var(--surface2); }
 .settings-menu button:active { background: var(--surface3); }
 
-/* XP Compact Container - Hidden in v19 */
-.xp-compact-container { display: none; }
 
 /* ─── GAME PROGRESS BAR ─── */
 #game-progress-container {
@@ -7780,6 +7777,13 @@ const LS = {
 };
 
 /* ══════════════════════════════════════════════════════
+   🔒 SÉCURITÉ — échappement HTML global
+══════════════════════════════════════════════════════ */
+function escHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+/* ══════════════════════════════════════════════════════
    🎯 UTILS
 ══════════════════════════════════════════════════════ */
 function shuffle(arr) { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
@@ -9111,8 +9115,11 @@ function renderCarnet(){
   // Barre de progression vers les 1000 mots
   const prog = document.getElementById('carnet-progress-bar');
   const progLabel = document.getElementById('carnet-progress-label');
-  if(prog){ prog.style.transform = 'scaleX(' + Math.min(1, discovered/total) + ')'; }
+  const pct = Math.round(Math.min(1, discovered/total) * 100);
+  if(prog){ prog.style.transform = 'scaleX(' + pct/100 + ')'; }
   if(progLabel){ progLabel.textContent = discovered+' / '+total+' mots découverts'; }
+  const progWrap = document.getElementById('carnet-progress-bar')?.closest('[role="progressbar"]');
+  if(progWrap) progWrap.setAttribute('aria-valuenow', pct);
   const empty=document.getElementById('carnet-empty'),list=document.getElementById('carnet-list');
   if(!c.length){empty.style.display='block';list.innerHTML='';return;}
   empty.style.display='none';
@@ -9214,7 +9221,7 @@ function answerQuiz(btn,chosen,q){
   if(!quizState.results)quizState.results=[];
   quizState.results[quizState.idx]=ok;
   const fb=document.getElementById('quiz-fb');
-  document.getElementById('quiz-fb-text').innerHTML=ok?`✅ <strong>Bravo !</strong> « ${q.word} » : ${q.trueDef}`:`❌ La vraie définition de <strong>${q.word}</strong> : ${q.trueDef}`;
+  document.getElementById('quiz-fb-text').innerHTML=ok?`✅ <strong>Bravo !</strong> « ${escHtml(q.word)} » : ${escHtml(q.trueDef)}`:`❌ La vraie définition de <strong>${escHtml(q.word)}</strong> : ${escHtml(q.trueDef)}`;
   fb.style.display='block'; fb.style.borderTop=`2px solid ${ok?'var(--teal2)':'var(--coral)'}`;fb.style.borderLeft='';
   // Scroll vers le feedback pour s'assurer qu'il est visible
   setTimeout(()=>fb.scrollIntoView({behavior:'smooth',block:'nearest'}),60);
@@ -10291,7 +10298,7 @@ const App = {
     const c=LS.get('carnet',[]).filter(e=>e.w.toLowerCase().includes(q)||e.d.toLowerCase().includes(q));
     const list=document.getElementById('carnet-list');
     const rL={rare:'Rare',epic:'Épique',legendary:'Légendaire'},rC={rare:'badge-rare',epic:'badge-epic',legendary:'badge-legendary'};
-    list.innerHTML=c.map(e=>`<div class="carnet-item"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:5px;"><div style="font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.05rem;color:var(--gold2);">${e.w}</div><span class="badge ${rC[e.r]||'badge-accent'}" style="flex-shrink:0;margin-left:8px;">${rL[e.r]||'Rare'}</span></div><div style="font-size:.95rem;color:var(--text2);line-height:1.55;font-family:'Cormorant Garamond',serif;">${e.d}</div></div>`).join('');
+    list.innerHTML=c.map(e=>`<div class="carnet-item" role="button" tabindex="0"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:5px;"><div style="font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.05rem;color:var(--gold2);">${escHtml(e.w)}</div><span class="badge ${rC[e.r]||'badge-accent'}" style="flex-shrink:0;margin-left:8px;">${rL[e.r]||'Rare'}</span></div><div style="font-size:.95rem;color:var(--text2);line-height:1.55;font-family:'Cormorant Garamond',serif;">${escHtml(e.d)}</div></div>`).join('');
   },
   startQuiz(mode) {
     if (mode === 'session') {
@@ -10670,8 +10677,14 @@ const App = {
 
   nextRound(){ if(solo.active) startSoloRound(); else nextRoundOnline(); },
   playAgain(){
-    if(solo.active){solo.round=0;solo.usedWords=[];solo.sessionWordObjs=[];solo.aiOpponents=pickAIOpponents(solo.avatar);solo.scores={player:0};solo.aiOpponents.forEach(ai=>solo.scores[ai.id]=0);startSoloRound();}
-    else playAgainOnline();
+    if(solo.active){
+      solo.round=0; solo.usedWords=[]; solo.sessionWordObjs=[];
+      solo.streak=0; solo.maxStreak=0;
+      solo.sessionCorrect=0; solo.sessionFooled=0; solo.sessionRounds=0;
+      solo.aiOpponents=pickAIOpponents(solo.avatar);
+      solo.scores={player:0}; solo.aiOpponents.forEach(ai=>solo.scores[ai.id]=0);
+      startSoloRound();
+    } else playAgainOnline();
   },
 
 
@@ -11605,7 +11618,7 @@ function showSoloResults(playerPts,reactions){
       + badgeHtml
       + '</div>';
 
-    wrap.innerHTML = '<div class="'+cardClass+'" style="padding:16px 18px;cursor:default;">' + authorHtml + '<div class="def-text">'+def.text+'</div>' + footerHtml + '</div>';
+    wrap.innerHTML = '<div class="'+cardClass+'" style="padding:16px 18px;cursor:default;">' + authorHtml + '<div class="def-text">'+escHtml(def.text)+'</div>' + footerHtml + '</div>';
     cont.appendChild(wrap);
   }
   for(var j=0; j<solo.allDefs.length; j++){
@@ -11717,6 +11730,7 @@ function renderPodium(players){
 }
 
 function showSoloFinal(){
+  solo.active = false;
   const allSc=[
     {name:solo.name,avatar:solo.avatar,color:solo.color,score:solo.scores.player,isPlayer:true},
     ...solo.aiOpponents.map(ai=>({name:ai.name,avatar:ai.id,color:ai.color,score:solo.scores[ai.id]||0,ai}))
@@ -11888,7 +11902,7 @@ function showVoteScreen(word,defs){
     }
     card.innerHTML=`
       <div class="def-letter">${letter(i)}</div>
-      <div class="def-text">${def.text}</div>
+      <div class="def-text">${escHtml(def.text)}</div>
       ${isMe?`<div style="font-size:.92rem;color:var(--gold2);margin-top:7px;font-family:'Cormorant Garamond',serif;font-style:italic;display:flex;align-items:center;gap:6px;letter-spacing:.005em;">${icon('writing',13)}<span>Ta définition — tu ne peux pas voter pour toi</span></div>`:''}
     `;
     cont.appendChild(card);
@@ -12239,9 +12253,10 @@ async function triggerVotingPhase(){
   const submitterUpdates={};
   submittedUids.forEach(uid=>{submitterUpdates['players/'+uid+'/canVoteThisRound']=true;});
   if(Object.keys(submitterUpdates).length) await update(roomRef,submitterUpdates);
-  // Complète avec des défs IA s'il y a moins de 4 propositions au total
+  // Complète avec des défs IA pour atteindre 5 propositions minimum (vraie incluse)
+  // Ex: 2 joueurs → 2 IA (2+2+1=5), 3 joueurs → 1 IA (3+1+1=5), 4+ → 0 IA (4++1≥5)
   const humanCount = onlineUids.length;
-  const needAI = Math.max(0, 3 - humanCount);
+  const needAI = Math.max(0, 4 - humanCount);
   const aiDefs = {};
   if(needAI > 0){
     const wordObj = {

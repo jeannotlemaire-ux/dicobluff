@@ -1,91 +1,39 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Dicobluff — Hors ligne</title>
-<link rel="icon" type="image/svg+xml" href="./assets/icon.svg">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,400;1,600&family=Manrope:wght@500;700&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    background: #1A2A36;
-    color: #F5EDD8;
-    font-family: 'Manrope', sans-serif;
-    min-height: 100dvh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 32px 24px;
-    text-align: center;
-    gap: 0;
-  }
-  .ornament {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    color: #C8860A;
-    font-size: 1.1rem;
-    opacity: .6;
-    margin-bottom: 28px;
-    letter-spacing: .1em;
-  }
-  .icon {
-    font-size: 3.2rem;
-    margin-bottom: 20px;
-    filter: drop-shadow(0 4px 16px rgba(200,134,10,.3));
-  }
-  h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-weight: 600;
-    font-size: 2rem;
-    color: #F5EDD8;
-    margin-bottom: 12px;
-    line-height: 1.2;
-  }
-  p {
-    font-size: .9rem;
-    color: #A0937A;
-    line-height: 1.6;
-    max-width: 280px;
-    margin-bottom: 32px;
-  }
-  button {
-    background: linear-gradient(135deg, #C8860A, #E5C170);
-    color: #0E1A22;
-    border: none;
-    border-radius: 100px;
-    padding: 14px 28px;
-    font-family: 'Manrope', sans-serif;
-    font-weight: 700;
-    font-size: .9rem;
-    cursor: pointer;
-    letter-spacing: .02em;
-    transition: filter .2s;
-  }
-  button:hover { filter: brightness(1.08); }
-  .logo {
-    position: fixed;
-    top: 24px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-weight: 600;
-    font-size: 1.3rem;
-    color: #C8860A;
-    letter-spacing: -.01em;
-    opacity: .7;
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0E1A22">
+  <title>Dicobluff — Hors ligne</title>
+  <style>
+    :root { --bg:#0E1A22; --cream:#F5EDD8; --gold:#C8860A; }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body {
+      background:var(--bg); color:var(--cream);
+      font-family:'Manrope',system-ui,sans-serif;
+      min-height:100dvh; display:grid; place-items:center;
+      text-align:center; padding:24px;
+    }
+    .wrap { max-width:340px; }
+    svg { width:52px; height:52px; color:var(--gold); margin-bottom:24px; }
+    h1 { font-family:'Cormorant Garamond',Georgia,serif; font-size:2.2rem; font-weight:300; font-style:italic; margin-bottom:12px; }
+    p { font-size:.9rem; line-height:1.7; opacity:.68; margin-bottom:28px; }
+    a {
+      display:inline-block; padding:12px 28px;
+      background:var(--gold); color:#0E1A22;
+      font-weight:700; font-size:.85rem; letter-spacing:.06em; text-transform:uppercase;
+      text-decoration:none; border-radius:8px;
+    }
+  </style>
 </head>
 <body>
-  <div class="logo">Dicobluff</div>
-  <div class="ornament">— ✦ —</div>
-  <div class="icon">📡</div>
-  <h1>Tu es hors ligne</h1>
-  <p>Vérifie ta connexion et réessaie. Les parties solo sont disponibles sans réseau.</p>
-  <button onclick="location.reload()">Réessayer</button>
+  <div class="wrap">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M1 6l11 11L23 6"/><path d="M1 1h22v14H1z"/>
+    </svg>
+    <h1>Hors connexion</h1>
+    <p>Tu es hors ligne. Lance une partie solo depuis le jeu — il fonctionne sans internet.</p>
+    <a href="game.html">Jouer hors ligne</a>
+  </div>
 </body>
 </html>
