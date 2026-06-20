@@ -4,18 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dicobluff — Le jeu de bluff littéraire</title>
-  <meta name="description" content="1000 mots rares. Des IA aux personnalités tranchées. Un seul vrai. Invente la définition parfaite pour piéger tes adversaires.">
+  <meta name="description" content="1000 mots rares. Des adversaires aux personnalités tranchées. Un seul vrai. Invente la définition parfaite pour piéger tes adversaires.">
+  <meta name="theme-color" content="#0E1A22">
+  <meta name="color-scheme" content="dark">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.dicobluff.fr/">
   <meta property="og:title" content="Dicobluff — Le jeu de bluff littéraire">
-  <meta property="og:description" content="1000 mots rares. Des IA retorses. Un seul vrai.">
+  <meta property="og:description" content="1000 mots rares. Des adversaires retors. Un seul vrai.">
   <meta property="og:image" content="https://www.dicobluff.fr/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:locale" content="fr_FR">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Dicobluff — Le jeu de bluff littéraire">
-  <meta name="twitter:description" content="1000 mots rares. Des IA retorses. Un seul vrai.">
+  <meta name="twitter:description" content="1000 mots rares. Des adversaires retors. Un seul vrai.">
   <meta name="twitter:image" content="https://www.dicobluff.fr/og-image.png">
   <link rel="canonical" href="https://www.dicobluff.fr/">
   <link rel="icon" type="image/svg+xml" href="assets/icon.svg">
@@ -83,11 +85,10 @@
       gap: 10px;
     }
     .nav-logo em { font-style: italic; color: var(--gold); }
-    .nav-logo img {
+    .nav-logo .icon-clip {
       height: 38px;
       width: 38px;
       border-radius: 10px;
-      flex-shrink: 0;
     }
 
     .nav-links {
@@ -104,6 +105,7 @@
       text-transform: uppercase;
       color: var(--cream-dim);
       text-decoration: none;
+      touch-action: manipulation;
       transition: color .2s;
     }
     .nav-links a:hover { color: var(--cream); }
@@ -172,8 +174,17 @@
       border-radius: 20px;
       margin-bottom: 24px;
       display: block;
+      overflow: hidden;
       box-shadow: 0 12px 40px rgba(200,134,10,.25);
     }
+    .hero-icon img { display: block; width: 110%; height: 110%; margin: -5%; }
+
+    .icon-clip {
+      display: inline-flex;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .icon-clip img { display: block; width: 110%; height: 110%; margin: -5%; }
 
     .eyebrow {
       display: inline-flex;
@@ -208,6 +219,7 @@
       line-height: 1.04;
       letter-spacing: -.015em;
       margin-bottom: 24px;
+      text-wrap: balance;
     }
     .hero-title em { font-style: italic; color: var(--gold); }
 
@@ -252,6 +264,7 @@
       font-family: 'Manrope', sans-serif;
       cursor: pointer;
       border: none;
+      touch-action: manipulation;
       transition: transform .22s, box-shadow .22s, background .2s;
     }
     .btn-store.primary {
@@ -419,6 +432,7 @@
       font-weight: 500;
       line-height: 1.1;
       margin-bottom: 14px;
+      text-wrap: balance;
     }
     .sec-title em { font-style: italic; color: var(--gold); }
     .center .sec-title { text-align: center; }
@@ -709,7 +723,14 @@
       gap: 10px;
     }
     .footer-logo em { font-style: italic; color: var(--gold); }
-    .footer-logo img { height: 32px; width: 32px; border-radius: 8px; }
+    .footer-logo .icon-clip { height: 32px; width: 32px; border-radius: 8px; }
+
+    .dl-trust {
+      font-size: .72rem;
+      color: var(--cream-dim);
+      margin-top: 14px;
+      letter-spacing: .02em;
+    }
 
     .footer-links {
       list-style: none;
@@ -726,6 +747,17 @@
     .footer-links a:hover { color: var(--cream); }
 
     .footer-copy { font-size: .72rem; color: rgba(245,237,216,.3); }
+
+    /* ─── REDUCED MOTION ─── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1 !important; transform: none !important; }
+    }
 
     /* ─── REVEAL ─── */
     .reveal {
@@ -779,7 +811,7 @@
 <!-- ════ NAV ════ -->
 <nav id="nav">
   <a href="#" class="nav-logo">
-    <img src="assets/icons/icon-192.png" alt="">
+    <span class="icon-clip"><img src="assets/icons/icon-384.png" alt="" width="38" height="38"></span>
     Dico<em>bluff</em>
   </a>
   <ul class="nav-links" id="nav-links">
@@ -800,7 +832,7 @@
   <div class="hero-noise" aria-hidden="true"></div>
 
   <div class="hero-content">
-    <img src="assets/icons/icon-192.png" alt="Dicobluff" class="hero-icon">
+    <span class="hero-icon"><img src="assets/icons/icon-384.png" alt="Dicobluff" fetchpriority="high" width="88" height="88"></span>
     <div class="eyebrow"><span class="eyebrow-dot"></span>Jeu de bluff littéraire</div>
     <h1 class="hero-title">
       Invente.<br>
@@ -808,12 +840,12 @@
       Triomphe.
     </h1>
     <p class="hero-sub">
-      1&nbsp;000 mots rares. Des IA aux personnalités tranchées.<br>
+      1&nbsp;000 mots rares. Des personnages aux personnalités tranchées.<br>
       Une seule vraie définition — sauras-tu la reconnaître&nbsp;?
     </p>
     <div class="pills">
       <span class="pill">1&nbsp;000 mots</span>
-      <span class="pill">12 personnages IA</span>
+      <span class="pill">12 personnages</span>
       <span class="pill">100&nbsp;% français</span>
       <span class="pill">Hors ligne</span>
     </div>
@@ -838,6 +870,7 @@
         </span>
       </span>
     </div>
+    <p class="dl-trust">Gratuit · Sans compte · Fonctionne hors connexion</p>
   </div>
 
   <div class="hero-visual">
@@ -892,14 +925,14 @@
       <div class="step-n">2</div>
       <span class="step-ico">✍️</span>
       <h3 class="step-name">Invente une définition</h3>
-      <p class="step-desc">Rédige la définition la plus convaincante possible pour tromper tes adversaires — humains ou IA.</p>
+      <p class="step-desc">Rédige la définition la plus convaincante possible pour tromper tes adversaires — humains ou fictifs.</p>
       <div class="step-arrow" aria-hidden="true">›</div>
     </div>
     <div class="step-card reveal" style="transition-delay:.2s">
       <div class="step-n">3</div>
       <span class="step-ico">🗳️</span>
       <h3 class="step-name">Le vote révèle tout</h3>
-      <p class="step-desc">Qui a voté pour ta définition&nbsp;? Qui a trouvé la vraie&nbsp;? Les IA bluffent aussi, et bien.</p>
+      <p class="step-desc">Qui a voté pour ta définition&nbsp;? Qui a trouvé la vraie&nbsp;? Les personnages bluffent aussi, et bien.</p>
     </div>
   </div>
 </section>
@@ -919,8 +952,8 @@
     </div>
     <div class="feat-card reveal" style="transition-delay:.05s">
       <div class="feat-ico">🎭</div>
-      <h3 class="feat-name">12 personnages IA</h3>
-      <p class="feat-desc">Cyrano bluffe avec panache. Tartuffe manipule. Arsène Lupin joue double jeu. Chaque IA a sa propre stratégie.</p>
+      <h3 class="feat-name">12 personnages littéraires</h3>
+      <p class="feat-desc">Cyrano bluffe avec panache. Tartuffe manipule. Arsène Lupin joue double jeu. Chacun a sa propre stratégie.</p>
     </div>
     <div class="feat-card reveal" style="transition-delay:.1s">
       <div class="feat-ico">⭐</div>
@@ -957,9 +990,9 @@
       <span class="mode-badge badge-free">Gratuit</span>
       <span class="mode-ico">🧠</span>
       <h3 class="mode-name">Solo</h3>
-      <p class="mode-desc">Affronte seul jusqu'à 4 personnages IA aux personnalités tranchées. Le mode parfait pour progresser à son rythme.</p>
+      <p class="mode-desc">Affronte seul jusqu'à 4 personnages aux personnalités tranchées. Le mode parfait pour progresser à son rythme.</p>
       <ul class="mode-feats">
-        <li>12 personnages IA jouables</li>
+        <li>12 personnages jouables</li>
         <li>Difficulté ajustable</li>
         <li>Mot du jour inclus</li>
         <li>Carnet &amp; historique</li>
@@ -981,11 +1014,11 @@
       <span class="mode-badge badge-premium">✦ Premium</span>
       <span class="mode-ico">👑</span>
       <h3 class="mode-name">Mode Décalé</h3>
-      <p class="mode-desc">Les règles changent. Les définitions deviennent absurdes. Les IA déraillent — volontairement. Un chaos littéraire jubilatoire.</p>
+      <p class="mode-desc">Les règles changent. Les définitions deviennent absurdes. Les personnages déraillent — volontairement. Un chaos littéraire jubilatoire.</p>
       <ul class="mode-feats">
         <li class="g">Mots Légendaires exclusifs</li>
         <li class="g">Définitions déjantées débloquées</li>
-        <li class="g">IA en mode "chaos"</li>
+        <li class="g">Personnages en mode "chaos"</li>
         <li class="g">Thèmes et ambiances spéciaux</li>
       </ul>
     </div>
@@ -1108,7 +1141,7 @@
           <div class="howto-num">2</div>
           <div class="howto-body">
             <div class="howto-step-name">Choisis tes adversaires</div>
-            <p class="howto-step-desc">Sélectionne 1 à 4 personnages IA parmi les 12 disponibles. Chacun a sa propre façon de bluffer.</p>
+            <p class="howto-step-desc">Sélectionne 1 à 4 personnages parmi les 12 disponibles. Chacun a sa propre façon de bluffer.</p>
           </div>
         </div>
         <div class="howto-step reveal" style="transition-delay:.1s">
@@ -1129,7 +1162,7 @@
           <div class="howto-num">5</div>
           <div class="howto-body">
             <div class="howto-step-name">Vote pour la vraie</div>
-            <p class="howto-step-desc">Toutes les définitions s'affichent mélangées. Repère la vraie parmi les fausses — IA et joueurs confondus.</p>
+            <p class="howto-step-desc">Toutes les définitions s'affichent mélangées. Repère la vraie parmi les fausses — personnages et joueurs confondus.</p>
           </div>
         </div>
         <div class="howto-step reveal" style="transition-delay:.25s">
@@ -1209,7 +1242,7 @@
 <!-- ════ FOOTER ════ -->
 <footer>
   <a href="#" class="footer-logo">
-    <img src="assets/icons/icon-192.png" alt="">
+    <span class="icon-clip"><img src="assets/icons/icon-384.png" alt="" width="32" height="32"></span>
     Dico<em>bluff</em>
   </a>
   <ul class="footer-links">

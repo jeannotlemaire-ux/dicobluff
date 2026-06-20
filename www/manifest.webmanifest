@@ -27,7 +27,7 @@
       "sizes": "1080x1920",
       "type": "image/png",
       "form_factor": "narrow",
-      "label": "Adversaires IA avec personnalité"
+      "label": "Adversaires aux personnalités tranchées"
     },
     {
       "src": "store-screenshots/playstore__3-fonctionnalite.png",
@@ -55,7 +55,7 @@
     {
       "name": "Jouer Solo",
       "short_name": "Solo",
-      "description": "Lancer une partie solo contre l'IA",
+      "description": "Lancer une partie solo contre les personnages",
       "url": "./game.html?mode=solo",
       "icons": [{ "src": "assets/icons/icon-96.png", "sizes": "96x96" }]
     },
