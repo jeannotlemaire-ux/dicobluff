@@ -5,7 +5,7 @@
   "description": "Le jeu de bluff littéraire — invente la définition la plus convaincante pour piéger tes adversaires.",
   "lang": "fr",
   "dir": "ltr",
-  "start_url": "./?source=pwa",
+  "start_url": "./game.html?source=pwa",
   "scope": "./",
   "display": "standalone",
   "display_override": ["standalone", "minimal-ui"],
@@ -56,14 +56,14 @@
       "name": "Jouer Solo",
       "short_name": "Solo",
       "description": "Lancer une partie solo contre l'IA",
-      "url": "./?mode=solo",
+      "url": "./game.html?mode=solo",
       "icons": [{ "src": "assets/icons/icon-96.png", "sizes": "96x96" }]
     },
     {
       "name": "Mot du jour",
       "short_name": "Mot du jour",
       "description": "Voir le mot du jour",
-      "url": "./?wod=1",
+      "url": "./game.html?wod=1",
       "icons": [{ "src": "assets/icons/icon-96.png", "sizes": "96x96" }]
     }
   ],
