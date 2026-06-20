@@ -16,32 +16,39 @@
   "categories": ["games", "education", "entertainment"],
   "screenshots": [
     {
-      "src": "store-screenshots/portrait-1080x1920__home.png",
+      "src": "store-screenshots/playstore__1-accroche.png",
       "sizes": "1080x1920",
       "type": "image/png",
       "form_factor": "narrow",
-      "label": "Écran d'accueil"
+      "label": "Le jeu de bluff littéraire"
     },
     {
-      "src": "store-screenshots/portrait-1080x1920__game-word.png",
+      "src": "store-screenshots/playstore__2-adversaires-ia.png",
       "sizes": "1080x1920",
       "type": "image/png",
       "form_factor": "narrow",
-      "label": "Le mot à deviner"
+      "label": "Adversaires IA avec personnalité"
     },
     {
-      "src": "store-screenshots/portrait-1080x1920__vote.png",
+      "src": "store-screenshots/playstore__3-fonctionnalite.png",
       "sizes": "1080x1920",
       "type": "image/png",
       "form_factor": "narrow",
-      "label": "Phase de vote"
+      "label": "Invente la définition parfaite"
     },
     {
-      "src": "store-screenshots/portrait-1080x1920__results.png",
+      "src": "store-screenshots/playstore__4-le-concept.png",
       "sizes": "1080x1920",
       "type": "image/png",
       "form_factor": "narrow",
-      "label": "Résultats"
+      "label": "Le concept du jeu"
+    },
+    {
+      "src": "store-screenshots/playstore__5-verdict.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Le verdict"
     }
   ],
   "shortcuts": [
