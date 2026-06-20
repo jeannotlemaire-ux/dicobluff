@@ -73,16 +73,21 @@
     }
 
     .nav-logo {
-      text-decoration: none;
-      margin-right: auto;
       display: flex;
       align-items: center;
-      flex-shrink: 0;
+      gap: 10px;
+      text-decoration: none;
+      margin-right: auto;
     }
-    .nav-logo img {
-      height: 42px;
-      width: auto;
-      display: block;
+    .nav-logo-mark { height: 28px; width: auto; display: block; flex-shrink: 0; }
+    .nav-logo-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 700;
+      font-size: 1.75rem;
+      letter-spacing: -.02em;
+      color: var(--cream);
+      line-height: 1;
     }
 
     .nav-links {
@@ -162,12 +167,34 @@
 
     .hero-content { position: relative; z-index: 1; }
 
-    .hero-logo {
+    /* Hero brand block */
+    .hero-brand { margin-bottom: 32px; }
+    .hero-brand-mark {
+      height: 68px;
+      width: auto;
       display: block;
-      width: clamp(200px, 34vw, 310px);
-      height: auto;
-      margin-bottom: 36px;
-      filter: drop-shadow(0 4px 28px rgba(200,134,10,.2));
+      margin-bottom: 10px;
+      filter: drop-shadow(0 6px 28px rgba(200,134,10,.22));
+    }
+    .hero-brand-name {
+      display: block;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 700;
+      font-size: clamp(2.2rem, 4vw, 3rem);
+      letter-spacing: -.03em;
+      color: var(--cream);
+      line-height: 1;
+    }
+    .hero-brand-tag {
+      display: block;
+      font-family: 'Manrope', sans-serif;
+      font-weight: 700;
+      font-size: .6rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: rgba(200,134,10,.65);
+      margin-top: 7px;
     }
 
     @keyframes blink {
@@ -676,14 +703,23 @@
     }
 
     .footer-logo {
-      text-decoration: none;
       display: flex;
       align-items: center;
+      gap: 9px;
+      text-decoration: none;
       opacity: .65;
       transition: opacity .2s;
     }
     .footer-logo:hover { opacity: 1; }
-    .footer-logo img { height: 36px; width: auto; display: block; }
+    .footer-logo-mark { height: 22px; width: auto; display: block; flex-shrink: 0; }
+    .footer-logo-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--cream-dim);
+      line-height: 1;
+    }
 
     .dl-trust {
       font-size: .72rem;
@@ -735,7 +771,8 @@
       .hero-badge { display: none; }
       .pills { justify-content: center; }
       .store-row { justify-content: center; }
-      .hero-logo { margin-left: auto; margin-right: auto; }
+      .hero-brand { text-align: left; }
+      .hero-brand-mark { margin: 0; }
       .steps-grid { grid-template-columns: 1fr; }
       .step-arrow { display: none; }
       .modes-grid { grid-template-columns: 1fr; max-width: 420px; }
@@ -771,7 +808,8 @@
 <!-- ════ NAV ════ -->
 <nav id="nav">
   <a href="#" class="nav-logo" aria-label="Dicobluff — accueil">
-    <img src="assets/logo.svg" alt="Dicobluff" height="42">
+    <svg class="nav-logo-mark" viewBox="22 48 136 96" aria-hidden="true" focusable="false"><defs><linearGradient id="n-mg" x1="20%" y1="0%" x2="80%" y2="100%"><stop offset="0%" stop-color="#F2DC98"/><stop offset="35%" stop-color="#C8860A"/><stop offset="100%" stop-color="#6B4503"/></linearGradient><linearGradient id="n-sh" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="white" stop-opacity=".22"/><stop offset="100%" stop-color="white" stop-opacity="0"/></linearGradient><mask id="n-em"><rect width="180" height="180" fill="white"/><ellipse cx="67.3" cy="81" rx="17.9" ry="10.5" fill="black" transform="rotate(-13 67.3 81)"/><ellipse cx="112.7" cy="81" rx="17.9" ry="10.5" fill="black" transform="rotate(13 112.7 81)"/></mask></defs><g transform="scale(0.352)"><path mask="url(#n-em)" fill="url(#n-mg)" d="M 86 262 C 86 190,138 158,198 160 C 226 161,247 179,254 198 C 255 202,255.5 206,256 207 C 256.5 206,257 202,258 198 C 265 179,286 161,314 160 C 374 158,426 190,426 262 C 426 306,401 330,370 324 C 341 318,315 296,295 275 C 281 261,271 253,256 253 C 241 253,231 261,217 275 C 197 296,171 318,142 324 C 111 330,86 306,86 262 Z"/><ellipse mask="url(#n-em)" cx="256" cy="188" rx="152" ry="40" fill="url(#n-sh)" opacity=".9"/><path d="M 256 358 L 264 372 L 256 386 L 248 372 Z" fill="#C8860A" opacity=".55"/><circle cx="256" cy="344" r="3" fill="#C8860A" opacity=".4"/></g></svg>
+    <span class="nav-logo-text">Dicobluff</span>
   </a>
   <ul class="nav-links" id="nav-links">
     <li><a href="#gameplay">Gameplay</a></li>
@@ -791,7 +829,11 @@
   <div class="hero-noise" aria-hidden="true"></div>
 
   <div class="hero-content">
-    <img src="assets/logo.svg" alt="Dicobluff" class="hero-logo" fetchpriority="high" width="310" height="82">
+    <div class="hero-brand">
+      <svg class="hero-brand-mark" viewBox="22 48 136 96" aria-hidden="true" focusable="false"><defs><linearGradient id="h-mg" x1="20%" y1="0%" x2="80%" y2="100%"><stop offset="0%" stop-color="#F2DC98"/><stop offset="35%" stop-color="#C8860A"/><stop offset="100%" stop-color="#6B4503"/></linearGradient><linearGradient id="h-sh" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="white" stop-opacity=".22"/><stop offset="100%" stop-color="white" stop-opacity="0"/></linearGradient><mask id="h-em"><rect width="180" height="180" fill="white"/><ellipse cx="67.3" cy="81" rx="17.9" ry="10.5" fill="black" transform="rotate(-13 67.3 81)"/><ellipse cx="112.7" cy="81" rx="17.9" ry="10.5" fill="black" transform="rotate(13 112.7 81)"/></mask></defs><g transform="scale(0.352)"><path mask="url(#h-em)" fill="url(#h-mg)" d="M 86 262 C 86 190,138 158,198 160 C 226 161,247 179,254 198 C 255 202,255.5 206,256 207 C 256.5 206,257 202,258 198 C 265 179,286 161,314 160 C 374 158,426 190,426 262 C 426 306,401 330,370 324 C 341 318,315 296,295 275 C 281 261,271 253,256 253 C 241 253,231 261,217 275 C 197 296,171 318,142 324 C 111 330,86 306,86 262 Z"/><ellipse mask="url(#h-em)" cx="256" cy="188" rx="152" ry="40" fill="url(#h-sh)" opacity=".9"/><path d="M 256 358 L 264 372 L 256 386 L 248 372 Z" fill="#C8860A" opacity=".55"/><circle cx="256" cy="344" r="3" fill="#C8860A" opacity=".4"/></g></svg>
+      <span class="hero-brand-name">Dicobluff</span>
+      <span class="hero-brand-tag">Le jeu de bluff littéraire</span>
+    </div>
     <h1 class="hero-title">
       Invente.<br>
       <em>Bluffe.</em><br>
@@ -1200,7 +1242,8 @@
 <!-- ════ FOOTER ════ -->
 <footer>
   <a href="#" class="footer-logo" aria-label="Dicobluff — retour en haut">
-    <img src="assets/logo.svg" alt="Dicobluff" height="36">
+    <svg class="footer-logo-mark" viewBox="22 48 136 96" aria-hidden="true" focusable="false"><defs><linearGradient id="f-mg" x1="20%" y1="0%" x2="80%" y2="100%"><stop offset="0%" stop-color="#F2DC98"/><stop offset="35%" stop-color="#C8860A"/><stop offset="100%" stop-color="#6B4503"/></linearGradient><linearGradient id="f-sh" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="white" stop-opacity=".22"/><stop offset="100%" stop-color="white" stop-opacity="0"/></linearGradient><mask id="f-em"><rect width="180" height="180" fill="white"/><ellipse cx="67.3" cy="81" rx="17.9" ry="10.5" fill="black" transform="rotate(-13 67.3 81)"/><ellipse cx="112.7" cy="81" rx="17.9" ry="10.5" fill="black" transform="rotate(13 112.7 81)"/></mask></defs><g transform="scale(0.352)"><path mask="url(#f-em)" fill="url(#f-mg)" d="M 86 262 C 86 190,138 158,198 160 C 226 161,247 179,254 198 C 255 202,255.5 206,256 207 C 256.5 206,257 202,258 198 C 265 179,286 161,314 160 C 374 158,426 190,426 262 C 426 306,401 330,370 324 C 341 318,315 296,295 275 C 281 261,271 253,256 253 C 241 253,231 261,217 275 C 197 296,171 318,142 324 C 111 330,86 306,86 262 Z"/><ellipse mask="url(#f-em)" cx="256" cy="188" rx="152" ry="40" fill="url(#f-sh)" opacity=".9"/><path d="M 256 358 L 264 372 L 256 386 L 248 372 Z" fill="#C8860A" opacity=".55"/><circle cx="256" cy="344" r="3" fill="#C8860A" opacity=".4"/></g></svg>
+    <span class="footer-logo-text">Dicobluff</span>
   </a>
   <ul class="footer-links">
     <li><a href="game.html">Jouer en ligne</a></li>
