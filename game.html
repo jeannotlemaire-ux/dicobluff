@@ -3066,7 +3066,10 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
   top: max(28px, calc(env(safe-area-inset-top, 0px) + 18px));
   left: 0;
   right: 0;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   white-space: nowrap;
   font-family: 'Cormorant Garamond', Georgia, serif;
   font-size: 1.9rem;
@@ -3078,6 +3081,12 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
   z-index: var(--z-raised);
   pointer-events: none;
   user-select: none;
+}
+.home-wordmark-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  flex-shrink: 0;
 }
 .home-wordmark-fixed .home-wordmark-inner { position: relative; display: inline-block; }
 .home-wordmark-fixed .home-wordmark-inner span { color: var(--gold); }
@@ -5112,6 +5121,7 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
     <div id="splash-author" style="font-family:'Cormorant Garamond',serif;font-weight:700;font-size:.85rem;color:var(--gold);margin-top:14px;opacity:0;transition:opacity .5s .3s var(--ease-expo);letter-spacing:.04em;">—</div>
   </div>
   <div style="text-align:center;padding-bottom:max(40px,env(safe-area-inset-bottom,40px));">
+    <img src="assets/icons/icon-192.png" alt="" style="width:72px;height:72px;border-radius:18px;margin-bottom:16px;box-shadow:0 8px 32px rgba(200,134,10,.3);">
     <div id="splash-logo" style="font-family:'Cormorant Garamond',serif;font-weight:700;font-style:italic;font-size:2.6rem;letter-spacing:-1px;color:var(--cream);text-shadow:0 2px 20px rgba(200,134,10,.3);min-height:3rem;margin-bottom:6px;"></div>
     <div id="splash-sub" style="color:var(--text2);font-size:.8rem;font-family:'Manrope',sans-serif;opacity:0;transition:opacity .4s var(--ease-expo);letter-spacing:.04em;">LE DICTIONNAIRE EST ENTRE VOS MAINS.</div>
     <div style="width:160px;height:2px;background:var(--surface2);border-radius:1px;overflow:hidden;margin:16px auto 0;">
@@ -5311,8 +5321,11 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
 
   <!-- Wordmark Dicobluff -->
   <div class="home-wordmark-fixed" aria-hidden="true">
-    <span class="home-wordmark-inner">Dico<span>bluff</span></span>
-    <div class="home-tagline">Invente · Trompe · Révèle</div>
+    <img src="assets/icons/icon-192.png" alt="" class="home-wordmark-icon">
+    <div>
+      <span class="home-wordmark-inner">Dico<span>bluff</span></span>
+      <div class="home-tagline">Invente · Trompe · Révèle</div>
+    </div>
   </div>
 
   <!-- Corps de la home -->

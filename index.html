@@ -78,8 +78,17 @@
       text-decoration: none;
       margin-right: auto;
       letter-spacing: .02em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
     .nav-logo em { font-style: italic; color: var(--gold); }
+    .nav-logo img {
+      height: 38px;
+      width: 38px;
+      border-radius: 10px;
+      flex-shrink: 0;
+    }
 
     .nav-links {
       list-style: none;
@@ -156,6 +165,15 @@
     }
 
     .hero-content { position: relative; z-index: 1; }
+
+    .hero-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 20px;
+      margin-bottom: 24px;
+      display: block;
+      box-shadow: 0 12px 40px rgba(200,134,10,.25);
+    }
 
     .eyebrow {
       display: inline-flex;
@@ -686,8 +704,12 @@
       font-weight: 600;
       color: var(--cream-dim);
       text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
     .footer-logo em { font-style: italic; color: var(--gold); }
+    .footer-logo img { height: 32px; width: 32px; border-radius: 8px; }
 
     .footer-links {
       list-style: none;
@@ -721,6 +743,7 @@
       .hero-badge { display: none; }
       .pills { justify-content: center; }
       .store-row { justify-content: center; }
+      .hero-icon { margin-left: auto; margin-right: auto; }
       .steps-grid { grid-template-columns: 1fr; }
       .step-arrow { display: none; }
       .modes-grid { grid-template-columns: 1fr; max-width: 420px; }
@@ -755,7 +778,10 @@
 
 <!-- ════ NAV ════ -->
 <nav id="nav">
-  <a href="#" class="nav-logo">Dico<em>bluff</em></a>
+  <a href="#" class="nav-logo">
+    <img src="assets/icons/icon-192.png" alt="">
+    Dico<em>bluff</em>
+  </a>
   <ul class="nav-links" id="nav-links">
     <li><a href="#gameplay">Gameplay</a></li>
     <li><a href="#features">Fonctionnalités</a></li>
@@ -774,6 +800,7 @@
   <div class="hero-noise" aria-hidden="true"></div>
 
   <div class="hero-content">
+    <img src="assets/icons/icon-192.png" alt="Dicobluff" class="hero-icon">
     <div class="eyebrow"><span class="eyebrow-dot"></span>Jeu de bluff littéraire</div>
     <h1 class="hero-title">
       Invente.<br>
@@ -1181,7 +1208,10 @@
 
 <!-- ════ FOOTER ════ -->
 <footer>
-  <a href="#" class="footer-logo">Dico<em>bluff</em></a>
+  <a href="#" class="footer-logo">
+    <img src="assets/icons/icon-192.png" alt="">
+    Dico<em>bluff</em>
+  </a>
   <ul class="footer-links">
     <li><a href="game.html">Jouer en ligne</a></li>
     <li><a href="privacy.html">Politique de confidentialité</a></li>
