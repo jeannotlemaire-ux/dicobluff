@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://www.dicobluff.fr; connect-src 'self' https://*.firebaseio.com https://*.googleapis.com; script-src 'self' 'unsafe-inline'; frame-ancestors 'none'">
   <title>Dicobluff — Le jeu de bluff littéraire</title>
   <meta name="description" content="1000 mots rares. Des adversaires aux personnalités tranchées. Un seul vrai. Invente la définition parfaite pour piéger tes adversaires.">
-  <meta name="theme-color" content="#0E1A22">
+  <meta name="theme-color" content="#1B2534">
   <meta name="color-scheme" content="dark">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.dicobluff.fr/">
@@ -29,7 +30,7 @@
     "@type": "MobileApplication",
     "name": "Dicobluff",
     "description": "Jeu de bluff de définitions en français — invente la définition la plus convaincante pour piéger tes adversaires. 1000 mots rares, 12 personnages littéraires.",
-    "operatingSystem": "Android",
+    "operatingSystem": "Android, iOS",
     "applicationCategory": "GameApplication",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
     "url": "https://play.google.com/store/apps/details?id=com.dicobluff.app",
@@ -42,13 +43,15 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYqXtK.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="https://fonts.gstatic.com/s/cormorantgaramond/v21/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtImSo.woff2" as="font" type="font/woff2" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:        #0E1A22;
-      --bg2:       #07101A;
+      --bg:        #1B2534;
+      --bg2:       #0E1A22;
       --gold:      #C8860A;
       --gold-lt:   #E09A20;
       --cream:     #F5EDD8;
@@ -84,7 +87,7 @@
       border-bottom: 1px solid transparent;
     }
     nav.scrolled {
-      background: rgba(7,16,26,.92);
+      background: rgba(14,26,34,.92);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border-bottom-color: rgba(200,134,10,.14);
@@ -113,11 +116,12 @@
       letter-spacing: .09em; text-transform: uppercase;
       color: var(--cream-dim); text-decoration: none;
       touch-action: manipulation; transition: color .2s;
+      padding: 10px 8px;
     }
     .nav-links a:hover { color: var(--cream); }
     .nav-cta {
       background: var(--gold) !important;
-      color: #07101A !important;
+      color: var(--bg2) !important;
       padding: 9px 22px; border-radius: 999px;
       transition: background .2s !important;
     }
@@ -309,7 +313,7 @@
     /* Floating badges on the card */
     .float-badge {
       position: absolute;
-      background: rgba(7,16,26,.94);
+      background: rgba(14,26,34,.94);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border: 1px solid rgba(200,134,10,.2);
@@ -401,28 +405,40 @@
     .step-desc { font-size: .845rem; color: var(--cream-dim); line-height: 1.65; }
 
     /* ─── FEATURES ─── */
-    .feat-grid {
+    .feat-list {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
-      gap: 14px;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
     }
-    .feat-card {
-      border: 1px solid rgba(245,237,216,.07);
-      border-radius: 14px;
-      background: rgba(245,237,216,.025);
-      padding: 26px 22px;
-      transition: border-color .28s, transform .28s;
+    .feat-row {
+      display: flex; gap: 18px; align-items: flex-start;
+      padding: 26px 0;
+      border-bottom: 1px solid rgba(245,237,216,.07);
     }
-    .feat-card:hover {
-      border-color: rgba(200,134,10,.22);
-      transform: translateY(-4px);
+    .feat-row:nth-child(odd) { padding-right: 40px; }
+    .feat-row:nth-child(even) {
+      padding-left: 40px;
+      border-left: 1px solid rgba(245,237,216,.07);
     }
-    .feat-icon { width: 34px; height: 34px; color: var(--gold); margin-bottom: 16px; display: block; }
+    .feat-row:nth-last-child(-n+2) { border-bottom: none; }
+    .feat-icon {
+      width: 32px; height: 32px; color: var(--gold);
+      flex-shrink: 0; margin-top: 2px;
+    }
+    .feat-content { flex: 1; min-width: 0; }
     .feat-name {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.22rem; font-weight: 600; margin-bottom: 8px;
+      font-size: 1.18rem; font-weight: 600; margin-bottom: 6px;
+      color: var(--cream);
     }
     .feat-desc { font-size: .845rem; color: var(--cream-dim); line-height: 1.65; }
+    @media (max-width: 640px) {
+      .feat-list { grid-template-columns: 1fr; }
+      .feat-row:nth-child(odd) { padding-right: 0; }
+      .feat-row:nth-child(even) { padding-left: 0; border-left: none; }
+      .feat-row:nth-last-child(-n+2) { border-bottom: 1px solid rgba(245,237,216,.07); }
+      .feat-row:last-child { border-bottom: none; }
+    }
 
     /* ─── MODES ─── */
     .modes-grid {
@@ -508,7 +524,7 @@
     }
     .char-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(7,16,26,.92) 0%, rgba(7,16,26,.2) 50%, transparent 100%);
+      background: linear-gradient(to top, rgba(14,26,34,.92) 0%, rgba(14,26,34,.2) 50%, transparent 100%);
       display: flex; flex-direction: column;
       justify-content: flex-end;
       padding: 14px 10px 12px;
@@ -675,7 +691,7 @@
     .carnet-phone {
       border-radius: 32px;
       box-shadow: 0 52px 104px rgba(0,0,0,.7), 0 0 0 1px rgba(200,134,10,.22);
-      display: block;
+      display: block; height: auto;
       flex-shrink: 0;
       transition: transform .4s ease;
     }
@@ -724,7 +740,7 @@
     /* ─── AUTHORS ─── */
     .authors-grid {
       display: grid;
-      grid-template-columns: repeat(9, 1fr);
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
       gap: 12px;
     }
     .author-card {
@@ -750,7 +766,7 @@
     }
     .author-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(7,16,26,.92) 0%, rgba(7,16,26,.12) 55%, transparent 100%);
+      background: linear-gradient(to top, rgba(14,26,34,.92) 0%, rgba(14,26,34,.12) 55%, transparent 100%);
       display: flex; flex-direction: column; justify-content: flex-end;
       padding: 12px 10px 10px;
     }
@@ -759,7 +775,7 @@
     .author-lock {
       position: absolute; top: 8px; right: 8px;
       width: 22px; height: 22px;
-      background: rgba(7,16,26,.8); backdrop-filter: blur(8px);
+      background: rgba(14,26,34,.8); backdrop-filter: blur(8px);
       border-radius: 6px; border: 1px solid rgba(200,134,10,.2);
       display: grid; place-items: center;
     }
@@ -788,7 +804,7 @@
       border-radius: 22px;
       box-shadow: 0 32px 64px rgba(0,0,0,.55);
       border: 1px solid rgba(245,237,216,.1);
-      display: block;
+      display: block; height: auto;
     }
     .multi-screen-img.side {
       width: clamp(100px, 15vw, 180px);
@@ -820,7 +836,7 @@
       box-shadow: 0 40px 72px rgba(0,0,0,.55);
       border: 1px solid rgba(200,134,10,.18);
       width: clamp(200px, 26vw, 300px);
-      display: block;
+      display: block; height: auto;
     }
 
     /* ─── ACCESSIBILITY ─── */
@@ -875,7 +891,7 @@
       .nav-links.open {
         display: flex; flex-direction: column;
         position: fixed; top: var(--nav-h); inset: var(--nav-h) 0 auto;
-        background: rgba(7,16,26,.97); backdrop-filter: blur(20px);
+        background: rgba(14,26,34,.97); backdrop-filter: blur(20px);
         padding: 16px var(--pad) 36px;
         border-bottom: 1px solid rgba(245,237,216,.07); gap: 0;
       }
@@ -934,17 +950,17 @@
         Une seule vraie définition — sauras-tu la reconnaître&nbsp;?
       </p>
       <div class="hero-stats reveal" style="transition-delay:.2s">
-        <div class="hero-stat">
-          <div class="stat-n">1&nbsp;000</div>
-          <div class="stat-l">Mots rares</div>
+        <div class="hero-stat" aria-label="1 000 mots rares">
+          <div class="stat-n" aria-hidden="true">1&nbsp;000</div>
+          <div class="stat-l" aria-hidden="true">Mots rares</div>
         </div>
-        <div class="hero-stat">
-          <div class="stat-n">12</div>
-          <div class="stat-l">Personnages</div>
+        <div class="hero-stat" aria-label="12 personnages">
+          <div class="stat-n" aria-hidden="true">12</div>
+          <div class="stat-l" aria-hidden="true">Personnages</div>
         </div>
-        <div class="hero-stat">
-          <div class="stat-n">100&nbsp;%</div>
-          <div class="stat-l">Hors ligne</div>
+        <div class="hero-stat" aria-label="100 % hors ligne">
+          <div class="stat-n" aria-hidden="true">100&nbsp;%</div>
+          <div class="stat-l" aria-hidden="true">Hors ligne</div>
         </div>
       </div>
       <div class="store-row reveal" style="transition-delay:.26s">
@@ -1019,8 +1035,7 @@
 <!-- GAMEPLAY -->
 <section id="gameplay" class="sec sec-dark">
   <div class="sec-head center">
-    <div class="eyebrow reveal">Le principe</div>
-    <h2 class="sec-title reveal" style="transition-delay:.06s">Trois actes. <em>Un seul gagnant.</em></h2>
+    <h2 class="sec-title reveal">Trois actes. <em>Un seul gagnant.</em></h2>
     <p class="sec-sub reveal" style="transition-delay:.12s">Un mot rare apparaît. Tout le monde invente une définition — les personnages aussi. Ensuite, on vote pour la vraie. Tu gagnes en trompant les autres… ou en les démasquant.</p>
   </div>
   <div class="steps-wrap reveal" style="transition-delay:.18s">
@@ -1056,57 +1071,92 @@
 <!-- PERSONNAGES -->
 <section id="personnages" class="sec">
   <div class="sec-head center">
-    <div class="eyebrow reveal">Les adversaires</div>
-    <h2 class="sec-title reveal" style="transition-delay:.06s">Ils <em>t'attendent</em></h2>
+    <h2 class="sec-title reveal">Ils <em>t'attendent</em></h2>
     <p class="sec-sub reveal" style="transition-delay:.12s">Douze figures de la littérature française, chacune avec sa stratégie de bluff, ses réactions et son art de la tromperie.</p>
   </div>
   <div class="chars-grid" style="max-width:1100px;margin:0 auto">
     <div class="char-card reveal">
-      <img src="new-avatars/tartuffe.png" alt="Tartuffe" class="char-img" loading="lazy">
+      <picture>
+      <source srcset="new-avatars/tartuffe.webp" type="image/webp">
+      <img src="new-avatars/tartuffe.png" alt="Tartuffe" class="char-img" loading="lazy" width="100" height="100">
+    </picture>
       <div class="char-overlay"><div class="char-name">Tartuffe</div><div class="char-role">Le Faux Dévot</div></div>
     </div>
     <div class="char-card reveal" style="transition-delay:.04s">
-      <img src="new-avatars/cyrano.png" alt="Cyrano de Bergerac" class="char-img" loading="lazy">
+      <picture>
+      <source srcset="new-avatars/cyrano.webp" type="image/webp">
+      <img src="new-avatars/cyrano.png" alt="Cyrano de Bergerac" class="char-img" loading="lazy" width="100" height="100">
+    </picture>
       <div class="char-overlay"><div class="char-name">Cyrano</div><div class="char-role">Le Maître du Verbe</div></div>
     </div>
     <div class="char-card reveal" style="transition-delay:.08s">
-      <img src="new-avatars/figaro.png" alt="Figaro" class="char-img" loading="lazy">
+      <picture>
+      <source srcset="new-avatars/figaro.webp" type="image/webp">
+      <img src="new-avatars/figaro.png" alt="Figaro" class="char-img" loading="lazy" width="100" height="100">
+    </picture>
       <div class="char-overlay"><div class="char-name">Figaro</div><div class="char-role">Le Valet Subversif</div></div>
     </div>
     <div class="char-card reveal" style="transition-delay:.12s">
-      <img src="new-avatars/arseneluppin.png" alt="Arsène Lupin" class="char-img" loading="lazy">
+      <picture>
+      <source srcset="new-avatars/arseneluppin.webp" type="image/webp">
+      <img src="new-avatars/arseneluppin.png" alt="Arsène Lupin" class="char-img" loading="lazy" width="100" height="100">
+    </picture>
       <div class="char-overlay"><div class="char-name">Arsène Lupin</div><div class="char-role">Le Gentleman Cambrioleur</div></div>
     </div>
     <div class="char-card reveal" style="transition-delay:.16s">
-      <img src="new-avatars/petitprince.png" alt="Le Petit Prince" class="char-img" loading="lazy">
+      <picture>
+      <source srcset="new-avatars/petitprince.webp" type="image/webp">
+      <img src="new-avatars/petitprince.png" alt="Le Petit Prince" class="char-img" loading="lazy" width="100" height="100">
+    </picture>
       <div class="char-overlay"><div class="char-name">Le Petit Prince</div><div class="char-role">L'Ingénu Céleste</div></div>
     </div>
     <div class="char-card reveal" style="transition-delay:.2s">
-      <img src="new-avatars/esmeralda.png" alt="Esmeralda" class="char-img" loading="lazy">
+      <picture>
+      <source srcset="new-avatars/esmeralda.webp" type="image/webp">
+      <img src="new-avatars/esmeralda.png" alt="Esmeralda" class="char-img" loading="lazy" width="100" height="100">
+    </picture>
       <div class="char-overlay"><div class="char-name">Esmeralda</div><div class="char-role">La Libre Bohémienne</div></div>
     </div>
     <div class="char-card reveal" style="transition-delay:.24s">
-      <img src="new-avatars/bovary.png" alt="Madame Bovary" class="char-img" loading="lazy">
+      <picture>
+      <source srcset="new-avatars/bovary.webp" type="image/webp">
+      <img src="new-avatars/bovary.png" alt="Madame Bovary" class="char-img" loading="lazy" width="100" height="100">
+    </picture>
       <div class="char-overlay"><div class="char-name">Emma Bovary</div><div class="char-role">La Romantique Désenchantée</div></div>
     </div>
     <div class="char-card reveal" style="transition-delay:.28s">
-      <img src="new-avatars/nemo.png" alt="Capitaine Nemo" class="char-img" loading="lazy">
+      <picture>
+      <source srcset="new-avatars/nemo.webp" type="image/webp">
+      <img src="new-avatars/nemo.png" alt="Capitaine Nemo" class="char-img" loading="lazy" width="100" height="100">
+    </picture>
       <div class="char-overlay"><div class="char-name">Capitaine Nemo</div><div class="char-role">L'Énigmatique des Abysses</div></div>
     </div>
     <div class="char-card reveal" style="transition-delay:.32s">
-      <img src="new-avatars/dantes.png" alt="Edmond Dantès" class="char-img" loading="lazy">
+      <picture>
+      <source srcset="new-avatars/dantes.webp" type="image/webp">
+      <img src="new-avatars/dantes.png" alt="Edmond Dantès" class="char-img" loading="lazy" width="100" height="100">
+    </picture>
       <div class="char-overlay"><div class="char-name">Edmond Dantès</div><div class="char-role">Le Comte Vengeur</div></div>
     </div>
     <div class="char-card reveal" style="transition-delay:.36s">
-      <img src="new-avatars/fogg.png" alt="Phileas Fogg" class="char-img" loading="lazy">
+      <picture>
+      <source srcset="new-avatars/fogg.webp" type="image/webp">
+      <img src="new-avatars/fogg.png" alt="Phileas Fogg" class="char-img" loading="lazy" width="100" height="100">
+    </picture>
       <div class="char-overlay"><div class="char-name">Phileas Fogg</div><div class="char-role">Le Voyageur Méthodique</div></div>
     </div>
     <div class="char-card reveal" style="transition-delay:.4s">
-      <img src="new-avatars/gavroche.png" alt="Gavroche" class="char-img" loading="lazy">
+      <picture>
+      <source srcset="new-avatars/gavroche.webp" type="image/webp">
+      <img src="new-avatars/gavroche.png" alt="Gavroche" class="char-img" loading="lazy" width="100" height="100">
+    </picture>
       <div class="char-overlay"><div class="char-name">Gavroche</div><div class="char-role">L'Enfant des Barricades</div></div>
     </div>
     <div class="char-card reveal" style="transition-delay:.44s">
-      <img src="new-avatars/donjuan.png" alt="Don Juan" class="char-img" loading="lazy">
+      <picture>
+      <source srcset="new-avatars/donjuan.webp" type="image/webp">
+      <img src="new-avatars/donjuan.png" alt="Don Juan" class="char-img" loading="lazy" width="100" height="100">
+    </picture>
       <div class="char-overlay"><div class="char-name">Don Juan</div><div class="char-role">Le Séducteur Imposteur</div></div>
     </div>
   </div>
@@ -1117,51 +1167,77 @@
 <!-- AUTEURS -->
 <section id="auteurs" class="sec sec-dark">
   <div class="sec-head center">
-    <div class="eyebrow reveal">Ton identité</div>
-    <h2 class="sec-title reveal" style="transition-delay:.06s">Choisis <em>qui tu es</em></h2>
+    <h2 class="sec-title reveal">Choisis <em>qui tu es</em></h2>
     <p class="sec-sub reveal" style="transition-delay:.12s">Incarne un auteur ou une autrice de la littérature française. Neuf portraits à débloquer en progressant — chacun gagnant au fil de tes parties.</p>
   </div>
   <div class="authors-grid" style="max-width:1000px;margin:0 auto">
     <div class="author-card reveal">
-      <img src="new-avatars/hugo.png" alt="Victor Hugo" class="author-img" loading="lazy">
+      <picture>
+      <source srcset="new-avatars/hugo.webp" type="image/webp">
+      <img src="new-avatars/hugo.png" alt="Victor Hugo" class="author-img" loading="lazy" width="100" height="100">
+    </picture>
       <div class="author-overlay"><div class="author-name">Victor Hugo</div><div class="author-xp">Dès le départ</div></div>
     </div>
     <div class="author-card reveal" style="transition-delay:.04s">
-      <img src="new-avatars/moliere.png" alt="Molière" class="author-img" loading="lazy">
+      <picture>
+      <source srcset="new-avatars/moliere.webp" type="image/webp">
+      <img src="new-avatars/moliere.png" alt="Molière" class="author-img" loading="lazy" width="100" height="100">
+    </picture>
       <div class="author-overlay"><div class="author-name">Molière</div><div class="author-xp">Dès le départ</div></div>
     </div>
     <div class="author-card reveal" style="transition-delay:.08s">
-      <img src="new-avatars/voltaire.png" alt="Voltaire" class="author-img" loading="lazy">
+      <picture>
+      <source srcset="new-avatars/voltaire.webp" type="image/webp">
+      <img src="new-avatars/voltaire.png" alt="Voltaire — verrouillé, se débloque niveau 3" class="author-img" loading="lazy" width="100" height="100">
+    </picture>
       <div class="author-overlay"><div class="author-name">Voltaire</div><div class="author-xp">Niveau 3</div></div>
       <div class="author-lock" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
     </div>
     <div class="author-card reveal" style="transition-delay:.12s">
-      <img src="new-avatars/georgesand.png" alt="George Sand" class="author-img" loading="lazy">
+      <picture>
+      <source srcset="new-avatars/georgesand.webp" type="image/webp">
+      <img src="new-avatars/georgesand.png" alt="George Sand — verrouillée, se débloque niveau 5" class="author-img" loading="lazy" width="100" height="100">
+    </picture>
       <div class="author-overlay"><div class="author-name">George Sand</div><div class="author-xp">Niveau 5</div></div>
       <div class="author-lock" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
     </div>
     <div class="author-card reveal" style="transition-delay:.16s">
-      <img src="new-avatars/flaubert.png" alt="Gustave Flaubert" class="author-img" loading="lazy">
+      <picture>
+      <source srcset="new-avatars/flaubert.webp" type="image/webp">
+      <img src="new-avatars/flaubert.png" alt="Gustave Flaubert — verrouillé, se débloque niveau 7" class="author-img" loading="lazy" width="100" height="100">
+    </picture>
       <div class="author-overlay"><div class="author-name">Gustave Flaubert</div><div class="author-xp">Niveau 7</div></div>
       <div class="author-lock" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
     </div>
     <div class="author-card reveal" style="transition-delay:.2s">
-      <img src="new-avatars/beauvoir.png" alt="Simone de Beauvoir" class="author-img" loading="lazy">
+      <picture>
+      <source srcset="new-avatars/beauvoir.webp" type="image/webp">
+      <img src="new-avatars/beauvoir.png" alt="Simone de Beauvoir — verrouillée, se débloque niveau 10" class="author-img" loading="lazy" width="100" height="100">
+    </picture>
       <div class="author-overlay"><div class="author-name">Simone de Beauvoir</div><div class="author-xp">Niveau 10</div></div>
       <div class="author-lock" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
     </div>
     <div class="author-card reveal" style="transition-delay:.24s">
-      <img src="new-avatars/duras.png" alt="Marguerite Duras" class="author-img" loading="lazy">
+      <picture>
+      <source srcset="new-avatars/duras.webp" type="image/webp">
+      <img src="new-avatars/duras.png" alt="Marguerite Duras — verrouillée, se débloque niveau 12" class="author-img" loading="lazy" width="100" height="100">
+    </picture>
       <div class="author-overlay"><div class="author-name">Marguerite Duras</div><div class="author-xp">Niveau 12</div></div>
       <div class="author-lock" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
     </div>
     <div class="author-card reveal" style="transition-delay:.28s">
-      <img src="new-avatars/lafontaine.png" alt="Jean de La Fontaine" class="author-img" loading="lazy">
+      <picture>
+      <source srcset="new-avatars/lafontaine.webp" type="image/webp">
+      <img src="new-avatars/lafontaine.png" alt="Jean de La Fontaine — verrouillé, se débloque niveau 15" class="author-img" loading="lazy" width="100" height="100">
+    </picture>
       <div class="author-overlay"><div class="author-name">Jean de La Fontaine</div><div class="author-xp">Niveau 15</div></div>
       <div class="author-lock" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
     </div>
     <div class="author-card reveal" style="transition-delay:.32s">
-      <img src="new-avatars/guitry.png" alt="Sacha Guitry" class="author-img" loading="lazy">
+      <picture>
+      <source srcset="new-avatars/guitry.webp" type="image/webp">
+      <img src="new-avatars/guitry.png" alt="Sacha Guitry — verrouillé, rang Légendaire" class="author-img" loading="lazy" width="100" height="100">
+    </picture>
       <div class="author-overlay"><div class="author-name">Sacha Guitry</div><div class="author-xp">Légendaire</div></div>
       <div class="author-lock" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
     </div>
@@ -1173,59 +1249,72 @@
 <!-- FEATURES -->
 <section id="features" class="sec sec-dark">
   <div class="sec-head">
-    <div class="eyebrow reveal">Fonctionnalités</div>
-    <h2 class="sec-title reveal" style="transition-delay:.06s">Tout pour bluffer <em>parfaitement</em></h2>
+    <h2 class="sec-title reveal">Tout pour bluffer <em>parfaitement</em></h2>
     <p class="sec-sub reveal" style="transition-delay:.12s">Un jeu complet, pensé pour durer. Chaque fonctionnalité a son rôle.</p>
   </div>
-  <div class="feat-grid">
-    <div class="feat-card reveal">
+  <div class="feat-list">
+    <div class="feat-row reveal">
       <svg class="feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
       </svg>
-      <h3 class="feat-name">1&nbsp;000 mots rares</h3>
-      <p class="feat-desc">Littéraires, scientifiques, philosophiques ou absurdes — des registres variés, du commun au légendaire.</p>
+      <div class="feat-content">
+        <h3 class="feat-name">1&nbsp;000 mots rares</h3>
+        <p class="feat-desc">Littéraires, scientifiques, philosophiques ou absurdes — des registres variés, du commun au légendaire.</p>
+      </div>
     </div>
-    <div class="feat-card reveal" style="transition-delay:.05s">
+    <div class="feat-row reveal" style="transition-delay:.05s">
       <svg class="feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
       </svg>
-      <h3 class="feat-name">12 personnages littéraires</h3>
-      <p class="feat-desc">Cyrano bluffe avec panache. Tartuffe manipule. Arsène Lupin joue double jeu. Chacun a sa propre stratégie.</p>
+      <div class="feat-content">
+        <h3 class="feat-name">12 personnages littéraires</h3>
+        <p class="feat-desc">Cyrano bluffe avec panache. Tartuffe manipule. Arsène Lupin joue double jeu. Chacun a sa propre stratégie.</p>
+      </div>
     </div>
-    <div class="feat-card reveal" style="transition-delay:.1s">
+    <div class="feat-row reveal" style="transition-delay:.08s">
       <svg class="feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32 1.41-1.41"/>
       </svg>
-      <h3 class="feat-name">Mot du jour</h3>
-      <p class="feat-desc">Un nouveau défi chaque matin. Reviens quotidiennement pour affronter un mot inédit et progresser.</p>
+      <div class="feat-content">
+        <h3 class="feat-name">Mot du jour</h3>
+        <p class="feat-desc">Un nouveau défi chaque matin. Reviens quotidiennement pour affronter un mot inédit et progresser.</p>
+      </div>
     </div>
-    <div class="feat-card reveal" style="transition-delay:.15s">
+    <div class="feat-row reveal" style="transition-delay:.11s">
       <svg class="feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
       </svg>
-      <h3 class="feat-name">Carnet de mots</h3>
-      <p class="feat-desc">Retrouve tous les mots découverts, leur vraie définition et leur étymologie. Une encyclopédie vivante.</p>
+      <div class="feat-content">
+        <h3 class="feat-name">Carnet de mots</h3>
+        <p class="feat-desc">Retrouve tous les mots découverts, leur vraie définition et leur étymologie. Une encyclopédie vivante.</p>
+      </div>
     </div>
-    <div class="feat-card reveal" style="transition-delay:.2s">
+    <div class="feat-row reveal" style="transition-delay:.14s">
       <svg class="feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <line x1="1" y1="1" x2="23" y2="23"/><path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"/><path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"/><path d="M10.71 5.05A16 16 0 0 1 22.56 9"/><path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/>
       </svg>
-      <h3 class="feat-name">100&nbsp;% hors ligne</h3>
-      <p class="feat-desc">Pas de connexion requise pour jouer. Dicobluff est une PWA installable qui fonctionne en mode avion.</p>
+      <div class="feat-content">
+        <h3 class="feat-name">100&nbsp;% hors ligne</h3>
+        <p class="feat-desc">Pas de connexion requise pour jouer. Dicobluff est une PWA installable qui fonctionne en mode avion.</p>
+      </div>
     </div>
-    <div class="feat-card reveal" style="transition-delay:.25s">
+    <div class="feat-row reveal" style="transition-delay:.17s">
       <svg class="feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/>
       </svg>
-      <h3 class="feat-name">XP &amp; Niveaux</h3>
-      <p class="feat-desc">Gagne de l'expérience, monte de niveau, débloque des avatars et gravis les rangs de la Table des Bluffeurs.</p>
+      <div class="feat-content">
+        <h3 class="feat-name">XP &amp; Niveaux</h3>
+        <p class="feat-desc">Gagne de l'expérience, monte de niveau, débloque des avatars et gravis les rangs de la Table des Bluffeurs.</p>
+      </div>
     </div>
-    <div class="feat-card reveal" style="transition-delay:.3s">
+    <div class="feat-row reveal" style="transition-delay:.2s">
       <svg class="feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/><path d="M12 11v4"/><path d="M9.5 14l2.5 2 2.5-2"/>
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
       </svg>
-      <h3 class="feat-name">Incarne un auteur</h3>
-      <p class="feat-desc">Choisis ton avatar parmi des auteurs et autrices de la littérature française. Débloque de nouveaux portraits en progressant.</p>
+      <div class="feat-content">
+        <h3 class="feat-name">Incarne un auteur</h3>
+        <p class="feat-desc">Choisis ton avatar parmi des auteurs et autrices de la littérature française. Débloque de nouveaux portraits en progressant.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -1236,8 +1325,7 @@
 <section id="apprendre" class="sec sec-dark">
   <div class="carnet-showcase">
     <div class="sec-head" style="text-align:center;width:100%">
-      <div class="eyebrow reveal">Apprenez en jouant</div>
-      <h2 class="sec-title reveal" style="transition-delay:.06s">Un jeu qui <em>cultive.</em></h2>
+      <h2 class="sec-title reveal">Un jeu qui <em>cultive.</em></h2>
       <p class="sec-sub reveal" style="transition-delay:.12s;max-width:560px;margin:0 auto">
         Chaque partie enrichit ton vocabulaire et ta culture générale — pour de bon.
       </p>
@@ -1247,10 +1335,10 @@
       <div class="carnet-phones">
         <img
           src="screenshots%20claude%20design/captures-d-cran-du-jeu/project/uploads/raw__04-results.png"
-          class="carnet-phone cp-main" alt="" loading="lazy">
+          class="carnet-phone cp-main" alt="" loading="lazy" width="300" height="533">
         <img
           src="screenshots%20claude%20design/captures-d-cran-du-jeu/project/uploads/phone-02-solo-setup.png"
-          class="carnet-phone cp-side" alt="" loading="lazy">
+          class="carnet-phone cp-side" alt="" loading="lazy" width="265" height="471">
       </div>
     </div>
 
@@ -1285,8 +1373,7 @@
 <!-- MODES -->
 <section id="modes" class="sec">
   <div class="sec-head">
-    <div class="eyebrow reveal">Modes de jeu</div>
-    <h2 class="sec-title reveal" style="transition-delay:.06s">Choisis ton <em>terrain</em></h2>
+    <h2 class="sec-title reveal">Choisis ton <em>terrain</em></h2>
     <p class="sec-sub reveal" style="transition-delay:.12s">Du débutant en quête de fun au bluffeur aguerri qui veut le défi ultime.</p>
   </div>
   <div class="modes-grid">
@@ -1342,8 +1429,7 @@
   <div class="howto-grid">
     <div>
       <div class="sec-head">
-        <div class="eyebrow reveal">Comment jouer</div>
-        <h2 class="sec-title reveal" style="transition-delay:.06s">Prêt en <em>30 secondes</em></h2>
+        <h2 class="sec-title reveal">Prêt en <em>30 secondes</em></h2>
         <p class="sec-sub reveal" style="transition-delay:.12s">Pas de compte, pas de tutoriel. Lance une partie et bluffe immédiatement.</p>
       </div>
       <div class="howto-steps">
@@ -1397,7 +1483,7 @@
         alt=""
         class="howto-shot"
         loading="lazy"
-        width="300"
+        width="300" height="533"
       >
     </div>
   </div>
@@ -1409,8 +1495,7 @@
 <section id="multi-section" class="sec sec-dark">
   <div class="multi-inner">
     <div>
-      <div class="eyebrow reveal" style="color:var(--teal)">— Jeu en ligne</div>
-      <h2 class="sec-title reveal" style="transition-delay:.06s">Bluffez <em>ensemble.</em></h2>
+      <h2 class="sec-title reveal">Bluffez <em>ensemble.</em></h2>
       <p class="sec-sub reveal" style="transition-delay:.12s;max-width:440px">
         Invite tes amis d'un code de partie. 2 à 8 joueurs en temps réel, où qu'ils soient. Chacun écrit sa définition — et personne ne sait qui ment.
       </p>
@@ -1449,19 +1534,19 @@
         src="screenshots%20claude%20design/captures-d-cran-du-jeu/project/uploads/phone-01-home.png"
         alt=""
         class="multi-screen-img side"
-        loading="lazy"
+        loading="lazy" width="180" height="320"
       >
       <img
         src="screenshots%20claude%20design/captures-d-cran-du-jeu/project/uploads/phone-04-vote.png"
         alt=""
         class="multi-screen-img main"
-        loading="lazy"
+        loading="lazy" width="240" height="427"
       >
       <img
         src="screenshots%20claude%20design/captures-d-cran-du-jeu/project/uploads/phone-03-word.png"
         alt=""
         class="multi-screen-img side"
-        loading="lazy"
+        loading="lazy" width="180" height="320"
       >
     </div>
   </div>

@@ -13,6 +13,12 @@
       "skillPath": "skills/brandkit/SKILL.md",
       "computedHash": "735007879f5110aeae1e981a53fe74a12afde70347f9773dacd50e4697a091bf"
     },
+    "copywriting": {
+      "source": "kostja94/marketing-skills",
+      "sourceType": "github",
+      "skillPath": "skills/content/copywriting/SKILL.md",
+      "computedHash": "de2a342b3926cc421f2e1f6bd72b248fd98ca7d17bab96cc8da3d57c24e76613"
+    },
     "cro": {
       "source": "coreyhaines31/marketingskills",
       "sourceType": "github",
@@ -102,6 +108,12 @@
       "sourceType": "github",
       "skillPath": "skills/web-design-guidelines/SKILL.md",
       "computedHash": "f3bc47f890f42a44db1007ab390709ec368e4b8c089baee6b0007182236ac474"
+    },
+    "web-quality-audit": {
+      "source": "addyosmani/web-quality-skills",
+      "sourceType": "github",
+      "skillPath": "skills/web-quality-audit/SKILL.md",
+      "computedHash": "10db799d6bff4fc98a4067aa04fdee2e9f34eaca1c42fd4207a89aafe644a6f0"
     }
   }
 }

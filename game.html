@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https://www.dicobluff.fr; connect-src 'self' https://*.firebaseio.com https://*.googleapis.com wss://*.firebaseio.com; script-src 'self' 'unsafe-inline'; worker-src 'self'; frame-ancestors 'none'">
 <meta name="description" content="Le jeu de bluff littéraire. Invente la définition la plus convaincante pour piéger tes adversaires.">
 <link rel="canonical" href="https://www.dicobluff.fr/">
 
@@ -5180,11 +5181,11 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
     <p class="starter-sub">Tu pourras en débloquer d'autres en jouant.</p>
     <div class="starter-grid">
       <button type="button" class="starter-choice" data-key="georgesand" aria-label="Choisir George Sand">
-        <div class="starter-img-wrap"><img id="starter-img-georgesand" src="./new-avatars/georgesand.png" alt="George Sand" loading="lazy"></div>
+        <div class="starter-img-wrap"><picture><source srcset="./new-avatars/georgesand.webp" type="image/webp"><img id="starter-img-georgesand" src="./new-avatars/georgesand.png" alt="George Sand" loading="lazy"></picture></div>
         <div class="starter-name">George Sand</div>
       </button>
       <button type="button" class="starter-choice" data-key="lafontaine" aria-label="Choisir La Fontaine">
-        <div class="starter-img-wrap"><img id="starter-img-lafontaine" src="./new-avatars/lafontaine.png" alt="La Fontaine" loading="lazy"></div>
+        <div class="starter-img-wrap"><picture><source srcset="./new-avatars/lafontaine.webp" type="image/webp"><img id="starter-img-lafontaine" src="./new-avatars/lafontaine.png" alt="La Fontaine" loading="lazy"></picture></div>
         <div class="starter-name">La Fontaine</div>
       </button>
     </div>
@@ -9625,160 +9626,6 @@ const AI_CHARACTERS = [
     }
   },
 ];
-
-/* ── BLOC LEGACY SUPPRIMÉ ──
-   Anciens personnages d'auteurs (Cosette v2, Cyrano v2, La Fontaine, Guitry,
-   Molière, Flaubert, Voltaire, Hugo) qui étaient dupliqués/orphelins ici en
-   tant qu'IA. Les auteurs sont désormais exclusivement côté JOUEUR (AV_DEFS).
-*/
-const _AI_LEGACY_PLACEHOLDER = [];
-/* Bloc orphelin (cosette v2, cyrano v2, lafontaine, guitry, moliere, flaubert,
-   voltaire, hugo) — neutralisé via commentaire de bloc ci-dessous.
-{ _legacy:true,
-    title:'La Poète Sensible',
-    desc:'Douce mais perspicace, elle lit entre les lignes comme personne.',
-    bank:'litteraire',
-    voteStrategy:(defs,realIdx,diff)=>{
-      // Cosette : sensible à la beauté des mots, attirée par les longues définitions
-      const sorted=[...defs].sort((a,b)=>(b.text||'').length-(a.text||'').length);
-      if(diff==='easy')  return Math.random()>.5 ? defs.indexOf(sorted[0]) : Math.floor(Math.random()*defs.length);
-      if(diff==='medium')return Math.random()<.42?realIdx:defs.indexOf(sorted[0]);
-      return Math.random()<.58?realIdx:Math.floor(Math.random()*defs.length);
-    },
-    reactions:{
-      correct:["Mon cœur le savait avant mon esprit ✨","Les mots vrais ont une lumière particulière."],
-      wrong:["Je me suis laissée emporter par la poésie…","Certains mensonges sont si beaux qu'on y croit."],
-      fooled:["Tu as écrit avec l'encre du rêve !","J'ai cru chaque mot, c'était magnifique."],
-      notfooled:["Je sens la sincérité des vrais mots.","Ton bluff manquait de lumière intérieure."],
-    }
-  },
-  {
-    id:'cyrano', name:'Cyrano', color:'#d94f4f',
-    title:'Le Maître du Verbe',
-    desc:'Éloquent et flamboyant, ses fausses définitions sont des chefs-d\'œuvre.',
-    bank:'litteraire',
-    voteStrategy:(defs,realIdx,diff)=>{
-      // Cyrano : excellent en hard, très attentif à la forme
-      if(diff==='easy')  return Math.random()<.35?realIdx:Math.floor(Math.random()*defs.length);
-      if(diff==='medium')return Math.random()<.52?realIdx:Math.floor(Math.random()*defs.length);
-      return Math.random()<.72?realIdx:Math.floor(Math.random()*defs.length);
-    },
-    reactions:{
-      correct:["Ah ! Que n'aurais-je pas deviné ! C'est bien elle !","Mon panache ne me trompe jamais.","La vraie sentence se reconnaît, comme un beau vers."],
-      wrong:["Par ma rapière, quelle déconvenue !","Même le plus beau discours peut être faux.","Diantre ! J'étais pourtant si convaincu de mon trait."],
-      fooled:["Tu n'as pas de nez pour le mensonge, mais quel talent !","C'est moi qui t'offre la réplique. Bravo.","Ta plume vaut bien mon épée, touché !"],
-      notfooled:["On ne plume pas si facilement le panache gaulois.","J'ai flairé la supercherie dès le premier mot.","Il faut plus que des belles phrases pour tromper Cyrano."],
-    }
-  },
-  {
-    id:'lafontaine', name:'La Fontaine', color:'#2d8a4e',
-    title:'Le Fabuliste Malicieux',
-    desc:'Sage et ruse, il cache la verite dans des fables.',
-    bank:'litteraire',
-    voteStrategy:(defs,realIdx,diff)=>{
-      if(diff==='easy')  return Math.random()<.34?realIdx:Math.floor(Math.random()*defs.length);
-      if(diff==='medium')return Math.random()<.48?realIdx:Math.floor(Math.random()*defs.length);
-      return Math.random()<.64?realIdx:Math.floor(Math.random()*defs.length);
-    },
-    reactions:{
-      correct:["La raison du plus sage est toujours la meilleure.","Rien ne sert de bluffer, il faut voter juste."],
-      wrong:["Tel est pris qui croyait prendre !","Le corbeau que je suis a lache son fromage."],
-      fooled:["Tu es un renard parmi les bluffeurs !","Ta fable etait si belle que je l ai crue vraie."],
-      notfooled:["On ne trompe pas un vieux fabuliste.","J ai vu le renard derriere ta definition."],
-    }
-  },
-  {
-    id:'guitry', name:'Guitry', color:'#2c2c2c',
-    title:'Le Dandy Spirituel',
-    desc:'Elegant et mordant, il manie le bon mot comme personne.',
-    bank:'absurde',
-    voteStrategy:(defs,realIdx,diff)=>{
-      if(diff==='easy')  return Math.random()<.32?realIdx:Math.floor(Math.random()*defs.length);
-      if(diff==='medium')return Math.random()<.46?realIdx:Math.floor(Math.random()*defs.length);
-      return Math.random()<.62?realIdx:Math.floor(Math.random()*defs.length);
-    },
-    reactions:{
-      correct:["Le mensonge, c est un art et la verite aussi.","Je l avais devine avant meme de lire."],
-      wrong:["Si j avais tort, c est que j avais raison autrement.","Meme mes erreurs ont du panache."],
-      fooled:["Chapeau, tu as du style dans l imposture !","Tu ferais un excellent auteur de theatre."],
-      notfooled:["On ne trompe pas un homme de scene.","Ton texte manquait d un troisieme acte."],
-    }
-  },
-  {
-    id:'moliere', name:'Molière', color:'#7c5cfc',
-    title:'Le Dramaturge Espiègle',
-    desc:'Maître du double sens, il joue avec les mots comme avec ses personnages.',
-    bank:'litteraire',
-    voteStrategy:(defs,realIdx,diff)=>{
-      // Molière : attentif aux nuances, performant en medium+
-      if(diff==='easy')  return Math.random()<.36?realIdx:Math.floor(Math.random()*defs.length);
-      if(diff==='medium')return Math.random()<.54?realIdx:Math.floor(Math.random()*defs.length);
-      return Math.random()<.70?realIdx:Math.floor(Math.random()*defs.length);
-    },
-    reactions:{
-      correct:["Voilà qui est parlé ! La vérité triomphe toujours.","Ah que cette définition sonne juste !"],
-      wrong:["Par ma plume, on m'a dupé comme Harpagon !","Même mon Tartuffe n'aurait pas mieux joué."],
-      fooled:["Tu joues la comédie mieux que mes acteurs !","C'est une pièce entière que tu viens de m'écrire."],
-      notfooled:["Je connais les masques mieux que personne.","Ton imposteur manquait de subtilité."],
-    }
-  },
-  {
-    id:'flaubert', name:'Flaubert', color:'#c8860a',
-    title:'Le Perfectionniste Acéré',
-    desc:'Exigeant et précis, il cherche le mot juste même pour bluffer.',
-    bank:'scientifique',
-    voteStrategy:(defs,realIdx,diff)=>{
-      // Flaubert : très bon, attentif à la précision du vocabulaire
-      if(diff==='easy')  return Math.random()<.38?realIdx:Math.floor(Math.random()*defs.length);
-      if(diff==='medium')return Math.random()<.55?realIdx:Math.floor(Math.random()*defs.length);
-      return Math.random()<.73?realIdx:Math.floor(Math.random()*defs.length);
-    },
-    reactions:{
-      correct:["Le mot juste existait, et c'était celui-là.","J'ai cherché la vérité dans chaque syllabe."],
-      wrong:["Bovarysme aigu : j'ai cru ce que je voulais croire.","La médiocrité du style m'a trompé."],
-      fooled:["Tu as trouvé le mot juste pour me berner !","Écrire le faux avec tant de style, c'est du génie."],
-      notfooled:["La fausseté se voit dans les adjectifs superflus.","Trop d'emphase trahit toujours l'imposteur."],
-    }
-  },
-  {
-    id:'voltaire', name:'Voltaire', color:'#d94f4f',
-    title:'Le Philosophe Ironique',
-    desc:'Acéré et sceptique, il déconstruit les impostures avec délectation.',
-    bank:'philosophique',
-    voteStrategy:(defs,realIdx,diff)=>{
-      // Voltaire : très analytique, excellent en expert
-      if(diff==='easy')  return Math.random()<.38?realIdx:Math.floor(Math.random()*defs.length);
-      if(diff==='medium')return Math.random()<.54?realIdx:Math.floor(Math.random()*defs.length);
-      return Math.random()<.75?realIdx:Math.floor(Math.random()*defs.length);
-    },
-    reactions:{
-      correct:["Il faut cultiver son instinct. Candide avait raison.","L'obscurantisme ne résiste pas à la lumière de la vérité."],
-      wrong:["Tout est pour le mieux… sauf mon vote 😒","Même Pangloss n'aurait pas fait pire."],
-      fooled:["Chapeau l'artiste, tu m'as vendu un conte comme vrai.","Ton bluff est une petite leçon de rhétorique."],
-      notfooled:["Je suis philosophe, pas dupe.","L'ironie de ta fausse définition était trop visible."],
-    }
-  },
-  {
-    id:'hugo', name:'Hugo', color:'#5b3fd4',
-    title:'Le Visionnaire Romantique',
-    desc:'Lyrique et puissant, ses définitions ont la grandeur de ses romans.',
-    bank:'philosophique',
-    voteStrategy:(defs,realIdx,diff)=>{
-      // Hugo : confiant et visionnaire
-      if(diff==='easy')  return Math.random()<.40?realIdx:Math.floor(Math.random()*defs.length);
-      if(diff==='medium')return Math.random()<.56?realIdx:Math.floor(Math.random()*defs.length);
-      return Math.random()<.74?realIdx:Math.floor(Math.random()*defs.length);
-    },
-    reactions:{
-      correct:["Les misérables se trompent, pas moi !","La vérité est toujours du côté du peuple."],
-      wrong:["Notre-Dame elle-même pleure mon erreur 😢","J'ai confondu le sublime et le faux."],
-      fooled:["Tu as écrit un chef-d'œuvre d'imposture !","Jean Valjean n'aurait pas mieux bluffé le juge."],
-      notfooled:["On ne trompe pas celui qui a vu la misère du monde.","Ton mensonge manquait de grandeur épique."],
-    }
-  },
-];
-*/
-/* ── FIN DU BLOC LEGACY NEUTRALISÉ ── */
 
 /* ── Fonction utilitaire : choisir 3 adversaires IA ──────── */
 /* Joueurs (AV_DEFS = auteurs réels) et IA (AI_CHARACTERS = personnages fictifs)
