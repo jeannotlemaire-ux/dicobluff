@@ -49,13 +49,32 @@
 <meta name="msapplication-TileImage" content="./assets/icons/icon-144.png">
 
 <title>Dicobluff</title>
+<link rel="preload" href="./assets/fonts/cg-semibold-italic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="./assets/fonts/cg-italic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="./assets/fonts/cg-bold.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- Preload retiré : les URLs versionnées v17 ne sont plus servies par Google Fonts.
-     La feuille de style ci-dessous charge la dernière révision automatiquement. -->
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic; font-weight: 400;
+  font-display: swap;
+  src: url('./assets/fonts/cg-italic.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic; font-weight: 300 600;
+  font-display: swap;
+  src: url('./assets/fonts/cg-semibold-italic.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal; font-weight: 600 700;
+  font-display: swap;
+  src: url('./assets/fonts/cg-bold.woff2') format('woff2');
+}
 /* ═══════════════════════════════════════════════════════════════
    🎨 DESIGN SYSTEM — Dicobluff DA (dark editorial, plume & masque)
    Palette : marine #0F1923 · crème #F2ECD8 · or #C8860A · coral #D94F3F
