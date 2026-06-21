@@ -5126,9 +5126,9 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
     <button type="button" class="modal-close-btn" onclick="closePremiumModal()" aria-label="Fermer"></button>
     <div class="premium-sheet-icon">✦</div>
     <div class="premium-sheet-title" id="premium-title">Dicobluff Premium</div>
-    <div class="premium-sheet-body">Débloquez les fonctionnalités avancées pour aller plus loin dans le jeu.</div>
+    <div class="premium-sheet-body">Enrichis ton vocabulaire avec les outils de progression.</div>
     <div class="premium-features">
-      <div class="premium-feature-row">Mode Difficile — adversaires au sommet de leur art</div>
+      <div class="premium-feature-row">Carnet de mots — sauvegarde et révise tes mots</div>
       <div class="premium-feature-row">Mode Révision — quiz, consolidation, légendaires</div>
     </div>
     <button class="premium-btn-unlock" onclick="triggerPremiumPurchase()">Débloquer — 2,99 €</button>
@@ -5144,10 +5144,10 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
     <button type="button" class="modal-close-btn" onclick="closeDailyLimitModal()" aria-label="Fermer"></button>
     <div class="premium-sheet-icon">🌙</div>
     <div class="premium-sheet-title" id="daily-limit-title">À demain !</div>
-    <div class="premium-sheet-body">Tu as joué tes <strong>3 parties gratuites</strong> du jour. Reviens demain pour 3 nouvelles parties — ou passe à Premium pour jouer sans limite.</div>
+    <div class="premium-sheet-body">Tu as joué tes <strong>3 parties gratuites</strong> du jour. Reviens demain pour 3 nouvelles parties — ou passe à Premium.</div>
     <div class="premium-features">
       <div class="premium-feature-row">Parties illimitées chaque jour</div>
-      <div class="premium-feature-row">Mode Difficile — adversaires redoutables</div>
+      <div class="premium-feature-row">Carnet de mots — sauvegarde et révise tes mots</div>
       <div class="premium-feature-row">Mode Révision — consolide ton vocabulaire</div>
     </div>
     <button class="premium-btn-unlock" onclick="closeDailyLimitModal();showPremiumModal();">Débloquer Premium — 2,99 €</button>
@@ -5237,7 +5237,7 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
     </button>
 
     <!-- Carnet -->
-    <button type="button" class="nav-side" id="nav-tab-carnet" onclick="App.showCarnet()" aria-label="Carnet de mots">
+    <button type="button" class="nav-side is-locked" id="nav-tab-carnet" onclick="App.showCarnet()" aria-label="Carnet de mots (Premium)">
       <div class="nav-side-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
       <div class="nav-side-label">Carnet</div>
     </button>
@@ -9975,7 +9975,10 @@ const App = {
     if(this._quitTrap){ this._quitTrap.release(); this._quitTrap = null; }
     if(ov) ov.classList.remove('open');
   },
-  showCarnet() { renderCarnet(); showScreen('carnet'); _setNavActive('carnet'); },
+  showCarnet() {
+    if(!isPremium()) { showPremiumModal(); return; }
+    renderCarnet(); showScreen('carnet'); _setNavActive('carnet');
+  },
   showProfile() { renderProfile(); showScreen('profile'); clearPendingUnlocks(); _setNavActive('profile'); },
   showRevision() {
     if(!isPremium()) { showPremiumModal(); return; }
