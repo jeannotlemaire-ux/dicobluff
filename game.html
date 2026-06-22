@@ -64,6 +64,7 @@
    Typo : Cormorant Garamond (titres, mots, italique éditorial) + Manrope (UI, chiffres, microcopy)
 ═══════════════════════════════════════════════════════════════ */
 :root {
+  --safe-top: env(safe-area-inset-top, 0px);
   /* Backgrounds — légèrement réchauffés : moins de dominante teal, plus encre marine */
   --bg:       #1B2534;
   --bg2:      #1F2B3C;
@@ -598,7 +599,7 @@ body.on-home #profile-btn { display: flex; }
   display: none; flex-direction: column; flex: 1;
   overflow-y: auto; overflow-x: hidden;
   padding: 22px 18px max(36px,env(safe-area-inset-bottom,36px));
-  padding-top: max(28px,env(safe-area-inset-top,28px));
+  padding-top: max(28px,var(--safe-top));
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   overscroll-behavior: none;
@@ -1365,7 +1366,7 @@ input::placeholder, textarea::placeholder { color: var(--text3); font-style: ita
 ═══════════════════════════════════════════════════════════════ */
 .notif {
   position: fixed;
-  top: max(18px,env(safe-area-inset-top,18px));
+  top: max(18px,var(--safe-top));
   left: 50%; transform: translateX(-50%) translateY(-90px);
   background: var(--surface2);
   border: 1px solid var(--gold-a30);
@@ -2648,7 +2649,7 @@ input::placeholder, textarea::placeholder { color: var(--text3); font-style: ita
 @media (orientation: landscape) and (max-height: 500px) {
   .screen {
     padding: 12px 14px max(18px, env(safe-area-inset-bottom, 18px));
-    padding-top: max(12px, env(safe-area-inset-top, 12px));
+    padding-top: max(12px, var(--safe-top));
   }
   .logo { font-size: 1.6rem !important; }
   .word-main { font-size: 1.8rem !important; }
@@ -3068,7 +3069,7 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: max(28px, calc(env(safe-area-inset-top, 0px) + 20px)) 22px max(20px, calc(env(safe-area-inset-bottom, 0px) + 16px));
+  padding: max(28px, calc(var(--safe-top) + 20px)) 22px max(20px, calc(env(safe-area-inset-bottom, 0px) + 16px));
   gap: 0;
 }
 
@@ -3492,7 +3493,7 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
 /* Chip profil en haut à gauche de la home */
 .home-profile-chip {
   position: absolute;
-  top: max(14px, env(safe-area-inset-top, 14px));
+  top: max(14px, var(--safe-top));
   left: 16px;
   display: inline-flex;
   align-items: center;
@@ -7744,6 +7745,16 @@ function resetMiniRank() {
 }
 
 /* ══════════════════════════════════════════════════════
+   📱 ANDROID SAFE AREA — env(safe-area-inset-top) retourne 0 dans certains
+      setups Capacitor. On force --safe-top à 48px sur Android natif.
+══════════════════════════════════════════════════════ */
+(function(){
+  if(window.Capacitor && window.Capacitor.getPlatform && window.Capacitor.getPlatform()==='android'){
+    document.documentElement.style.setProperty('--safe-top','48px');
+  }
+})();
+
+/* ══════════════════════════════════════════════════════
    🛠 LOCAL STORAGE HELPER
 ══════════════════════════════════════════════════════ */
 const LS = {
@@ -11320,7 +11331,7 @@ function processSoloResults(){
     if(st){
       st.innerHTML = `<span style="display:inline-flex;vertical-align:middle;margin-right:6px;">${icon('streak', 16)}</span>Streak x${solo.streak} !`;
       // Visible : descend sous la barre de statut.
-      st.style.transform='translateX(-50%) translateY(max(64px, calc(env(safe-area-inset-top,0px) + 56px)))';
+      st.style.transform=`translateX(-50%) translateY(max(64px, calc(var(--safe-top, 0px) + 56px)))`;
       // Caché : remonte entièrement hors de l'écran (au-delà de sa hauteur).
       setTimeout(()=>{st.style.transform='translateX(-50%) translateY(-200%)';},2500);
     }
