@@ -1,3 +1,8 @@
 node_modules/
 release.keystore
 android/keystore.properties
+output.zip
+encryption_public_key.pem
+upload_certificate.pem
+pepk.jar
+pepk-src.jar
