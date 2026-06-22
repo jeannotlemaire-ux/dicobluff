@@ -51,8 +51,8 @@
 <title>Dicobluff</title>
 <!-- Préchargement images critiques above-the-fold -->
 <link rel="preload" as="image" href="./assets/logo.png">
-<link rel="preload" as="image" href="./new-avatars/georgesand.webp" type="image/webp">
-<link rel="preload" as="image" href="./new-avatars/lafontaine.webp" type="image/webp">
+<link rel="preload" as="image" href="./new-avatars/georgesand.png">
+<link rel="preload" as="image" href="./new-avatars/lafontaine.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -598,7 +598,7 @@ body.on-home #profile-btn { display: flex; }
   display: none; flex-direction: column; flex: 1;
   overflow-y: auto; overflow-x: hidden;
   padding: 22px 18px max(36px,env(safe-area-inset-bottom,36px));
-  padding-top: max(48px,env(safe-area-inset-top,48px));
+  padding-top: max(28px,env(safe-area-inset-top,28px));
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   overscroll-behavior: none;
@@ -5172,11 +5172,11 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
     <p class="starter-sub">Tu pourras en débloquer d'autres en jouant.</p>
     <div class="starter-grid">
       <button type="button" class="starter-choice" data-key="georgesand" aria-label="Choisir George Sand">
-        <div class="starter-img-wrap"><picture><source srcset="./new-avatars/georgesand.webp" type="image/webp"><img id="starter-img-georgesand" src="./new-avatars/georgesand.png" alt="George Sand"></picture></div>
+        <div class="starter-img-wrap"><img id="starter-img-georgesand" src="./new-avatars/georgesand.png" alt="George Sand"></div>
         <div class="starter-name">George Sand</div>
       </button>
       <button type="button" class="starter-choice" data-key="lafontaine" aria-label="Choisir La Fontaine">
-        <div class="starter-img-wrap"><picture><source srcset="./new-avatars/lafontaine.webp" type="image/webp"><img id="starter-img-lafontaine" src="./new-avatars/lafontaine.png" alt="La Fontaine"></picture></div>
+        <div class="starter-img-wrap"><img id="starter-img-lafontaine" src="./new-avatars/lafontaine.png" alt="La Fontaine"></div>
         <div class="starter-name">La Fontaine</div>
       </button>
     </div>
@@ -12584,13 +12584,9 @@ const _initNav=document.getElementById("bottom-nav");if(_initNav)_initNav.classL
 renderHomeExtras();
 updateNotifBtn();
 if('Notification' in window && Notification.permission === 'granted') registerPeriodicSync();
-// Theme init : respecte le choix utilisateur s'il existe, sinon suit la préférence système
+// Theme init : respecte le choix utilisateur s'il existe, sinon dark par défaut
 const savedTheme = LS.get('theme', null);
-let initialTheme = savedTheme;
-if(!initialTheme){
-  const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
-  initialTheme = prefersLight ? 'light' : 'dark';
-}
+const initialTheme = savedTheme || 'dark';
 if(initialTheme==='light'){
   document.documentElement.setAttribute('data-theme','light');
 }
