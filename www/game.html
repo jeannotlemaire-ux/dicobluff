@@ -7745,12 +7745,22 @@ function resetMiniRank() {
 }
 
 /* ══════════════════════════════════════════════════════
-   📱 ANDROID SAFE AREA — env(safe-area-inset-top) retourne 0 dans certains
-      setups Capacitor. On force --safe-top à 48px sur Android natif.
+   📱 ANDROID SAFE AREA — env(safe-area-inset-top) retourne 0 dans Capacitor.
+      Détection via UA (fiable) + API Capacitor (fallback).
+      On force --safe-top à 64px seulement si la valeur CSS est < 10px.
 ══════════════════════════════════════════════════════ */
 (function(){
-  if(window.Capacitor && window.Capacitor.getPlatform && window.Capacitor.getPlatform()==='android'){
-    document.documentElement.style.setProperty('--safe-top','48px');
+  var isAndroid = /Android/i.test(navigator.userAgent);
+  if(!isAndroid && window.Capacitor && window.Capacitor.getPlatform){
+    try { isAndroid = window.Capacitor.getPlatform()==='android'; } catch(e){}
+  }
+  if(isAndroid){
+    try {
+      var cur = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--safe-top'))||0;
+      if(cur < 10) document.documentElement.style.setProperty('--safe-top','64px');
+    } catch(e) {
+      document.documentElement.style.setProperty('--safe-top','64px');
+    }
   }
 })();
 
