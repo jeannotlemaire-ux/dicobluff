@@ -484,7 +484,7 @@ body::before {
 
 #settings-btn {
   position: fixed;
-  top: 20px;
+  top: max(20px, var(--safe-top));
   /* Aligné sur le bord droit du conteneur #app (max-width 430px, centré).
      Sur grand écran : 50vw + 215px - 20px - taille_bouton. Sur mobile : 20px. */
   right: max(20px, calc(50vw - 215px + 20px));
@@ -502,7 +502,7 @@ body::before {
 /* Bouton profil — avatar en haut à gauche, visible uniquement sur la home */
 #profile-btn {
   position: fixed;
-  top: 20px;
+  top: max(20px, var(--safe-top));
   left: max(20px, calc(50vw - 215px + 20px));
   z-index: var(--z-sticky);
   width: 44px; height: 44px;
@@ -540,7 +540,7 @@ body.on-home #profile-btn { display: flex; }
 }
 .settings-menu {
   position: fixed;
-  top: 65px;
+  top: calc(max(20px, var(--safe-top)) + 52px);
   right: max(20px, calc(50vw - 215px + 20px));
   z-index: var(--z-sticky);
   background: var(--surface);
