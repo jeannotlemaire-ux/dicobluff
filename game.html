@@ -574,10 +574,10 @@ body.on-home #profile-btn { display: flex; }
 /* ─── GAME PROGRESS BAR ─── */
 #game-progress-container {
   position: fixed;
-  top: 0; left: 50%;
+  top: var(--safe-top, 0); left: 50%;
   transform: translateX(-50%);
   width: 100%; max-width: 430px;
-  padding: 12px 18px;
+  padding: 10px 18px 12px;
   z-index: var(--z-dropdown);
   display: none;
   background: linear-gradient(to bottom, var(--bg) 60%, transparent);
@@ -598,6 +598,7 @@ body.on-home #profile-btn { display: flex; }
 .screen {
   display: none; flex-direction: column; flex: 1;
   overflow-y: auto; overflow-x: hidden;
+  overscroll-behavior-y: contain;
   padding: 22px 18px max(36px,env(safe-area-inset-bottom,36px));
   padding-top: max(28px,var(--safe-top));
   -webkit-overflow-scrolling: touch;
@@ -9806,9 +9807,8 @@ function renderHomeExtras() {
   }
 
   // Bandeau onboarding : visible uniquement au premier lancement.
-  const hasPlayed = LS.get('hasPlayed', false);
   const onb = document.getElementById('home-onboarding');
-  if(onb) onb.style.display = hasPlayed ? 'none' : 'flex';
+  if(onb) onb.style.display = 'none';
 
   // Quick stats — streak quotidien
   const ds = getDailyStreakDisplay();
@@ -12657,7 +12657,7 @@ if(initialTheme==='light'){
 */
 const PWA = (function(){
   // Dans une appli Capacitor (native), les prompts PWA sont inutiles.
-  const isNative = !!(window.Capacitor && (typeof window.Capacitor.isNativePlatform === 'function' ? window.Capacitor.isNativePlatform() : window.Capacitor.isNative));
+  const isNative = !!(window.Capacitor) || /wv/.test(navigator.userAgent);
   let deferredPrompt = null;
   let promptShown = false;
 
@@ -13019,28 +13019,33 @@ const LottieAnims = {
 (function setupAndroidBack(){
   let _backGuard = false;
   const HOME = 'home';
-  // Après chaque showScreen, pousse un état si pas sur home
+
+  // Entrée initiale dans l'historique : garantit qu'il y a toujours au moins
+  // 2 niveaux de navigation avant de quitter l'app (sinon le 1er popstate quitte).
+  history.replaceState({ dicobluffScreen: HOME }, '');
+  history.pushState({ dicobluffScreen: HOME }, '');
+
   const _wrapShowScreen = window.showScreen;
   window._dicobluffShowScreen = function(id){
     _wrapShowScreen.apply(this, arguments);
-    if(id && id !== HOME && !_backGuard){
+    if(id && !_backGuard){
       history.pushState({ dicobluffScreen: id }, '');
     }
   };
-  // Remplacer showScreen par la version wrappée (avant le hook queue)
   window.showScreen = window._dicobluffShowScreen;
 
   window.addEventListener('popstate', function(){
     _backGuard = true;
     const cur = document.querySelector('.screen.active');
     const curId = cur ? cur.id.replace('screen-','') : null;
-    // Si on est en pleine partie → afficher confirmation quitter
     const inGame = curId && (curId.startsWith('solo-') || curId === 'queue' || curId === 'game');
     if(inGame && typeof App !== 'undefined' && typeof App.confirmQuit === 'function'){
       App.confirmQuit();
     } else if(typeof App !== 'undefined' && typeof App.showHome === 'function'){
       App.showHome();
     }
+    // Repousse un état pour éviter que le prochain retour quitte l'app
+    history.pushState({ dicobluffScreen: curId || HOME }, '');
     _backGuard = false;
   });
 })();
