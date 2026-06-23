@@ -770,14 +770,6 @@
     }
     .author-name { font-family: 'Cormorant Garamond', serif; font-size: .95rem; font-weight: 600; line-height: 1.1; }
     .author-xp  { font-size: .55rem; color: var(--gold); font-weight: 700; letter-spacing: .06em; margin-top: 3px; }
-    .author-lock {
-      position: absolute; top: 8px; right: 8px;
-      width: 22px; height: 22px;
-      background: rgba(14,26,34,.8); backdrop-filter: blur(8px);
-      border-radius: 6px; border: 1px solid rgba(200,134,10,.2);
-      display: grid; place-items: center;
-    }
-    .author-lock svg { width: 11px; height: 11px; color: var(--gold); }
 
     /* ─── MULTI SECTION ─── */
     #multi-section { position: relative; overflow: hidden; }
@@ -1186,58 +1178,51 @@
     <div class="author-card reveal" style="transition-delay:.08s">
       <picture>
       <source srcset="new-avatars/voltaire.webp" type="image/webp">
-      <img src="new-avatars/voltaire.png" alt="Voltaire — verrouillé, se débloque niveau 3" class="author-img" loading="lazy" width="100" height="100">
+      <img src="new-avatars/voltaire.png" alt="Voltaire" class="author-img" loading="lazy" decoding="async" width="100" height="100">
     </picture>
       <div class="author-overlay"><div class="author-name">Voltaire</div><div class="author-xp">Niveau 3</div></div>
-      <div class="author-lock" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
     </div>
     <div class="author-card reveal" style="transition-delay:.12s">
       <picture>
       <source srcset="new-avatars/georgesand.webp" type="image/webp">
-      <img src="new-avatars/georgesand.png" alt="George Sand — verrouillée, se débloque niveau 5" class="author-img" loading="lazy" width="100" height="100">
+      <img src="new-avatars/georgesand.png" alt="George Sand" class="author-img" loading="lazy" decoding="async" width="100" height="100">
     </picture>
       <div class="author-overlay"><div class="author-name">George Sand</div><div class="author-xp">Niveau 5</div></div>
-      <div class="author-lock" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
     </div>
     <div class="author-card reveal" style="transition-delay:.16s">
       <picture>
       <source srcset="new-avatars/flaubert.webp" type="image/webp">
-      <img src="new-avatars/flaubert.png" alt="Gustave Flaubert — verrouillé, se débloque niveau 7" class="author-img" loading="lazy" width="100" height="100">
+      <img src="new-avatars/flaubert.png" alt="Gustave Flaubert" class="author-img" loading="lazy" decoding="async" width="100" height="100">
     </picture>
       <div class="author-overlay"><div class="author-name">Gustave Flaubert</div><div class="author-xp">Niveau 7</div></div>
-      <div class="author-lock" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
     </div>
     <div class="author-card reveal" style="transition-delay:.2s">
       <picture>
       <source srcset="new-avatars/beauvoir.webp" type="image/webp">
-      <img src="new-avatars/beauvoir.png" alt="Simone de Beauvoir — verrouillée, se débloque niveau 10" class="author-img" loading="lazy" width="100" height="100">
+      <img src="new-avatars/beauvoir.png" alt="Simone de Beauvoir" class="author-img" loading="lazy" decoding="async" width="100" height="100">
     </picture>
       <div class="author-overlay"><div class="author-name">Simone de Beauvoir</div><div class="author-xp">Niveau 10</div></div>
-      <div class="author-lock" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
     </div>
     <div class="author-card reveal" style="transition-delay:.24s">
       <picture>
       <source srcset="new-avatars/duras.webp" type="image/webp">
-      <img src="new-avatars/duras.png" alt="Marguerite Duras — verrouillée, se débloque niveau 12" class="author-img" loading="lazy" width="100" height="100">
+      <img src="new-avatars/duras.png" alt="Marguerite Duras" class="author-img" loading="lazy" decoding="async" width="100" height="100">
     </picture>
       <div class="author-overlay"><div class="author-name">Marguerite Duras</div><div class="author-xp">Niveau 12</div></div>
-      <div class="author-lock" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
     </div>
     <div class="author-card reveal" style="transition-delay:.28s">
       <picture>
       <source srcset="new-avatars/lafontaine.webp" type="image/webp">
-      <img src="new-avatars/lafontaine.png" alt="Jean de La Fontaine — verrouillé, se débloque niveau 15" class="author-img" loading="lazy" width="100" height="100">
+      <img src="new-avatars/lafontaine.png" alt="Jean de La Fontaine" class="author-img" loading="lazy" decoding="async" width="100" height="100">
     </picture>
       <div class="author-overlay"><div class="author-name">Jean de La Fontaine</div><div class="author-xp">Niveau 15</div></div>
-      <div class="author-lock" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
     </div>
     <div class="author-card reveal" style="transition-delay:.32s">
       <picture>
       <source srcset="new-avatars/guitry.webp" type="image/webp">
-      <img src="new-avatars/guitry.png" alt="Sacha Guitry — verrouillé, rang Légendaire" class="author-img" loading="lazy" width="100" height="100">
+      <img src="new-avatars/guitry.png" alt="Sacha Guitry" class="author-img" loading="lazy" decoding="async" width="100" height="100">
     </picture>
       <div class="author-overlay"><div class="author-name">Sacha Guitry</div><div class="author-xp">Légendaire</div></div>
-      <div class="author-lock" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
     </div>
   </div>
 </section>
