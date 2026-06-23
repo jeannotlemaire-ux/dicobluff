@@ -2740,6 +2740,11 @@ input::placeholder, textarea::placeholder { color: var(--text3); font-style: ita
   position: relative;
   overflow: hidden;
 }
+#screen-solo-setup {
+  overflow-y: hidden;
+  overscroll-behavior: none;
+  touch-action: pan-x pinch-zoom;
+}
 
 /* Light mode nav — la surface unifiée est sur .bottom-nav-inner désormais */
 [data-theme="light"] .bottom-nav-inner {
@@ -3070,7 +3075,7 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: max(28px, calc(var(--safe-top) + 20px)) 22px max(20px, calc(env(safe-area-inset-bottom, 0px) + 16px));
+  padding: 8px 22px max(20px, calc(env(safe-area-inset-bottom, 0px) + 16px));
   gap: 0;
 }
 
@@ -5132,7 +5137,7 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
 ═══════════════════════════════════════════════ -->
 <div id="premium-modal" role="dialog" aria-modal="true" aria-labelledby="premium-title">
   <div class="premium-sheet">
-    <button type="button" class="modal-close-btn" onclick="closePremiumModal()" aria-label="Fermer"></button>
+    <button type="button" class="modal-close-btn" onclick="closePremiumModal()" aria-label="Fermer">&times;</button>
     <div class="premium-sheet-icon">✦</div>
     <div class="premium-sheet-title" id="premium-title">Dicobluff Premium</div>
     <div class="premium-sheet-body">Enrichis ton vocabulaire avec les outils de progression.</div>
@@ -5150,7 +5155,7 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
 ═══════════════════════════════════════════════ -->
 <div id="daily-limit-modal" role="dialog" aria-modal="true" aria-labelledby="daily-limit-title">
   <div class="premium-sheet">
-    <button type="button" class="modal-close-btn" onclick="closeDailyLimitModal()" aria-label="Fermer"></button>
+    <button type="button" class="modal-close-btn" onclick="closeDailyLimitModal()" aria-label="Fermer">&times;</button>
     <div class="premium-sheet-icon">🌙</div>
     <div class="premium-sheet-title" id="daily-limit-title">À demain !</div>
     <div class="premium-sheet-body">Tu as joué tes <strong>3 parties gratuites</strong> du jour. Reviens demain pour 3 nouvelles parties — ou passe à Premium.</div>
@@ -5286,16 +5291,6 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
 
   <!-- Corps de la home -->
   <div class="home-inner">
-
-    <!-- Bandeau onboarding (masqué par défaut, révélé via JS) -->
-    <button id="home-onboarding" onclick="App.showRules()" style="display:none;align-items:center;gap:12px;width:100%;padding:12px 16px;margin-bottom:18px;background:linear-gradient(135deg,var(--gold-a12),var(--gold-a05));border:1px solid rgba(200,134,10,.3);border-radius:14px;cursor:pointer;text-align:left;font-family:inherit;color:var(--text);-webkit-tap-highlight-color:transparent;">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold2)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-      <span style="flex:1;display:flex;flex-direction:column;gap:2px;">
-        <span style="font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1rem;line-height:1.1;">Première partie ?</span>
-        <span style="font-size:.72rem;opacity:.75;line-height:1.3;">Comprendre Dicobluff en 30 secondes</span>
-      </span>
-      <span style="color:var(--gold2);font-size:1.2rem;line-height:1;">›</span>
-    </button>
 
     <div style="text-align:center;padding:0 0 20px;">
       <span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;font-size:1.6rem;letter-spacing:-.02em;color:var(--cream);line-height:1;">Dicobluff</span>
@@ -9807,8 +9802,6 @@ function renderHomeExtras() {
   }
 
   // Bandeau onboarding : visible uniquement au premier lancement.
-  const onb = document.getElementById('home-onboarding');
-  if(onb) onb.style.display = 'none';
 
   // Quick stats — streak quotidien
   const ds = getDailyStreakDisplay();
@@ -10252,8 +10245,7 @@ const App = {
   showMultiplayer() {
     if(!isOnline){notify('⚠️ Configure Firebase pour le multijoueur !',4000);return;}
     LS.set('hasPlayed', true);
-    const banner = document.getElementById('home-onboarding');
-    if(banner) banner.style.display='none';
+
     showScreen('multi');
   },
   back() { showScreen(pendingMode==='join'||pendingMode==='create'?'multi':'home'); },
@@ -10301,8 +10293,7 @@ const App = {
   /* ── SOLO ── */
   goSolo(){
     LS.set('hasPlayed', true);
-    const banner = document.getElementById('home-onboarding');
-    if(banner) banner.style.display='none';
+
     solo.active = true;
     // Restaure les préférences sauvegardées si elles existent
     const savedDiff = LS.get('solo_difficulty', null);
