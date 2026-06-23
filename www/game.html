@@ -1367,7 +1367,7 @@ input::placeholder, textarea::placeholder { color: var(--text3); font-style: ita
 .notif {
   position: fixed;
   top: max(18px,var(--safe-top));
-  left: 50%; transform: translateX(-50%) translateY(-90px);
+  left: 50%; transform: translateX(-50%) translateY(calc(-100% - max(18px, var(--safe-top)) - 10px));
   background: var(--surface2);
   border: 1px solid var(--gold-a30);
   border-radius: 100px;
@@ -5168,18 +5168,30 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
 ═══════════════════════════════════════════════ -->
 <div id="starter-overlay" role="dialog" aria-modal="true" aria-labelledby="starter-title" aria-hidden="true">
   <div class="starter-card">
-    <div class="starter-eyebrow">Bienvenue dans Dicobluff</div>
-    <h2 class="starter-title" id="starter-title">Choisis ton avatar de départ</h2>
-    <p class="starter-sub">Tu pourras en débloquer d'autres en jouant.</p>
-    <div class="starter-grid">
-      <button type="button" class="starter-choice" data-key="georgesand" aria-label="Choisir George Sand">
-        <div class="starter-img-wrap"><img id="starter-img-georgesand" src="./new-avatars/georgesand.png" alt="George Sand"></div>
-        <div class="starter-name">George Sand</div>
-      </button>
-      <button type="button" class="starter-choice" data-key="lafontaine" aria-label="Choisir La Fontaine">
-        <div class="starter-img-wrap"><img id="starter-img-lafontaine" src="./new-avatars/lafontaine.png" alt="La Fontaine"></div>
-        <div class="starter-name">La Fontaine</div>
-      </button>
+    <!-- Étape 1 : choix avatar -->
+    <div id="starter-step-avatar">
+      <div class="starter-eyebrow">Bienvenue dans Dicobluff</div>
+      <h2 class="starter-title" id="starter-title">Choisis ton avatar de départ</h2>
+      <p class="starter-sub">Tu pourras en débloquer d'autres en jouant.</p>
+      <div class="starter-grid">
+        <button type="button" class="starter-choice" data-key="georgesand" aria-label="Choisir George Sand">
+          <div class="starter-img-wrap"><img id="starter-img-georgesand" src="./new-avatars/georgesand.png" alt="George Sand"></div>
+          <div class="starter-name">George Sand</div>
+        </button>
+        <button type="button" class="starter-choice" data-key="lafontaine" aria-label="Choisir La Fontaine">
+          <div class="starter-img-wrap"><img id="starter-img-lafontaine" src="./new-avatars/lafontaine.png" alt="La Fontaine"></div>
+          <div class="starter-name">La Fontaine</div>
+        </button>
+      </div>
+    </div>
+    <!-- Étape 2 : prénom -->
+    <div id="starter-step-name" style="display:none;text-align:center;">
+      <div class="starter-eyebrow">Dernière étape</div>
+      <h2 class="starter-title" id="starter-name-title">Comment tu t'appelles ?</h2>
+      <p class="starter-sub">Ton prénom apparaîtra sur ton profil.</p>
+      <input type="text" id="starter-name-input" placeholder="Ton prénom…" maxlength="20" autocomplete="given-name"
+        style="width:100%;padding:12px 14px;font-size:1.05rem;font-family:inherit;border-radius:10px;border:1.5px solid var(--border2);background:var(--bg2);color:var(--cream);margin:16px 0 20px;outline:none;text-align:center;box-sizing:border-box;">
+      <button type="button" id="starter-name-btn" style="width:100%;padding:14px;font-size:1rem;font-weight:700;font-family:inherit;border-radius:12px;background:var(--gold);color:var(--ink-fixed);border:none;cursor:pointer;">Commencer →</button>
     </div>
   </div>
 </div>
@@ -10302,6 +10314,10 @@ const App = {
     // Tire 3 IA initiales si vide
     if(!solo.aiOpponents || !solo.aiOpponents.length) solo.aiOpponents = pickAIOpponents();
     showScreen('solo-setup');
+    // Tutoriel au premier lancement, quand le joueur s'engage dans une partie
+    if(!LS.get('tutorial_done', false)){
+      setTimeout(()=>{ if(typeof App!=='undefined' && App.openTutorial) App.openTutorial(); }, 400);
+    }
     App.refreshSoloSetup();
   },
 
@@ -12628,7 +12644,7 @@ if(initialTheme==='light'){
     if(typeof notify === 'function'){
       notify('✨ Bienvenue ! Tu es Niveau 1 — Apprenti', 4000);
     }
-  }, 1200);
+  }, 4000);
 })();
 
 /* ─── PWA : Service Worker + Install Prompt ──────────────────────
@@ -12640,7 +12656,7 @@ if(initialTheme==='light'){
 */
 const PWA = (function(){
   // Dans une appli Capacitor (native), les prompts PWA sont inutiles.
-  const isNative = !!(window.Capacitor && window.Capacitor.isNative);
+  const isNative = !!(window.Capacitor && (typeof window.Capacitor.isNativePlatform === 'function' ? window.Capacitor.isNativePlatform() : window.Capacitor.isNative));
   let deferredPrompt = null;
   let promptShown = false;
 
@@ -12962,27 +12978,70 @@ const LottieAnims = {
       const key = btn.dataset.key;
       if(!key) return;
       LS.set('avatar', key);
-      LS.set('starter_chosen', true);
       try{ SFX.submit && SFX.submit(); }catch(e){}
-      ov.classList.remove('open');
-      ov.setAttribute('aria-hidden','true');
-      // Mettre à jour les éléments UI qui affichent l'avatar
+      // Passer à l'étape 2 : saisie du prénom
+      const stepAv = document.getElementById('starter-step-avatar');
+      const stepName = document.getElementById('starter-step-name');
+      if(stepAv) stepAv.style.display='none';
+      if(stepName) stepName.style.display='block';
+      setTimeout(()=>{ const inp=document.getElementById('starter-name-input'); if(inp) inp.focus(); },100);
       if(typeof updateXPDisplay === 'function') updateXPDisplay();
       if(typeof updateHomeChip === 'function') updateHomeChip();
-      // Si le tutoriel n'a pas encore été vu, le déclencher 400ms après la
-      // fermeture du starter (laisse le temps à la transition de finir).
-      try {
-        if(!LS.get('tutorial_done', false) && typeof App !== 'undefined' && App.openTutorial) {
-          setTimeout(() => App.openTutorial(), 400);
-        }
-      } catch(e){}
     });
   });
+  // Bouton confirmer prénom
+  const nameBtn = document.getElementById('starter-name-btn');
+  const nameInput = document.getElementById('starter-name-input');
+  if(nameBtn && nameInput){
+    const confirmName = () => {
+      const val = nameInput.value.trim();
+      if(val) LS.set('pseudo', val);
+      LS.set('starter_chosen', true);
+      ov.classList.remove('open');
+      ov.setAttribute('aria-hidden','true');
+      if(typeof updateXPDisplay === 'function') updateXPDisplay();
+      if(typeof updateHomeChip === 'function') updateHomeChip();
+    };
+    nameBtn.addEventListener('click', confirmName);
+    nameInput.addEventListener('keydown', (e)=>{ if(e.key==='Enter'){ e.preventDefault(); confirmName(); } });
+  }
   // Ouverture (laisse le temps au DOM de se monter)
   setTimeout(()=>{
     ov.classList.add('open');
     ov.setAttribute('aria-hidden','false');
   }, 150);
+})();
+
+// ── ANDROID BACK GESTURE ─────────────────────────────────────────────────
+// history.pushState pour chaque écran non-home → le geste retour Android
+// déclenche popstate au lieu de quitter l'app.
+(function setupAndroidBack(){
+  let _backGuard = false;
+  const HOME = 'home';
+  // Après chaque showScreen, pousse un état si pas sur home
+  const _wrapShowScreen = window.showScreen;
+  window._dicobluffShowScreen = function(id){
+    _wrapShowScreen.apply(this, arguments);
+    if(id && id !== HOME && !_backGuard){
+      history.pushState({ dicobluffScreen: id }, '');
+    }
+  };
+  // Remplacer showScreen par la version wrappée (avant le hook queue)
+  window.showScreen = window._dicobluffShowScreen;
+
+  window.addEventListener('popstate', function(){
+    _backGuard = true;
+    const cur = document.querySelector('.screen.active');
+    const curId = cur ? cur.id.replace('screen-','') : null;
+    // Si on est en pleine partie → afficher confirmation quitter
+    const inGame = curId && (curId.startsWith('solo-') || curId === 'queue' || curId === 'game');
+    if(inGame && typeof App !== 'undefined' && typeof App.confirmQuit === 'function'){
+      App.confirmQuit();
+    } else if(typeof App !== 'undefined' && typeof App.showHome === 'function'){
+      App.showHome();
+    }
+    _backGuard = false;
+  });
 })();
 
 // Hook : démarrer les dots quand on entre dans l'écran queue
