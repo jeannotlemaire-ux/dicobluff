@@ -570,17 +570,7 @@ body.on-home #profile-btn { display: flex; }
 .settings-menu button:active { background: var(--surface3); }
 
 
-/* ─── GAME PROGRESS BAR ─── */
-#game-progress-container {
-  position: fixed;
-  top: var(--safe-top, 0); left: 50%;
-  transform: translateX(-50%);
-  width: 100%; max-width: 430px;
-  padding: 10px 18px 12px;
-  z-index: var(--z-dropdown);
-  display: none;
-  background: linear-gradient(to bottom, var(--bg) 60%, transparent);
-}
+
 .progress-dots {
   display: flex; justify-content: center; gap: 8px;
 }
@@ -5278,10 +5268,6 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
 
 <div id="app">
 
-<!-- Barre de progression globale -->
-<div id="game-progress-container">
-  <div class="progress-dots" id="progress-dots"></div>
-</div>
 
 <!-- ══════════════════════════════════════════
      HOME
@@ -5577,10 +5563,11 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
      WRITING PHASE
 ══════════════════════════════════════════ -->
 <div id="screen-word" class="screen">
-  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+  <div style="position:relative;display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
     <div style="display:flex;align-items:center;gap:7px;">
       <div class="badge badge-accent" id="round-label">Manche 1</div>
     </div>
+    <div class="progress-dots" aria-label="Progression des manches" style="position:absolute;left:50%;transform:translateX(-50%);pointer-events:none;"></div>
     <div class="row">
       <span class="timer-num" id="timer-display" role="timer" aria-label="Temps restant">2:00</span>
       <button onclick="App.quitGame()" class="btn-quit-game" aria-label="Quitter la partie"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
@@ -5632,8 +5619,9 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
      VOTE PHASE
 ══════════════════════════════════════════ -->
 <div id="screen-vote" class="screen">
-  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+  <div style="position:relative;display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
     <div class="badge badge-accent" id="vote-round-label">Manche 1</div>
+    <div class="progress-dots" aria-label="Progression des manches" style="position:absolute;left:50%;transform:translateX(-50%);pointer-events:none;"></div>
     <div class="row">
       <span class="timer-num" id="vote-timer-display" role="timer" aria-label="Temps restant pour voter" style="display:none;">0:45</span>
       <button onclick="App.quitGame()" class="btn-quit-game" aria-label="Quitter la partie"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
@@ -5670,7 +5658,10 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
      RESULTS PHASE
 ══════════════════════════════════════════ -->
 <div id="screen-results" class="screen">
-  <div class="center" style="margin-top:20px;margin-bottom:16px;">
+  <div style="display:flex;justify-content:center;margin-bottom:12px;">
+    <div class="progress-dots" aria-label="Progression des manches" style="pointer-events:none;"></div>
+  </div>
+  <div class="center" style="margin-top:0;margin-bottom:16px;">
     <div class="t-label" style="letter-spacing:3px;margin-bottom:4px;">Résultats</div>
     <div id="results-word" class="word-main">—</div>
     <div class="ornament" aria-hidden="true" style="margin-top:4px;font-size:.7rem;">— ✦ —</div>
@@ -8042,13 +8033,8 @@ function showScreen(id) {
   // 🎨 Injecte les icônes SVG dans tout [data-icon] de l'écran courant
   if(el && typeof injectIcons === 'function') injectIcons(el);
 
-  // Barre de progression (Recommandation #9)
-  const prog = document.getElementById('game-progress-container');
-  const inGame = ['word','vote','results'].includes(id) && solo.active;
-  if(prog) {
-    prog.style.display = inGame ? 'block' : 'none';
-    if(inGame) updateGameProgress();
-  }
+  // Mise à jour des dots de progression intégrés dans chaque écran de jeu
+  if(['word','vote','results'].includes(id) && solo.active) updateGameProgress();
 
   // Masquer les éléments fixes pendant le jeu et le quiz pour éviter les superpositions
   // (le quiz a déjà son propre badge de progression en haut à droite)
@@ -8070,8 +8056,8 @@ function showScreen(id) {
 }
 
 function updateGameProgress() {
-  const container = document.getElementById('progress-dots');
-  if(!container) return;
+  const containers = document.querySelectorAll('.progress-dots');
+  if(!containers.length) return;
   let html = '';
   const max = solo.maxRounds || 5;
   for(let i=1; i<=max; i++) {
@@ -8080,7 +8066,7 @@ function updateGameProgress() {
     else if(i === solo.round) cls += ' active';
     html += `<div class="${cls}"></div>`;
   }
-  container.innerHTML = html;
+  containers.forEach(c => { c.innerHTML = html; });
 }
 
 /* ══════════════════════════════════════════════
