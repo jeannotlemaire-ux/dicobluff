@@ -7,7 +7,7 @@
    - Versioning : incrémente CACHE_VERSION pour forcer l'invalidation de tous les caches
 */
 
-const CACHE_VERSION = 'dicobluff-v14';
+const CACHE_VERSION = 'dicobluff-v18';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
@@ -72,6 +72,10 @@ self.addEventListener('fetch', (event) => {
   if (NETWORK_ONLY_HOSTS.some((h) => url.hostname.includes(h))) {
     return; // laisse le navigateur faire sa requête normale
   }
+
+  // Bypass pour Capacitor (localhost) — les assets sont servis nativement par le WebViewAssetLoader.
+  // Sur certaines versions Android, le SW ne peut pas fetcher https://localhost/ correctement.
+  if (url.hostname === 'localhost') return;
 
   // Bypass des requêtes non-http (ex: chrome-extension://)
   if (!url.protocol.startsWith('http')) return;
