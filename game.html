@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https://www.dicobluff.fr; connect-src 'self' https://*.firebaseio.com https://*.googleapis.com wss://*.firebaseio.com https://*.firebasedatabase.app wss://*.firebasedatabase.app https://identitytoolkit.googleapis.com https://securetoken.googleapis.com; script-src 'self' 'unsafe-inline' https://www.gstatic.com https://cdnjs.cloudflare.com; worker-src 'self'; frame-ancestors 'none'">
 <meta name="description" content="Le jeu de bluff littéraire. Invente la définition la plus convaincante pour piéger tes adversaires.">
-<link rel="canonical" href="https://www.dicobluff.fr/">
+<link rel="canonical" href="https://www.dicobluff.fr/game.html">
 
 <!-- Open Graph / réseaux sociaux -->
 <meta property="og:type"        content="website">
@@ -27,7 +27,7 @@
 <!-- PWA core -->
 <link rel="manifest" href="./manifest.webmanifest">
 <meta name="theme-color" content="#0E1A22">
-<meta name="color-scheme" content="dark light">
+<meta name="color-scheme" content="dark">
 
 <!-- Apple / iOS PWA -->
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -50,7 +50,6 @@
 
 <title>Dicobluff</title>
 <!-- Préchargement images critiques above-the-fold -->
-<link rel="preload" as="image" href="./assets/logo.png">
 <link rel="preload" as="image" href="./new-avatars/georgesand.png">
 <link rel="preload" as="image" href="./new-avatars/lafontaine.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -5195,7 +5194,7 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
       <div class="starter-eyebrow">Dernière étape</div>
       <h2 class="starter-title" id="starter-name-title">Comment tu t'appelles ?</h2>
       <p class="starter-sub">Ton prénom apparaîtra sur ton profil.</p>
-      <input type="text" id="starter-name-input" placeholder="Ton prénom…" maxlength="20" autocomplete="given-name"
+      <input type="text" id="starter-name-input" placeholder="Ton prénom…" maxlength="20" autocomplete="given-name" aria-label="Ton prénom"
         style="width:100%;padding:12px 14px;font-size:1.05rem;font-family:inherit;border-radius:10px;border:1.5px solid var(--border2);background:var(--bg2);color:var(--cream);margin:16px 0 20px;outline:none;text-align:center;box-sizing:border-box;">
       <button type="button" id="starter-name-btn" style="width:100%;padding:14px;font-size:1rem;font-weight:700;font-family:inherit;border-radius:12px;background:var(--gold);color:var(--ink-fixed);border:none;cursor:pointer;">Commencer →</button>
     </div>
@@ -5604,7 +5603,7 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
   <div id="player-def-section">
     <div class="muted small center" style="margin-bottom:12px;font-family:'Manrope',sans-serif;">Invente une <strong style="color:var(--gold2);">fausse définition</strong> convaincante !</div>
     <label for="input-def" class="sr-only">Ta fausse définition</label>
-    <textarea id="input-def" placeholder="Action de… / Personne qui… / Région où l'on…" maxlength="220" minlength="15" oninput="App.onDefInput()" onkeydown="if((event.key==='Enter'&&(event.ctrlKey||event.metaKey))||(event.key==='Enter'&&!event.shiftKey&&this.value.trim().length>=15)){event.preventDefault();const b=document.getElementById('btn-submit-def');if(b&&!b.disabled)App.submitDefinition();}" aria-label="Invente une fausse définition (Entrée pour soumettre, Maj+Entrée pour aller à la ligne)" aria-describedby="def-char-hint"></textarea>
+    <textarea id="input-def" placeholder="Action de… / Personne qui… / Région où l'on…" maxlength="220" minlength="15" autocomplete="off" oninput="App.onDefInput()" onkeydown="if((event.key==='Enter'&&(event.ctrlKey||event.metaKey))||(event.key==='Enter'&&!event.shiftKey&&this.value.trim().length>=15)){event.preventDefault();const b=document.getElementById('btn-submit-def');if(b&&!b.disabled)App.submitDefinition();}" aria-label="Invente une fausse définition (Entrée pour soumettre, Maj+Entrée pour aller à la ligne)" aria-describedby="def-char-hint"></textarea>
     <div class="char-count" id="def-char-hint"><span id="def-chars">0</span>/220 <span id="def-min-hint" style="margin-left:6px;color:var(--text3);">· minimum 15</span></div>
     <div class="def-min-progress" id="def-min-progress" aria-hidden="true"><div class="def-min-progress-fill" id="def-min-progress-fill"></div></div>
     <div class="gap-16"></div>
@@ -7671,7 +7670,7 @@ function renderMiniRank(players) {
     return `<div class="lb-item" data-pid="${p.id}" data-rank="${i+1}" style="${bg}">
       ${rankCell}
       ${avImg}
-      <div style="flex:1;font-weight:500;font-size:.95rem;font-family:'Manrope',sans-serif;">${p.name||'?'}</div>
+      <div style="flex:1;font-weight:500;font-size:.95rem;font-family:'Manrope',sans-serif;">${escHtml(p.name||'?')}</div>
       <div class="lb-score">${p.score||0} pts</div>
     </div>`;
   }).join('');
@@ -9662,7 +9661,6 @@ function renderHomeExtras() {
     const n = new Date();
     return Math.floor((n.getTime() - n.getTimezoneOffset() * 60000) / 86400000);
   };
-  const escHtml = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
   const todayIdx = localDayIdx();
   // Reconstruit le carrousel à chaque changement de jour
   if(carousel && carousel.dataset.builtForDay !== String(todayIdx)) {
@@ -11506,7 +11504,7 @@ function renderPodium(players){
     const nameSuffix='';
     return `<div class="podium-spot ${s.cls}" data-cls="${s.cls}">
       <div class="podium-portrait">${goldExtras}${portrait}</div>
-      <div class="podium-name">${p.name||'?'}${nameSuffix}</div>
+      <div class="podium-name">${escHtml(p.name||'?')}${nameSuffix}</div>
       <div class="podium-score">${p.score||0} pts</div>
       <div class="podium-base">${s.medal}</div>
     </div>`;
@@ -11583,7 +11581,7 @@ function showSoloFinal(){
       + '<div class="lb-rank">'+(medals[i]||String(i+1))+'</div>'
       + avHtml
       + '<div style="flex:1;">'
-        + '<div style="font-weight:700;font-size:1.05rem;font-family:\'Cormorant Garamond\',serif;letter-spacing:.01em;">'+p.name+nameSuffix+'</div>'
+        + '<div style="font-weight:700;font-size:1.05rem;font-family:\'Cormorant Garamond\',serif;letter-spacing:.01em;">'+escHtml(p.name||'?')+nameSuffix+'</div>'
         + aiTitle
       + '</div>'
       + '<div class="lb-score" style="color:'+scoreColor+';">'+p.score+' pts</div>'
@@ -11642,7 +11640,7 @@ function initVoteProgress(players) {
     const inner = imgSrc
       ? `<img src="${imgSrc}" alt="${p.name}" style="width:100%;height:100%;object-fit:contain;display:block;">`
       : (p.name||'?')[0].toUpperCase();
-    pip.innerHTML = `<div class="vote-pip-dot waiting" id="vpd-${p.id}">${inner}</div><div class="vote-pip-name">${p.name}</div>`;
+    pip.innerHTML = `<div class="vote-pip-dot waiting" id="vpd-${p.id}">${inner}</div><div class="vote-pip-name">${escHtml(p.name||'?')}</div>`;
     pips.appendChild(pip);
   });
   wrap.style.display = 'flex';
