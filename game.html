@@ -13025,6 +13025,21 @@ const LottieAnims = {
   });
 })();
 
+// Filet de sécurité Capacitor : "backbutton" est dispatché sur document
+// quand il n'y a plus d'historique WebView à consommer.
+document.addEventListener('backbutton', function(e) {
+  if (e && e.preventDefault) e.preventDefault();
+  const cur = document.querySelector('.screen.active');
+  const curId = cur ? cur.id.replace('screen-','') : 'home';
+  const inGame = curId && (curId.startsWith('solo-') || curId === 'word' || curId === 'vote' || curId === 'results');
+  if (inGame && typeof App !== 'undefined' && typeof App.confirmQuit === 'function') {
+    App.confirmQuit();
+  } else if (typeof App !== 'undefined' && typeof App.showHome === 'function') {
+    App.showHome();
+  }
+  history.pushState({ dicobluffScreen: curId || 'home' }, '');
+}, false);
+
 // Hook : démarrer les dots quand on entre dans l'écran queue
 const _origShowScreen = window.showScreen;
 if (typeof showScreen === 'function') {
