@@ -9858,6 +9858,52 @@ async function registerPeriodicSync() {
   } catch(e) {}
 }
 
+/* Planifie 7 notifications locales quotidiennes à 8h avec le mot du jour.
+   Utilise @capacitor/local-notifications — fonctionne uniquement dans l'app Android. */
+async function scheduleWODLocalNotif() {
+  try {
+    if (typeof Capacitor === 'undefined' || !Capacitor.isNativePlatform()) return;
+    const LocalNotifications = Capacitor.Plugins && Capacitor.Plugins.LocalNotifications;
+    if (!LocalNotifications) return;
+
+    const perm = await LocalNotifications.requestPermissions();
+    if (!perm || perm.display !== 'granted') return;
+
+    // Annule les notifications WOD existantes (IDs 8001-8007)
+    await LocalNotifications.cancel({
+      notifications: [8001,8002,8003,8004,8005,8006,8007].map(id => ({ id }))
+    }).catch(() => {});
+
+    const wodPool = WORDS.filter(w => w.r === 'epic' || w.r === 'legendary');
+    const notifications = [];
+    const now = new Date();
+
+    for (let offset = 0; offset < 7; offset++) {
+      const fireAt = new Date(now);
+      fireAt.setDate(fireAt.getDate() + offset);
+      fireAt.setHours(8, 0, 0, 0);
+      if (fireAt <= now) continue; // déjà passé aujourd'hui
+
+      const dIdx = Math.floor((fireAt.getTime() - fireAt.getTimezoneOffset() * 60000) / 86400000);
+      const wIdx = ((Math.imul(dIdx + 1, 2654435761) ^ Math.imul(dIdx ^ 0xDEAD, 1000003)) >>> 0) % wodPool.length;
+      const word = wodPool[wIdx];
+
+      notifications.push({
+        id: 8001 + offset,
+        title: 'Dicobluff · Mot du jour',
+        body: '✦ ' + word.w + ' — ' + word.h,
+        schedule: { at: fireAt, allowWhileIdle: true },
+        smallIcon: 'ic_launcher_foreground',
+        iconColor: '#C8860A'
+      });
+    }
+
+    if (notifications.length) {
+      await LocalNotifications.schedule({ notifications });
+    }
+  } catch(e) {}
+}
+
 /* ══════════════════════════════════════════════════════════
    LOTTIE MICRO-ANIMATIONS — burst · success · loading dots
    Using bodymovin/lottie-web for smooth 60fps SVG rendering
@@ -12597,6 +12643,7 @@ const _initNav=document.getElementById("bottom-nav");if(_initNav)_initNav.classL
 renderHomeExtras();
 updateNotifBtn();
 if('Notification' in window && Notification.permission === 'granted') registerPeriodicSync();
+scheduleWODLocalNotif();
 // Theme init : respecte le choix utilisateur s'il existe, sinon dark par défaut
 const savedTheme = LS.get('theme', null);
 const initialTheme = savedTheme || 'dark';
