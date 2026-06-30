@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://www.dicobluff.fr; connect-src 'self' https://*.firebaseio.com https://*.googleapis.com; script-src 'self' 'unsafe-inline'; frame-ancestors 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https://www.dicobluff.fr; connect-src 'self'; script-src 'self' 'unsafe-inline'; frame-ancestors 'none'">
   <title>Dicobluff — Le jeu de bluff littéraire</title>
   <meta name="description" content="1000 mots rares. Des adversaires aux personnalités tranchées. Un seul vrai. Invente la définition parfaite pour piéger tes adversaires.">
   <meta name="theme-color" content="#1B2534">
@@ -41,11 +41,13 @@
     "publisher": { "@type": "Organization", "name": "Dicobluff", "url": "https://www.dicobluff.fr/" }
   }
   </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" href="https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYqXtK.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="https://fonts.gstatic.com/s/cormorantgaramond/v21/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtImSo.woff2" as="font" type="font/woff2" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preload" href="assets/fonts/cg-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/cg-italic.woff2" as="font" type="font/woff2" crossorigin>
+  <style>
+    @font-face { font-family:'Cormorant Garamond'; font-style:normal; font-weight:300 700; font-display:swap; src:url('assets/fonts/cg-normal.woff2') format('woff2'); }
+    @font-face { font-family:'Cormorant Garamond'; font-style:italic; font-weight:300 600; font-display:swap; src:url('assets/fonts/cg-italic.woff2') format('woff2'); }
+    @font-face { font-family:'Manrope'; font-style:normal; font-weight:300 800; font-display:swap; src:url('assets/fonts/manrope.woff2') format('woff2'); }
+  </style>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -156,8 +158,8 @@
       bottom: -5%;
       font-family: 'Cormorant Garamond', serif;
       font-style: italic; font-weight: 300;
-      font-size: clamp(9rem, 24vw, 32rem);
-      color: rgba(200,134,10,.035);
+      font-size: clamp(10rem, 28vw, 40rem);
+      color: rgba(200,134,10,.05);
       line-height: 1; letter-spacing: -.04em;
       pointer-events: none; user-select: none;
       white-space: nowrap;
@@ -188,8 +190,8 @@
     h1.hero-title {
       font-family: 'Cormorant Garamond', serif;
       font-style: italic; font-weight: 300;
-      font-size: clamp(4rem, 8.5vw, 10.5rem);
-      line-height: .92; letter-spacing: -.03em;
+      font-size: clamp(4.5rem, 10.5vw, 14rem);
+      line-height: .88; letter-spacing: -.04em;
       margin-bottom: 28px; color: var(--cream);
       text-wrap: balance;
     }
@@ -309,6 +311,23 @@
     }
     .gc-def.real .gc-ltr { border-color: var(--teal); color: var(--teal); }
 
+    /* Phone hero (hero visual) */
+    .phone-hero {
+      position: relative;
+      filter: drop-shadow(0 56px 96px rgba(0,0,0,.7));
+    }
+    .phone-hero-shell {
+      width: clamp(220px, 28vw, 320px);
+      border-radius: 44px;
+      border: 2px solid rgba(255,255,255,.1);
+      overflow: hidden;
+      background: #09141B;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.04);
+    }
+    .phone-hero-img {
+      width: 100%; height: auto; display: block;
+    }
+
     /* Floating badges on the card */
     .float-badge {
       position: absolute;
@@ -321,8 +340,8 @@
       white-space: nowrap;
       box-shadow: 0 8px 28px rgba(0,0,0,.4);
     }
-    .fb1 { top: -20px; right: -28px; }
-    .fb2 { bottom: -16px; left: -28px; }
+    .fb1 { top: 48px; right: -24px; }
+    .fb2 { bottom: 72px; left: -24px; }
     .fb-ico {
       width: 30px; height: 30px;
       border-radius: 8px;
@@ -356,8 +375,8 @@
     .sec-title {
       font-family: 'Cormorant Garamond', serif;
       font-style: italic; font-weight: 400;
-      font-size: clamp(2rem, 4.5vw, 4.2rem);
-      line-height: 1.05; letter-spacing: -.02em;
+      font-size: clamp(2.4rem, 5.5vw, 5.8rem);
+      line-height: 1.0; letter-spacing: -.03em;
       margin-bottom: 14px;
     }
     .sec-title em { font-weight: 600; color: var(--gold); font-style: italic; }
@@ -640,8 +659,8 @@
     .dl-title {
       font-family: 'Cormorant Garamond', serif;
       font-style: italic; font-weight: 300;
-      font-size: clamp(3rem, 8.5vw, 10rem);
-      line-height: .92; letter-spacing: -.03em;
+      font-size: clamp(3.5rem, 10.5vw, 13rem);
+      line-height: .88; letter-spacing: -.04em;
       margin-bottom: 24px; color: var(--cream);
     }
     .dl-title strong { font-weight: 600; color: var(--gold); }
@@ -978,25 +997,10 @@
     </div>
 
     <div class="hero-visual" aria-hidden="true">
-      <div class="game-card reveal" style="transition-delay:.18s">
-        <p class="gc-round">Manche 2 / 5</p>
-        <p class="gc-word">Chiliade</p>
-        <p class="gc-q">Quelle est la vraie définition&nbsp;?</p>
-        <div class="gc-defs">
-          <div class="gc-def">
-            <span class="gc-ltr">A</span>
-            <span>Danse rituelle des peuples d'Asie centrale, pratiquée lors des solstices.</span>
-          </div>
-          <div class="gc-def real">
-            <span class="gc-ltr">B</span>
-            <span>Groupe ou ensemble de mille unités — nombre mythique de perfection.</span>
-          </div>
-          <div class="gc-def">
-            <span class="gc-ltr">C</span>
-            <span>Plante carnivore des zones tropicales, cousine de la sarracénie.</span>
-          </div>
+      <div class="phone-hero reveal" style="transition-delay:.18s">
+        <div class="phone-hero-shell">
+          <img src="store-screenshots/portrait__01-home.png" alt="" loading="eager" class="phone-hero-img" width="320" height="693">
         </div>
-        <!-- Floating badges -->
         <div class="float-badge fb1">
           <div class="fb-ico" style="background:rgba(42,157,143,.14)">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2A9D8F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
@@ -1299,6 +1303,15 @@
         <p class="feat-desc">Choisis ton avatar parmi des auteurs et autrices de la littérature française. Débloque de nouveaux portraits en progressant.</p>
       </div>
     </div>
+    <div class="feat-row reveal" style="transition-delay:.23s">
+      <svg class="feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/><circle cx="17" cy="8" r="1" fill="currentColor"/><circle cx="20" cy="11" r="1" fill="currentColor"/><circle cx="14" cy="11" r="1" fill="currentColor"/><circle cx="17" cy="14" r="1" fill="currentColor"/>
+      </svg>
+      <div class="feat-content">
+        <h3 class="feat-name">Multijoueur en ligne</h3>
+        <p class="feat-desc">Crée un salon privé et invite tes amis, ou rejoins une partie rapide pour bluffer contre des inconnus en temps réel.</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1518,23 +1531,17 @@
     </div>
     <div class="multi-screens reveal" style="transition-delay:.14s" aria-hidden="true">
       <img
-        src="store-screenshots/phone-01-home.png"
-        alt=""
+        src="store-screenshots/portrait__03-game-word.png"
         class="multi-screen-img side"
-        loading="lazy" width="180" height="320"
-      >
+        alt="" loading="lazy" width="265" height="572">
       <img
         src="store-screenshots/phone-04-vote.png"
-        alt=""
         class="multi-screen-img main"
-        loading="lazy" width="240" height="427"
-      >
+        alt="" loading="lazy" width="300" height="648">
       <img
-        src="store-screenshots/phone-03-word.png"
-        alt=""
+        src="store-screenshots/raw__04-results.png"
         class="multi-screen-img side"
-        loading="lazy" width="180" height="320"
-      >
+        alt="" loading="lazy" width="265" height="572">
     </div>
   </div>
 </section>
