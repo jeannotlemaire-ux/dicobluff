@@ -5093,6 +5093,7 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
   <button onclick="App.closeSettings();App.showRules();" class="row" role="menuitem"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Comment jouer ?</button>
   <button onclick="App.closeSettings();App.showCGU();" class="row" role="menuitem"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg> Conditions d'utilisation</button>
   <button onclick="App.closeSettings();App.openRatePage();" class="row" role="menuitem"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> Noter Dicobluff</button>
+  <button onclick="App.closeSettings();restorePremiumPurchase();" class="row" role="menuitem"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> Restaurer mes achats</button>
 </div>
 <div id="notif" class="notif" role="alert" aria-live="polite" aria-atomic="true"></div>
 <!-- canvas word-bg removed -->
@@ -5184,6 +5185,7 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
       <div class="premium-feature-row">Mode Révision — quiz, consolidation, légendaires</div>
     </div>
     <button class="premium-btn-unlock" onclick="triggerPremiumPurchase()">Débloquer — 2,99 €</button>
+    <button class="premium-btn-close" onclick="restorePremiumPurchase()">Restaurer mes achats</button>
     <button class="premium-btn-close" onclick="closePremiumModal()">Pas maintenant</button>
   </div>
 </div>
@@ -5469,8 +5471,9 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
   </div>
 
   <div id="multi-connect-status" style="display:none;align-items:center;gap:8px;font-size:.8rem;color:var(--cream-dim);margin-bottom:16px;" aria-live="polite">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="animation:spin .9s linear infinite;flex-shrink:0"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
-    Connexion en cours…
+    <svg id="multi-connect-spinner" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="animation:spin .9s linear infinite;flex-shrink:0"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+    <span id="multi-connect-status-text">Connexion en cours…</span>
+    <button type="button" id="multi-connect-retry" onclick="App.retryMultiplayerConnect()" class="btn-back" style="display:none;font-size:.8rem;padding:4px 10px;">Réessayer</button>
   </div>
 
   <div id="multi-btns">
@@ -8117,8 +8120,11 @@ function updateGameProgress() {
 /* ══════════════════════════════════════════════
    💎 PREMIUM
 ══════════════════════════════════════════════ */
+const PREMIUM_PRODUCT_ID = 'premiumunlock';
 function isPremium(){ return LS.get('premium', false); }
-function unlockPremium(){
+function unlockPremium(opts){
+  opts = opts || {};
+  const already = isPremium();
   LS.set('premium', true);
   // Retire les verrous visuels
   document.querySelectorAll('.is-locked').forEach(el => {
@@ -8127,8 +8133,10 @@ function unlockPremium(){
   });
   const revTab = document.getElementById('nav-tab-revision');
   if(revTab){ revTab.setAttribute('aria-label','Réviser'); revTab.querySelector('.nav-side-label').textContent = 'Réviser'; }
-  notify('✦ Premium débloqué !', 3000);
-  SFX.win();
+  if(!already && opts.silent !== true){
+    notify('✦ Premium débloqué !', 3000);
+    SFX.win();
+  }
 }
 let _premiumTrap = null;
 function showPremiumModal(){
@@ -8144,17 +8152,31 @@ function closePremiumModal(){
   if(m) m.classList.remove('open');
 }
 function triggerPremiumPurchase(){
-  // TODO : intégrer Capacitor In-App Purchases ici
-  // Pour l'instant, on simule un achat pour les tests
-  if(window.Capacitor && window.Capacitor.isNative){
-    notify('Paiement en cours…', 2000);
-    setTimeout(()=>{ unlockPremium(); closePremiumModal(); }, 1800);
+  if(window.CdvPurchase){
+    const product = CdvPurchase.store.get(PREMIUM_PRODUCT_ID);
+    const offer = product && product.getOffer();
+    if(offer){
+      notify('Paiement en cours…', 2000);
+      CdvPurchase.store.order(offer).catch(err => {
+        notify(err && err.message ? err.message : 'Achat annulé', 2500);
+      });
+    } else {
+      notify('Produit indisponible pour le moment', 2500);
+    }
   } else {
-    // Sur navigateur (dev) : déverrouille directement
+    // Hors app native (navigateur, dev) : déverrouille directement pour pouvoir tester l'UI
     unlockPremium(); closePremiumModal();
   }
 }
-// Applique l'état premium au démarrage si déjà acheté
+function restorePremiumPurchase(){
+  if(window.CdvPurchase){
+    notify('Recherche de tes achats…', 2000);
+    CdvPurchase.store.restorePurchases();
+  } else {
+    notify('Restauration indisponible hors application', 2500);
+  }
+}
+// Applique l'état premium au démarrage si déjà acheté localement
 (function applyPremiumState(){
   if(!isPremium()) return;
   document.addEventListener('DOMContentLoaded', () => {
@@ -8164,6 +8186,24 @@ function triggerPremiumPurchase(){
     if(revTab){ revTab.setAttribute('aria-label','Réviser'); revTab.querySelector('.nav-side-label').textContent = 'Réviser'; }
   });
 })();
+// Initialise Google Play Billing (cordova-plugin-purchase) — no-op hors app native
+document.addEventListener('deviceready', function(){
+  if(!window.CdvPurchase) return;
+  const { store, ProductType, Platform } = CdvPurchase;
+  store.register({
+    type: ProductType.NON_CONSUMABLE,
+    id: PREMIUM_PRODUCT_ID,
+    platform: Platform.GOOGLE_PLAY,
+  });
+  store.when()
+    .approved(transaction => transaction.verify())
+    .verified(receipt => receipt.finish())
+    .owned(() => unlockPremium());
+  store.error(err => {
+    console.error('[IAP]', err);
+  });
+  store.initialize([Platform.GOOGLE_PLAY]);
+});
 
 let _notifT;
 function notify(msg,dur=2400){
@@ -8260,7 +8300,10 @@ let _fbReady = false;
 let _fbReadyQueue = [];
 function _onFbReady(cb){ if(_fbReady){cb();return;} _fbReadyQueue.push(cb); }
 
+let _fbInitDone = false;
 function initFirebase(){
+  if(_fbInitDone) return;
+  _fbInitDone = true;
   try {
     fbApp = firebase.initializeApp(firebaseConfig);
     fbDb  = firebase.database();
@@ -8280,11 +8323,24 @@ function warmFirebase(){
   loadFirebase(()=>{});
 }
 
+let _multiConnectTimeout = null;
 function _multiSetConnected(ready){
   const s=document.getElementById('multi-connect-status');
   const w=document.getElementById('multi-btns');
   if(s) s.style.display=ready?'none':'flex';
   if(w) w.querySelectorAll('button').forEach(b=>{b.disabled=!ready;b.style.opacity=ready?'':'0.45';});
+  if(ready && _multiConnectTimeout){ clearTimeout(_multiConnectTimeout); _multiConnectTimeout=null; }
+}
+function _multiSetConnectError(){
+  if(_multiConnectTimeout){ clearTimeout(_multiConnectTimeout); _multiConnectTimeout=null; }
+  const spinner=document.getElementById('multi-connect-spinner');
+  const text=document.getElementById('multi-connect-status-text');
+  const retry=document.getElementById('multi-connect-retry');
+  const s=document.getElementById('multi-connect-status');
+  if(s) s.style.display='flex';
+  if(spinner) spinner.style.display='none';
+  if(text) text.textContent='Connexion impossible — vérifie ta connexion internet.';
+  if(retry) retry.style.display='inline-block';
 }
 
 let _fbLoading = false;
@@ -8304,6 +8360,7 @@ function loadFirebase(cb) {
     const s = document.createElement('script');
     s.src = src;
     s.onload = () => { if(++loaded === SCRIPTS.length) { initFirebase(); _fbCallbacks.forEach(fn=>fn()); _fbCallbacks=[]; } };
+    s.onerror = () => { console.warn('[Firebase] échec de chargement du script', src); };
     document.head.appendChild(s);
   });
 }
@@ -10428,8 +10485,24 @@ const App = {
   showMultiplayer() {
     LS.set('hasPlayed', true);
     showScreen('multi');
+    App._connectMultiplayer();
+  },
+  _connectMultiplayer(){
+    const spinner=document.getElementById('multi-connect-spinner');
+    const text=document.getElementById('multi-connect-status-text');
+    const retry=document.getElementById('multi-connect-retry');
+    if(spinner) spinner.style.display='';
+    if(text) text.textContent='Connexion en cours…';
+    if(retry) retry.style.display='none';
     _multiSetConnected(_fbReady);
-    if(!_fbReady) loadFirebase(()=>{ _onFbReady(()=>_multiSetConnected(true)); });
+    if(_fbReady) return;
+    if(_multiConnectTimeout) clearTimeout(_multiConnectTimeout);
+    _multiConnectTimeout = setTimeout(()=>{ if(!_fbReady) _multiSetConnectError(); }, 10000);
+    loadFirebase(()=>{ _onFbReady(()=>_multiSetConnected(true)); });
+  },
+  retryMultiplayerConnect(){
+    if(!_fbReady) _fbLoading = false; // relance un chargement si la tentative précédente est restée bloquée
+    App._connectMultiplayer();
   },
   back() { showScreen(pendingMode==='join'||pendingMode==='create'?'multi':'home'); },
 
@@ -12854,6 +12927,7 @@ const PWA = (function(){
   let promptShown = false;
 
   function showUpdateBanner(reg){
+    if(isNative) return; // Mise à jour gérée par le Play Store, pas de reload web dans l'app
     if(document.getElementById('pwa-update-banner')) return;
     const banner = document.createElement('div');
     banner.id = 'pwa-update-banner';
