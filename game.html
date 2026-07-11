@@ -2052,7 +2052,17 @@ input::placeholder, textarea::placeholder { color: var(--text3); font-style: ita
   display: inline-flex; align-items: center; justify-content: center;
 }
 #rev-mode-consolidate .rev-mode-icon { background: rgba(42,157,143,.12); color: var(--teal2); }
-#rev-mode-legendary .rev-mode-icon { background: rgba(217,79,63,.10); color: var(--coral2); }
+#rev-mode-legendary .rev-mode-icon {
+  background: rgba(217,79,63,.14); color: var(--coral2);
+  width: 50px; height: 50px;
+  box-shadow: 0 0 16px rgba(217,79,63,.28);
+}
+/* Mode Légendaires : traitement plus théâtral, c'est le mode "prestige" */
+#rev-mode-legendary {
+  background: linear-gradient(135deg, rgba(217,79,63,.09), var(--surface) 65%);
+  border-color: rgba(217,79,63,.22);
+}
+#rev-mode-legendary:hover { border-color: rgba(217,79,63,.4); background: linear-gradient(135deg, rgba(217,79,63,.13), var(--surface2) 65%); }
 .rev-mode-body { flex: 1; min-width: 0; }
 .rev-mode-title {
   font-family: 'Cormorant Garamond', Georgia, serif;
@@ -2076,6 +2086,76 @@ input::placeholder, textarea::placeholder { color: var(--text3); font-style: ita
   line-height: 1;
 }
 
+/* Mot vedette — aperçu concret du mot le plus prioritaire à réviser */
+.revision-featured {
+  background: var(--surface);
+  border: 1px solid var(--gold-a20);
+  border-radius: var(--radius-lg);
+  padding: 20px 20px 18px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+  color: inherit;
+  appearance: none;
+  position: relative;
+  overflow: hidden;
+  transition: border-color .18s var(--ease-expo), background .18s var(--ease-expo), transform .18s var(--ease-expo);
+  -webkit-tap-highlight-color: transparent;
+}
+.revision-featured::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-a30), transparent);
+}
+.revision-featured:hover { border-color: var(--gold-a40); background: var(--surface2); }
+.revision-featured:active { transform: scale(.99); }
+.revision-featured-eyebrow {
+  font-family: 'Manrope', sans-serif;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--gold2);
+  margin-bottom: 10px;
+}
+.revision-featured-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.revision-featured-word {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: var(--cream);
+  line-height: 1.1;
+  letter-spacing: -.01em;
+}
+.revision-featured-def {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--text2);
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+.revision-featured-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.revision-featured-cta {
+  font-family: 'Manrope', sans-serif;
+  font-size: .8rem;
+  font-weight: 700;
+  color: var(--gold2);
+}
+
 .revision-stats {
   border-top: 1px solid var(--border);
   padding-top: 18px;
@@ -2088,6 +2168,47 @@ input::placeholder, textarea::placeholder { color: var(--text3); font-style: ita
   text-transform: uppercase;
   color: var(--text3);
   margin-bottom: 12px;
+}
+.revision-mastery-row {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+.revision-mastery-ring {
+  position: relative;
+  width: 88px; height: 88px;
+  flex-shrink: 0;
+}
+.revision-mastery-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.ring-track { fill: none; stroke: var(--surface2); stroke-width: 8; }
+.ring-fill {
+  fill: none; stroke: var(--gold2); stroke-width: 8; stroke-linecap: round;
+  stroke-dasharray: 264; stroke-dashoffset: 264;
+  transition: stroke-dashoffset .8s var(--ease-expo);
+}
+.revision-mastery-pct {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Manrope', sans-serif; font-weight: 800; font-size: 1.05rem;
+  color: var(--cream);
+  font-variant-numeric: tabular-nums;
+}
+.revision-mastery-num {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--cream);
+  font-variant-numeric: tabular-nums;
+}
+.revision-mastery-sub {
+  font-family: 'Manrope', sans-serif;
+  font-size: .78rem;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  font-weight: 600;
+  margin-top: 3px;
 }
 .revision-stats-grid {
   display: grid;
@@ -6131,6 +6252,19 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
     <div class="muted small">Joue une partie pour remplir ton carnet, puis reviens t'entraîner.</div>
   </div>
 
+  <div id="revision-featured" class="revision-featured" style="display:none;" role="button" tabindex="0">
+    <div class="revision-featured-eyebrow">✦ À réviser en priorité</div>
+    <div class="revision-featured-top">
+      <div class="revision-featured-word" id="revision-featured-word"></div>
+      <span class="badge" id="revision-featured-badge"></span>
+    </div>
+    <div class="revision-featured-def" id="revision-featured-def"></div>
+    <div class="revision-featured-foot">
+      <div class="carnet-dots" id="revision-featured-dots" aria-label=""></div>
+      <span class="revision-featured-cta">Revoir ce mot ›</span>
+    </div>
+  </div>
+
   <div id="revision-modes" class="revision-modes">
 
     <button type="button" class="revision-mode-card" id="rev-mode-quiz" onclick="App.startRevisionMode('quiz')">
@@ -6170,6 +6304,19 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
 
   <div class="revision-stats" id="revision-stats">
     <div class="revision-stats-title">Statistiques</div>
+    <div class="revision-mastery-row">
+      <div class="revision-mastery-ring" aria-hidden="true">
+        <svg viewBox="0 0 100 100">
+          <circle class="ring-track" cx="50" cy="50" r="42"></circle>
+          <circle class="ring-fill" id="revision-mastery-fill" cx="50" cy="50" r="42"></circle>
+        </svg>
+        <div class="revision-mastery-pct" id="revision-mastery-pct">0%</div>
+      </div>
+      <div>
+        <div class="revision-mastery-num" id="revision-mastery-count">0 / 0</div>
+        <div class="revision-mastery-sub">mots maîtrisés</div>
+      </div>
+    </div>
     <div class="revision-stats-grid">
       <div class="revision-stat">
         <div class="revision-stat-num" id="rev-stat-perfect">0</div>
@@ -9302,17 +9449,51 @@ function renderRevision(){
   const empty = document.getElementById('revision-empty');
   const modes = document.getElementById('revision-modes');
   const statsBlock = document.getElementById('revision-stats');
+  const featured = document.getElementById('revision-featured');
   if(!carnet.length){
     if(intro) intro.style.display='none';
     if(empty) empty.style.display='block';
     if(modes) modes.style.display='none';
     if(statsBlock) statsBlock.style.display='none';
+    if(featured) featured.style.display='none';
     return;
   }
   if(intro){ intro.style.display='block'; intro.textContent = 'Tu as ' + carnet.length + ' mot' + (carnet.length>1?'s':'') + ' en mémoire.'; }
   if(empty) empty.style.display='none';
   if(modes) modes.style.display='flex';
   if(statsBlock) statsBlock.style.display='block';
+
+  // Mot vedette : priorité aux moins bien maîtrisés (moins de pastilles, ajoutés le plus tôt)
+  if(featured){
+    const pool = eligible.consolidate.length ? eligible.consolidate : carnet;
+    const pick = [...pool].sort((a,b) => (a.pastilles||0) - (b.pastilles||0) || (a.at||0) - (b.at||0))[0];
+    if(pick){
+      const rL={rare:'Rare',epic:'Épique',legendary:'Légendaire'},rC={rare:'badge-rare',epic:'badge-epic',legendary:'badge-legendary'};
+      const p = pick.pastilles || 0;
+      document.getElementById('revision-featured-word').textContent = pick.w;
+      const badgeEl = document.getElementById('revision-featured-badge');
+      badgeEl.className = 'badge ' + (rC[pick.r] || 'badge-accent');
+      badgeEl.textContent = rL[pick.r] || 'Rare';
+      document.getElementById('revision-featured-def').textContent = pick.d;
+      const dotsEl = document.getElementById('revision-featured-dots');
+      dotsEl.setAttribute('aria-label', 'Maîtrise ' + p + '/3');
+      dotsEl.innerHTML = [0,1,2].map(k => '<span class="carnet-dot' + (k<p?' filled':'') + '"></span>').join('');
+      featured.onclick = () => App.openCarnetDetail(pick.w);
+      featured.style.display = 'block';
+    } else {
+      featured.style.display = 'none';
+    }
+  }
+
+  // Jauge de maîtrise globale du carnet (mots à 3/3 pastilles)
+  const mastered = carnet.filter(e => (e.pastilles||0) >= 3).length;
+  const masteryPct = carnet.length ? Math.round(mastered / carnet.length * 100) : 0;
+  const ringFill = document.getElementById('revision-mastery-fill');
+  if(ringFill) ringFill.style.strokeDashoffset = String(264 - (264 * masteryPct / 100));
+  const pctEl = document.getElementById('revision-mastery-pct');
+  if(pctEl) pctEl.textContent = masteryPct + '%';
+  const countEl = document.getElementById('revision-mastery-count');
+  if(countEl) countEl.textContent = mastered + ' / ' + carnet.length;
 
   // Sous-libellés et états des modes
   const subQuiz = document.getElementById('rev-mode-quiz-sub');
