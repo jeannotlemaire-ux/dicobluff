@@ -2045,16 +2045,19 @@ input::placeholder, textarea::placeholder { color: var(--text3); font-style: ita
 }
 .rev-mode-icon {
   flex-shrink: 0;
-  width: 44px; height: 44px;
+  width: 50px; height: 50px;
   border-radius: 14px;
-  background: rgba(200,134,10,.10);
+  background: rgba(200,134,10,.14);
   color: var(--gold2);
   display: inline-flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 16px rgba(200,134,10,.28);
 }
-#rev-mode-consolidate .rev-mode-icon { background: rgba(42,157,143,.12); color: var(--teal2); }
+#rev-mode-consolidate .rev-mode-icon {
+  background: rgba(42,157,143,.14); color: var(--teal2);
+  box-shadow: 0 0 16px rgba(42,157,143,.28);
+}
 #rev-mode-legendary .rev-mode-icon {
   background: rgba(217,79,63,.14); color: var(--coral2);
-  width: 50px; height: 50px;
   box-shadow: 0 0 16px rgba(217,79,63,.28);
 }
 /* Mode Légendaires : traitement plus théâtral, c'est le mode "prestige" */
@@ -2209,37 +2212,6 @@ input::placeholder, textarea::placeholder { color: var(--text3); font-style: ita
   letter-spacing: .06em;
   font-weight: 600;
   margin-top: 3px;
-}
-.revision-stats-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-}
-.revision-stat {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 12px 14px;
-}
-.revision-stat-wide { grid-column: 1 / -1; }
-.revision-stat-num {
-  font-family: 'Manrope', sans-serif;
-  font-weight: 800;
-  font-size: 1.5rem;
-  color: var(--cream);
-  line-height: 1;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: -.02em;
-}
-.revision-stat-num-sm { font-size: .95rem; font-weight: 600; }
-.revision-stat-lbl {
-  font-family: var(--font-body);
-  font-size: var(--text-2xs);
-  color: var(--text3);
-  margin-top: 4px;
-  text-transform: uppercase;
-  letter-spacing: .06em;
-  font-weight: 600;
 }
 
 /* AVATAR GRID */
@@ -6317,20 +6289,6 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
         <div class="revision-mastery-sub">mots maîtrisés</div>
       </div>
     </div>
-    <div class="revision-stats-grid">
-      <div class="revision-stat">
-        <div class="revision-stat-num" id="rev-stat-perfect">0</div>
-        <div class="revision-stat-lbl">Quiz parfaits</div>
-      </div>
-      <div class="revision-stat">
-        <div class="revision-stat-num" id="rev-stat-best">—</div>
-        <div class="revision-stat-lbl">Meilleur score</div>
-      </div>
-      <div class="revision-stat revision-stat-wide">
-        <div class="revision-stat-num revision-stat-num-sm" id="rev-stat-last">—</div>
-        <div class="revision-stat-lbl">Dernier quiz</div>
-      </div>
-    </div>
   </div>
 </div>
 
@@ -9512,23 +9470,6 @@ function renderRevision(){
   const nLeg = eligible.legendary.length;
   if(subLeg) subLeg.textContent = nLeg > 0 ? (nLeg + ' mot' + (nLeg>1?'s':'') + ' rare' + (nLeg>1?'s':'') + ' à maîtriser · ~1 min') : 'Aucun mot rare encore appris';
   if(cardLeg) cardLeg.classList.toggle('disabled', nLeg < 3);
-
-  // Statistiques
-  const s = getStats();
-  const perfectEl = document.getElementById('rev-stat-perfect');
-  const bestEl = document.getElementById('rev-stat-best');
-  const lastEl = document.getElementById('rev-stat-last');
-  if(perfectEl) perfectEl.textContent = s.quizPerfect || 0;
-  if(bestEl) bestEl.textContent = (s.quizBest != null) ? (s.quizBest + '/10') : '—';
-  if(lastEl) {
-    const t = s.quizLast;
-    if(!t) lastEl.textContent = '—';
-    else {
-      const diff = Date.now() - t;
-      const days = Math.floor(diff / (24*3600*1000));
-      lastEl.textContent = days === 0 ? "aujourd'hui" : (days === 1 ? 'hier' : ('il y a ' + days + ' jours'));
-    }
-  }
 }
 
 function renderCarnet(){
