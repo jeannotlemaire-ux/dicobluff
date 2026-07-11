@@ -6267,7 +6267,7 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
       </div>
       <div class="rev-mode-body">
         <div class="rev-mode-title">Légendaires</div>
-        <div class="rev-mode-sub" id="rev-mode-legendary-sub">— mots rares à maîtriser</div>
+        <div class="rev-mode-sub" id="rev-mode-legendary-sub">— mots à maîtriser</div>
       </div>
       <div class="rev-mode-arrow" aria-hidden="true">›</div>
     </button>
@@ -9468,7 +9468,7 @@ function renderRevision(){
   const subLeg = document.getElementById('rev-mode-legendary-sub');
   const cardLeg = document.getElementById('rev-mode-legendary');
   const nLeg = eligible.legendary.length;
-  if(subLeg) subLeg.textContent = nLeg > 0 ? (nLeg + ' mot' + (nLeg>1?'s':'') + ' rare' + (nLeg>1?'s':'') + ' à maîtriser · ~1 min') : 'Aucun mot rare encore appris';
+  if(subLeg) subLeg.textContent = nLeg > 0 ? (nLeg + ' mot' + (nLeg>1?'s':'') + ' à maîtriser · ~1 min') : 'Aucun mot encore appris';
   if(cardLeg) cardLeg.classList.toggle('disabled', nLeg < 3);
 }
 
