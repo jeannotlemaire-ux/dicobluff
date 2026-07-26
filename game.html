@@ -4456,6 +4456,59 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
 }
 .premium-btn-close:hover { color: var(--text2); }
 
+/* Premium success modal — confirmation animée après achat */
+#premium-success-modal {
+  position: fixed; inset: 0;
+  z-index: var(--z-modal);
+  background: rgba(14,26,34,.86);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: none;
+  align-items: center; justify-content: center;
+  padding: 20px;
+}
+#premium-success-modal.open { display: flex; animation: screenIn .35s var(--ease-expo) both; }
+.premium-success-sheet {
+  background: var(--surface);
+  border: 1px solid var(--gold-a30);
+  border-radius: 24px;
+  padding: 40px 28px 32px;
+  max-width: 380px; width: 100%;
+  text-align: center;
+  box-shadow: 0 0 60px rgba(200,134,10,.25), var(--shadow-lg);
+  position: relative;
+  animation: premiumSuccessPop .5s var(--ease-expo) both;
+}
+@keyframes premiumSuccessPop {
+  0% { transform: scale(.82); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.premium-success-icon {
+  font-size: 3.2rem;
+  margin-bottom: 16px;
+  line-height: 1;
+  filter: drop-shadow(0 4px 16px rgba(200,134,10,.5));
+  animation: premiumSuccessIconPulse 1.3s ease-in-out .3s 2;
+}
+@keyframes premiumSuccessIconPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.18); }
+}
+.premium-success-title {
+  font-family: var(--font-display);
+  font-weight: 700; font-style: italic;
+  font-size: 1.6rem;
+  color: var(--cream);
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+.premium-success-body {
+  font-family: var(--font-body);
+  font-size: .9rem; color: var(--text2);
+  line-height: 1.6; margin-bottom: 26px;
+  max-width: 300px; margin-left: auto; margin-right: auto;
+}
+
 /* Daily limit modal */
 #daily-limit-modal {
   position: fixed; inset: 0;
@@ -5377,6 +5430,18 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
     <button class="premium-btn-unlock" onclick="triggerPremiumPurchase()">Débloquer — 2,99 €</button>
     <button class="premium-btn-close" onclick="restorePremiumPurchase()">Restaurer mes achats</button>
     <button class="premium-btn-close" onclick="closePremiumModal()">Pas maintenant</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     PREMIUM SUCCESS MODAL — confirmation animée après achat
+═══════════════════════════════════════════════ -->
+<div id="premium-success-modal" role="dialog" aria-modal="true" aria-labelledby="premium-success-title">
+  <div class="premium-success-sheet">
+    <div class="premium-success-icon" id="premium-success-icon">✦</div>
+    <div class="premium-success-title" id="premium-success-title">Bienvenue dans Premium !</div>
+    <div class="premium-success-body">Merci pour ton soutien ! Parties illimitées, Carnet de mots et mode Révision sont maintenant débloqués.</div>
+    <button class="premium-btn-unlock" onclick="closePremiumSuccessModal()">C'est parti !</button>
   </div>
 </div>
 
@@ -8338,9 +8403,27 @@ function unlockPremium(opts){
   const revTab = document.getElementById('nav-tab-revision');
   if(revTab){ revTab.setAttribute('aria-label','Réviser'); revTab.querySelector('.nav-side-label').textContent = 'Réviser'; }
   if(!already && opts.silent !== true){
-    notify('✦ Premium débloqué !', 3000);
+    closePremiumModal();
+    closeDailyLimitModal();
+    showPremiumSuccessModal();
     SFX.win();
   }
+}
+let _premiumSuccessTrap = null;
+function showPremiumSuccessModal(){
+  const m = document.getElementById('premium-success-modal');
+  if(!m) return;
+  m.classList.add('open');
+  _premiumSuccessTrap = FocusTrap.activate(m, { onEscape: closePremiumSuccessModal });
+  if(!REDUCED_MOTION){
+    launchConfetti();
+    fireBurst(document.getElementById('premium-success-icon'));
+  }
+}
+function closePremiumSuccessModal(){
+  const m = document.getElementById('premium-success-modal');
+  if(_premiumSuccessTrap){ _premiumSuccessTrap.release(); _premiumSuccessTrap = null; }
+  if(m) m.classList.remove('open');
 }
 let _premiumTrap = null;
 function showPremiumModal(){
@@ -11070,6 +11153,7 @@ const App = {
   nextRound(){ if(solo.active) startSoloRound(); else nextRoundOnline(); },
   playAgain(){
     if(roomRef){ playAgainOnline(); return; }
+    if(!canPlayToday()){ showDailyLimitModal(); return; }
     solo.round=0; solo.usedWords=[]; solo.sessionWordObjs=[];
     solo.streak=0; solo.maxStreak=0;
     solo.sessionCorrect=0; solo.sessionFooled=0; solo.sessionRounds=0;
