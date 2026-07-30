@@ -6119,6 +6119,11 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
   <div class="spacer"></div>
   <div class="gap-20"></div>
 
+  <button class="btn btn-gold" onclick="App.shareGameResult()">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px;vertical-align:middle;"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+    Partager ma partie
+  </button>
+  <div class="gap-10"></div>
   <button class="btn btn-primary" onclick="App.playAgain()"><span data-icon="replay" data-icon-size="18" style="display:inline-flex;vertical-align:middle;margin-right:8px;"></span>Rejouer</button>
   <div class="gap-10"></div>
   <button class="btn btn-ghost" onclick="App.showHomeAfterGame()"><span data-icon="home" data-icon-size="16" style="display:inline-flex;vertical-align:middle;margin-right:8px;"></span>Accueil</button>
@@ -8582,6 +8587,7 @@ let roomId=null,roomRef=null,roomListener=null,gameState=null;
 const _reconnTimers={};    // uid → timeoutId (30s avant abandon)
 let _prevOnlineState={};   // uid → bool (pour détecter les changements)
 let pendingMode=null;
+let pendingRoomCode=null;
 let selectedVote=null;
 let quickMatchData=null;
 let multiStats={correct:0,fooled:0,rounds:0,streak:0,maxStreak:0};
@@ -10121,7 +10127,7 @@ let solo = {
   active:false, name:'', avatar:'georgesand', color:'',
   difficulty:'medium', gameMode:'classic', aiOpponents:[],
   scores:{}, round:0, maxRounds:5, usedWords:[], sessionWordObjs:[], wordObj:null, allDefs:[],
-  votes:{}, streak:0, maxStreak:0, sessionCorrect:0, sessionFooled:0, sessionRounds:0,
+  votes:{}, streak:0, maxStreak:0, sessionCorrect:0, sessionFooled:0, sessionRounds:0, sessionFooledNames:[],
 };
 /* Mode Blitz supprimé. Conservé en stub pour compatibilité avec d'éventuels appels résiduels. */
 let blitzMode=false;
@@ -10706,7 +10712,7 @@ const App = {
       else if(p === 0) hintEl.textContent = 'Retrouve la vraie définition en partie ou en quiz pour valider ta première pastille.';
       else hintEl.textContent = 'Encore ' + (3-p) + ' bonne' + (3-p>1?'s':'') + ' trouvaille' + (3-p>1?'s':'') + ' pour débloquer le partage.';
     }
-    if(shareEl) shareEl.style.display = (p >= 3) ? 'flex' : 'none';
+    if(shareEl) shareEl.style.display = 'flex';
     const ov = document.getElementById('carnet-detail-overlay');
     if(ov){
       ov.setAttribute('aria-hidden','false'); ov.classList.add('open');
@@ -10732,9 +10738,36 @@ const App = {
     const carnet = LS.get('carnet', []);
     const e = carnet.find(x => x.w === _currentCarnetWord);
     if(!e) return;
-    const txt = `J'ai appris le mot « ${e.w} » dans Dicobluff.\n\n${e.w} — ${e.d}\n\n#Dicobluff`;
+    const shareUrl = 'https://www.dicobluff.fr';
+    const txt = `J'ai appris le mot « ${e.w} » dans Dicobluff.\n\n${e.w} — ${e.d}\n\n#Dicobluff\n${shareUrl}`;
     if(navigator.share){
-      navigator.share({ title: 'Dicobluff — ' + e.w, text: txt }).catch(()=>{});
+      navigator.share({ title: 'Dicobluff — ' + e.w, text: txt, url: shareUrl }).catch(()=>{});
+    } else if(navigator.clipboard){
+      navigator.clipboard.writeText(txt).then(()=> notify && notify('Copié dans le presse-papiers')).catch(()=>{});
+    } else {
+      notify && notify('Partage indisponible sur ce navigateur');
+    }
+  },
+  shareGameResult() {
+    const shareUrl = 'https://www.dicobluff.fr';
+    const correctN = parseInt(document.getElementById('stat-correct')?.textContent, 10) || 0;
+    const fooledN = parseInt(document.getElementById('stat-fooled')?.textContent, 10) || 0;
+    let intro, score;
+    if(roomRef){
+      score = gameState?.players?.[myUID]?.score || 0;
+      intro = fooledN > 0
+        ? `j'ai piégé ${fooledN} adversaire${fooledN>1?'s':''} avec mes fausses définitions`
+        : `j'ai trouvé ${correctN} vraie${correctN>1?'s':''} définition${correctN>1?'s':''} en multijoueur`;
+    } else {
+      score = solo.scores?.player || 0;
+      const names = [...new Set(solo.sessionFooledNames || [])];
+      if(names.length === 1) intro = `j'ai piégé ${names[0]} avec ma fausse définition`;
+      else if(names.length > 1) intro = `j'ai piégé ${names.slice(0,-1).join(', ')} et ${names[names.length-1]} avec mes fausses définitions`;
+      else intro = `j'ai trouvé ${correctN} vraie${correctN>1?'s':''} définition${correctN>1?'s':''}`;
+    }
+    const txt = `Sur Dicobluff, ${intro}.\nScore : ${score} pts · ${fooledN} IA piégée${fooledN>1?'s':''}\n\n${shareUrl}`;
+    if(navigator.share){
+      navigator.share({ title: 'Dicobluff', text: txt, url: shareUrl }).catch(()=>{});
     } else if(navigator.clipboard){
       navigator.clipboard.writeText(txt).then(()=> notify && notify('Copié dans le presse-papiers')).catch(()=>{});
     } else {
@@ -11114,7 +11147,7 @@ const App = {
     if(!solo.difficulty || !['easy','medium','hard'].includes(solo.difficulty)) solo.difficulty = 'medium';
     if(solo.gameMode !== 'classic') solo.gameMode = 'classic';
     solo.round=0; solo.usedWords=[]; solo.sessionWordObjs=[]; solo.streak=0; solo.maxStreak=0;
-    solo.sessionCorrect=0; solo.sessionFooled=0; solo.sessionRounds=0;
+    solo.sessionCorrect=0; solo.sessionFooled=0; solo.sessionRounds=0; solo.sessionFooledNames=[];
     solo.scores={player:0}; solo.aiOpponents.forEach(ai=>solo.scores[ai.id]=0);
     track('game_start', {mode:'solo', nb_ai: solo.aiOpponents.length});
     SFX.newRound(); startSoloRound();
@@ -11184,7 +11217,7 @@ const App = {
     if(!canPlayToday()){ showDailyLimitModal(); return; }
     solo.round=0; solo.usedWords=[]; solo.sessionWordObjs=[];
     solo.streak=0; solo.maxStreak=0;
-    solo.sessionCorrect=0; solo.sessionFooled=0; solo.sessionRounds=0;
+    solo.sessionCorrect=0; solo.sessionFooled=0; solo.sessionRounds=0; solo.sessionFooledNames=[];
     solo.aiOpponents=pickAIOpponents(solo.avatar);
     solo.scores={player:0}; solo.aiOpponents.forEach(ai=>solo.scores[ai.id]=0);
     startSoloRound();
@@ -11274,7 +11307,12 @@ const App = {
       <div class="gap-20"></div>
       <button id="btn-join-now" class="btn btn-primary name-proceed-btn" onclick="App.joinRoom()" disabled>Rejoindre →</button>
     `;
-    setTimeout(()=>document.getElementById('input-room-code')?.focus(),100);
+    setTimeout(()=>{
+      const codeEl=document.getElementById('input-room-code');
+      if(!codeEl) return;
+      if(pendingRoomCode){ codeEl.value=pendingRoomCode; pendingRoomCode=null; App.onCodeInput(); }
+      codeEl.focus();
+    },100);
   },
 
   onCodeInput(){
@@ -11307,7 +11345,7 @@ const App = {
     }catch(e){console.warn(e);notify('❌ Erreur Firebase — vérifie les règles de la base de données');}
   },
 
-  copyCode(){navigator.clipboard.writeText(roomId).then(()=>{notify('📋 Code copié !');SFX.copy();});},
+  copyCode(){const msg=`Rejoins ma partie sur Dicobluff : https://www.dicobluff.fr/?room=${roomId}`;navigator.clipboard.writeText(msg).then(()=>{notify('📋 Lien d\'invitation copié !');SFX.copy();});},
 
   setMultiRounds(n){
     if(!roomRef)return;update(roomRef,{maxRounds:n});
@@ -12019,6 +12057,7 @@ function processSoloResults(){
   } else {
     playerPts += votedForPlayer.length*1;
     solo.sessionFooled += votedForPlayer.length;
+    votedForPlayer.forEach(([aiId])=>{const ai=solo.aiOpponents.find(a=>a.id===aiId);if(ai)solo.sessionFooledNames.push(ai.name);});
     if (votedForPlayer.length > 0) setTimeout(() => SFX.fooled && SFX.fooled(), 350);
   }
   solo.scores.player=(solo.scores.player||0)+playerPts;
@@ -13249,7 +13288,7 @@ function runSplash(){
           return; // pas de deep link si tutoriel en cours
         }
       } catch(e){ console.warn('tutorial init failed', e); }
-      // Deep links depuis les raccourcis PWA (?mode=solo, ?wod=1)
+      // Deep links depuis les raccourcis PWA (?mode=solo, ?wod=1) et le lien d'invitation multi (?room=XXXX)
       try {
         const params = new URLSearchParams(location.search);
         if(params.get('mode') === 'solo') {
@@ -13259,6 +13298,19 @@ function runSplash(){
             const wod = document.getElementById('home-wod-block');
             if(wod) wod.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }, 400);
+        } else if(/^[A-Za-z0-9]{4}$/.test(params.get('room')||'') && LS.get('tutorial_done', false)) {
+          // Contrairement à ?mode=solo (App.goSolo() ouvre lui-même le tutoriel si besoin),
+          // rejoindre un salon n'a pas de garde interne : on exige tutorial_done ici,
+          // sinon un profil neuf (starter pas encore choisi) contournerait le tutoriel.
+          pendingRoomCode = params.get('room').toUpperCase();
+          setTimeout(() => {
+            try {
+              warmFirebase(); // le flux normal (bouton "Jouer en ligne") le déclenche via onmouseenter/ontouchstart,
+                               // qu'on court-circuite ici en allant droit à l'écran de saisie du code.
+              App.prepareJoin();
+              if(LS.get('pseudo','')) App.showJoinInput();
+            } catch(e){}
+          }, 200);
         }
       } catch(e){}
     },400);
