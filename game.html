@@ -8678,6 +8678,13 @@ function loadFirebase(cb) {
   SCRIPTS.forEach(src => {
     const s = document.createElement('script');
     s.src = src;
+    // Un <script> créé dynamiquement est async=true par défaut : il s'exécute dès
+    // que SON téléchargement se termine, sans attendre les scripts précédents. Or
+    // database-compat et auth-compat dépendent de app-compat (objet `firebase`
+    // global). async=false restaure l'ordre d'exécution du DOM sans bloquer le
+    // téléchargement en parallèle — sinon un simple aléa réseau peut faire
+    // s'exécuter database/auth-compat avant app-compat et lever une erreur.
+    s.async = false;
     s.onload = () => { if(++loaded === SCRIPTS.length) { initFirebase(); _fbCallbacks.forEach(fn=>fn()); _fbCallbacks=[]; } };
     s.onerror = () => { console.warn('[Firebase] échec de chargement du script', src); };
     document.head.appendChild(s);
