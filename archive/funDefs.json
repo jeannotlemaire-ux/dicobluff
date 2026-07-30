@@ -1,0 +1,4002 @@
+[
+  {
+    "w": "Achéropoiète",
+    "funDef": "Image sainte qu'aucune main n'a peinte, apparue toute seule au grand étonnement du curé."
+  },
+  {
+    "w": "Adéphagie",
+    "funDef": "Goinfrerie maladive du gars qui vide la marmite avant que les autres aient sorti leur cuillère."
+  },
+  {
+    "w": "Agalmatophilie",
+    "funDef": "Penchant trouble pour les statues, qu'on tripote en douce quand personne ne regarde."
+  },
+  {
+    "w": "Aléthique",
+    "funDef": "Qui touche à la vérité, sujet que les maris adultères évitent soigneusement."
+  },
+  {
+    "w": "Allodoxie",
+    "funDef": "Travers du type qui répète les idées du voisin en jurant qu'il les a trouvées tout seul."
+  },
+  {
+    "w": "Ambagieux",
+    "funDef": "Qui tourne autour du pot pendant une heure plutôt que d'avouer qu'il a vidé la cave."
+  },
+  {
+    "w": "Amphigouri",
+    "funDef": "Charabia pompeux qui sert à noyer le poisson pour qu'on n'aille pas vérifier."
+  },
+  {
+    "w": "Anacoluthe",
+    "funDef": "Phrase qui part dans une direction et abandonne l'idée en route, comme un email de chef qui termine sans ponctuation."
+  },
+  {
+    "w": "Anagnoste",
+    "funDef": "Esclave romain payé pour faire la lecture aux maîtres pendant qu'ils s'empiffraient."
+  },
+  {
+    "w": "Anfractuosité",
+    "funDef": "Trou tortueux creusé dans la roche ou dans le corps, qu'il vaut mieux pas explorer sans lumière."
+  },
+  {
+    "w": "Apophtegme",
+    "funDef": "Bonne parole d'un illustre personnage qu'on ressort à table pour faire taire les ignorants."
+  },
+  {
+    "w": "Aporie",
+    "funDef": "Cul-de-sac philosophique où le raisonneur s'enferre sans trouver d'issue."
+  },
+  {
+    "w": "Ataraxie",
+    "funDef": "Calme parfait de l'âme que cherchent les sages et que les maris n'atteignent jamais."
+  },
+  {
+    "w": "Blandice",
+    "funDef": "Flatterie douce que le commercial téléphonique vous distille pour vous vendre une assurance avant que vous compreniez ce que vous achetez."
+  },
+  {
+    "w": "Boustrophédon",
+    "funDef": "Vieille façon d'écrire qui change de sens à chaque ligne, comme un bœuf qui laboure son champ."
+  },
+  {
+    "w": "Brachylogie",
+    "funDef": "Façon de parler si brève qu'on en oublie ce qu'on voulait dire avant d'avoir fini."
+  },
+  {
+    "w": "Callipyge",
+    "funDef": "Pourvu d'un derrière si bien galbé qu'on lui a dressé des statues dans l'Antiquité."
+  },
+  {
+    "w": "Catachrèse",
+    "funDef": "Détournement d'un mot pour nommer une chose qui n'en avait pas, comme un parrain embarrassé."
+  },
+  {
+    "w": "Catabase",
+    "funDef": "Virée chez les morts entreprise par un vivant, souvent pour récupérer une femme mal surveillée."
+  },
+  {
+    "w": "Cénotaphe",
+    "funDef": "Tombeau pompeux dressé pour un mort dont le corps repose ailleurs, parfois au fond d'un fossé."
+  },
+  {
+    "w": "Chleuasme",
+    "funDef": "Procédé du malin qui se rabaisse pour qu'on le contredise et qu'on le couvre de compliments."
+  },
+  {
+    "w": "Chtonien",
+    "funDef": "Qui touche aux dieux d'en bas, ceux qu'on n'invoque pas après le coucher du soleil."
+  },
+  {
+    "w": "Confabulation",
+    "funDef": "Manie d'inventer des souvenirs pour boucher les trous, comme le mari qui jure qu'il rentrait du marché."
+  },
+  {
+    "w": "Contempteur",
+    "funDef": "Cuistre qui crache son mépris sur tout le monde, debout sur sa caisse au beau milieu de la place."
+  },
+  {
+    "w": "Coprolalie",
+    "funDef": "Manie incontrôlable de balancer des gros mots à tort et à travers, au grand effroi des grand-mères."
+  },
+  {
+    "w": "Cosmogonie",
+    "funDef": "Histoire savante racontant comment le monde s'est mis en place, version concurrente de la Genèse."
+  },
+  {
+    "w": "Déliquescence",
+    "funDef": "État pourrissant d'une chose ou d'un peuple qui finit en bouillie, comme un vieux fromage oublié."
+  },
+  {
+    "w": "Déréliction",
+    "funDef": "Sentiment d'être lâché par tout le monde, même par Dieu qui semble avoir filé sans laisser d'adresse."
+  },
+  {
+    "w": "Dipsomanie",
+    "funDef": "Soif maladive qui prend d'un coup et pousse le bonhomme à vider la cave en une nuit."
+  },
+  {
+    "w": "Dithyrambe",
+    "funDef": "Compliment qui dégouline tellement que l'intéressé en rougit et que l'auditoire en a la nausée."
+  },
+  {
+    "w": "Doxographie",
+    "funDef": "Recueil pédant rassemblant tout ce que les vieux philosophes ont raconté, le bon comme le pénible."
+  },
+  {
+    "w": "Dulcitude",
+    "funDef": "Douceur sirupeuse qu'on prête aux jeunes filles et aux flatteurs en quête d'une faveur."
+  },
+  {
+    "w": "Éburnéen",
+    "funDef": "Blanc lisse comme une dent d'éléphant, qualité que les poètes prêtent aux gorges de leurs belles."
+  },
+  {
+    "w": "Écholalie",
+    "funDef": "Manie de répéter bêtement ce qu'on vient d'entendre, comme le stagiaire qui reformule la dernière phrase du directeur en réunion."
+  },
+  {
+    "w": "Éidétique",
+    "funDef": "Mémoire qui retient tout dans le détail, jusqu'aux taches de vin sur la nappe de la veille."
+  },
+  {
+    "w": "Épistémologie",
+    "funDef": "Branche savante qui se demande comment on sait ce qu'on croit savoir, et finit souvent par n'en rien savoir."
+  },
+  {
+    "w": "Éristique",
+    "funDef": "Art d'avoir raison à tout prix, même quand on a tort, pratiqué par les avocats et les beaux-pères."
+  },
+  {
+    "w": "Ergastule",
+    "funDef": "Cachot puant sous terre où les Romains entassaient leurs esclaves comme des sacs de blé."
+  },
+  {
+    "w": "Escobarderie",
+    "funDef": "Discours hypocrite à double sens qu'un confesseur retors sert pour s'en tirer sans avouer."
+  },
+  {
+    "w": "Flagornerie",
+    "funDef": "Flatterie servile d'un courtisan qui se plie en deux dans l'espoir d'attraper une miette."
+  },
+  {
+    "w": "Fuligineux",
+    "funDef": "Sombre et impénétrable comme le diaporama de synthèse que la direction présente le vendredi à 17h sans explication."
+  },
+  {
+    "w": "Galimatias",
+    "funDef": "Embrouillamini où l'on perd le fil au bout de trois mots, débité par un ivrogne ou un savant."
+  },
+  {
+    "w": "Gémonies",
+    "funDef": "Escaliers romains où l'on jetait les corps des suppliciés pour que la populace leur crache dessus."
+  },
+  {
+    "w": "Glossolalie",
+    "funDef": "Jargon mystique débité par celui qui se croit inspiré, mais qu'aucun curé ne comprend."
+  },
+  {
+    "w": "Gnoséologie",
+    "funDef": "Discipline savante qui passe son temps à se demander si on sait vraiment ce qu'on sait."
+  },
+  {
+    "w": "Gymnosophiste",
+    "funDef": "Sage indien qui méditait tout nu sous les arbres, au scandale des marchands de chausses."
+  },
+  {
+    "w": "Hagiographie",
+    "funDef": "Biographie léchée d'un saint ou d'un puissant, où l'on tait soigneusement ses cuites et ses maîtresses."
+  },
+  {
+    "w": "Halieutique",
+    "funDef": "Science de la pêche, que pratiquent surtout ceux qui passent l'après-midi à rêver près de l'eau."
+  },
+  {
+    "w": "Haruspice",
+    "funDef": "Prêtre romain qui fouillait les tripes encore chaudes d'un bouc pour deviner ce qui allait arriver."
+  },
+  {
+    "w": "Héraldique",
+    "funDef": "Science des blasons que les nobles désargentés étudient pour prouver qu'ils valent plus qu'ils n'ont."
+  },
+  {
+    "w": "Hiérophante",
+    "funDef": "Grand prêtre qui dévoilait les mystères sacrés aux initiés, après leur avoir bien fait payer le ticket."
+  },
+  {
+    "w": "Hypotypose",
+    "funDef": "Description si vive qu'on croirait voir la scène, comme quand le voisin raconte ce qu'il a vu chez la voisine."
+  },
+  {
+    "w": "Iconoclaste",
+    "funDef": "Trublion qui casse les statues du temple et les idées des bien-pensants à coups de maillet."
+  },
+  {
+    "w": "Idiolecte",
+    "funDef": "Façon de parler propre à un seul individu, comme l'oncle qui ponctue tout d'un sacré nom de Dieu."
+  },
+  {
+    "w": "Illéité",
+    "funDef": "Qualité d'être soi-même et personne d'autre, ce qui n'empêche pas de finir par ressembler à son père."
+  },
+  {
+    "w": "Irréfragable",
+    "funDef": "Preuve si solide qu'aucun avocat retors ne saurait la balayer d'un revers de manche."
+  },
+  {
+    "w": "Jacquerie",
+    "funDef": "Révolte de paysans qui, las de manger des navets, sont venus brûler le château avec les fourches."
+  },
+  {
+    "w": "Jactance",
+    "funDef": "Manie de se vanter haut et fort au comptoir, en exagérant chaque exploit d'un facteur dix."
+  },
+  {
+    "w": "Kaïros",
+    "funDef": "La fenêtre de trois secondes pendant laquelle les portes du RER restent ouvertes et où vous devez décider si vous courez."
+  },
+  {
+    "w": "Kakistocratie",
+    "funDef": "Régime où le pouvoir est confié aux pires de la cité, ce qui n'est pas si rare qu'il y paraît."
+  },
+  {
+    "w": "Kénose",
+    "funDef": "Effacement volontaire de soi, comme Dieu se vidant de sa gloire pour venir traîner ses sandales chez les hommes."
+  },
+  {
+    "w": "Laconisme",
+    "funDef": "Façon de parler très brève, héritée des Spartiates qui préféraient frapper plutôt que discuter."
+  },
+  {
+    "w": "Lapidaire",
+    "funDef": "Si bref et tranchant qu'on dirait gravé dans la pierre par le tailleur d'un cimetière."
+  },
+  {
+    "w": "Latitudinaire",
+    "funDef": "Curé arrangeant qui ferme les yeux sur les écarts dogmatiques, pourvu qu'on remplisse la quête."
+  },
+  {
+    "w": "Latrie",
+    "funDef": "Adoration réservée à Dieu seul, qu'on ne doit pas confondre avec celle qu'on accorde à un beau cul de statue."
+  },
+  {
+    "w": "Logomachie",
+    "funDef": "Querelle creuse où l'on s'écharpe pour un mot pendant que la vraie question dort sous la table."
+  },
+  {
+    "w": "Logorrhée",
+    "funDef": "Flot de paroles ininterrompu du collègue d'open space qui commente sa propre présentation pendant quarante-cinq minutes sans reprendre son souffle."
+  },
+  {
+    "w": "Longanimité",
+    "funDef": "Patience d'ange qu'il faut pour ne pas étrangler son beau-frère après le troisième dîner du mois."
+  },
+  {
+    "w": "Lubricité",
+    "funDef": "Penchant marqué pour les plaisirs de la chair, exhibé sans gêne devant les fenêtres ouvertes."
+  },
+  {
+    "w": "Lycanthropie",
+    "funDef": "Croyance qu'un homme se transforme en bête la nuit, notamment observable en réunion de travail après deux heures de visioconférence."
+  },
+  {
+    "w": "Magnanimité",
+    "funDef": "Grandeur d'âme du puissant qui pardonne à son ennemi, surtout quand celui-ci est déjà à terre."
+  },
+  {
+    "w": "Maïeutique",
+    "funDef": "Art d'accoucher les esprits par questions, à la manière de Socrate harcelant les ignorants de la place."
+  },
+  {
+    "w": "Manichéisme",
+    "funDef": "Façon simpliste de voir le monde en blanc et noir, comme les bigotes qui rangent les gens en deux tas."
+  },
+  {
+    "w": "Métempsycose",
+    "funDef": "Voyage de l'âme d'un corps à l'autre après la mort, ce qui ferait du bonhomme un ancien chien errant."
+  },
+  {
+    "w": "Mnémotechnique",
+    "funDef": "Astuces pour ne pas oublier, utiles quand la nuit blanche a effacé le code PIN qu'on venait de changer pour la troisième fois."
+  },
+  {
+    "w": "Nécromancie",
+    "funDef": "Art douteux de causer avec les morts, pratiqué par des charlatans qui font les voix sous le drap."
+  },
+  {
+    "w": "Nihilisme",
+    "funDef": "Doctrine de celui qui ne croit plus à rien, ni à Dieu, ni au pain, ni même au vin du dimanche."
+  },
+  {
+    "w": "Onomastique",
+    "funDef": "Étude savante d'où viennent les noms, qui révèle parfois que le Sieur Beaucul descend d'un porcher."
+  },
+  {
+    "w": "Ontologie",
+    "funDef": "Discipline qui s'interroge sur ce qu'est l'être, question qu'un buveur résout au troisième verre."
+  },
+  {
+    "w": "Paléographe",
+    "funDef": "Savant qui passe sa vie à déchiffrer des grimoires illisibles écrits par des moines à demi soûls."
+  },
+  {
+    "w": "Palimpseste",
+    "funDef": "Vieux parchemin gratté et réutilisé, où l'ancien texte transparaît comme un péché mal effacé."
+  },
+  {
+    "w": "Palingénésie",
+    "funDef": "Renaissance de l'âme dans un nouveau corps, mécanique qui permet aux gredins de remettre ça à zéro."
+  },
+  {
+    "w": "Panoptique",
+    "funDef": "Prison astucieuse où un seul gardien lorgne tout le monde sans qu'on le voie, comme le bon Dieu."
+  },
+  {
+    "w": "Paréidolie",
+    "funDef": "Manie d'imaginer des visages dans les nuages, surtout celui de la voisine pour qui l'on soupire."
+  },
+  {
+    "w": "Paronomase",
+    "funDef": "Procédé qui accouple des mots qui sonnent pareil mais ne disent pas du tout la même chose, pour la rigolade."
+  },
+  {
+    "w": "Phylactère",
+    "funDef": "Petite boîte sacrée qu'on porte au front pour s'attirer la protection du Très-Haut."
+  },
+  {
+    "w": "Ploutocrate",
+    "funDef": "Gros bonnet qui mène la cité avec son or et achète les votes des magistrats au prix du veau."
+  },
+  {
+    "w": "Pneumatologie",
+    "funDef": "Étude savante des esprits et des âmes, ce qui occupe les théologiens mais ne nourrit pas leur soupe."
+  },
+  {
+    "w": "Prévarication",
+    "funDef": "Faute du fonctionnaire qui détourne sa charge à son profit, vice aussi vieux que l'administration."
+  },
+  {
+    "w": "Propédeutique",
+    "funDef": "Cours préparatoires qu'on inflige aux étudiants avant qu'ils n'aient le droit d'apprendre quoi que ce soit d'utile."
+  },
+  {
+    "w": "Prosélytisme",
+    "funDef": "Acharnement à convertir le voisin à sa foi, en lui collant aux basques jusqu'à ce qu'il cède ou fuie."
+  },
+  {
+    "w": "Rodomontade",
+    "funDef": "Fanfaronnade bruyante d'un bravache qui se vante d'exploits qu'il n'a jamais accomplis nulle part."
+  },
+  {
+    "w": "Sérendipité",
+    "funDef": "Heureux hasard de tomber sur une trouvaille précieuse, comme un louis d'or oublié dans une vieille botte."
+  },
+  {
+    "w": "Sibyllin",
+    "funDef": "Discours si embrouillé qu'on peut y lire ce qu'on veut, à la manière des oracles antiques rusés."
+  },
+  {
+    "w": "Sibaritisme",
+    "funDef": "Penchant pour le luxe et la mollesse, vie de fainéant couché sur des coussins à se faire éventer."
+  },
+  {
+    "w": "Solipsisme",
+    "funDef": "Doctrine de celui qui croit qu'il n'y a que lui de réel, le reste étant le rêve d'un dieu fatigué."
+  },
+  {
+    "w": "Sophistique",
+    "funDef": "Art retors d'embrouiller l'adversaire pour avoir raison sans en avoir besoin, cher aux avocats."
+  },
+  {
+    "w": "Sorite",
+    "funDef": "Raisonnement en cascade qui mène à une conclusion inattendue, comme prouver qu'un chauve a des cheveux."
+  },
+  {
+    "w": "Superfétatoire",
+    "funDef": "Tellement inutile qu'on se demande pourquoi on l'a rajouté, comme une cinquième anse à un pot."
+  },
+  {
+    "w": "Syncrétisme",
+    "funDef": "Mélange de croyances où chacun contribue sa conviction, un peu comme le fil WhatsApp familial où cohabitent homéopathie et géopolitique."
+  },
+  {
+    "w": "Tergiverser",
+    "funDef": "Tortiller du cul pour ne pas avouer, comme le débiteur qui voit son créancier passer la porte."
+  },
+  {
+    "w": "Théurgie",
+    "funDef": "Magie sacrée qui prétend forcer la main des dieux par d'obscures cérémonies à la nuit tombée."
+  },
+  {
+    "w": "Tmèse",
+    "funDef": "Procédé qui consiste à fourrer un mot dans un autre, comme un cocu glissant dans le lit conjugal."
+  },
+  {
+    "w": "Tripalium",
+    "funDef": "Vieil engin romain à trois pieux où l'on attachait les condamnés, ancêtre du mot travail."
+  },
+  {
+    "w": "Ubiquiste",
+    "funDef": "Qui se trouve partout à la fois, comme ce cousin qu'on retrouve sur LinkedIn, TikTok, et dans tous les fils de commentaires politiques."
+  },
+  {
+    "w": "Uxoricide",
+    "funDef": "Crime du mari qui occit son épouse, parfois pour son or, parfois parce qu'elle ronflait trop fort."
+  },
+  {
+    "w": "Vélléité",
+    "funDef": "Vague envie qui ne mène à rien, comme celle du buveur qui jure d'arrêter chaque dimanche."
+  },
+  {
+    "w": "Verbigération",
+    "funDef": "Manie de répéter sans cesse les mêmes mots sans rime ni raison, signe d'un esprit qui a déraillé."
+  },
+  {
+    "w": "Verbosité",
+    "funDef": "Manie de tartiner mille mots pour ne rien dire, fléau des prêcheurs et des beaux-pères en visite."
+  },
+  {
+    "w": "Vexillologie",
+    "funDef": "Étude savante des drapeaux, à laquelle se consacrent ceux qui n'ont rien de mieux à brandir."
+  },
+  {
+    "w": "Vicissitude",
+    "funDef": "Coup du sort qui retourne tout, comme la veuve riche qui se retrouve un beau matin sur la paille."
+  },
+  {
+    "w": "Vilipender",
+    "funDef": "Couvrir quelqu'un d'injures sur la place publique, jusqu'à ce qu'il rentre chez lui en pleurant."
+  },
+  {
+    "w": "Vitupérer",
+    "funDef": "Gueuler des reproches à pleins poumons, à la manière d'une harengère qui retrouve son mari saoul."
+  },
+  {
+    "w": "Xénoglossie",
+    "funDef": "Don miraculeux de parler soudain une langue inconnue, souvent constaté après deux épisodes en version originale sans sous-titres."
+  },
+  {
+    "w": "Zélateur",
+    "funDef": "Fanatique qui défend sa cause avec un zèle excessif et finit par être pénible à toute la paroisse."
+  },
+  {
+    "w": "Zététique",
+    "funDef": "Méthode de celui qui cherche sans jamais conclure, ce qui peut durer toute une vie de bibliothèque."
+  },
+  {
+    "w": "Zoïle",
+    "funDef": "Critique acide qui descend tout par envie, sans jamais avoir pondu lui-même la moindre ligne valable."
+  },
+  {
+    "w": "Abderitisme",
+    "funDef": "Bêtise partagée par tout un village, où chacun semble plus niais que son voisin."
+  },
+  {
+    "w": "Acédie",
+    "funDef": "Mollesse mauvaise du moine qui ne croit plus à rien et reste vautré sur sa paillasse jusqu'à none."
+  },
+  {
+    "w": "Acribie",
+    "funDef": "Précision tatillonne du tabellion qui recompte ses sous trois fois avant de fermer son coffre."
+  },
+  {
+    "w": "Adamantin",
+    "funDef": "Dur et brillant comme le diamant, qualité que les amoureux prêtent volontiers à leur belle."
+  },
+  {
+    "w": "Agonistique",
+    "funDef": "Qui touche au combat réglé, comme la dispute des deux comtés pour la main de la même héritière."
+  },
+  {
+    "w": "Anabase",
+    "funDef": "Longue marche d'une armée vers les hauteurs, où chaque soudard maudit le sergent à chaque pas."
+  },
+  {
+    "w": "Anachorète",
+    "funDef": "Religieux qui s'est retiré tout seul dans le désert, où il finit par parler aux pierres."
+  },
+  {
+    "w": "Antonomase",
+    "funDef": "Procédé qui consiste à dire le Sage pour Socrate, ou un Tartuffe pour un cagot fini."
+  },
+  {
+    "w": "Apodictique",
+    "funDef": "Démonstration si serrée qu'aucun ergoteur ne saurait y trouver un trou pour glisser son doigt."
+  },
+  {
+    "w": "Apostasie",
+    "funDef": "Reniement public de sa foi, qui scandalise le curé et fait jaser tout le village pendant des mois."
+  },
+  {
+    "w": "Apotropaïque",
+    "funDef": "Qui chasse le mauvais œil, comme la médaille bénie qu'on glisse sous la chemise des nourrissons."
+  },
+  {
+    "w": "Asymptote",
+    "funDef": "Qui approche sans cesse sans jamais y toucher, comme la livraison qui reste 'en cours d'acheminement' depuis quatre jours ouvrés."
+  },
+  {
+    "w": "Aulique",
+    "funDef": "Qui sent la cour du prince et ses simagrées, où l'on se courbe en saluant pour mieux trahir."
+  },
+  {
+    "w": "Catilinaire",
+    "funDef": "Engueulade publique d'une violence telle que l'accusé en sort blanc comme un linge de lit."
+  },
+  {
+    "w": "Cautèle",
+    "funDef": "Méfiance rusée du paysan qui compte ses œufs trois fois avant de tourner le dos à son valet."
+  },
+  {
+    "w": "Chiliasme",
+    "funDef": "Croyance qu'un règne de mille ans de bonheur arrive bientôt, théorie qui fait recette par temps de famine."
+  },
+  {
+    "w": "Clinquant",
+    "funDef": "Tape-à-l'œil de pacotille, comme la bague en cuivre du bonimenteur qui passe pour de l'or."
+  },
+  {
+    "w": "Concupiscence",
+    "funDef": "Désir violent des plaisirs et des biens d'ici-bas, péché favori des hommes et des chats."
+  },
+  {
+    "w": "Consubstantiel",
+    "funDef": "De la même nature exactement, comme le manager et son tableur Excel qu'il consulte avant de répondre à la moindre question."
+  },
+  {
+    "w": "Coronal",
+    "funDef": "Qui touche à la couronne ou au haut du crâne, là où poussent les cornes des cocus selon les commères."
+  },
+  {
+    "w": "Diérèse",
+    "funDef": "Manière de séparer deux voyelles d'une syllabe, surtout par les poètes en mal de pieds."
+  },
+  {
+    "w": "Dolosif",
+    "funDef": "Fait avec une mauvaise intention bien arrêtée, comme le contrat signé par un margoulin notoire."
+  },
+  {
+    "w": "Échauguette",
+    "funDef": "Petite tour perchée sur les remparts où le veilleur s'endort dès la deuxième heure de garde."
+  },
+  {
+    "w": "Effluve",
+    "funDef": "Bouffée odorante qui s'échappe d'un corps, parfois douce comme un parfum, parfois pestilentielle."
+  },
+  {
+    "w": "Encomiastique",
+    "funDef": "Discours flatteur qu'on sert à un puissant pour lui soutirer une place ou une bourse bien garnie."
+  },
+  {
+    "w": "Enthymème",
+    "funDef": "Raisonnement bâclé qui saute un échelon en espérant que l'auditeur n'y verra que du feu."
+  },
+  {
+    "w": "Épanadiplose",
+    "funDef": "Tournure qui ramène à la fin le mot du début, à la manière d'un ivrogne qui radote son histoire."
+  },
+  {
+    "w": "Épigone",
+    "funDef": "Héritier d'un grand homme qui n'arrive jamais à la cheville du maître, malgré tous ses efforts."
+  },
+  {
+    "w": "Éthéré",
+    "funDef": "Si léger qu'on dirait qu'il flotte, qualité prêtée aux belles dames et aux esprits de mauvais vin."
+  },
+  {
+    "w": "Eudémonisme",
+    "funDef": "Doctrine qui place le bonheur au-dessus de tout, ce qui arrange bien ceux qui aiment la table."
+  },
+  {
+    "w": "Évhémérisme",
+    "funDef": "Théorie selon laquelle les dieux des mythes n'étaient au fond que des bonshommes un peu fanfarons."
+  },
+  {
+    "w": "Exégèse",
+    "funDef": "Lecture savante d'un texte sacré, où chaque pédant tire la couverture à sa propre interprétation."
+  },
+  {
+    "w": "Faconde",
+    "funDef": "Bagout intarissable du bonimenteur qui vous vend une rosse pour un destrier sans reprendre souffle."
+  },
+  {
+    "w": "Forfanterie",
+    "funDef": "Vantardise effrontée du blanc-bec qui se prétend bretteur mais perd ses chausses au premier coup."
+  },
+  {
+    "w": "Friponnerie",
+    "funDef": "Petite filouterie d'un drôle qui détrousse le passant en lui souriant largement."
+  },
+  {
+    "w": "Gnomique",
+    "funDef": "Qui débite des maximes pompeuses, comme le grand-père qui ressort la même sentence à chaque dîner."
+  },
+  {
+    "w": "Hébétude",
+    "funDef": "Stupeur qui paralyse l'esprit, comme celle du buveur qui contemple son verre vide après le réveil."
+  },
+  {
+    "w": "Hendiadys",
+    "funDef": "Procédé qui exprime une idée par deux mots accouplés, parure verbeuse chère aux poètes ronflants."
+  },
+  {
+    "w": "Hiératique",
+    "funDef": "Solennel et raide comme un évêque en procession, qui n'oserait pas même cligner d'un œil."
+  },
+  {
+    "w": "Hypallage",
+    "funDef": "Procédé qui colle à un mot ce qui revient à son voisin, embrouillamini cher aux poètes pédants."
+  },
+  {
+    "w": "Hypocoristique",
+    "funDef": "Petit nom mielleux qu'on donne à sa belle, du genre poulette ou mon chouchou ratatiné."
+  },
+  {
+    "w": "Iatrogène",
+    "funDef": "Mal causé par le remède lui-même, comme la saignée du barbier qui finit le patient au lieu du mal."
+  },
+  {
+    "w": "Immarcescible",
+    "funDef": "Qui ne se fane jamais, qualité dont rêve toute dame en s'attardant devant son miroir."
+  },
+  {
+    "w": "Impavide",
+    "funDef": "Imperturbable devant le danger, comme le veilleur qui ronfle pendant que les remparts brûlent."
+  },
+  {
+    "w": "Incoercible",
+    "funDef": "Qu'on ne peut retenir, comme le fou rire des écoliers quand le maître se prend les pieds dans sa robe."
+  },
+  {
+    "w": "Ineffable",
+    "funDef": "Si fort qu'aucun mot ne suffit, comme le bonheur du veuf au lendemain des funérailles."
+  },
+  {
+    "w": "Ithos",
+    "funDef": "Bonne tête qu'on se compose pour gagner la confiance de l'auditoire avant de lui mentir effrontément."
+  },
+  {
+    "w": "Janotisme",
+    "funDef": "Phrase mal tournée qui fait rire sans le vouloir, du genre celle du marmot qui parle de son père et sa pelle."
+  },
+  {
+    "w": "Kalokagathie",
+    "funDef": "Idéal grec qui veut qu'un beau corps cache une belle âme, vérité que la vie se charge de démentir."
+  },
+  {
+    "w": "Liminaire",
+    "funDef": "Posé sur le seuil, comme le mot d'introduction qu'on s'empresse de sauter pour aller au vif."
+  },
+  {
+    "w": "Litote",
+    "funDef": "Façon de dire moins pour faire entendre plus, comme le mari qui trouve sa femme pas désagréable."
+  },
+  {
+    "w": "Logodédale",
+    "funDef": "Bâtisseur de phrases si tortueuses qu'on s'y perd comme dans le labyrinthe d'un château abandonné."
+  },
+  {
+    "w": "Marcescent",
+    "funDef": "Qui se flétrit sans tomber, comme la vieille fille qui reste accrochée à ses rêves de mariage."
+  },
+  {
+    "w": "Matois",
+    "funDef": "Bonhomme à l'air innocent qui cache une ruse de renard, du genre à vous fourguer sa rosse en jurant."
+  },
+  {
+    "w": "Mellifluité",
+    "funDef": "Discours doux comme le miel, dont se sert le bonimenteur pour vous endormir avant de vous délester."
+  },
+  {
+    "w": "Métonymie",
+    "funDef": "Procédé qui dit 'l'Élysée a réagi' pour désigner un chargé de communication anonyme qui a répondu à un journaliste."
+  },
+  {
+    "w": "Misonéisme",
+    "funDef": "Haine du nouveau qu'on trouve chez le vieux paysan rejetant tout ce qui n'était pas connu de son grand-père."
+  },
+  {
+    "w": "Nesciente",
+    "funDef": "Qui ignore tout d'une situation et le sait à peine, comme celui qui signe sans lire les conditions générales et reçoit une facture mensuelle à vie."
+  },
+  {
+    "w": "Nyctalope",
+    "funDef": "Qui voit dans l'obscurité comme en plein jour, talent fort utile aux étudiants qui révisent à quatre heures du matin la veille des partiels."
+  },
+  {
+    "w": "Obnubiler",
+    "funDef": "Embrumer l'esprit d'une idée fixe, comme celle du jaloux qui ne pense plus qu'au voisin de sa femme."
+  },
+  {
+    "w": "Obséquiosité",
+    "funDef": "Politesse rampante du courtisan qui se plie en deux jusqu'à ce que sa colonne en craque."
+  },
+  {
+    "w": "Omphalos",
+    "funDef": "Pierre sainte des Grecs censée marquer le nombril du monde, et que chaque cité prétendait posséder."
+  },
+  {
+    "w": "Oxymore",
+    "funDef": "Accouplement de deux mots qui se contredisent, comme un sage soûlard ou un mari fidèle."
+  },
+  {
+    "w": "Palinodie",
+    "funDef": "Volte-face publique du politicien qui jure aujourd'hui le contraire de ce qu'il proclamait hier."
+  },
+  {
+    "w": "Pampre",
+    "funDef": "Branche de vigne couverte de feuilles, qu'on suspend chez le vigneron et qu'on dépouille au pressoir."
+  },
+  {
+    "w": "Parangon",
+    "funDef": "Modèle accompli d'une vertu, qualité que chacun reconnaît surtout chez les morts et les inconnus."
+  },
+  {
+    "w": "Parousie",
+    "funDef": "Retour triomphal attendu à la fin des temps, qui se fait attendre depuis si longtemps qu'on doute du calendrier."
+  },
+  {
+    "w": "Pélagique",
+    "funDef": "Qui appartient à la haute mer, là où les marins racontent avoir vu des sirènes à demi vêtues."
+  },
+  {
+    "w": "Pénultième",
+    "funDef": "Avant-dernier d'une série, comme l'avant-dernier verre qu'on jure être le dernier de la soirée."
+  },
+  {
+    "w": "Pérégrination",
+    "funDef": "Long trajet de réunion en réunion, où chaque escale vous éloigne un peu plus de votre vrai travail."
+  },
+  {
+    "w": "Préciosité",
+    "funDef": "Raffinement affecté des dames qui appellent une chaise un commodité de la conversation."
+  },
+  {
+    "w": "Prolégomènes",
+    "funDef": "Longue introduction savante qu'on inflige au lecteur avant d'arriver à l'os du sujet."
+  },
+  {
+    "w": "Prolepse",
+    "funDef": "Procédé qui consiste à devancer l'objection pour l'écraser dans l'œuf, cher aux maris infidèles."
+  },
+  {
+    "w": "Psychopompe",
+    "funDef": "Qui guide les âmes des morts vers l'au-delà, métier dont on revient rarement pour se plaindre."
+  },
+  {
+    "w": "Rémanence",
+    "funDef": "Trace qui persiste après coup, comme l'odeur de l'oignon qui reste sur les doigts jusqu'au lendemain."
+  },
+  {
+    "w": "Sapide",
+    "funDef": "Qui a réellement de la saveur, qualité rarissime dans les plats de la cantine d'entreprise réchauffés deux fois."
+  },
+  {
+    "w": "Stochastique",
+    "funDef": "Qui obéit au hasard pur, comme l'arrivée du bus 42 en heure de pointe ou la décision d'un chef de projet le vendredi après-midi."
+  },
+  {
+    "w": "Sumessif",
+    "funDef": "Qui a trait à la vie assise, état naturel du clerc et du gros chanoine bien installé sur sa chaise."
+  },
+  {
+    "w": "Syllepse",
+    "funDef": "Accord grammatical qui suit le sens plutôt que la règle, à la façon des gens qui parlent d'instinct."
+  },
+  {
+    "w": "Thrène",
+    "funDef": "Chant funèbre qu'on entonne sur la dépouille, parfois avec plus d'application que de chagrin sincère."
+  },
+  {
+    "w": "Vaticination",
+    "funDef": "Prédiction solennelle d'un illuminé qui roule des yeux blancs en marmonnant des prophéties obscures."
+  },
+  {
+    "w": "Bréhaigne",
+    "funDef": "Femelle dont le ventre demeure obstinément vide malgré les assauts répétés du mâle."
+  },
+  {
+    "w": "Coquefredouille",
+    "funDef": "Benêt à qui l'on ferait avaler que sa propre femme est encore pucelle."
+  },
+  {
+    "w": "Drôlesse",
+    "funDef": "Donzelle qui troque ses faveurs contre quelques sols dans l'arrière-salle des tavernes."
+  },
+  {
+    "w": "Estrapade",
+    "funDef": "Châtiment public consistant à hisser le coupable au bout d'une corde puis à le laisser choir pour la grande joie de la populace."
+  },
+  {
+    "w": "Foutimasser",
+    "funDef": "Lambiner sans rien produire, à la manière d'un mari qui s'agite fort sous les draps pour bien peu d'ouvrage."
+  },
+  {
+    "w": "Gourgandine",
+    "funDef": "Femme légère qui hante les ruelles et les seuils de taverne en quête de godelureaux."
+  },
+  {
+    "w": "Hourder",
+    "funDef": "Boucher à la truelle, avec un mortier de fortune, les trous d'un mur qu'on a fait au voisin."
+  },
+  {
+    "w": "Jacterie",
+    "funDef": "Caquetage incessant de commères qui débitent ragots et cocuages au-dessus du lavoir."
+  },
+  {
+    "w": "Lansquenet",
+    "funDef": "Soudard germanique qu'on louait pour faire la guerre et qui pillait volontiers la cave après la bataille."
+  },
+  {
+    "w": "Maquignonner",
+    "funDef": "Trafiquer du cheval en jurant ses grands dieux qu'une rosse poussive est encore vaillante."
+  },
+  {
+    "w": "Nigaudin",
+    "funDef": "Jeune sot qui croit encore que les marmots sortent du chou et s'étonne du ventre rond de sa sœur."
+  },
+  {
+    "w": "Outrecuider",
+    "funDef": "Se vanter par-dessus sa propre culotte, à la façon d'un galant qui prétend trois conquêtes sans en avoir tâté une."
+  },
+  {
+    "w": "Paillardise",
+    "funDef": "Penchant marqué pour les plaisirs de la chair et les propos qui sentent le vin et le foin."
+  },
+  {
+    "w": "Quenouiller",
+    "funDef": "Filer la laine entre les doigts en attendant que le mari rentre du champ, occupation jugée bien molle pour un homme."
+  },
+  {
+    "w": "Ribaudaille",
+    "funDef": "Ramassis de gueux et de drôlesses qui hantent les tavernes et sentent le suint à dix pas."
+  },
+  {
+    "w": "Pisse-froid",
+    "funDef": "Triste sire qui glace les ripailles par sa mine longue et refuse même le pichet qu'on lui tend."
+  },
+  {
+    "w": "Tabuster",
+    "funDef": "Secouer rudement quelqu'un, à la façon dont on tire du lit une donzelle qui a trop tâté du vin de messe."
+  },
+  {
+    "w": "Ventrebleu",
+    "funDef": "Vieux juron qu'on lâche entre deux pichets, déformation prudente d'un blasphème portant sur le ventre du Très-Haut."
+  },
+  {
+    "w": "Zézayer",
+    "funDef": "Parler en sifflant les s comme des z, à la manière d'un galant éméché qui susurre des cochonneries à l'oreille d'une dame."
+  },
+  {
+    "w": "Pansu",
+    "funDef": "Si rebondi du ventre qu'il pose son écuelle dessus pour souper sans se baisser."
+  },
+  {
+    "w": "Cocasserie",
+    "funDef": "Manière d'être si saugrenue qu'elle fait pouffer même les bonnes sœurs au sortir des vêpres."
+  },
+  {
+    "w": "Daguet",
+    "funDef": "Jeune cerf encore puceau qui n'a sur la tête que deux maigres pointes, pas de quoi impressionner les biches."
+  },
+  {
+    "w": "Fanfreluche",
+    "funDef": "Bricole de tissu cousue sur la robe d'une dame pour faire croire qu'elle vaut plus cher qu'elle ne coûte."
+  },
+  {
+    "w": "Galimafrée",
+    "funDef": "Tambouille douteuse de restes raclés au fond du chaudron, que la servante sert en jurant que c'est neuf."
+  },
+  {
+    "w": "Houspiller",
+    "funDef": "Engueuler vertement quelqu'un avec force gestes, comme une harengère qui retrouve son mari à la taverne."
+  },
+  {
+    "w": "Jobard",
+    "funDef": "Crédule fini qui achèterait la lune au bonimenteur et le remercierait poliment au passage."
+  },
+  {
+    "w": "Goguette",
+    "funDef": "Beuverie chantante où l'on s'attable entre compères pour vider les pichets en braillant des refrains lestes."
+  },
+  {
+    "w": "Margoulin",
+    "funDef": "Marchand fripon qui pèse la viande avec le pouce sur la balance et jure sur sa mère que c'est honnête."
+  },
+  {
+    "w": "Nicodème",
+    "funDef": "Nigaud accompli à qui sa femme raconte qu'elle revient du marché alors qu'elle sort du lit du voisin."
+  },
+  {
+    "w": "Rogaton",
+    "funDef": "Reliquat racorni au fond du plat que même les chiens reniflent avant de se détourner."
+  },
+  {
+    "w": "Faribole",
+    "funDef": "Sottise sans queue ni tête débitée pour amuser la galerie ou enfumer un crédule."
+  },
+  {
+    "w": "Pituite",
+    "funDef": "Crachat épais et amertume du buveur au matin, quand la cuite d'hier remonte par le gosier."
+  },
+  {
+    "w": "Vétille",
+    "funDef": "Misère sans conséquence dont la commère fait toute une affaire pour avoir de quoi jaser au lavoir."
+  },
+  {
+    "w": "Bobèche",
+    "funDef": "Petit machin sous la chandelle qui empêche la cire de pisser partout."
+  },
+  {
+    "w": "Cagne",
+    "funDef": "Femme molle qui traîne en chemise jusqu'à midi."
+  },
+  {
+    "w": "Drille",
+    "funDef": "Compère toujours partant pour boire un coup et lutiner la servante."
+  },
+  {
+    "w": "Escarcelle",
+    "funDef": "Bourse pendue à la ceinture qu'on rouvre en grognant."
+  },
+  {
+    "w": "Fessu",
+    "funDef": "Pourvu d'un derrière qui prend deux places sur le banc."
+  },
+  {
+    "w": "Greluchon",
+    "funDef": "Jeune galant payé en chausses par une dame mûre."
+  },
+  {
+    "w": "Indigent",
+    "funDef": "Pauvre bougre qui n'a plus qu'une chemise trouée."
+  },
+  {
+    "w": "Jeanjean",
+    "funDef": "Pequenaud à peine arrivé en ville, déjà délesté de sa bourse."
+  },
+  {
+    "w": "Lopin",
+    "funDef": "Maigre bout de terre qui ne donne que trois navets l'an."
+  },
+  {
+    "w": "Maritorne",
+    "funDef": "Servante si laide que les muletiers passent leur chemin."
+  },
+  {
+    "w": "Nonchaloir",
+    "funDef": "Mollesse après ripaille où l'on ne lace même plus ses chausses."
+  },
+  {
+    "w": "Oing",
+    "funDef": "Vieux saindoux pour graisser l'essieu, ou la peau quand il en reste."
+  },
+  {
+    "w": "Chopiner",
+    "funDef": "Vider chopine après chopine sans jamais se relever de son banc."
+  },
+  {
+    "w": "Quinaud",
+    "funDef": "Penaud comme le galant surpris en chausses par le mari."
+  },
+  {
+    "w": "Rabouin",
+    "funDef": "Nom du diable qu'on disait aux marmots pour qu'ils mangent leur soupe."
+  },
+  {
+    "w": "Salopiaud",
+    "funDef": "Crasseux qui ne se lave que le bout du nez aux grandes fêtes."
+  },
+  {
+    "w": "Brogne",
+    "funDef": "Vieille cuirasse de cuir grasse de sueur que les soudards refilaient à leurs fils."
+  },
+  {
+    "w": "Vesse",
+    "funDef": "Pet sournois lâché sous la table, dont nul n'avoue être l'auteur."
+  },
+  {
+    "w": "Bistrouille",
+    "funDef": "Mélange infect de piquette et d'alcool fort qui te met à terre au deuxième verre."
+  },
+  {
+    "w": "Dégueulando",
+    "funDef": "Tellement laid que ça soulève le cœur de celui qui croise son regard."
+  },
+  {
+    "w": "Empaffé",
+    "funDef": "Imbécile gonflé de lui-même qui se croit important alors qu'il dégoûte tout le monde."
+  },
+  {
+    "w": "Foutriquet",
+    "funDef": "Demi-portion qui se rengorge ridiculement et ne fait pitié à personne."
+  },
+  {
+    "w": "Grognasser",
+    "funDef": "Râler en continu entre les dents avec une mauvaise foi confondante."
+  },
+  {
+    "w": "Margoulette",
+    "funDef": "Visage déplaisant qu'on rêverait de remodeler d'un coup de poing dès qu'il s'ouvre."
+  },
+  {
+    "w": "Pisseux",
+    "funDef": "D'un jaune sale et terne, comme un drap oublié au fond d'un panier depuis des semaines."
+  },
+  {
+    "w": "Loufiat",
+    "funDef": "Serveur de bistrot dont l'amabilité décroît à mesure que le pourboire s'annonce maigre."
+  },
+  {
+    "w": "Morpion",
+    "funDef": "Bestiole logée dans les parties intimes, souvenir fréquent des sorties au bordel."
+  },
+  {
+    "w": "Pétochard",
+    "funDef": "Trouillard fini qui en perd le contrôle de ses entrailles au moindre bruit louche."
+  },
+  {
+    "w": "Pisse-vinaigre",
+    "funDef": "Vieux aigri qui empoisonne tout son entourage et marchande deux sous à un mendiant."
+  },
+  {
+    "w": "Roupettes",
+    "funDef": "Attributs masculins ballottant dans le linge, qu'il faut bien rajuster de temps à autre."
+  },
+  {
+    "w": "Torcheculatif",
+    "funDef": "Bon tout au plus pour les latrines, qualité souvent prêtée aux manuels scolaires."
+  },
+  {
+    "w": "Vérolé",
+    "funDef": "Atteint d'une saleté ramenée d'un bordel et désormais pourri jusqu'à la moelle."
+  },
+  {
+    "w": "Zigouigoui",
+    "funDef": "Truc anatomique vaguement intime qu'on n'ose pas nommer clairement."
+  },
+  {
+    "w": "Béotien",
+    "funDef": "Rustaud de la Béotie qui confond Homère avec un plombier et le Parthénon avec une halle au blé."
+  },
+  {
+    "w": "Émoluments",
+    "funDef": "Traitement qu'on juge toujours insuffisant quand c'est le sien et excessif quand c'est celui du voisin."
+  },
+  {
+    "w": "Fantasmagorie",
+    "funDef": "Défilé de visions effrayantes et grotesques, comme un cauchemar exhibé en spectacle payant."
+  },
+  {
+    "w": "Lupanar",
+    "funDef": "Établissement de plaisir que les bien-pensants fréquentaient discrètement et dont ils niaient l'existence."
+  },
+  {
+    "w": "Ostracisme",
+    "funDef": "Mise à l'écart qu'infligeaient les Athéniens au voisin trop populaire qui commençait à leur faire de l'ombre."
+  },
+  {
+    "w": "Palinopsie",
+    "funDef": "Vision tenace où ce qu'on vient de regarder continue à flotter devant les yeux comme un fantôme."
+  },
+  {
+    "w": "Ratiociner",
+    "funDef": "Tortiller du cerveau en longueur pour éviter d'admettre qu'on a simplement et platement tort."
+  },
+  {
+    "w": "Viduité",
+    "funDef": "Condition de veuf ou de veuve qu'on regarde avec compassion avant de s'empresser de les recaser."
+  },
+  {
+    "w": "Zyeuter",
+    "funDef": "Loucher vers quelque chose qu'on n'est pas censé voir en faisant semblant de regarder ailleurs."
+  },
+  {
+    "w": "Aboulie",
+    "funDef": "Maladie commode qui permet d'éviter toute décision en invoquant une raison médicale."
+  },
+  {
+    "w": "Abjuration",
+    "funDef": "Art de claquer officiellement la porte d'une doctrine tout en continuant à y croire en privé."
+  },
+  {
+    "w": "Abscondre",
+    "funDef": "Planquer ce qu'on ne devrait pas avoir en espérant que personne ne fouine dans le placard."
+  },
+  {
+    "w": "Acatalepsie",
+    "funDef": "Philosophie pratique de ceux qui refusent de conclure pour ne jamais avoir à assumer leurs erreurs."
+  },
+  {
+    "w": "Achromatopsie",
+    "funDef": "Condition de celui qui vit dans un monde en noir et blanc, ce qui simplifie le choix des cravates."
+  },
+  {
+    "w": "Acouphène",
+    "funDef": "Bruit intérieur que personne d'autre n'entend, utile pour ne pas écouter les gens qu'on n'aime pas."
+  },
+  {
+    "w": "Adamisme",
+    "funDef": "Secte qui priait tout nu en pleine nature, ce qui posait problème en hiver."
+  },
+  {
+    "w": "Aède",
+    "funDef": "Chanteur sans partition ni micro qui déclamait des milliers de vers sans jamais perdre le fil."
+  },
+  {
+    "w": "Affabulation",
+    "funDef": "Don particulier pour inventer des histoires très convaincantes, utile pour les politiciens et les enfants."
+  },
+  {
+    "w": "Allégorèse",
+    "funDef": "Art savant de lire entre les lignes en trouvant ce qu'on cherchait avant même d'avoir ouvert le livre."
+  },
+  {
+    "w": "Allopathie",
+    "funDef": "Médecine classique qui prescrit des pilules contre les symptômes d'autres pilules."
+  },
+  {
+    "w": "Amuïssement",
+    "funDef": "Disparition d'un son dans un mot, comme quand les Français avalent la moitié des lettres qu'ils écrivent."
+  },
+  {
+    "w": "Anatife",
+    "funDef": "Bestiole maritime qui s'accroche aux bateaux sans payer sa traversée, comme certains passagers."
+  },
+  {
+    "w": "Angélisme",
+    "funDef": "Illusion touchante que les hommes sont fondamentalement bons, qui ne résiste pas à une semaine dans les transports."
+  },
+  {
+    "w": "Antéfixe",
+    "funDef": "Décoration de gouttière dont personne ne voit le détail mais dont l'absence rend furieux l'archéologue."
+  },
+  {
+    "w": "Anthropophagie",
+    "funDef": "Régime alimentaire extrême réservé aux naufragés désespérés et aux peuplades mal documentées."
+  },
+  {
+    "w": "Antiphrase",
+    "funDef": "Manière d'appeler un chauve Samson ou un lâche Hercule avec un sourire en coin."
+  },
+  {
+    "w": "Antiquaille",
+    "funDef": "Tas de vieilleries qu'on appelle collection quand on en est fier et antiquaille quand c'est chez les autres."
+  },
+  {
+    "w": "Arétologie",
+    "funDef": "Science des vertus qui intéresse surtout ceux qui n'en ont pas."
+  },
+  {
+    "w": "Argyrie",
+    "funDef": "Maladie qui transforme le patient en statue d'argent mat, sans les avantages financiers."
+  },
+  {
+    "w": "Atticisme",
+    "funDef": "Élégance du style athénien que l'on invoque pour justifier sa préciosité agaçante."
+  },
+  {
+    "w": "Autochthone",
+    "funDef": "Celui qui était là avant tout le monde et le rappelle à chaque occasion."
+  },
+  {
+    "w": "Autotélie",
+    "funDef": "Principe philosophique qu'on invoque pour expliquer à sa famille pourquoi on joue aux jeux vidéo."
+  },
+  {
+    "w": "Axiologie",
+    "funDef": "Science des valeurs qui détermine ce qui est bien ou beau, et sur laquelle tout le monde est en désaccord."
+  },
+  {
+    "w": "Azymute",
+    "funDef": "Repère de navigation que tout le monde cite en disant être dans tous les azimuts, sans savoir ce que ça veut dire."
+  },
+  {
+    "w": "Bacchante",
+    "funDef": "Femme en délire religieux autorisé, qui criait, courait et brandissait un thyrse sous la lune."
+  },
+  {
+    "w": "Baguenauder",
+    "funDef": "S'adonner à l'art noble de ne rien faire d'utile tout en ayant l'air occupé."
+  },
+  {
+    "w": "Baliverne",
+    "funDef": "Ânerie sérieusement débitée par un individu convaincu de son importance."
+  },
+  {
+    "w": "Barcarolle",
+    "funDef": "Mélodie mélancolique et bercante qu'on chante en ramant, ce qui est plus difficile qu'il n'y paraît."
+  },
+  {
+    "w": "Beffroi",
+    "funDef": "Grande tour qui sonnait les alarmes, les réunions et les cloches du dimanche, parfois en même temps."
+  },
+  {
+    "w": "Béatification",
+    "funDef": "Mise à l'essai officielle des saints, avant la promotion définitive qui vient après un miracle supplémentaire."
+  },
+  {
+    "w": "Bestiaire",
+    "funDef": "Encyclopédie animalière médiévale où la licorne et le phénix côtoient le lièvre sans distinction."
+  },
+  {
+    "w": "Bibliomanie",
+    "funDef": "Maladie des gens qui achètent plus de livres qu'ils n'en liront jamais et le savent parfaitement."
+  },
+  {
+    "w": "Blattération",
+    "funDef": "Son particulier qu'émet le chameau mécontent, souvent reproduit involontairement par les buveurs de café."
+  },
+  {
+    "w": "Bondieuserie",
+    "funDef": "Bibelot pieux au kitsch assumé qu'on vend dans les boutiques de sanctuaires à des prix indécents."
+  },
+  {
+    "w": "Borborygme",
+    "funDef": "Bruit indiscret que produit votre ventre pendant la réunion la plus importante de votre carrière."
+  },
+  {
+    "w": "Bradycardie",
+    "funDef": "Cœur qui prend son temps, ce qui est une vertu chez un yogi et un problème chez un marathonien."
+  },
+  {
+    "w": "Branle-bas",
+    "funDef": "Bousculade frénétique qui précède toujours le moment où l'on réalise qu'on a oublié quelque chose d'essentiel."
+  },
+  {
+    "w": "Bréviaire",
+    "funDef": "Guide de prières obligatoires dont les moines vérifient scrupuleusement que les autres ne sautent pas de pages."
+  },
+  {
+    "w": "Byssus",
+    "funDef": "Soie naturelle produite par des moules, filaments si fins qu'on en tissait autrefois des gants transparents."
+  },
+  {
+    "w": "Catharsis",
+    "funDef": "Nettoyage intérieur par les larmes que Aristote recommandait et que Hollywood exploite commercialement."
+  },
+  {
+    "w": "Cénobite",
+    "funDef": "Moine vivant avec d'autres, ce qui suppose une tolérance au bruit des prières collectives à l'aube."
+  },
+  {
+    "w": "Chiasme",
+    "funDef": "Construction où la seconde partie reprend la première à l'envers, comme un miroir grammatical."
+  },
+  {
+    "w": "Chiromancien",
+    "funDef": "Spécialiste qui voit votre destin dans la paume de votre main, avec un tarif qui varie selon l'espoir vendu."
+  },
+  {
+    "w": "Contumax",
+    "funDef": "Accusé qui juge plus prudent de ne pas se présenter à son procès, ce qu'on lui reprochera davantage."
+  },
+  {
+    "w": "Coryphée",
+    "funDef": "Chef de file des choristes antiques, dont la mission était de garder le rythme malgré le vin de Dionysos."
+  },
+  {
+    "w": "Crépusculaire",
+    "funDef": "Qui baigne dans cette lumière orangée propice aux regrets et aux fins de civilisation."
+  },
+  {
+    "w": "Cromlech",
+    "funDef": "Grand cercle de pierres dont personne ne sait exactement l'usage, ce qui alimente des théories infinies."
+  },
+  {
+    "w": "Déicide",
+    "funDef": "Crime théologique d'une nature particulièrement difficile à juger, vu l'absence de corps."
+  },
+  {
+    "w": "Démiurge",
+    "funDef": "Grand architecte cosmique de Platon qui façonnait le monde comme un potier, mais en bien plus ambitieux."
+  },
+  {
+    "w": "Démonologie",
+    "funDef": "Science sérieuse des diableries qu'on pratiquait sans ironie au Moyen Âge avec des traités illustrés."
+  },
+  {
+    "w": "Déontologie",
+    "funDef": "Code de bonne conduite professionnel que chaque corps de métier jure de respecter et interprète librement."
+  },
+  {
+    "w": "Dyspepsie",
+    "funDef": "Digestion capricieuse qui transforme tout bon repas en expiation après qu'on y a pris trop de plaisir."
+  },
+  {
+    "w": "Effulgence",
+    "funDef": "Luminosité éblouissante qu'on attribut aux saints dans les tableaux et aux vedettes sous les projecteurs."
+  },
+  {
+    "w": "Égotisme",
+    "funDef": "Passion de soi-même qu'on confond avec l'égoïsme mais qui est plus littéraire et moins honteux."
+  },
+  {
+    "w": "Épagomène",
+    "funDef": "Journée bonus du calendrier qu'on inventait pour faire coïncider l'année avec le soleil, toujours récalcitrant."
+  },
+  {
+    "w": "Éphèbe",
+    "funDef": "Adolescent grec astreint à deux ans de service militaire avant d'avoir le droit de se plaindre."
+  },
+  {
+    "w": "Épithalame",
+    "funDef": "Poème de mariage que les invités enduraient poliment avant de passer aux festivités sérieuses."
+  },
+  {
+    "w": "Équanimité",
+    "funDef": "Sérénité de façade que certains maintiennent même en apprenant de mauvaises nouvelles, au grand étonnement."
+  },
+  {
+    "w": "Étiologie",
+    "funDef": "Recherche des origines d'un problème qu'on finit souvent par attribuer à son enfance."
+  },
+  {
+    "w": "Fabuliste",
+    "funDef": "Écrivain qui met des animaux en scène pour critiquer les hommes sans risquer les poursuites."
+  },
+  {
+    "w": "Fallacie",
+    "funDef": "Argument qui paraît valide jusqu'à ce qu'on le regarde de près, ce que l'adversaire espère qu'on ne fera pas."
+  },
+  {
+    "w": "Fatrasie",
+    "funDef": "Poème médiéval nonsensique que les lettrés composaient pour rire, preuve que l'absurde a toujours existé."
+  },
+  {
+    "w": "Fomentation",
+    "funDef": "Art de souffler sur des braises en public tout en niant à voix haute y être pour quoi que ce soit."
+  },
+  {
+    "w": "Fugacité",
+    "funDef": "Propriété du bonheur, de la jeunesse et du wifi dans les transports d'être toujours en train de disparaître."
+  },
+  {
+    "w": "Galéopithèque",
+    "funDef": "Animal qui n'est ni chauve-souris ni écureuil volant mais s'en sort tout aussi bien sans être ni l'un ni l'autre."
+  },
+  {
+    "w": "Gastrosophie",
+    "funDef": "Élévation de la table au rang de discipline philosophique, pour manger et se justifier en même temps."
+  },
+  {
+    "w": "Génuflexion",
+    "funDef": "Geste de déférence qui abîme les pantalons et les genoux mais impressionne toujours le destinataire."
+  },
+  {
+    "w": "Géomancie",
+    "funDef": "Art de lire l'avenir dans la terre, ce qui est moins salissant que la nécromancie mais tout aussi fiable."
+  },
+  {
+    "w": "Gérontocratie",
+    "funDef": "Système de gouvernement naturel des sociétés qui confondent l'ancienneté avec la sagesse."
+  },
+  {
+    "w": "Glossateur",
+    "funDef": "Savant médiéval qui écrivait dans les marges des livres pour les rendre encore plus incompréhensibles."
+  },
+  {
+    "w": "Gnose",
+    "funDef": "Savoir secret des initiés qui explique tout ce que les simples mortels ignorent, et le font savoir."
+  },
+  {
+    "w": "Griot",
+    "funDef": "Mémoire vivante de sa communauté qui sait exactement qui descend de qui et le dit sans ménagement."
+  },
+  {
+    "w": "Guilde",
+    "funDef": "Syndicat médiéval qui contrôlait l'accès au métier et n'hésitait pas à ruiner les concurrents."
+  },
+  {
+    "w": "Gynécocratie",
+    "funDef": "Gouvernement des femmes que les hommes imaginent soit comme un paradis soit comme une dystopie."
+  },
+  {
+    "w": "Haplologie",
+    "funDef": "Phénomène qui vous fait dire Angleterre au lieu d'Angle-terre-terre, par pure économie syllabique."
+  },
+  {
+    "w": "Hermétisme",
+    "funDef": "Ensemble de savoirs secrets si bien cachés que même leurs dépositaires doutent parfois de leur contenu."
+  },
+  {
+    "w": "Heuristique",
+    "funDef": "Art de chercher par tâtonnements en appelant ça une méthode pour paraître organisé."
+  },
+  {
+    "w": "Hiérogamie",
+    "funDef": "Noce entre un dieu et un humain qui se terminait rarement bien pour la partie mortelle."
+  },
+  {
+    "w": "Homélie",
+    "funDef": "Discours édifiant qu'on écoute poliment en pensant à autre chose, surtout le dimanche matin."
+  },
+  {
+    "w": "Hybris",
+    "funDef": "Arrogance fatale qui pousse les héros à défier les dieux, ce qui finit toujours très mal."
+  },
+  {
+    "w": "Hypostase",
+    "funDef": "Terme philosophique tellement complexe que ses définitions ne s'accordent pas entre elles."
+  },
+  {
+    "w": "Iatrocratie",
+    "funDef": "Règne des blouses blanches sur nos décisions, qu'on découvre surtout pendant les pandémies."
+  },
+  {
+    "w": "Idiocratie",
+    "funDef": "Système politique où les plus qualifiés sont systématiquement écartés au profit des plus bruyants."
+  },
+  {
+    "w": "Igné",
+    "funDef": "Qualifie les roches sorties bouillantes des volcans et les tempéraments qui leur ressemblent."
+  },
+  {
+    "w": "Illuminisme",
+    "funDef": "Croyance d'être touché par la grâce divine, ce qui donne un sentiment de supériorité très pratique."
+  },
+  {
+    "w": "Immolation",
+    "funDef": "Acte extrême de dévotion dont on attend en général une contrepartie proportionnelle."
+  },
+  {
+    "w": "Inanité",
+    "funDef": "Qualité des discours qui durent une heure pour ne rien dire, mais avec beaucoup d'assurance."
+  },
+  {
+    "w": "Infatuation",
+    "funDef": "Admiration de soi portée à un niveau qui rend les autres légèrement nauseux."
+  },
+  {
+    "w": "Intercession",
+    "funDef": "Art de demander une faveur au nom de quelqu'un qui espère en profiter sans se mouiller."
+  },
+  {
+    "w": "Intuitionisme",
+    "funDef": "Philosophie du pressentiment érigé en méthode de connaissance rigoureuse."
+  },
+  {
+    "w": "Irrédentisme",
+    "funDef": "Revendication de territoires occupés par d'autres, au nom d'un lien culturel ou linguistique historique."
+  },
+  {
+    "w": "Itinérance",
+    "funDef": "Mode de vie que les nomades appellent liberté et les sédentaires appellent instabilité."
+  },
+  {
+    "w": "Jansénisme",
+    "funDef": "Doctrine qui prétend que vous êtes sauvé ou damné d'avance, ce qui simplifie les choix moraux."
+  },
+  {
+    "w": "Jouvence",
+    "funDef": "Fontaine mythique que des explorateurs cherchaient sérieusement et que l'industrie cosmétique a monétisée."
+  },
+  {
+    "w": "Kabbale",
+    "funDef": "Système de pensée ésotérique si complexe que même ses adeptes ne sont pas tous d'accord sur sa nature."
+  },
+  {
+    "w": "Kénotisme",
+    "funDef": "Théologie du divin qui se déshabillerait de sa toute-puissance pour mieux s'humaniser."
+  },
+  {
+    "w": "Kyrielle",
+    "funDef": "Liste interminable de doléances qu'on débite d'une seule traite sans reprendre son souffle."
+  },
+  {
+    "w": "Lagniappe",
+    "funDef": "Geste commercial généreux que le vendeur présente comme un cadeau mais qui est calculé au centième."
+  },
+  {
+    "w": "Larmoiement",
+    "funDef": "Talent pour produire des larmes à la demande, utile au théâtre et dans les négociations difficiles."
+  },
+  {
+    "w": "Latreutique",
+    "funDef": "Adoration réservée à Dieu qui distingue les théologiens des fidèles confondant tous les saints."
+  },
+  {
+    "w": "Lépidoptère",
+    "funDef": "Papillon sous son nom savant, qui impressionne dans une conversation sans que personne ne comprenne pourquoi."
+  },
+  {
+    "w": "Leucocratie",
+    "funDef": "Régime dont les bénéficiaires n'aiment pas le nom mais ont du mal à nier la réalité."
+  },
+  {
+    "w": "Lèse-majesté",
+    "funDef": "Offense envers la couronne punie jadis de mort et aujourd'hui de procès interminables."
+  },
+  {
+    "w": "Logocratie",
+    "funDef": "Régime où celui qui parle le mieux gagne, indépendamment de la qualité de ses idées."
+  },
+  {
+    "w": "Macrobe",
+    "funDef": "Vieillard remarquablement tenace qui déjoue tous les pronostics médicaux."
+  },
+  {
+    "w": "Magnanime",
+    "funDef": "Grand d'âme qui pardonne ses ennemis vaincus, surtout quand ils ne peuvent plus nuire."
+  },
+  {
+    "w": "Mahométan",
+    "funDef": "Terme vieilli pour désigner un musulman, qu'on n'utilise plus depuis qu'on a appris que c'était inexact."
+  },
+  {
+    "w": "Mercantilisme",
+    "funDef": "Théorie économique selon laquelle l'enrichissement d'un pays passe par l'appauvrissement des autres."
+  },
+  {
+    "w": "Mésalliance",
+    "funDef": "Union que la famille appelle une catastrophe jusqu'à ce qu'elle réalise que le conjoint est riche."
+  },
+  {
+    "w": "Millénarisme",
+    "funDef": "Foi en un futur paradisiaque qui reporte indéfiniment les réformes urgentes du présent."
+  },
+  {
+    "w": "Mnémosyne",
+    "funDef": "Déesse-Mémoire dont la descendance féminine et prolifique s'occupait de tout ce que les hommes faisaient."
+  },
+  {
+    "w": "Monachisme",
+    "funDef": "Mode de vie de ceux qui renoncent au monde pour prier, et dont certains font d'excellente bière."
+  },
+  {
+    "w": "Nécrophilie",
+    "funDef": "Penchant troublant pour ce qui ne respire plus, répertorié dans les traités psychiatriques avec embarras."
+  },
+  {
+    "w": "Noctule",
+    "funDef": "Chauve-souris de grande taille qui chasse la nuit avec une efficacité que les entomologistes apprécient."
+  },
+  {
+    "w": "Numineux",
+    "funDef": "Qualifie l'expérience du sacré qui mêle l'attirance et la terreur selon les théologiens."
+  },
+  {
+    "w": "Obédience",
+    "funDef": "Discipline de ceux qui obéissent non par faiblesse mais par conviction que la hiérarchie a raison."
+  },
+  {
+    "w": "Objectivisme",
+    "funDef": "Conviction que la réalité existe sans nous, ce que les idéalistes contestent et les physiciens supposent."
+  },
+  {
+    "w": "Oneirique",
+    "funDef": "Qui appartient au monde des rêves, où les lois de la physique se reposent et les angoisses se donnent libre cours."
+  },
+  {
+    "w": "Ontogenèse",
+    "funDef": "Histoire personnelle de chaque être depuis l'œuf jusqu'à l'adulte complet, en passant par le têtard."
+  },
+  {
+    "w": "Opiniâtreté",
+    "funDef": "Ténacité remarquable que l'on appelle vertu chez les vainqueurs et entêtement chez les perdants."
+  },
+  {
+    "w": "Otiosité",
+    "funDef": "Disponibilité perpétuelle que les oisifs habitués appellent liberté et les autres appellent chômage."
+  },
+  {
+    "w": "Panthéisme",
+    "funDef": "Philosophie selon laquelle tout est Dieu, ce qui simplifie la théologie mais complique les prières."
+  },
+  {
+    "w": "Paternoster",
+    "funDef": "Notre Père en latin, mais aussi ces ascenseurs sans portes qui n'attendent pas qu'on ait fini de prier."
+  },
+  {
+    "w": "Pathétisme",
+    "funDef": "Art de faire pleurer des gens qui savent qu'on joue la comédie mais pleurent quand même."
+  },
+  {
+    "w": "Perfidie",
+    "funDef": "Art de poignarder quelqu'un dans le dos avec un grand sourire et l'air sincèrement navré."
+  },
+  {
+    "w": "Phratrie",
+    "funDef": "Groupement familial étendu qui rend les décisions collectives interminables et les fêtes mémorables."
+  },
+  {
+    "w": "Piaculaire",
+    "funDef": "Sacrifice expiatoire que les Romains offraient pour réparer un acte sacrilège, souvent par précaution."
+  },
+  {
+    "w": "Picrochole",
+    "funDef": "Type du chef belliqueux qui déclenche des guerres pour des histoires de fouaces ou d'insultes."
+  },
+  {
+    "w": "Pitiatisme",
+    "funDef": "Maladie qui disparaît quand le médecin affirme avec assez de conviction qu'elle n'existe pas."
+  },
+  {
+    "w": "Polyandrie",
+    "funDef": "Institution matrimoniale rare qui implique une organisation domestique dont les anthropologues s'étonnent."
+  },
+  {
+    "w": "Précepte",
+    "funDef": "Règle de vie qu'on transmet aux autres en espérant qu'ils en feront meilleur usage qu'on en a fait."
+  },
+  {
+    "w": "Prédestination",
+    "funDef": "Théorie confortable qui explique tous vos échecs par la volonté divine sans remettre en cause vos choix."
+  },
+  {
+    "w": "Acculturation",
+    "funDef": "Transformation progressive de quelqu'un au contact d'une autre culture, parfois consentie, parfois forcée."
+  },
+  {
+    "w": "Alexithymie",
+    "funDef": "Handicap émotionnel qui empêche de dire ce qu'on ressent, parfois confondu avec la froideur."
+  },
+  {
+    "w": "Anachronie",
+    "funDef": "Erreur de datation narrative où le téléphone portable apparaît dans une histoire médiévale."
+  },
+  {
+    "w": "Androphobie",
+    "funDef": "Peur des hommes que certaines femmes développent après avoir trop fréquenté les hommes."
+  },
+  {
+    "w": "Angélologie",
+    "funDef": "Spécialité théologique qui classe les anges par ordre d'importance, avec un soin quasi bureaucratique."
+  },
+  {
+    "w": "Antinatalisme",
+    "funDef": "Philosophie radicale qui considère naître comme un mauvais départ dont on ne se remet jamais vraiment."
+  },
+  {
+    "w": "Apologétique",
+    "funDef": "Art de prouver que la religion est raisonnable, à des gens qui commencent par douter de la démarche."
+  },
+  {
+    "w": "Apostat",
+    "funDef": "Ancien croyant devenu ennemi de sa foi d'origine, avec toute la ferveur d'un converti inversé."
+  },
+  {
+    "w": "Aporétique",
+    "funDef": "Se dit d'un problème que plus on examine, moins on comprend, et que les philosophes aiment particulièrement."
+  },
+  {
+    "w": "Archivolte",
+    "funDef": "Décoration de voûte qu'on admire sans savoir son nom et qu'on cite ensuite pour impressionner."
+  },
+  {
+    "w": "Astrolâtrie",
+    "funDef": "Religion des étoiles pratiquée avant qu'on sache qu'elles brûlent et ne nous regardent pas."
+  },
+  {
+    "w": "Avunculat",
+    "funDef": "Système familial où l'oncle maternel compte plus que le père, ce qui simplifie certaines questions d'héritage."
+  },
+  {
+    "w": "Bacchanale",
+    "funDef": "Fête dionysiaque où les règles habituelles de bienséance étaient officiellement suspendues."
+  },
+  {
+    "w": "Batracologie",
+    "funDef": "Spécialité zoologique consacrée aux animaux glissants qui n'ont pas bonne réputation dans les contes."
+  },
+  {
+    "w": "Bénignité",
+    "funDef": "Absence de gravité qui rassure le patient avant que le médecin ne regarde de plus près."
+  },
+  {
+    "w": "Binarisme",
+    "funDef": "Habitude de tout mettre dans deux cases, ce qui arrange les esprits simples et énerve les nuancés."
+  },
+  {
+    "w": "Bovarysme",
+    "funDef": "Maladie de ceux qui vivent dans un roman qu'ils n'ont pas écrit et que la réalité s'entête à corriger."
+  },
+  {
+    "w": "Bradylalie",
+    "funDef": "Façon de parler si lentement que l'interlocuteur finit la phrase avant vous, et souvent mieux."
+  },
+  {
+    "w": "Caducité",
+    "funDef": "Déchéance juridique ou physique d'une chose que le temps a simplement oubliée de renouveler."
+  },
+  {
+    "w": "Cagoulard",
+    "funDef": "Conspirateur à cagoule des années 30, qui prenait ses vœux de silence moins sérieusement que prévu."
+  },
+  {
+    "w": "Captation",
+    "funDef": "Art subtil de s'emparer d'un héritage en gagnant la confiance du testateur pendant ses dernières années."
+  },
+  {
+    "w": "Caqueteuse",
+    "funDef": "Pipelette professionnelle dont le flux de paroles ne s'interrompt que pendant le sommeil."
+  },
+  {
+    "w": "Cénesthésie",
+    "funDef": "Sentiment confus mais continu d'exister dans son corps, que la fièvre ou le jeûne peuvent perturber."
+  },
+  {
+    "w": "Chicanerie",
+    "funDef": "Art d'ergoter sur des minuties pour gagner du temps ou décourager l'adversaire légitime."
+  },
+  {
+    "w": "Christologie",
+    "funDef": "Spécialité théologique sur la nature du Christ, source de conciles orageux pendant quatre siècles."
+  },
+  {
+    "w": "Clémentine",
+    "funDef": "Petit agrume pratique qui se pèle facilement et disparaît de la table avant même qu'on le remarque."
+  },
+  {
+    "w": "Clérocratie",
+    "funDef": "Régime où les prêtres gouvernent, parfois avec la conviction que Dieu approuve leurs décisions fiscales."
+  },
+  {
+    "w": "Comminatoire",
+    "funDef": "Lettre ou discours qui fait peser une menace tellement sérieuse qu'on ne sait plus s'il faut rire ou trembler."
+  },
+  {
+    "w": "Contingence",
+    "funDef": "Philosophie du si : tout aurait pu être différent, ce qui est consolant quand c'est mauvais."
+  },
+  {
+    "w": "Convulsionnaire",
+    "funDef": "Fidèle janséniste pris de tremblements pieux, que les témoins ne savaient trop comment interpréter."
+  },
+  {
+    "w": "Cryptogamie",
+    "funDef": "Mode de reproduction discret des fougères et des mousses, par spores, sans aucune fleur pour l'annoncer."
+  },
+  {
+    "w": "Curialisme",
+    "funDef": "Tendance à placer les intérêts du Vatican avant ceux des croyants de base, tendance ancienne et tenace."
+  },
+  {
+    "w": "Dandysme",
+    "funDef": "Art de vivre où l'apparence est tout, que Beau Brummell a fondé et Oscar Wilde a porté à son comble."
+  },
+  {
+    "w": "Délation",
+    "funDef": "Art de rapporter les faits de quelqu'un à qui peut lui nuire, avec l'air de le faire pour le bien commun."
+  },
+  {
+    "w": "Dilection",
+    "funDef": "Amour parfait et désintéressé dont les mystiques remplissent leurs traités et les romantiques leurs poèmes."
+  },
+  {
+    "w": "Dimorphisme",
+    "funDef": "Différence visible entre mâles et femelles, allant des plumes de paon aux salaires inégaux."
+  },
+  {
+    "w": "Dithyrambique",
+    "funDef": "Éloge si enflé qu'il finit par rendre l'objet de l'admiration légèrement ridicule."
+  },
+  {
+    "w": "Dysphorie",
+    "funDef": "Sentiment de ne pas être à sa place dans sa propre vie, sans pouvoir en expliquer précisément la raison."
+  },
+  {
+    "w": "Économisme",
+    "funDef": "Vision du monde où tout a un prix et où les valeurs morales ont un coût de revient."
+  },
+  {
+    "w": "Ectoplasme",
+    "funDef": "Matière mystérieuse exsudée par les médiums, dont la consistance rappelle la choucroute selon les sceptiques."
+  },
+  {
+    "w": "Émasculation",
+    "funDef": "Opération radicale ou éditoriale consistant à priver quelqu'un ou quelque chose de sa force essentielle."
+  },
+  {
+    "w": "Entéléchie",
+    "funDef": "État idéal d'un être parvenu à sa pleine réalisation, que les humains approchent rarement."
+  },
+  {
+    "w": "Entropie",
+    "funDef": "Loi universelle expliquant pourquoi les chambres se mettent en désordre toutes seules mais pas l'inverse."
+  },
+  {
+    "w": "Épizootie",
+    "funDef": "Pandémie animale que les vétérinaires gèrent et les éleveurs redoutent."
+  },
+  {
+    "w": "Eschatologie",
+    "funDef": "Science des fins dernières qui prédit ce qui se passera après la mort, avec une certitude variable."
+  },
+  {
+    "w": "Quérulance",
+    "funDef": "Maladie des gens qui passent leur vie à chercher querelle à la justice et à perdre leurs procès."
+  },
+  {
+    "w": "Quiddité",
+    "funDef": "La chose même d'une chose, son être intime que les scolastiques débattaient avec une passion redoutable."
+  },
+  {
+    "w": "Quisquilie",
+    "funDef": "Vétille de la vétille, la version latine du rien du tout qu'on discute deux heures en réunion."
+  },
+  {
+    "w": "Quadrivium",
+    "funDef": "Programme universitaire médiéval comprenant arithmétique, géométrie, musique et astronomie, déjà ambitieux."
+  },
+  {
+    "w": "Quotidienneté",
+    "funDef": "Essence monotone de la vie ordinaire que les philosophes analysent et que les vivants subissent."
+  },
+  {
+    "w": "Rédhibition",
+    "funDef": "Retour légal d'un achat défectueux que le vendeur avait trop bien caché pour être honnête."
+  },
+  {
+    "w": "Réductionnisme",
+    "funDef": "Méthode scientifique qui simplifie tout jusqu'à l'essentiel, parfois jusqu'à l'inexact."
+  },
+  {
+    "w": "Régicide",
+    "funDef": "Crime d'État par excellence qui redéfinit les frontières entre la trahison et la révolution."
+  },
+  {
+    "w": "Réification",
+    "funDef": "Processus par lequel on transforme les gens en ressources humaines et les patients en cas cliniques."
+  },
+  {
+    "w": "Révulsion",
+    "funDef": "Dégoût qui remonte du ventre et contre lequel la volonté n'a aucun pouvoir."
+  },
+  {
+    "w": "Rixe",
+    "funDef": "Dispute qui commence par des mots et finit par des coups, souvent dans un contexte festif."
+  },
+  {
+    "w": "Rogomme",
+    "funDef": "Alcool de bas étage dont la seule qualité est le prix, et dont les amateurs paient cher les conséquences."
+  },
+  {
+    "w": "Rousseauisme",
+    "funDef": "Philosophie optimiste qui attribue tous les vices humains à la civilisation, et donc à quelqu'un d'autre."
+  },
+  {
+    "w": "Saturnisme",
+    "funDef": "Empoisonnement lent au plomb qui frappait les ouvriers fondeurs et les aristocrates romains buvant leur vin."
+  },
+  {
+    "w": "Scatologie",
+    "funDef": "Genre littéraire que Rabelais a pratiqué avec délectation et que les autres mentionnent avec embarras."
+  },
+  {
+    "w": "Scholastique",
+    "funDef": "Système de pensée médiéval qui réconciliait Aristote et la Bible avec une patience admirable."
+  },
+  {
+    "w": "Sémiologie",
+    "funDef": "Science qui étudie ce que les choses veulent dire au-delà de ce qu'elles montrent."
+  },
+  {
+    "w": "Séraphique",
+    "funDef": "D'une béatitude si parfaite qu'elle en devient légèrement irréelle pour les mortels ordinaires."
+  },
+  {
+    "w": "Simonie",
+    "funDef": "Commerce honteux des offices d'Église que les papes condamnaient pendant que leurs successeurs le pratiquaient."
+  },
+  {
+    "w": "Sophrosyne",
+    "funDef": "Vertu grecque de sagesse équilibrée qui consiste à ne pas vouloir plus qu'on ne peut obtenir sainement."
+  },
+  {
+    "w": "Spoliation",
+    "funDef": "Vol institutionnalisé qu'on habille de termes juridiques pour lui donner une apparence de légitimité."
+  },
+  {
+    "w": "Succédané",
+    "funDef": "Substitut de fortune qui dépanne sans convaincre, comme le café de chicorée pendant les guerres."
+  },
+  {
+    "w": "Synécdoque",
+    "funDef": "Façon de dire les voiles pour les bateaux, et d'espérer que l'interlocuteur comprend le reste."
+  },
+  {
+    "w": "Tartufferie",
+    "funDef": "Dévotion spectacle servant à couvrir des actions que la dévotion sincère condamnerait formellement."
+  },
+  {
+    "w": "Téléologie",
+    "funDef": "Philosophie du Tout est fait pour quelque chose, pratique pour donner un sens aux événements inexpliqués."
+  },
+  {
+    "w": "Ténébrisme",
+    "funDef": "Technique picturale qui fait ressortir les visages de l'obscurité, avec un dramatisme à couper le souffle."
+  },
+  {
+    "w": "Théodicée",
+    "funDef": "Exercice théologique délicat consistant à défendre Dieu contre les accusations du malheur humain."
+  },
+  {
+    "w": "Théogonie",
+    "funDef": "Généalogie divine que Hésiode a compilée avec rigueur, prouvant que les dieux grecs avaient des familles compliquées."
+  },
+  {
+    "w": "Timocratie",
+    "funDef": "Système electoral où le cens remplace le mérite, et où gouverner coûte d'abord de l'argent."
+  },
+  {
+    "w": "Tychisme",
+    "funDef": "Philosophie du hasard véritable, non récupérable par aucune loi, qui dérange les déterministes."
+  },
+  {
+    "w": "Tyrannicide",
+    "funDef": "Assassinat légitime selon certains philosophes et criminel selon les tyrans, sans consensus possible."
+  },
+  {
+    "w": "Ubuesque",
+    "funDef": "Si absurde et grotesque que même la fiction n'ose s'y aventurer, qualité attribuée aux administrations."
+  },
+  {
+    "w": "Unanimisme",
+    "funDef": "Théorie littéraire selon laquelle les foules ont une âme collective supérieure à la somme des individus."
+  },
+  {
+    "w": "Usufruit",
+    "funDef": "Jouissance légale d'un bien qu'on ne possède pas et qu'on devra rendre un jour à quelqu'un d'autre."
+  },
+  {
+    "w": "Utilitarisme",
+    "funDef": "Philosophie du plus grand bien pour le plus grand nombre, qui sacrifie souvent les minorités sur l'autel du calcul."
+  },
+  {
+    "w": "Vaingloire",
+    "funDef": "Gloire que l'on s'attribue soi-même, faute d'avoir réussi à convaincre les autres de le faire."
+  },
+  {
+    "w": "Vénalité",
+    "funDef": "Propriété de certains fonctionnaires et juges qui, faute de salaire suffisant, trouvent d'autres ressources."
+  },
+  {
+    "w": "Viatique",
+    "funDef": "Nourriture de route que les pèlerins emportaient, et dernier sacrement qu'on espère ne pas devoir recevoir trop tôt."
+  },
+  {
+    "w": "Villégiature",
+    "funDef": "Vacances bucoliques des classes aisées du XIXe siècle qui se ressourcaient dans leurs propriétés champêtres."
+  },
+  {
+    "w": "Volapük",
+    "funDef": "Langue inventée pour unir l'humanité, abandonnée avant que l'humanité ait eu le temps de la désapprendre."
+  },
+  {
+    "w": "Vulgate",
+    "funDef": "Version officielle et populaire de la Bible en latin, qui a dominé l'Occident pendant mille ans."
+  },
+  {
+    "w": "Walpurgis",
+    "funDef": "Nuit de sorcellerie obligatoire dans le calendrier populaire germanique, fêtée avec des feux et des costumes."
+  },
+  {
+    "w": "Weltanschauung",
+    "funDef": "Grand mot allemand pour dire vision du monde, qu'on cite en allemand pour paraître plus profond."
+  },
+  {
+    "w": "Wergeld",
+    "funDef": "Prix officiel d'un homme selon sa valeur sociale dans les sociétés germaniques, tableau disponible chez le juge."
+  },
+  {
+    "w": "Xanthippe",
+    "funDef": "Épouse célèbre pour son caractère difficile, au point que son nom est devenu un type littéraire."
+  },
+  {
+    "w": "Xénocratie",
+    "funDef": "Régime imposé de l'extérieur par des gens que la population n'a pas élus et ne peut pas renvoyer."
+  },
+  {
+    "w": "Xylographie",
+    "funDef": "Gravure sur bois ancêtre de l'imprimerie, dont les livres charmaient par leurs imperfections même."
+  },
+  {
+    "w": "Xylophage",
+    "funDef": "Mangeur de bois méthodique dont le travail est inaudible et les résultats catastrophiques."
+  },
+  {
+    "w": "Yataghan",
+    "funDef": "Lame ottomane à la courbure particulière qui se glissait dans la ceinture sans risque de blessure... en principe."
+  },
+  {
+    "w": "Zoochorie",
+    "funDef": "Service de livraison naturel par lequel les animaux sèment involontairement les plantes qu'ils mangent."
+  },
+  {
+    "w": "Zoonose",
+    "funDef": "Maladie qui fait le saut d'une espèce à l'autre, processus dont la Covid a rappelé l'existence brutalement."
+  },
+  {
+    "w": "Zoroastrisme",
+    "funDef": "Religion ancienne de Perse fondée sur la lutte du Bien et du Mal, dont Nietzsche a repris le prophète."
+  },
+  {
+    "w": "Abscission",
+    "funDef": "Largage automnal des feuilles par les arbres, mécanisme élégant qui donne du travail aux jardiniers."
+  },
+  {
+    "w": "Afféterie",
+    "funDef": "Préciosité dans les manières ou le langage qui signale à tous qu'on fait des efforts visibles."
+  },
+  {
+    "w": "Agapè",
+    "funDef": "Repas communautaire des premiers chrétiens qui combinait la foi et la nourriture avec plus ou moins d'égalité."
+  },
+  {
+    "w": "Ambage",
+    "funDef": "Manœuvre verbale servant à tourner autour du pot avec l'élégance d'un chat qui flaire son repas."
+  },
+  {
+    "w": "Anaclitique",
+    "funDef": "Dépendance amoureuse envers celui qui vous nourrit ou vous soigne, expliquée par Freud avec son vocabulaire habituel."
+  },
+  {
+    "w": "Andrologie",
+    "funDef": "Pendant masculin de la gynécologie, qui reçoit moins de patients car les hommes consultent moins."
+  },
+  {
+    "w": "Androphage",
+    "funDef": "Mangeur d'hommes dont l'existence réelle est souvent exagérée dans les récits de voyageurs anxieux."
+  },
+  {
+    "w": "Antiphon",
+    "funDef": "Chant liturgique dialogué entre deux groupes de chanteurs qui se répondent depuis des stalles opposées."
+  },
+  {
+    "w": "Aquosite",
+    "funDef": "Propriété des choses gorgées d'eau, utile pour évaluer le concombre et certains arguments."
+  },
+  {
+    "w": "Atonie",
+    "funDef": "Langueur profonde de l'âme ou du corps qui empêche jusqu'à l'effort de se plaindre."
+  },
+  {
+    "w": "Bateleur",
+    "funDef": "Artiste ambulant qui jongle avec les mots ou les balles sur les places pour nourrir sa famille."
+  },
+  {
+    "w": "Caducée",
+    "funDef": "Symbole médical à serpents qu'on confond souvent avec le bâton d'Esculape, source d'erreurs mémorables."
+  },
+  {
+    "w": "Causticité",
+    "funDef": "Mordant des propos qui brûle comme un acide et laisse des marques durables sur l'amour-propre."
+  },
+  {
+    "w": "Cogitation",
+    "funDef": "Pensée intense et silencieuse qu'on interrompt difficilement et dont le résultat est incertain."
+  },
+  {
+    "w": "Commisération",
+    "funDef": "Compassion sincère qu'on éprouve pour le malheur des autres avant de se réjouir d'y avoir échappé."
+  },
+  {
+    "w": "Corroboration",
+    "funDef": "Confirmation supplémentaire qu'on demande à ceux qui ont déjà dit la vérité mais qu'on ne croit pas."
+  },
+  {
+    "w": "Crédence",
+    "funDef": "Confiance accordée a priori à quelqu'un avant même qu'il l'ait méritée."
+  },
+  {
+    "w": "Décorum",
+    "funDef": "Code de bienséance non écrit que tout le monde est censé connaître et que personne n'explique."
+  },
+  {
+    "w": "Dysphasie",
+    "funDef": "Difficulté à trouver ses mots au moment précis où on en a le plus besoin."
+  },
+  {
+    "w": "Faillibilisme",
+    "funDef": "Philosophie de l'erreur possible qui garde l'esprit ouvert mais rend les certitudes difficiles."
+  },
+  {
+    "w": "Fatuité",
+    "funDef": "Vanité portée à un degré qui la rend comique même pour son titulaire si jamais il se regarde."
+  },
+  {
+    "w": "Fictionnalisation",
+    "funDef": "Art de romancer ce qui s'est passé pour que ça devienne plus intéressant que la réalité."
+  },
+  {
+    "w": "Flagrance",
+    "funDef": "Évidence si criante qu'on se demande comment certains arrivent à ne pas la voir."
+  },
+  {
+    "w": "Grégarisme",
+    "funDef": "Tendance à faire comme tout le monde, au cas où ce serait la bonne idée."
+  },
+  {
+    "w": "Gustation",
+    "funDef": "Sens dont les affinités avec la personnalité intriguent les psychologues et ravissent les cuisiniers."
+  },
+  {
+    "w": "Loquacité",
+    "funDef": "Talent verbal qui remplit tous les silences sans pour autant les remplir toujours de sens."
+  },
+  {
+    "w": "Lucre",
+    "funDef": "Profit financier que les gens vertueux dédaignent en public et poursuivent en privé."
+  },
+  {
+    "w": "Macération",
+    "funDef": "Trempage prolongé dans un liquide par lequel les fruits cèdent leur essence et les pécheurs leur orgueil."
+  },
+  {
+    "w": "Munificence",
+    "funDef": "Générosité de ceux qui ont assez pour donner en grand et qui le font avec un style qui s'en souvient."
+  },
+  {
+    "w": "Narcose",
+    "funDef": "Sommeil artificiel chimiquement induit, utile en chirurgie, non recommandé au volant."
+  },
+  {
+    "w": "Oblation",
+    "funDef": "Offrande rituelle qu'on présente à la divinité en espérant une contrepartie proportionnelle."
+  },
+  {
+    "w": "Occultation",
+    "funDef": "Disparition provisoire d'un astre ou durable d'une vérité inconfortable."
+  },
+  {
+    "w": "Opprobre",
+    "funDef": "Infamie sociale que la communauté inflige collectivement à celui qu'elle a décidé de condamner."
+  },
+  {
+    "w": "Ordalie",
+    "funDef": "Jugement divin par le feu ou l'eau bouillante selon la logique que l'innocent survivrait."
+  },
+  {
+    "w": "Ostraciser",
+    "funDef": "Bannir quelqu'un du groupe par vote, pratique athénienne devenue métaphore des dynamiques de bureau."
+  },
+  {
+    "w": "Outrecuidance",
+    "funDef": "Arrogance si monumentale qu'elle suscite plus d'admiration que d'indignation."
+  },
+  {
+    "w": "Paganité",
+    "funDef": "L'ensemble de ce qui est paganisme, mot rare pour dire ce que paganisme dit déjà."
+  },
+  {
+    "w": "Panégyrique",
+    "funDef": "Long éloge officiel qu'on prononce des morts et des vivants puissants, avec la même sincérité."
+  },
+  {
+    "w": "Acrimonie",
+    "funDef": "Amertume corrosive de celui qui répond à chaque message d'équipe par une pique, et signe quand même cordialement."
+  },
+  {
+    "w": "Acrostiche",
+    "funDef": "Poème à secret vertical où la première lettre de chaque ligne forme un mot caché, technique préférée des démissions passives-agressives."
+  },
+  {
+    "w": "Adventice",
+    "funDef": "Mauvaise herbe philosophique qui surgit là où on ne l'a pas semée, comme cette réunion ajoutée la veille au planning."
+  },
+  {
+    "w": "Affidé",
+    "funDef": "Homme de main loyal jusqu'à l'abnégation, version analogique du community manager qui défend la marque dans tous les commentaires."
+  },
+  {
+    "w": "Agreste",
+    "funDef": "Champêtre et un peu fruste, comme ce collègue qui ramène ses œufs frais au bureau et juge votre salade en sachet."
+  },
+  {
+    "w": "Alacrité",
+    "funDef": "Entrain pétillant de la personne qui répond à un mail à 8h02 avec trois points d'exclamation et une vraie joie de vivre suspecte."
+  },
+  {
+    "w": "Albâtre",
+    "funDef": "Pierre blanche si lisse et translucide qu'elle sert de comparaison obligatoire pour toute peau de roman et tout filtre de selfie."
+  },
+  {
+    "w": "Amphibologie",
+    "funDef": "Phrase à double sens involontaire qui fait dérailler une visio entière, du genre « j'ai vu Paul avec mes jumelles »."
+  },
+  {
+    "w": "Anamnèse",
+    "funDef": "Réminiscence solennelle de ce qu'on savait déjà sans le savoir, comme ce mot de passe qui revient pile après la réinitialisation."
+  },
+  {
+    "w": "Antienne",
+    "funDef": "Rengaine qu'on ressort à chaque réunion comme « il faut casser les silos », jusqu'à ce que personne n'y croie plus."
+  },
+  {
+    "w": "Apocope",
+    "funDef": "L'art de couper la queue des mots, responsable de « resto », « apéro » et de la moitié du vocabulaire en réunion d'agence."
+  },
+  {
+    "w": "Aréopage",
+    "funDef": "Comité de sages réunis pour trancher gravement, autrement dit le jury d'un appel d'offres qui choisira le moins-disant."
+  },
+  {
+    "w": "Argutie",
+    "funDef": "Finasserie verbale du juriste qui passe vingt minutes à distinguer « notamment » de « par exemple » dans un contrat."
+  },
+  {
+    "w": "Ataxie",
+    "funDef": "Désordre du geste qui transforme le simple fait de cliquer sur « Rejoindre la réunion » en numéro de funambule."
+  },
+  {
+    "w": "Atrabilaire",
+    "funDef": "Bilieux chronique qui voit dans chaque notification une attaque personnelle et dans chaque emoji un complot."
+  },
+  {
+    "w": "Avanie",
+    "funDef": "Humiliation cinglante administrée en réunion plénière, juste après un « sans vouloir te vexer »."
+  },
+  {
+    "w": "Avunculaire",
+    "funDef": "Relatif à l'oncle, ce personnage qui, à chaque repas de famille, t'explique la crypto et la géopolitique entre la poire et le fromage."
+  },
+  {
+    "w": "Balourdise",
+    "funDef": "Lourdeur sociale de celui qui répond « tout le monde » à un mail destiné à une seule personne, et y joint un mème."
+  },
+  {
+    "w": "Bélître",
+    "funDef": "Coquin sans envergure qu'on traite ainsi pour faire savant, l'équivalent châtié d'un commentaire YouTube particulièrement nul."
+  },
+  {
+    "w": "Bilboquet",
+    "funDef": "Jouet de l'adresse patiente, ancêtre analogique du jeu mobile auquel on s'acharne en réunion caméra éteinte."
+  },
+  {
+    "w": "Bonze",
+    "funDef": "Gros ponte intouchable d'une organisation, qu'on ne contredit jamais et dont les avis valent décret depuis 1998."
+  },
+  {
+    "w": "Cacochyme",
+    "funDef": "Souffreteux perpétuel qui pose une RTT pour un rhume mais court le marathon le dimanche suivant."
+  },
+  {
+    "w": "Capharnaüm",
+    "funDef": "Désordre absolu, état naturel de tout dossier partagé nommé « FINAL_v2_vraiment_final_bis »."
+  },
+  {
+    "w": "Captieux",
+    "funDef": "Trompeur sous des dehors de logique, comme cet argument commercial qui prouve qu'un abonnement à 99€ est « quasi gratuit »."
+  },
+  {
+    "w": "Casuistique",
+    "funDef": "Art savant de trouver l'exception qui arrange, pratiqué par celui qui explique pourquoi sa note de frais inclut un karaoké."
+  },
+  {
+    "w": "Chafouin",
+    "funDef": "À l'air faussement contrit, comme le visage de celui qui dit « j'ai un petit retard sur le rendu » avec trois semaines d'avance sur la catastrophe."
+  },
+  {
+    "w": "Chamarrer",
+    "funDef": "Surcharger de fioritures, comme cette présentation où chaque slide clignote, tournoie et explose en confettis animés."
+  },
+  {
+    "w": "Cingler",
+    "funDef": "Frapper net, au sens propre comme dans cette remarque qui cingle l'ego en open space sans qu'on puisse répliquer."
+  },
+  {
+    "w": "Circonlocution",
+    "funDef": "Long détour verbal pour ne pas dire « non », spécialité du manager qui « va voir ce qu'il peut faire » depuis six mois."
+  },
+  {
+    "w": "Coercition",
+    "funDef": "Contrainte exercée sous menace, comme ce « team building » obligatoire un samedi présenté comme un cadeau de l'entreprise."
+  },
+  {
+    "w": "Concaténer",
+    "funDef": "Mettre bout à bout, geste fondateur de l'informaticien et du fâcheux qui colle vingt mots-clés dans un seul titre de poste."
+  },
+  {
+    "w": "Coquecigrue",
+    "funDef": "Sornette grandiose, du calibre de la promesse « ce projet sera bouclé en deux semaines, sans dette technique »."
+  },
+  {
+    "w": "Courtaud",
+    "funDef": "Court et râblé, silhouette de l'imprimante du bureau qui survit à toutes les réorganisations et à toutes les pannes."
+  },
+  {
+    "w": "Cuistre",
+    "funDef": "Pédant insupportable qui corrige votre orthographe sur les réseaux mais confond « censé » et « sensé » dans la même phrase."
+  },
+  {
+    "w": "Déhiscence",
+    "funDef": "Éclatement programmé de la gousse qui libère ses graines, modèle naturel du dossier confidentiel qui « fuite » pile au bon moment."
+  },
+  {
+    "w": "Délétère",
+    "funDef": "Toxique au sens chimique et au sens RH, comme cette « ambiance d'équipe » qu'un seul collègue suffit à transformer en gaz lacrymogène."
+  },
+  {
+    "w": "Dévolu",
+    "funDef": "Acquis d'office à quelqu'un, comme la dernière part de gâteau au stagiaire qui range la cuisine commune."
+  },
+  {
+    "w": "Diaprer",
+    "funDef": "Colorer de reflets multiples, talent de la bulle de savon et du graphiste qui décline un logo en dix-sept variantes pastel."
+  },
+  {
+    "w": "Disette",
+    "funDef": "Pénurie dramatique, mot juste pour décrire l'état du frigo commun le vendredi soir après le passage de l'équipe."
+  },
+  {
+    "w": "Dispendieux",
+    "funDef": "Ruineux avec panache, qualificatif réservé au logiciel à 400€ par mois qu'on utilise pour envoyer trois fichiers."
+  },
+  {
+    "w": "Dolent",
+    "funDef": "Plaintif jusqu'au soupir, registre de la story Instagram « j'avais pas le moral » suivie de quarante photos de plage."
+  },
+  {
+    "w": "Ductile",
+    "funDef": "Malléable au point de prendre toute forme, comme l'avis du consultant qui s'aligne sur le client en temps réel."
+  },
+  {
+    "w": "Ébaubi",
+    "funDef": "Bouche bée d'ahurissement, état du nouvel embauché découvrant que le « process simple » fait quarante-deux étapes."
+  },
+  {
+    "w": "Égrillard",
+    "funDef": "Grivois sous prétexte d'humour, auteur du commentaire douteux qui transforme aussitôt le canal Slack en zone de silence gêné."
+  },
+  {
+    "w": "Émollient",
+    "funDef": "Adoucissant trompeur, comme ce mail « rassurant » de la direction qui calme tout le monde trois jours avant le plan social."
+  },
+  {
+    "w": "Endémique",
+    "funDef": "Solidement implanté quelque part, comme le bug du formulaire que tout le monde connaît et que personne ne corrigera jamais."
+  },
+  {
+    "w": "Énergumène",
+    "funDef": "Forcené notoire qui débarque en visio en hurlant qu'on a oublié de l'inviter à une réunion qui n'a jamais existé."
+  },
+  {
+    "w": "Épigraphe",
+    "funDef": "Citation savante en exergue, prétexte du gourou LinkedIn pour glisser une phrase de Sénèque avant de vendre sa formation à 2000€."
+  },
+  {
+    "w": "Esculape",
+    "funDef": "Médecin, dans le langage soutenu de celui qui dit « je consulte mon Esculape » au lieu d'avouer qu'il a tapé ses symptômes en ligne."
+  },
+  {
+    "w": "Exorde",
+    "funDef": "Entrée en matière soignée d'un discours, l'équivalent oratoire du « avant de commencer, est-ce que tout le monde m'entend bien ? »."
+  },
+  {
+    "w": "Fallacieux",
+    "funDef": "Mensonger avec finesse, qualité maîtresse du bandeau « il ne reste que 2 articles » qui en cache mille en stock."
+  },
+  {
+    "w": "Fariboles",
+    "funDef": "Sornettes débitées avec aplomb, telles que « on va révolutionner le marché » prononcées par une start-up de trois mois sans clients."
+  },
+  {
+    "w": "Fastueux",
+    "funDef": "Somptueux jusqu'à l'indécence, comme ce séminaire annuel à Marrakech d'une entreprise qui gèle les augmentations « par prudence »."
+  },
+  {
+    "w": "Fatras",
+    "funDef": "Amas indistinct de notes, onglets et brouillons qui constitue ce qu'on appelle pudiquement « mon système d'organisation »."
+  },
+  {
+    "w": "Faquin",
+    "funDef": "Goujat de bas étage, insulte raffinée pour celui qui pique votre repas étiqueté dans le frigo commun."
+  },
+  {
+    "w": "Félonie",
+    "funDef": "Trahison majeure du registre médiéval, parfaite pour qualifier le collègue qui présente votre idée comme la sienne devant le comité."
+  },
+  {
+    "w": "Fielleux",
+    "funDef": "Venimeux sous la politesse, registre du commentaire qui commence par « avec tout le respect que je te dois » et termine en lame de rasoir."
+  },
+  {
+    "w": "Forban",
+    "funDef": "Bandit hors-la-loi du registre maritime, recyclé pour décrire le revendeur qui multiplie par dix le prix d'une console à Noël."
+  },
+  {
+    "w": "Foucade",
+    "funDef": "Lubie soudaine, comme cette décision de « tout migrer sur un nouvel outil » prise un lundi matin et oubliée le mercredi."
+  },
+  {
+    "w": "Fourbe",
+    "funDef": "Hypocrite calculateur dont le sourire en réunion annonce toujours un mauvais coup dans le compte rendu."
+  },
+  {
+    "w": "Fragrant",
+    "funDef": "Délicieusement odorant, à ne pas confondre avec « flagrant », confusion qui transforme un parfum en délit dans bien des copies."
+  },
+  {
+    "w": "Frasque",
+    "funDef": "Incartade tapageuse qu'on raconte le lundi à la machine à café, généralement survenue lors du pot de départ du jeudi."
+  },
+  {
+    "w": "Fretin",
+    "funDef": "Menu poisson dont on ne se soucie pas, comme les « petites tâches secondaires » refilées à celui qui ose dire qu'il a du temps."
+  },
+  {
+    "w": "Fustiger",
+    "funDef": "Étriller publiquement, sport du commentateur en ligne qui fustige un film qu'il n'a manifestement pas regardé jusqu'au bout."
+  },
+  {
+    "w": "Gabegie",
+    "funDef": "Gaspillage chaotique érigé en système, illustré par le budget « innovation » qui finance trois babyfoots et zéro innovation."
+  },
+  {
+    "w": "Gandin",
+    "funDef": "Beau parleur tiré à quatre épingles, version costume-cintré du type qui prend la pose devant le miroir des toilettes du coworking."
+  },
+  {
+    "w": "Gargantuesque",
+    "funDef": "Démesuré jusqu'à l'absurde, comme le buffet du séminaire dont on parle encore six mois plus tard avec un mélange d'effroi et d'admiration."
+  },
+  {
+    "w": "Gausser (se)",
+    "funDef": "Se moquer avec gourmandise, activité préférée du fil de commentaires dès qu'une marque fait une faute d'orthographe dans sa pub."
+  },
+  {
+    "w": "Gent",
+    "funDef": "Engeance désignée d'un mot vieilli, comme « la gent du marketing » qu'on évoque avec un soupir entendu en réunion produit."
+  },
+  {
+    "w": "Goujat",
+    "funDef": "Malotru notoire dont la signature de mail dit « Bien cordialement » alors que le contenu dit clairement l'inverse."
+  },
+  {
+    "w": "Grabataire",
+    "funDef": "Cloué au lit, état revendiqué par message dès 7h du matin pour un mal de gorge, jamais incompatible avec une soirée le soir même."
+  },
+  {
+    "w": "Grandiloquent",
+    "funDef": "Pompeux et boursouflé, ton du post LinkedIn qui transforme « j'ai rendu un dossier à l'heure » en odyssée existentielle de 2000 mots."
+  },
+  {
+    "w": "Grégeois",
+    "funDef": "Feu inextinguible des Byzantins, ancêtre de la polémique en ligne qui s'embrase, qu'on arrose d'excuses et qui redouble de flammes."
+  },
+  {
+    "w": "Guéable",
+    "funDef": "Traversable à pied sec, qualité rare d'un dossier administratif et inexistante dès qu'apparaît le mot « justificatif complémentaire »."
+  },
+  {
+    "w": "Hâbleur",
+    "funDef": "Beau parleur infatigable qui a « failli signer avec Google » à chaque pause-café depuis trois ans, toujours « presque »."
+  },
+  {
+    "w": "Heaume",
+    "funDef": "Lourd casque médiéval couvrant toute la tête, ancêtre conceptuel du casque antibruit qu'on enfile pour ne plus entendre l'open space."
+  },
+  {
+    "w": "Hégémonie",
+    "funDef": "Domination écrasante d'un seul, comme celle du tableur Excel qui règne sur l'entreprise malgré dix logiciels censés le remplacer."
+  },
+  {
+    "w": "Hère",
+    "funDef": "Pauvre type sans le sou, généralement précédé de « pauvre », pour désigner le stagiaire qui paie sa tournée alors qu'il n'est pas payé."
+  },
+  {
+    "w": "Hiémal",
+    "funDef": "Relatif à l'hiver, mot savant pour décrire l'humeur du bureau quand le chauffage tombe en panne en décembre."
+  },
+  {
+    "w": "Hilote",
+    "funDef": "Esclave spartiate sans droits, ancêtre antique du collaborateur « polyvalent » qui cumule trois fiches de poste pour un seul salaire."
+  },
+  {
+    "w": "Hispide",
+    "funDef": "Hérissé de poils rêches, comme le menton du télétravailleur en visio qui jure pourtant « non non je sors un peu cette semaine »."
+  },
+  {
+    "w": "Histrion",
+    "funDef": "Cabotin théâtral qui transforme chaque réunion en one-man-show, surtout quand un décideur est dans la salle."
+  },
+  {
+    "w": "Idiosyncrasie",
+    "funDef": "Manie strictement personnelle, comme cet collègue qui ne répond aux mails qu'entre 16h17 et 16h23, sans explication."
+  },
+  {
+    "w": "Ignominie",
+    "funDef": "Infamie absolue, calibre du crime que constitue le fait de répondre « répondre à tous » à une invitation à un pot de départ."
+  },
+  {
+    "w": "Imberbe",
+    "funDef": "Glabre par jeunesse, le « petit nouveau » qu'on envoie chercher la clé du local imaginaire le premier jour."
+  },
+  {
+    "w": "Impécunieux",
+    "funDef": "Désargenté avec élégance, état chronique du freelance entre deux factures impayées qui répond pourtant « ça roule » à tout le monde."
+  },
+  {
+    "w": "Impéritie",
+    "funDef": "Incompétence officielle et notoire, qualité du chef de projet qui confond Slack et la conférence de presse en publiant la mauvaise info."
+  },
+  {
+    "w": "Imprécation",
+    "funDef": "Malédiction solennelle proférée à voix basse contre l'imprimante qui bourre toujours pile pendant le rendu urgent."
+  },
+  {
+    "w": "Incarnat",
+    "funDef": "Rouge chair éclatant, teinte exacte du visage d'un collègue surpris en train de critiquer le patron qui se tenait derrière lui."
+  },
+  {
+    "w": "Incommensurable",
+    "funDef": "Trop immense pour être mesuré, comme l'écart entre le temps annoncé d'une réunion (30 min) et sa durée réelle (deux heures)."
+  },
+  {
+    "w": "Inénarrable",
+    "funDef": "Trop cocasse pour être décrit, niveau de la story du collègue qui s'est endormi caméra allumée pendant la réunion du comité de direction."
+  },
+  {
+    "w": "Inféoder",
+    "funDef": "Placer sous tutelle docile, comme cette filiale « autonome » dont chaque décision doit remonter au siège pour validation."
+  },
+  {
+    "w": "Ingambe",
+    "funDef": "Vif sur ses jambes, qualité du collègue de 60 ans qui monte les escaliers deux par deux pendant que les jeunes attendent l'ascenseur."
+  },
+  {
+    "w": "Inopiné",
+    "funDef": "Survenu sans prévenir, comme le « petit point rapide » inopiné qui débarque dans l'agenda à 17h55 un vendredi."
+  },
+  {
+    "w": "Insipide",
+    "funDef": "Plat à tous les sens, qualificatif du discours d'entreprise truffé de « synergies » et « d'écosystèmes » qui ne dit rigoureusement rien."
+  },
+  {
+    "w": "Intempestif",
+    "funDef": "Mal tombé par essence, comme le notification sonore en pleine présentation au client le plus important de l'année."
+  },
+  {
+    "w": "Inverti",
+    "funDef": "Mis sens dessus dessous, état du planning quand un seul congé surprise renverse l'organisation soigneusement bâtie sur trois mois."
+  },
+  {
+    "w": "Inéluctable",
+    "funDef": "Impossible à éviter, comme le moment où, en pleine visio, quelqu'un demande « vous m'entendez ? » pour la quatrième fois."
+  },
+  {
+    "w": "Jaspiner",
+    "funDef": "Jacasser à mi-voix, activité du fond de la salle de réunion qui en sait toujours plus long que l'ordre du jour officiel."
+  },
+  {
+    "w": "Jérémiade",
+    "funDef": "Lamentation en boucle, registre du collègue qui transforme chaque pause-café en complainte sur sa charge de travail sans jamais agir."
+  },
+  {
+    "w": "Jocrisse",
+    "funDef": "Nigaud serviable qu'on charge de toutes les corvées en lui faisant croire que c'est « stratégique » pour sa carrière."
+  },
+  {
+    "w": "Lambin",
+    "funDef": "Traînard chronique dont le « je t'envoie ça dans cinq minutes » se mesure en jours ouvrés, voire en saisons."
+  },
+  {
+    "w": "Lampas",
+    "funDef": "Somptueux tissu de soie à motifs, le genre dont est tendu le fauteuil de direction pendant que l'équipe s'assoit sur des chaises pliantes."
+  },
+  {
+    "w": "Languide",
+    "funDef": "Alangui jusqu'à la pose, état revendiqué dans les selfies « j'ai zéro énergie aujourd'hui » suivis de huit heures de scroll intensif."
+  },
+  {
+    "w": "Larcin",
+    "funDef": "Petit vol discret, comme le stylo emprunté « cinq minutes » il y a trois ans et désormais propriété définitive de l'emprunteur."
+  },
+  {
+    "w": "Lénifiant",
+    "funDef": "Apaisant jusqu'à l'engourdissement, ton du discours rassurant de la direction juste avant l'annonce qu'on aurait dû redouter."
+  },
+  {
+    "w": "Liesse",
+    "funDef": "Jubilation collective, état rarissime de l'open space, atteint uniquement le jour où la machine à café offre enfin un vrai expresso."
+  },
+  {
+    "w": "Limpide",
+    "funDef": "Transparent comme de l'eau de roche, l'exact opposé du document juridique de douze pages qu'il faut signer « avant ce soir »."
+  },
+  {
+    "w": "Lithiase",
+    "funDef": "Production de petits cailloux internes, façon savante de dire « j'ai eu une colique néphrétique » pour impressionner l'assemblée."
+  },
+  {
+    "w": "Loquace",
+    "funDef": "Intarissable de nature, qualité du collègue qui répond « oui mais juste un truc rapide » et monopolise ensuite vingt minutes de réunion."
+  },
+  {
+    "w": "Louvoyer",
+    "funDef": "Avancer en zigzag pour éviter l'obstacle, art du manager qui répond à « c'est validé ou pas ? » par dix minutes de nuances."
+  },
+  {
+    "w": "Lubrique",
+    "funDef": "Obsédé sans pudeur, registre du regard insistant qu'on signale aux RH avec une capture d'écran à l'appui."
+  },
+  {
+    "w": "Lucubration",
+    "funDef": "Cogitation nocturne fumeuse, comme ce « concept révolutionnaire » griffonné à 3h du matin qui paraît absurde au réveil."
+  },
+  {
+    "w": "Madré",
+    "funDef": "Malin sous des airs de naïf, profil du vieux comptable qui « ne comprend rien à l'informatique » mais déjoue tous les audits."
+  },
+  {
+    "w": "Magister",
+    "funDef": "Maître d'école pontifiant, ressuscité pour qualifier celui qui corrige tout le monde en réunion avec un index levé permanent."
+  },
+  {
+    "w": "Mansuétude",
+    "funDef": "Indulgence souriante, qualité rare du manager qui pardonne un retard de livraison au lieu de lancer trois mails « urgent » en majuscules."
+  },
+  {
+    "w": "Maraud",
+    "funDef": "Filou de bas étage, insulte savoureuse pour celui qui resquille systématiquement à la cantine d'entreprise sans badge."
+  },
+  {
+    "w": "Marmoréen",
+    "funDef": "Froid et figé comme le marbre, exactement le visage du DRH quand on lui demande quand arrive la prime promise au printemps."
+  },
+  {
+    "w": "Matamore",
+    "funDef": "Vantard sans courage, le type qui « aurait dit ses quatre vérités au patron » mais qui se tait dès que le patron entre dans la pièce."
+  },
+  {
+    "w": "Maugréer",
+    "funDef": "Râler entre ses dents, langue maternelle de tout le bureau dès qu'un mail annonce « petit changement d'organisation à partir de lundi »."
+  },
+  {
+    "w": "Méandre",
+    "funDef": "Détour interminable, comme l'explication de quinze minutes du collègue dont on a oublié la question initiale dès la troisième phrase."
+  },
+  {
+    "w": "Mécréant",
+    "funDef": "Incroyant assumé, registre médiéval recyclé pour celui qui ose dire en réunion qu'il ne croit pas aux vertus du dernier outil collaboratif."
+  },
+  {
+    "w": "Mégère",
+    "funDef": "Harpie querelleuse du registre classique, terme qu'on n'emploie plus guère sans risquer un signalement bien mérité aux ressources humaines."
+  },
+  {
+    "w": "Mésange",
+    "funDef": "Petit oiseau vif et coloré, présence apaisante par la fenêtre du télétravailleur, jusqu'à ce qu'elle s'invite sur le rebord à 7h en chantant."
+  },
+  {
+    "w": "Mièvre",
+    "funDef": "Doucereux sans saveur, qualité de la carte de vœux d'entreprise où « bienveillance » apparaît quatre fois en deux phrases."
+  },
+  {
+    "w": "Minauder",
+    "funDef": "Faire des manières charmeuses, attitude du candidat qui, en entretien, rit trop fort à la blague pas drôle du recruteur."
+  },
+  {
+    "w": "Misérabilisme",
+    "funDef": "Goût appuyé pour étaler la détresse, registre du post qui transforme une journée banale en tragédie pour récolter des commentaires de soutien."
+  },
+  {
+    "w": "Mitoyen",
+    "funDef": "Partagé entre deux voisins, source intarissable de conflits, comme ce mur de bureau si fin qu'on entend toutes les visios d'à côté."
+  },
+  {
+    "w": "Mordicus",
+    "funDef": "Sans céder d'un pouce, façon dont on soutient mordicus que « ça marchait avant la mise à jour », preuve à l'appui de rien du tout."
+  },
+  {
+    "w": "Morigéner",
+    "funDef": "Sermonner d'un ton supérieur, spécialité du manager qui morigène l'équipe sur la ponctualité depuis sa chambre, caméra coupée, à 10h15."
+  },
+  {
+    "w": "Mucron",
+    "funDef": "Minuscule pointe au bout d'une feuille, détail botanique dont la seule existence justifie l'achat d'un dictionnaire de jardinage à 60€."
+  },
+  {
+    "w": "Muliebrité",
+    "funDef": "La féminité dite à la latine, mot si rare que l'employer en réunion garantit dix secondes de silence et un message privé « tu sors ça d'où ? »."
+  },
+  {
+    "w": "Nubile",
+    "funDef": "En âge nubile, terme savant et désuet que les présentateurs ressortent maladroitement, déclenchant aussitôt une polémique en ligne."
+  },
+  {
+    "w": "Obérer",
+    "funDef": "Plomber de dettes, verbe technique pour dire que l'abonnement à seize logiciels « indispensables » a obéré le budget de toute l'équipe."
+  },
+  {
+    "w": "Obombrer",
+    "funDef": "Plonger dans l'ombre, comme cette mauvaise nouvelle glissée en fin de réunion qui obombre instantanément l'ambiance jusqu'au week-end."
+  },
+  {
+    "w": "Obvier",
+    "funDef": "Prévenir un problème, verbe rare qu'on emploie dans les rapports pour donner l'impression qu'on a anticipé ce qu'on découvre en panique."
+  },
+  {
+    "w": "Olibrius",
+    "funDef": "Énergumène qui se fait remarquer, comme ce participant qui rejoint la visio à vélo, sur l'autoroute, en commentant le paysage."
+  },
+  {
+    "w": "Opiniâtre",
+    "funDef": "Têtu jusqu'au bout, qualité du collègue qui défend opiniâtrement Internet Explorer en 2026 « parce que ça marche très bien chez lui »."
+  },
+  {
+    "w": "Oripeaux",
+    "funDef": "Clinquant fané, comme la « refonte totale » d'un site qui consiste à changer la couleur d'un bouton et à se vanter d'une révolution."
+  },
+  {
+    "w": "Pâlichon",
+    "funDef": "Légèrement blafard, teint du collègue qui prétend « avoir dormi tôt » après une nuit blanche à finir le rapport qu'il jurait avoir bouclé."
+  },
+  {
+    "w": "Palonnier",
+    "funDef": "Barre qui répartit l'effort sur les commandes au pied, pièce d'avion dont le seul nom impressionne lors d'un dîner d'aérophiles."
+  },
+  {
+    "w": "Pandiculation",
+    "funDef": "L'étirement involontaire du réveil bras tendus et dos cambré, geste qu'on cache de justesse quand la caméra de la visio s'allume sans prévenir."
+  },
+  {
+    "w": "Pantois",
+    "funDef": "Sans voix de saisissement, état du destinataire d'un mail « pour info, ton poste est supprimé, bonne journée » envoyé un vendredi 17h."
+  },
+  {
+    "w": "Paronyme",
+    "funDef": "Faux jumeau lexical qui piège tout le monde, responsable de quiproquos du genre « collusion » et « collision » dans un même rapport."
+  },
+  {
+    "w": "Pataud",
+    "funDef": "Balourd dans ses gestes, comme le nouveau venu qui, voulant fermer une fenêtre Zoom, raccroche pour tout le monde au milieu d'un discours capital."
+  },
+  {
+    "w": "Patibulaire",
+    "funDef": "À la mine inquiétante, allure prêtée injustement à tout livreur tatoué qui sonne pendant qu'on est en pyjama en pleine journée."
+  },
+  {
+    "w": "Péroraison",
+    "funDef": "Final grandiose d'un discours, repérable au « pour conclure » qui précède en réalité encore vingt minutes d'envolées lyriques."
+  },
+  {
+    "w": "Pérorer",
+    "funDef": "Discourir avec suffisance, art du conférencier qui pérore sur « l'agilité » pendant qu'on attend la pause-café depuis quarante minutes."
+  },
+  {
+    "w": "Pétulance",
+    "funDef": "Énergie débordante et bruyante, état du stagiaire de première semaine qui veut « tout changer » avant même d'avoir trouvé les toilettes."
+  },
+  {
+    "w": "Picaresque",
+    "funDef": "Riche en péripéties cocasses, comme le récit-fleuve du collègue racontant comment il a survécu à une grève des trains et à un séminaire le même jour."
+  },
+  {
+    "w": "Pingre",
+    "funDef": "Radin jusqu'au ridicule, profil du collègue qui calcule au centime sa part de l'addition mais oublie systématiquement le pourboire."
+  },
+  {
+    "w": "Piteux",
+    "funDef": "Pitoyable et risible, état de la présentation bricolée à la dernière minute dont la première slide affiche encore « Lorem ipsum »."
+  },
+  {
+    "w": "Pleutre",
+    "funDef": "Couard notoire, celui qui, en réunion, approuve la mauvaise idée du chef puis la critique discrètement dans les messages privés."
+  },
+  {
+    "w": "Polisson",
+    "funDef": "Espiègle effronté, registre du collègue qui glisse un GIF coquin dans le canal officiel « par erreur » trois secondes avant de le supprimer."
+  },
+  {
+    "w": "Poltron",
+    "funDef": "Trouillard avéré, celui qui éteint sa caméra dès qu'on demande « quelqu'un veut présenter ses résultats devant le directeur ? »."
+  },
+  {
+    "w": "Posthume",
+    "funDef": "Survenu après le départ, comme la reconnaissance posthume d'un projet qu'on a sabandonné en mars et qu'on encense soudain en décembre."
+  },
+  {
+    "w": "Pourfendre",
+    "funDef": "Pourfendre une idée, verbe héroïque pour décrire le commentaire assassin qui démolit une proposition en trois lignes et un emoji moqueur."
+  },
+  {
+    "w": "Prébende",
+    "funDef": "Rente confortable sans effort, comme ce poste de « conseiller stratégique » dont personne ne sait ce qu'il fait mais que tout le monde envie."
+  },
+  {
+    "w": "Prétérition",
+    "funDef": "L'art de dire en feignant de taire, comme « je ne mentionnerai même pas son retard de trois semaines » glissé en plein bilan d'équipe."
+  },
+  {
+    "w": "Probité",
+    "funDef": "Honnêteté à toute épreuve, qualité du collègue qui refuse de gonfler sa note de frais alors que tout le service y voit un sport olympique."
+  },
+  {
+    "w": "Procrastiner",
+    "funDef": "Repousser indéfiniment, art consommé de celui qui réorganise ses dossiers, vide ses mails et arrose ses plantes plutôt que de commencer LA tâche."
+  },
+  {
+    "w": "Prodrome",
+    "funDef": "Signe annonciateur d'une catastrophe, comme le « on peut se voir cinq minutes ? » du manager qui précède toujours une révélation pénible."
+  },
+  {
+    "w": "Prurit",
+    "funDef": "Démangeaison irrésistible, propre comme figurée, comme ce prurit de répondre à un troll en ligne dont on sait pourtant qu'il faut l'ignorer."
+  },
+  {
+    "w": "Pugnace",
+    "funDef": "Bagarreur dans l'âme, qualité du collègue qui transforme un débat sur la couleur d'un bouton en guerre de tranchées de quatre heures."
+  },
+  {
+    "w": "Pusillanime",
+    "funDef": "Timoré jusqu'à la paralysie, profil du décideur qui repousse chaque décision « pour mûrir le sujet » depuis dix-huit mois de réunions."
+  },
+  {
+    "w": "Quémander",
+    "funDef": "Réclamer humblement et sans fin, comme celui qui quémande une augmentation par allusions depuis trois entretiens annuels sans jamais oser le dire."
+  },
+  {
+    "w": "Querelleur",
+    "funDef": "Chercheur de noises permanent, celui qui répond à chaque mail collectif par un « je ne suis pas d'accord » avant même de l'avoir lu."
+  },
+  {
+    "w": "Quolibet",
+    "funDef": "Moquerie lancée à la volée, comme les quolibets qui pleuvent dans le chat de la visio quand le patron partage son écran avec ses onglets persos."
+  },
+  {
+    "w": "Rabougri",
+    "funDef": "Atrophié et chétif, état de la plante du bureau que tout le monde « arrose de temps en temps » et que personne n'arrose jamais vraiment."
+  },
+  {
+    "w": "Rébarbatif",
+    "funDef": "Rebutant à souhait, qualité du règlement intérieur de quarante pages qu'on jure avoir lu en cochant la case « j'accepte »."
+  },
+  {
+    "w": "Récalcitrant",
+    "funDef": "Rétif à toute consigne, comme l'imprimante récalcitrante qui fonctionne parfaitement jusqu'à l'instant précis où le directeur a besoin d'imprimer."
+  },
+  {
+    "w": "Réfractaire",
+    "funDef": "Imperméable à tout changement, profil du collègue réfractaire au télétravail qui défend le présentiel total depuis sa résidence secondaire."
+  },
+  {
+    "w": "Rémora",
+    "funDef": "Poisson qui se colle aux requins pour voyager gratis, modèle marin du collègue qui s'accroche à chaque projet réussi sans jamais y contribuer."
+  },
+  {
+    "w": "Renâcler",
+    "funDef": "Rechigner ostensiblement, attitude du service entier quand on propose une réunion supplémentaire « juste pour aligner tout le monde » un lundi 8h."
+  },
+  {
+    "w": "Replet",
+    "funDef": "Confortablement rebondi, silhouette du chat de la maison qui s'incruste sur le clavier en pleine visio et que tout le monde trouve adorable."
+  },
+  {
+    "w": "Rétif",
+    "funDef": "Rebelle à toute direction, comme le formulaire en ligne rétif qui efface tout dès qu'on revient en arrière d'une seule page."
+  },
+  {
+    "w": "Ribambelle",
+    "funDef": "Longue file interminable, comme la ribambelle de mails « pour suivi » qui s'accumulent pendant trois jours de congé sagement déconnecté."
+  },
+  {
+    "w": "Roboratif",
+    "funDef": "Revigorant à souhait, qualité prêtée au café du matin sans lequel aucune réunion d'avant 9h ne survivrait à sa première minute."
+  },
+  {
+    "w": "Roide",
+    "funDef": "Raide à l'ancienne, posture du collègue qui se tient roide en entretien annuel parce qu'il a appris la veille que « l'attitude compte autant que les résultats »."
+  },
+  {
+    "w": "Rosserie",
+    "funDef": "Méchanceté élégante, l'art de la pique parfaitement tournée qui fait rire toute la table sauf, évidemment, son destinataire."
+  },
+  {
+    "w": "Roublard",
+    "funDef": "Malin sans vergogne, profil du vendeur roublard qui te fait signer une « offre exceptionnelle valable uniquement aujourd'hui » depuis trois mois."
+  },
+  {
+    "w": "Rubescent",
+    "funDef": "Virant au rouge, teinte rubescente du visage surpris en flagrant délit d'avoir oublié de couper son micro pendant un commentaire bien senti."
+  },
+  {
+    "w": "Sagace",
+    "funDef": "Fin limier de l'esprit, qualité du collègue sagace qui devine au ton du mail « il faut qu'on parle » l'exacte teneur de la mauvaise nouvelle."
+  },
+  {
+    "w": "Saugrenu",
+    "funDef": "Absurde au point d'être cocasse, comme l'idée saugrenue d'envoyer un sondage à toute l'entreprise pour choisir la couleur des gobelets."
+  },
+  {
+    "w": "Scabreux",
+    "funDef": "Délicat et glissant, qualité du sujet scabreux qu'un collègue lance en réunion plénière juste avant la pause, plongeant la salle dans le malaise."
+  },
+  {
+    "w": "Sciemment",
+    "funDef": "En toute connaissance de cause, comme celui qui clique sciemment sur « répondre à tous » pour bien faire savoir au chef qu'il a raison."
+  },
+  {
+    "w": "Sempiternel",
+    "funDef": "Éternellement recommencé, comme le sempiternel débat « on remet la clim à combien » qui ressurgit chaque été sans jamais trouver de paix."
+  },
+  {
+    "w": "Sentencieux",
+    "funDef": "Donneur de leçons solennel, celui qui répond à « il fait beau » par un proverbe sur l'éphémère et trois citations latines mal orthographiées."
+  },
+  {
+    "w": "Serein",
+    "funDef": "Imperturbablement calme, état que la direction réclame à l'équipe par mail intitulé « URGENT : restons sereins face à la crise majeure »."
+  },
+  {
+    "w": "Servile",
+    "funDef": "Obséquieux jusqu'à la flagornerie, comme l'imitation servile du « génie » concurrent qui copie tout, jusqu'à ses fautes de frappe."
+  },
+  {
+    "w": "Sibilant",
+    "funDef": "Sifflant à l'oreille, comme le bruit sibilant du micro mal réglé qui transforme chaque visio en concert expérimental involontaire."
+  },
+  {
+    "w": "Sinécure",
+    "funDef": "Poste grassement payé sans la moindre tâche, le Graal moderne, repérable au titre vague et à l'agenda mystérieusement vide de son titulaire."
+  },
+  {
+    "w": "Sourcilleux",
+    "funDef": "Tatillon et susceptible, profil du relecteur sourcilleux qui renvoie un document de douze pages pour une virgule manquante à la note de bas de page 47."
+  },
+  {
+    "w": "Stentor",
+    "funDef": "Voix de tonnerre, organe du collègue à voix de stentor dont chaque appel téléphonique en open space est audible jusqu'au parking."
+  },
+  {
+    "w": "Stipendier",
+    "funDef": "Payer en sous-main, comme ces faux avis cinq étoiles stipendiés qui vantent un restaurant que leurs auteurs n'ont jamais approché."
+  },
+  {
+    "w": "Subodorer",
+    "funDef": "Flairer sans preuve, talent du collègue qui subodore une réorganisation rien qu'en voyant deux directeurs déjeuner ensemble pour la première fois."
+  },
+  {
+    "w": "Subreptice",
+    "funDef": "Discrètement furtif, comme la subreptice modification du planning glissée à 23h en espérant que personne ne consulte ses notifications."
+  },
+  {
+    "w": "Succinct",
+    "funDef": "Bref et dense, qualité réclamée par tous pour leurs mails mais respectée par personne, surtout pas dans le mail intitulé « réponse rapide »."
+  },
+  {
+    "w": "Suranné",
+    "funDef": "Désuet et charmant, qualité du fax suranné qui trône encore dans un coin du bureau « au cas où », branché et fonctionnel contre toute attente."
+  },
+  {
+    "w": "Tabellion",
+    "funDef": "Notaire d'autrefois recyclé en raillerie, qu'on emploie pour le collègue qui fait signer un compte rendu de réunion comme un acte authentique."
+  },
+  {
+    "w": "Taciturne",
+    "funDef": "Avare de paroles, profil du collègue taciturne dont le « ça va » lâché une fois par semaine est analysé comme un événement social majeur."
+  },
+  {
+    "w": "Tarabiscoté",
+    "funDef": "Tortueux à plaisir, comme la procédure tarabiscotée pour obtenir un stylo, qui exige trois validations et un formulaire en double exemplaire."
+  },
+  {
+    "w": "Tatillon",
+    "funDef": "Maniaque du détail infime, profil du collègue tatillon qui reprend la mise en forme d'un tableau « parce que les colonnes ne sont pas alignées au pixel »."
+  },
+  {
+    "w": "Ténébreux",
+    "funDef": "Obscur et mystérieux, qualité du processus ténébreux par lequel un budget validé en janvier disparaît sans laisser de trace en mars."
+  },
+  {
+    "w": "Thaumaturge",
+    "funDef": "Faiseur de miracles autoproclamé, comme le consultant thaumaturge qui promet de « doubler vos ventes en un mois » avec un tableau de bord coloré."
+  },
+  {
+    "w": "Thuriféraire",
+    "funDef": "Flatteur professionnel, le thuriféraire qui applaudit chaque phrase du patron en réunion et like ses posts à 4h du matin pour bien le montrer."
+  },
+  {
+    "w": "Tonitruant",
+    "funDef": "D'un éclat assourdissant, comme l'entrée tonitruante du collègue qui claque la porte de la salle de réunion en croyant qu'elle était fermée à clé."
+  },
+  {
+    "w": "Tortueux",
+    "funDef": "Sinueux et retors, comme le raisonnement tortueux qui explique pourquoi un projet « globalement réussi » a en fait raté tous ses objectifs."
+  },
+  {
+    "w": "Touffu",
+    "funDef": "Dense au point d'être illisible, qualité du rapport touffu de cent pages dont seule la dernière, jamais lue, contenait l'information importante."
+  },
+  {
+    "w": "Tourbe",
+    "funDef": "Masse grouillante et anonyme, terme hautain pour désigner « la foule des commentateurs » sous une publication virale qui s'enflamme sans nuance."
+  },
+  {
+    "w": "Transi",
+    "funDef": "Glacé jusqu'aux os, état du télétravailleur transi devant un radiateur en panne, emmitouflé sous trois pulls mais souriant pour la visio."
+  },
+  {
+    "w": "Trémulant",
+    "funDef": "Parcouru de tremblements, comme la voix trémulante du candidat qui annonce ses prétentions salariales en espérant qu'on ne remarque pas sa panique."
+  },
+  {
+    "w": "Trivial",
+    "funDef": "Banal jusqu'à la vulgarité, registre de la blague triviale qui plombe instantanément une réunion sérieuse devant un client prestigieux."
+  },
+  {
+    "w": "Truculent",
+    "funDef": "Pittoresque et savoureux, qualité du collègue truculent dont les anecdotes de week-end durent plus longtemps que les réunions qu'elles interrompent."
+  },
+  {
+    "w": "Turlupiner",
+    "funDef": "Tracasser sans relâche, comme la question qui turlupine après l'entretien : « pourquoi le recruteur a-t-il dit on vous rappelle vite avec ce sourire ? »."
+  },
+  {
+    "w": "Tutélaire",
+    "funDef": "Protecteur de l'ombre, comme la figure tutélaire du vieux technicien qui sauve tous les serveurs en panne et que personne ne pense à remercier."
+  },
+  {
+    "w": "Ubéreux",
+    "funDef": "Débordant de fécondité, qualité ubéreuse du collègue qui pond trois idées géniales par jour, dont aucune ne sera jamais mise en œuvre."
+  },
+  {
+    "w": "Vélin",
+    "funDef": "Parchemin de luxe en peau de veau, support des chartes médiévales et fantasme du graphiste qui veut imprimer une carte de visite « avec du caractère »."
+  },
+  {
+    "w": "Vénéneux",
+    "funDef": "Empoisonneur silencieux, comme le champignon vénéneux que le collègue cueilleur du dimanche jure « parfaitement comestible » avant le drame."
+  },
+  {
+    "w": "Vermoulu",
+    "funDef": "Rongé de l'intérieur, état du système informatique vermoulu que tout le monde sait condamné mais que personne n'ose remplacer « avant l'année prochaine »."
+  },
+  {
+    "w": "Vertugadin",
+    "funDef": "Armature qui gonflait les jupes anciennes, ancêtre conceptuel de toute mode inconfortable qu'on adopte uniquement pour la photo de profil."
+  },
+  {
+    "w": "Veule",
+    "funDef": "Mou et sans ressort, profil du collègue veule qui change d'avis selon le dernier qui a parlé, et change encore selon le suivant."
+  },
+  {
+    "w": "Vétilleux",
+    "funDef": "Obsédé du rien, profil du relecteur vétilleux qui ignore une erreur de chiffre majeure mais signale trois fois l'espace en trop après une virgule."
+  },
+  {
+    "w": "Vibrion",
+    "funDef": "Personnage hyperactif et brouillon, le vibrion qui court de réunion en réunion sans jamais finir une seule des tâches qu'il a lui-même lancées."
+  },
+  {
+    "w": "Vindicte",
+    "funDef": "Soif de vengeance collective, comme la vindicte du fil de commentaires qui réclame le bannissement éternel d'une marque pour un emoji mal placé."
+  },
+  {
+    "w": "Volubile",
+    "funDef": "Bavard à débit rapide, profil du commercial volubile dont le pitch de trois minutes ne laisse aucun espace pour respirer, encore moins pour refuser."
+  },
+  {
+    "w": "Vorace",
+    "funDef": "Insatiable de nature, qualité de l'application vorace qui dévore la batterie du téléphone en arrière-plan alors qu'on jurait l'avoir fermée."
+  },
+  {
+    "w": "Avaricieux",
+    "funDef": "Radin maladif, profil de l'avaricieux qui éteint le chauffage commun en plein janvier pour économiser sur une facture qu'il ne paie même pas."
+  },
+  {
+    "w": "Cauteleux",
+    "funDef": "Rusé et méfiant, profil du négociateur cauteleux qui sourit en serrant la main mais relit chaque ligne du contrat trois fois, loupe à la main."
+  },
+  {
+    "w": "Diaphane",
+    "funDef": "Translucide et délicat, teint diaphane du télétravailleur qui n'a pas vu le soleil depuis trois semaines mais réclame « plus de lumière » en visio."
+  },
+  {
+    "w": "Faraud",
+    "funDef": "Fier comme un paon, attitude du collègue faraud qui paonne après avoir résolu un bug que tout le monde avait déjà oublié depuis deux mois."
+  },
+  {
+    "w": "Goguenard",
+    "funDef": "Moqueur narquois, profil du collègue goguenard dont le « ah, intéressant ce choix » signifie en réalité « tu vas droit dans le mur, et je le sais »."
+  },
+  {
+    "w": "Hagard",
+    "funDef": "Au regard égaré, état hagard du collègue qui découvre que son fichier « ouvert depuis trois jours » n'avait pas été enregistré une seule fois."
+  },
+  {
+    "w": "Hâve",
+    "funDef": "Blême et défait, visage hâve du chef de projet en fin de sprint qui se nourrit exclusivement de café froid et d'espoirs déçus depuis dix jours."
+  },
+  {
+    "w": "Insidieux",
+    "funDef": "Sournoisement progressif, comme la fuite insidieuse du sens d'une réunion qui dérive lentement d'« aligner le planning » à « refaire toute la stratégie »."
+  },
+  {
+    "w": "Jovial",
+    "funDef": "Gai et chaleureux, qualité du collègue jovial dont la bonne humeur permanente à 7h du matin reste le plus grand mystère scientifique de l'open space."
+  },
+  {
+    "w": "Narquois",
+    "funDef": "Ironiquement moqueur, ton narquois du collègue qui répond « bien sûr, ça va sûrement marcher cette fois » à la énième promesse de réorganisation miracle."
+  },
+  {
+    "w": "Obséquieux",
+    "funDef": "Flatteur jusqu'à la nausée, attitude obséquieuse de celui qui ouvre toutes les portes au directeur de visite mais ignore superbement le livreur du midi."
+  },
+  {
+    "w": "Pernicieux",
+    "funDef": "Nuisible en douce, comme l'habitude pernicieuse de répondre aux mails à minuit, qui finit par devenir la norme attendue de toute l'équipe."
+  },
+  {
+    "w": "Pétulant",
+    "funDef": "Débordant d'énergie remuante, attitude pétulante du stagiaire qui propose de « tout réinventer » avant même d'avoir compris comment ouvrir son agenda partagé."
+  },
+  {
+    "w": "Roublardise",
+    "funDef": "Malice sans scrupule, art de la roublardise du commercial qui transforme un « non catégorique » du client en « il faut juste lui laisser le temps de dire oui »."
+  },
+  {
+    "w": "Sardonique",
+    "funDef": "D'une ironie glaciale, comme le sourire sardonique du collègue qui regarde s'écrouler le projet dont il avait prédit l'échec depuis le premier jour."
+  },
+  {
+    "w": "Sirupeux",
+    "funDef": "D'une douceur écœurante, ton sirupeux du mail collectif « Joyeux vendredi à toute la magnifique famille ! » assorti de douze émojis arc-en-ciel."
+  },
+  {
+    "w": "Sournois",
+    "funDef": "Faussement aimable, profil sournois du collègue qui te félicite chaleureusement en réunion et critique méthodiquement ton travail dès que tu quittes la salle."
+  },
+  {
+    "w": "Truchement",
+    "funDef": "Intermédiaire obligé, comme le truchement du « il faut que ça remonte à la direction » par lequel toute idée disparaît mystérieusement avant d'aboutir."
+  },
+  {
+    "w": "Abscons",
+    "funDef": "Volontairement obscur, qualité du jargon abscons d'un rapport où « optimiser le ROI omnicanal des synergies » signifie en fait « vendre plus de trucs »."
+  },
+  {
+    "w": "Acariâtre",
+    "funDef": "D'humeur de chien, profil du voisin de bureau acariâtre qui soupire à chaque conversation, gronde à chaque rire et exige le silence absolu de toute l'humanité."
+  },
+  {
+    "w": "Aduler",
+    "funDef": "Encenser sans mesure, comme aduler le moindre post du fondateur sur les réseaux avec des « visionnaire ! génial ! » qu'on ne pense pas une seconde."
+  },
+  {
+    "w": "Affligeant",
+    "funDef": "D'une médiocrité navrante, niveau de la présentation affligeante dont la seule animation est un texte qui rebondit façon économiseur d'écran des années 90."
+  },
+  {
+    "w": "Aigrelet",
+    "funDef": "Délicatement acide, ton aigrelet du « félicitations » envoyé par un collègue à qui on vient de souffler la promotion qu'il convoitait depuis trois ans."
+  },
+  {
+    "w": "Allègre",
+    "funDef": "Plein d'un entrain léger, démarche allègre du collègue qui s'en va en vacances le vendredi soir pendant que les autres rament encore sur le rendu."
+  },
+  {
+    "w": "Amène",
+    "funDef": "D'une amabilité raffinée, ton amène du courriel diplomatique qui annonce une catastrophe en commençant par « j'espère que vous allez bien » et trois compliments."
+  },
+  {
+    "w": "Amphigourique",
+    "funDef": "Confus jusqu'à l'absurde, qualité du discours amphigourique où chaque phrase contredit la précédente et où la conclusion renvoie au point de départ."
+  },
+  {
+    "w": "Atermoyer",
+    "funDef": "Reporter sans fin, art d'atermoyer du décideur qui répond à chaque relance par « je reviens vers vous très vite » depuis le début du calendrier grégorien."
+  },
+  {
+    "w": "Bonhomie",
+    "funDef": "Gentillesse simple et bon enfant, qualité du collègue dont la bonhomie désarme même les clients les plus furieux qui finissent par s'excuser eux-mêmes."
+  },
+  {
+    "w": "Cacographie",
+    "funDef": "L'art involontaire de massacrer l'orthographe, brillamment illustré par le mail officiel de la direction truffé de fautes mais intitulé « COMUNICATION IMPORTENTE »."
+  },
+  {
+    "w": "Cagneux",
+    "funDef": "Aux genoux rentrés vers l'intérieur, démarche cagneuse qu'on adopte involontairement après huit heures sur une chaise de bureau « ergonomique » à 19€."
+  },
+  {
+    "w": "Chenu",
+    "funDef": "À la tête blanchie par les ans, allure chenue du doyen du service que tout le monde consulte en secret quand le logiciel « ultra-moderne » plante encore."
+  },
+  {
+    "w": "Concupiscent",
+    "funDef": "Au regard nettement trop appuyé, attitude concupiscente qu'on signale aux RH avec capture d'écran horodatée et témoins à l'appui dès la première occurrence."
+  },
+  {
+    "w": "Contrit",
+    "funDef": "Sincèrement repentant, mine contrite du collègue qui présente ses excuses pour le mail « répondre à tous » envoyé à trois mille personnes par mégarde."
+  },
+  {
+    "w": "Cuistrerie",
+    "funDef": "Pédanterie ridicule, comme la cuistrerie de celui qui corrige « pallier à » en réunion mais écrit « malgré que » dans tous ses comptes rendus officiels."
+  },
+  {
+    "w": "Débonnaire",
+    "funDef": "Bienveillant et coulant, profil du manager débonnaire qui valide tous les congés, oublie tous les retards et se demande pourquoi rien n'est jamais livré à temps."
+  },
+  {
+    "w": "Délétion",
+    "funDef": "Disparition pure et simple, comme la délétion accidentelle du dossier partagé que personne n'avait sauvegardé parce que « c'était sur le cloud, donc safe »."
+  },
+  {
+    "w": "Désinvolte",
+    "funDef": "D'un détachement frôlant l'insolence, attitude désinvolte du collègue qui arrive en retard à sa propre présentation, café à la main, en lançant « bon, on en était où ? »."
+  },
+  {
+    "w": "Dévot",
+    "funDef": "Pratiquant zélé, ou faux dévot, comme l'apôtre dévot de la « culture d'entreprise » qui récite les valeurs affichées au mur tout en piétinant chacune d'elles."
+  },
+  {
+    "w": "Échauffourée",
+    "funDef": "Bagarre brève et brouillonne, comme l'échauffourée verbale de fin de réunion quand deux services se disputent la paternité d'un succès qu'aucun n'avait soutenu."
+  },
+  {
+    "w": "Éconduire",
+    "funDef": "Refuser avec courtoisie, art d'éconduire du recruteur qui termine par « votre profil est génial, on garde votre CV précieusement » avant de l'oublier instantanément."
+  },
+  {
+    "w": "Élucubration",
+    "funDef": "Théorie fumeuse et alambiquée, comme l'élucubration du gourou qui prouve par un graphique en spirale que la productivité dépend de la phase de la lune."
+  },
+  {
+    "w": "Emberlificoter",
+    "funDef": "Embrouiller à dessein, art d'emberlificoter du commercial qui noie une clause défavorable sous trente pages de conditions « que personne ne lit jamais, c'est standard »."
+  },
+  {
+    "w": "Émérite",
+    "funDef": "Chevronné et reconnu, comme le technicien émérite qui répare en trente secondes ce que trois consultants à 1000€ la journée avaient déclaré « techniquement impossible »."
+  },
+  {
+    "w": "Esseulé",
+    "funDef": "Abandonné dans la solitude, sort de l'esseulé qui télétravaille depuis si longtemps qu'il commence à donner des prénoms à ses plantes et à les inviter en réunion."
+  },
+  {
+    "w": "Étique",
+    "funDef": "D'une maigreur squelettique, à ne pas confondre avec « éthique », confusion qui transforme un débat moral en bulletin de santé dans plus d'une copie d'examen."
+  },
+  {
+    "w": "Exécrable",
+    "funDef": "D'une qualité épouvantable, niveau du café exécrable de la machine du couloir, qu'on continue pourtant de boire chaque matin par fidélité et désespoir mêlés."
+  },
+  {
+    "w": "Factieux",
+    "funDef": "Fauteur de troubles organisé, profil factieux du collègue qui monte une pétition contre le nouveau logiciel avant même que quiconque ait pu l'essayer une fois."
+  },
+  {
+    "w": "Falot",
+    "funDef": "Terne et sans relief, profil du candidat falot dont, à la fin de l'entretien, personne dans le jury n'est capable de se rappeler ni le nom ni le visage."
+  },
+  {
+    "w": "Fauve",
+    "funDef": "D'un roux sauvage, ou désignant l'odeur fauve du collègue qui revient de sa séance de sport de midi sans avoir pris le temps d'une douche pourtant fortement recommandée."
+  },
+  {
+    "w": "Fielleusement",
+    "funDef": "Avec une méchanceté doucereuse, manière fielleusement aimable dont on glisse « content que ça ait fini par marcher, depuis le temps » à un collègue enfin promu."
+  },
+  {
+    "w": "Floconneux",
+    "funDef": "D'une légèreté duveteuse, aspect floconneux du nuage de poussière qui s'envole du ventilateur de l'ordinateur qu'on n'a pas nettoyé depuis son achat en 2019."
+  },
+  {
+    "w": "Fourbu",
+    "funDef": "Épuisé jusqu'à l'os, état fourbu du chef de projet qui a enchaîné dix réunions sur un sujet qui aurait tenu, tout le monde le savait, dans un seul mail de trois lignes."
+  },
+  {
+    "w": "Fringant",
+    "funDef": "Plein d'une vivacité élégante, allure fringante du collègue qui arrive au bureau frais et souriant après un cours de yoga de 6h, café vert en main, pendant que les autres titubent."
+  },
+  {
+    "w": "Gargouillis",
+    "funDef": "Bruit liquide indiscret, gargouillis du ventre qui résonne soudain en pleine réunion silencieuse, juste après que tout le monde a sauté le déjeuner pour finir le dossier."
+  },
+  {
+    "w": "Gausserie",
+    "funDef": "Raillerie amusée, gausserie générale qui éclate dans le chat quand un collègue partage par erreur son fond d'écran orné de chatons en costume de pirate."
+  },
+  {
+    "w": "Goinfrer (se)",
+    "funDef": "Se gaver sans la moindre retenue, comme se goinfrer des viennoiseries du séminaire avant 9h, en justifiant chaque part par un « il ne faut pas que ça se perde »."
+  },
+  {
+    "w": "Grandguignolesque",
+    "funDef": "D'une horreur exagérée et théâtrale, qualité grandguignolesque de la réaction du service informatique quand un stagiaire ose demander pourquoi on ne migre pas enfin vers le cloud."
+  },
+  {
+    "w": "Hagiographe",
+    "funDef": "Biographe trop élogieux, comme l'hagiographe maison qui rédige le portrait du fondateur pour le site en oubliant soigneusement les trois faillites précédentes."
+  },
+  {
+    "w": "Hilarant",
+    "funDef": "Irrésistiblement comique, niveau du correcteur automatique hilarant qui transforme « je confirme la réunion » en un message tellement absurde qu'il devient légendaire dans l'équipe."
+  },
+  {
+    "w": "Idoine",
+    "funDef": "Parfaitement adapté, comme l'outil idoine qu'on cherche pendant six mois, qu'on finit par développer en interne, et qui existait déjà, gratuit, depuis le début."
+  },
+  {
+    "w": "Impétueux",
+    "funDef": "Fougueux et irréfléchi, élan impétueux du nouveau directeur qui décide de « tout réorganiser dès lundi » sans avoir encore compris ce que fait la moitié de ses équipes."
+  },
+  {
+    "w": "Incurie",
+    "funDef": "Négligence coupable, incurie administrative par laquelle un dossier vital reste « en attente de validation » sur le bureau de quelqu'un parti à la retraite il y a deux ans."
+  },
+  {
+    "w": "Inopportun",
+    "funDef": "Mal tombé par excellence, comme la question inopportune « et le bilan, on en parle quand ? » lancée pile pendant le pot de Noël, le verre à la main."
+  },
+  {
+    "w": "Jaseur",
+    "funDef": "Bavard indiscret, profil du jaseur du bureau qui connaît les augmentations de tout le monde avant les intéressés et les partage « en toute confidentialité » avec toute l'entreprise."
+  },
+  {
+    "w": "Lascif",
+    "funDef": "Empreint d'une sensualité appuyée, regard lascif qu'on évite soigneusement de croiser à la photocopieuse et qu'on documente, le cas échéant, pour les ressources humaines."
+  },
+  {
+    "w": "Lénitif",
+    "funDef": "Apaisant comme un baume, vertu lénitive du message « on en reparle à la rentrée » qui suspend miraculeusement tous les conflits jusqu'à septembre, où ils reprennent intacts."
+  },
+  {
+    "w": "Lippu",
+    "funDef": "Aux lèvres charnues et proéminentes, détail anatomique qu'aucun filtre de visio ne parvient à corriger malgré les trois mises à jour « beauté » de l'application."
+  },
+  {
+    "w": "Logorrhéique",
+    "funDef": "Pris d'un flot de paroles incontrôlable, profil logorrhéique du collègue qui répond « juste un mot rapide » et tient ensuite la parole pendant quarante minutes sans respirer."
+  },
+  {
+    "w": "Madrigal",
+    "funDef": "Compliment galant et tourné avec art, madrigal qu'on n'envoie plus guère qu'en commentaire d'une photo, sous forme de trois emojis et d'un « trop belle ! » sans majuscule."
+  },
+  {
+    "w": "Maléfique",
+    "funDef": "Doté d'un pouvoir de nuisance occulte, qualité maléfique de l'imprimante qui sent toujours quand un document est vital et choisit précisément ce moment pour bourrer du papier."
+  },
+  {
+    "w": "Mansuet",
+    "funDef": "D'une douceur paisible, naturel mansuet du collègue qui pardonne le mail incendiaire qu'on lui a envoyé par erreur et propose même de relire la version corrigée."
+  },
+  {
+    "w": "Maussade",
+    "funDef": "D'humeur sombre et grise, état maussade de l'open space le premier lundi de novembre, quand la nuit tombe à 17h et que le café est encore plus mauvais que d'habitude."
+  },
+  {
+    "w": "Mélifluous",
+    "funDef": "Suave jusqu'à l'écœurement, ton mielleux du commercial dont chaque phrase coule comme du sirop et dont on devine, derrière chaque compliment, l'option payante à 49€."
+  },
+  {
+    "w": "Mésintelligence",
+    "funDef": "Brouille feutrée, mésintelligence persistante entre deux services qui se sourient en réunion et se sabotent méthodiquement par mails interposés le reste de la semaine."
+  },
+  {
+    "w": "Minuscule",
+    "funDef": "D'une petitesse infime, taille minuscule de la clause cruciale écrite en corps 6 tout en bas du contrat, juste sous « lu et approuvé, signez ici sans réfléchir »."
+  },
+  {
+    "w": "Morguer",
+    "funDef": "Toiser avec mépris, art de morguer du collègue qui te regarde de haut parce que tu utilises encore la souris alors que lui « connaît tous les raccourcis clavier »."
+  },
+  {
+    "w": "Narquoiserie",
+    "funDef": "Ironie sournoise et fine, narquoiserie du « bien joué » glissé à un collègue dont le projet vient de capoter spectaculairement devant le comité de direction au complet."
+  },
+  {
+    "w": "Nébuleux",
+    "funDef": "Vague et brumeux, qualité nébuleuse de la « vision stratégique à cinq ans » présentée en quatre slides dont aucune ne contient un seul chiffre ni une seule date concrète."
+  },
+  {
+    "w": "Obombrage",
+    "funDef": "Voile d'ombre discret, obombrage léger que projette sur la salle l'annonce d'une « petite réorganisation » dont chacun comprend, au ton employé, qu'elle sera énorme."
+  },
+  {
+    "w": "Onctueux",
+    "funDef": "D'une amabilité grasse et glissante, ton onctueux du démarcheur téléphonique qui t'appelle « cher ami » dès la deuxième seconde et te propose une cuisine équipée dont tu n'as pas besoin."
+  },
+  {
+    "w": "Outrancier",
+    "funDef": "Exagéré jusqu'à l'absurde, ton outrancier du communiqué qui qualifie de « tremblement de terre dans le secteur » la sortie d'une mise à jour qui change la police de caractères."
+  },
+  {
+    "w": "Pacant",
+    "funDef": "Rustre mal dégrossi, terme régional savoureux pour qualifier celui qui répond à un message soigné par un « ok » sec, sans majuscule, sans point, sans aucun égard."
+  },
+  {
+    "w": "Palabrer",
+    "funDef": "Discourir interminablement sans rien décider, art de palabrer du comité qui consacre deux heures à débattre du lieu d'un séminaire qui, finalement, n'aura jamais lieu."
+  },
+  {
+    "w": "Patelin",
+    "funDef": "Doucereux et insinuant, ton patelin du commercial qui t'appelle par ton prénom, s'enquiert de ta famille et glisse, mine de rien, le bon de commande sous ta main."
+  },
+  {
+    "w": "Pédant",
+    "funDef": "Étaleur de science prétentieux, profil du pédant qui ponctue chaque phrase d'un « comme chacun sait » suivi d'une information que strictement personne ne connaissait."
+  },
+  {
+    "w": "Perclus",
+    "funDef": "Raidi et engourdi, état perclus du télétravailleur qui se lève après huit heures de chaise et marche comme un robot rouillé jusqu'à la cuisine pour un énième café."
+  },
+  {
+    "w": "Pérégrin",
+    "funDef": "Voyageur lointain et un peu mystérieux, allure de pérégrin du nouveau collègue muté d'une filiale dont personne ne savait l'existence et dont nul ne connaît le rôle exact."
+  },
+  {
+    "w": "Persifler",
+    "funDef": "Se moquer sous des dehors aimables, art de persifler du collègue qui te félicite « pour le courage qu'il a fallu pour oser présenter un truc pareil au directeur »."
+  },
+  {
+    "w": "Picoter",
+    "funDef": "Provoquer mille petites piqûres, sensation qui picote les yeux fixés sur l'écran depuis l'aube et que trois gouttes de collyre ne suffisent jamais vraiment à calmer."
+  },
+  {
+    "w": "Piètre",
+    "funDef": "D'une médiocrité affligeante, niveau piètre de l'excuse « j'ai cru que la réunion était demain » avancée pour la quatrième fois ce mois-ci, toujours avec le même aplomb."
+  },
+  {
+    "w": "Plébéien",
+    "funDef": "Du commun, jugé sans noblesse, comme le café plébéien de la machine que méprise ouvertement le collègue revenu d'un stage de barista et désormais inconsolable."
+  },
+  {
+    "w": "Poltronnerie",
+    "funDef": "Lâcheté assumée, poltronnerie du collègue qui éteint systématiquement sa caméra et coupe son micro dès qu'on prononce les mots « qui se porte volontaire pour présenter ? »."
+  },
+  {
+    "w": "Pondéreux",
+    "funDef": "D'une lourdeur considérable, qualité pondéreuse du rapport annuel de trois cents pages que tout le monde imprime, que personne ne lit, et qui sert surtout à caler une porte."
+  },
+  {
+    "w": "Préchi-prêcha",
+    "funDef": "Sermon moralisateur en boucle, préchi-prêcha du séminaire annuel sur « les valeurs de l'entreprise » qu'on subit chaque année, mot pour mot, sans qu'aucune valeur n'ait jamais bougé."
+  },
+  {
+    "w": "Prodigalité",
+    "funDef": "Générosité dispendieuse, prodigalité du budget « événementiel » qui finance un DJ, des fontaines à chocolat et des hologrammes pour célébrer le déménagement d'un seul étage."
+  },
+  {
+    "w": "Prolixe",
+    "funDef": "Bavard et délayé, profil prolixe de l'auteur du compte rendu de douze pages pour une réunion d'un quart d'heure dont la seule décision tenait en une ligne."
+  },
+  {
+    "w": "Pugnacité",
+    "funDef": "Ténacité combative, pugnacité admirable du collègue qui défend pendant trois heures un point de détail dans une réunion qui, sans lui, aurait pu durer dix minutes."
+  },
+  {
+    "w": "Quinteux",
+    "funDef": "D'humeur imprévisible et capricieuse, tempérament quinteux du vieux serveur informatique qui plante un jour sur deux selon des critères que personne, jamais, n'a réussi à cerner."
+  },
+  {
+    "w": "Rabâcher",
+    "funDef": "Répéter à n'en plus finir, art de rabâcher du collègue qui ressort « de mon temps, on n'avait pas tous ces outils » à chaque mise à jour, depuis maintenant douze ans."
+  },
+  {
+    "w": "Rancunier",
+    "funDef": "Inapte au pardon, profil rancunier du collègue qui se souvient encore, trois ans après, du jour où on lui a pris « sa » place de parking lors d'un séminaire dans une autre ville."
+  },
+  {
+    "w": "Réticent",
+    "funDef": "Hésitant et sur la réserve, attitude réticente de l'équipe entière à l'idée d'« essayer un nouvel outil collaboratif », le quatrième de l'année, qui promet encore de « tout simplifier »."
+  },
+  {
+    "w": "Revêche",
+    "funDef": "D'un abord rugueux, caractère revêche du gardien de l'immeuble qui répond à « bonjour, comment allez-vous ? » par un grognement et le claquement définitif de sa fenêtre."
+  },
+  {
+    "w": "Ribauderie",
+    "funDef": "Inconduite tapageuse, ribauderie du pot de fin d'année qui dérape au point d'alimenter les conversations de couloir, et le dossier des ressources humaines, jusqu'au printemps suivant."
+  },
+  {
+    "w": "Rocambolesque",
+    "funDef": "Plein de rebondissements invraisemblables, niveau rocambolesque du récit du collègue expliquant comment un simple oubli de pièce jointe a déclenché une crise internationale entre trois filiales."
+  },
+  {
+    "w": "Roturier",
+    "funDef": "Du commun, sans titre ni privilège, comme le salarié roturier qui n'a pas accès au parking réservé, à la cantine de direction, ni au mystérieux « étage des décideurs »."
+  },
+  {
+    "w": "Rubicond",
+    "funDef": "Au teint rouge éclatant, visage rubicond du collègue qui revient du déjeuner d'affaires « strictement professionnel » avec des joues qui racontent une tout autre histoire."
+  },
+  {
+    "w": "Sagacité",
+    "funDef": "Finesse de jugement remarquable, sagacité du collègue qui devine au seul intitulé « réunion exceptionnelle, présence obligatoire » qu'il vaut mieux mettre à jour son CV dès ce soir."
+  },
+  {
+    "w": "Saturnien",
+    "funDef": "D'humeur sombre et taciturne, tempérament saturnien du collègue dont le « bonjour » du matin ressemble plus à un constat de défaite qu'à une salutation amicale."
+  },
+  {
+    "w": "Scrofuleux",
+    "funDef": "Au teint maladif et terreux, allure scrofuleuse que prend tout être humain sous l'éclairage néon impitoyable de la salle de réunion du sous-sol, sans fenêtre depuis 1987."
+  },
+  {
+    "w": "Sémillant",
+    "funDef": "D'une vivacité pétillante, allure sémillante de l'animateur du séminaire qui parvient, par on ne sait quel miracle, à garder le sourire et l'énergie à la trente-deuxième slide d'affilée."
+  },
+  {
+    "w": "Sentencieusement",
+    "funDef": "D'un ton grave et docte, manière sentencieusement pompeuse dont le collègue annonce « il faut savoir prioriser » avant de retourner regarder des vidéos de chats pendant deux heures."
+  },
+  {
+    "w": "Songe-creux",
+    "funDef": "Rêveur chimérique, profil du songe-creux qui présente chaque trimestre un projet « qui va tout changer », jamais commencé, mais toujours décrit avec une infinie conviction."
+  },
+  {
+    "w": "Soporifique",
+    "funDef": "D'un ennui à endormir un troupeau, qualité soporifique de la présentation trimestrielle dont la troisième slide a déjà fait basculer la moitié de la salle dans un sommeil profond et assumé."
+  },
+  {
+    "w": "Sournoiserie",
+    "funDef": "Hypocrisie calculée, sournoiserie du collègue qui te demande gentiment « comment avance ton projet ? » uniquement pour pouvoir rapporter ton retard au chef dans la foulée."
+  },
+  {
+    "w": "Spadassin",
+    "funDef": "Bretteur prompt au duel, recyclé pour qualifier le négociateur spadassin qu'on envoie en réunion pour démolir l'offre concurrente avec un sourire et une calculatrice."
+  },
+  {
+    "w": "Spécieux",
+    "funDef": "Faux mais plausible, comme l'argument spécieux qui prouve, chiffres à l'appui, qu'embaucher coûte plus cher que de faire travailler les trois personnes restantes deux fois plus."
+  },
+  {
+    "w": "Stoïque",
+    "funDef": "Impassible face à l'adversité, attitude stoïque du collègue qui apprend la suppression de son service par mail collectif et répond simplement « bien noté, merci pour l'info »."
+  },
+  {
+    "w": "Subsumer",
+    "funDef": "Faire entrer un cas dans une catégorie plus vaste, comme subsumer « j'ai oublié de répondre, j'étais débordé et j'ai un peu zappé » sous l'élégant intitulé « priorisation stratégique »."
+  },
+  {
+    "w": "Succube",
+    "funDef": "Démon nocturne séducteur des légendes médiévales, réincarné aujourd'hui en notification de réseau social qui surgit à minuit et engloutit deux heures de sommeil par pure traîtrise."
+  },
+  {
+    "w": "Superbe",
+    "funDef": "Orgueil dédaigneux, la superbe du collègue qui, à peine promu chef d'équipe, cesse de saluer ceux avec qui il déjeunait la veille encore, désormais bien en dessous de son nouveau rang."
+  },
+  {
+    "w": "Suppliciant",
+    "funDef": "D'une lenteur torturante, qualité suppliciante de la barre de chargement bloquée à 99 % pendant que le client attend, en silence, le fichier qu'on lui jurait « prêt depuis ce matin »."
+  },
+  {
+    "w": "Taciturnité",
+    "funDef": "Goût marqué pour le silence, taciturnité du collègue dont les rares interventions en réunion sont si attendues qu'elles provoquent un silence respectueux et un peu inquiet de toute la salle."
+  },
+  {
+    "w": "Tannant",
+    "funDef": "Agaçant à force d'insister, qualité tannante du collègue qui relance toutes les vingt minutes pour un dossier non urgent, jusqu'à ce qu'on le traite juste pour avoir la paix."
+  },
+  {
+    "w": "Tarabuster",
+    "funDef": "Harceler de sollicitations, art de tarabuster du client qui appelle, mail, relance et tarabuste sans relâche pour une modification qu'il annulera de toute façon dès le lendemain."
+  },
+  {
+    "w": "Tempétueux",
+    "funDef": "Violent et orageux, caractère tempétueux de la réunion de crise où chacun crie plus fort que l'autre pour défendre une décision que tout le monde, au fond, sait déjà irréversible."
+  },
+  {
+    "w": "Tenace",
+    "funDef": "Obstinément accrocheur, qualité tenace de la rumeur de réorganisation qui circule depuis trois ans et que ni les démentis officiels ni les réorganisations réelles ne parviennent à éteindre."
+  },
+  {
+    "w": "Thésauriser",
+    "funDef": "Accumuler sans jamais utiliser, manie de thésauriser des onglets de navigateur « à lire plus tard », jusqu'à atteindre le chiffre symbolique de trois cents, dont aucun ne sera jamais ouvert."
+  },
+  {
+    "w": "Timoré",
+    "funDef": "Craintif et hésitant, profil timoré du décideur qui réclame « une dernière étude de marché » avant chaque choix, étude qu'il commandera, recevra, et oubliera de lire pendant six mois."
+  },
+  {
+    "w": "Tonitruer",
+    "funDef": "Vociférer comme le tonnerre, art de tonitruer du directeur en visio qui, oubliant son micro réglé au maximum, fait sursauter douze personnes et leurs casques d'un seul « BONJOUR À TOUS ! »."
+  },
+  {
+    "w": "Tourmente",
+    "funDef": "Bourrasque déchaînée, tourmente qui s'abat sur l'open space le jour où la messagerie tombe en panne deux heures et où chacun redécouvre, effaré, l'existence du téléphone et de ses collègues."
+  },
+  {
+    "w": "Tracassier",
+    "funDef": "Chicaneur méticuleux, profil tracassier du collègue qui retourne un formulaire validé pour la troisième fois parce qu'une date est écrite « 15/06 » au lieu du réglementaire « 15 juin 2026 »."
+  },
+  {
+    "w": "Tribulations",
+    "funDef": "Cascade d'épreuves successives, tribulations du collègue qui, pour valider une note de frais de 12€, a dû remplir quatre formulaires, obtenir trois signatures et joindre un justificatif... qu'il avait perdu."
+  },
+  {
+    "w": "Trivialité",
+    "funDef": "Banalité grossière, trivialité de la blague lâchée en plein discours solennel devant les actionnaires, qui plonge la salle dans un silence qu'aucun « je plaisantais » ne parvient à dissiper."
+  },
+  {
+    "w": "Truander",
+    "funDef": "Escroquer en douce, art de truander du site marchand qui affiche fièrement « -70 % » sur un prix subtilement gonflé de 70 % exactement la veille de la « grande promotion exceptionnelle »."
+  },
+  {
+    "w": "Tumultueux",
+    "funDef": "Bruyant et désordonné, déroulement tumultueux de la réunion à dix-huit participants où chacun parle en même temps, où trois micros grésillent, et dont nul ne saura jamais ce qui a été décidé."
+  },
+  {
+    "w": "Ultracrépidarianisme",
+    "funDef": "Manie d'avoir un avis tranché sur tout, ultracrépidarianisme du commentateur qui, sans diplôme ni expérience, explique aux médecins, aux climatologues et aux pilotes comment faire leur métier."
+  },
+  {
+    "w": "Vaticiner",
+    "funDef": "Prophétiser avec emphase, art de vaticiner du gourou des affaires qui annonce chaque année « la fin du bureau », « la fin du salariat » et « la révolution totale », sans qu'aucune n'arrive jamais."
+  },
+  {
+    "w": "Véhément",
+    "funDef": "D'une ardeur impétueuse, plaidoyer véhément du collègue qui défend pendant vingt minutes, avec une passion digne d'un grand orateur, le choix du parfum de café de la machine commune."
+  },
+  {
+    "w": "Vénal",
+    "funDef": "Corruptible par nature, profil vénal du critique en ligne dont l'avis « totalement objectif » sur un produit s'illumine miraculeusement dès qu'arrive le partenariat rémunéré et le code promo personnel."
+  },
+  {
+    "w": "Vénéfice",
+    "funDef": "Empoisonnement criminel du vocabulaire juridique ancien, recyclé pour qualifier le café de la machine du sous-sol dont l'effet sur l'estomac relève, certains matins, de la tentative caractérisée."
+  },
+  {
+    "w": "Vénérable",
+    "funDef": "Digne d'un profond respect, statut vénérable du vieux logiciel maison que personne ne comprend, que nul n'ose toucher, et qui fait tourner, seul, toute la facturation depuis 1997."
+  },
+  {
+    "w": "Vergogne",
+    "funDef": "Pudeur et retenue, qu'on n'évoque plus guère que pour signaler leur absence chez le collègue qui, sans vergogne, réchauffe son poisson au micro-ondes commun à midi pile, chaque jour, depuis trois ans."
+  },
+  {
+    "w": "Vertueux",
+    "funDef": "Conforme à la morale affichée, posture vertueuse de l'entreprise qui publie un grand manifeste sur l'équilibre vie pro-vie perso, juste avant d'envoyer son traditionnel mail « urgent » du dimanche soir à 22h."
+  },
+  {
+    "w": "Vespéral",
+    "funDef": "Relatif au soir tombant, lumière vespérale qui baigne l'open space désert où ne reste qu'un seul collègue, illuminé par son écran, finissant un rapport que personne, demain, n'aura le temps de lire."
+  },
+  {
+    "w": "Vétuste",
+    "funDef": "Délabré par l'âge, état vétuste de la salle de réunion dite « historique » dont le projecteur date d'une autre ère et qu'on réserve uniquement quand toutes les autres, sans exception, sont occupées."
+  },
+  {
+    "w": "Vilipendeur",
+    "funDef": "Dénigreur méthodique, profil du vilipendeur qui démolit chaque idée nouvelle dès sa première seconde d'existence, sans jamais, en dix ans, en avoir proposé une seule lui-même."
+  },
+  {
+    "w": "Virevoltant",
+    "funDef": "Tournoyant et vif, comportement virevoltant du collègue hyperactif qui passe de réunion en réunion, de projet en projet, sans jamais s'arrêter assez longtemps pour en terminer un seul."
+  },
+  {
+    "w": "Vitupération",
+    "funDef": "Blâme indigné et tonitruant, vitupération du collègue qui consacre un courriel de mille mots, en gras et en majuscules, à dénoncer le scandale absolu de la disparition de sa tasse personnelle."
+  },
+  {
+    "w": "Vociférer",
+    "funDef": "Hurler de colère, art de vociférer du client au téléphone qui exige de parler « immédiatement au responsable » pour un problème que trois clics et un peu de calme auraient résolu en silence."
+  },
+  {
+    "w": "Volage",
+    "funDef": "Inconstant et papillonnant, profil volage du collègue qui s'enthousiasme pour chaque nouvel outil pendant deux semaines avant de l'abandonner, déjà séduit par la promesse encore plus brillante du suivant."
+  },
+  {
+    "w": "Voltigeur",
+    "funDef": "Acrobate du saut périlleux, recyclé pour qualifier le voltigeur des réunions qui jongle avec trois fuseaux horaires, deux casques et un café sans jamais lâcher le fil d'aucune des cinq conversations."
+  },
+  {
+    "w": "Vulpin",
+    "funDef": "Rusé comme un renard, profil vulpin du vieux négociateur qui sourit, acquiesce à tout, ne promet rien, et repart, à la surprise générale, avec exactement ce qu'il était venu chercher."
+  },
+  {
+    "w": "Abouter",
+    "funDef": "Assembler par les bouts, technique d'abouter chère au bricoleur du dimanche qui raccorde deux rallonges « juste pour cette fois » et alimente ainsi le sapin de Noël depuis la cave depuis huit ans."
+  },
+  {
+    "w": "Achalandé",
+    "funDef": "Abondamment fourni, état achalandé du frigo commun le lundi matin, qui se transforme inexorablement en désert glacé et vaguement odorant dès le jeudi midi venu."
+  },
+  {
+    "w": "Acuité",
+    "funDef": "Finesse perçante de l'esprit, acuité du collègue qui repère en une fraction de seconde l'unique faute de frappe dans une présentation de cent slides, juste avant de la projeter au comité."
+  },
+  {
+    "w": "Adventif",
+    "funDef": "Surgi hors de sa place normale, comme la tâche adventive qui apparaît dans le planning sans qu'aucun chef n'avoue l'avoir ajoutée, mais que chacun jure « avoir toujours été prévue »."
+  },
+  {
+    "w": "Algarade",
+    "funDef": "Empoignade soudaine et bruyante, algarade en pleine réunion entre deux services qui se disputent un budget qu'aucun des deux ne savait dépenser, sous le regard gêné des autres."
+  },
+  {
+    "w": "Amphitryon",
+    "funDef": "Hôte généreux qui régale, amphitryon du repas d'équipe qui paie l'addition pour tout le monde, et que chacun remercie chaleureusement... avant d'oublier de l'inviter au sien."
+  },
+  {
+    "w": "Atrabile",
+    "funDef": "Bile noire des théories médicales d'antan, censée verser dans la mélancolie ; ressurgit chez le collègue dont l'humeur, chaque lundi, semble en contenir une réserve abondante et durable."
+  },
+  {
+    "w": "Bachique",
+    "funDef": "Voué au vin et à ses joies, ambiance bachique du pot de départ qui commence sobrement à 18h et s'achève, plus tard, en karaoké improvisé dont chacun jurera, le lundi, n'avoir aucun souvenir."
+  },
+  {
+    "w": "Cacophonie",
+    "funDef": "Tintamarre discordant, cacophonie totale de la visio à quinze où trois micros grésillent, un chien aboie, un enfant pleure et où quelqu'un, quelque part, n'a toujours pas compris qu'on l'entendait."
+  },
+  {
+    "w": "Cataplasme",
+    "funDef": "Emplâtre tiède des remèdes d'antan, dont le nom sert aujourd'hui à qualifier la mesure cataplasme prise par la direction pour « régler » un problème de fond avec un pansement provisoire et inutile."
+  },
+  {
+    "w": "Cauchemardesque",
+    "funDef": "Digne d'un mauvais rêve, qualité cauchemardesque du tableur partagé à dix-sept onglets, douze formules circulaires et trois macros mystérieuses dont l'auteur a quitté l'entreprise il y a longtemps."
+  },
+  {
+    "w": "Couardise",
+    "funDef": "Lâcheté manifeste, couardise du collègue qui, sommé de présenter un résultat décevant au directeur, déclenche soudain une « urgence familiale » pile à l'instant fatidique du début de la réunion."
+  },
+  {
+    "w": "Diatribe",
+    "funDef": "Charge verbale au vitriol, diatribe enflammée que publie le client mécontent sur tous les réseaux, en treize paragraphes majuscules, pour un colis arrivé avec un jour de retard et un coin légèrement corné."
+  },
+  {
+    "w": "Escarmouche",
+    "funDef": "Accrochage bref et localisé, escarmouche feutrée par mails interposés qui annonce, à qui sait lire entre les lignes, la grande guerre de tranchées budgétaire à venir entre deux directions rivales."
+  },
+  {
+    "w": "Fanfaronnade",
+    "funDef": "Vantardise tapageuse, fanfaronnade du collègue qui « aurait pu décrocher le contrat du siècle » mais a « préféré laisser sa chance à l'équipe », laquelle, étrangement, n'en a jamais entendu parler."
+  },
+  {
+    "w": "Funambulesque",
+    "funDef": "En équilibre périlleux, montage funambulesque du planning où trois personnes se partagent quatre projets sur deux fuseaux horaires, le tout tenant, miraculeusement, par un seul tableau partagé non sauvegardé."
+  },
+  {
+    "w": "Galvauder",
+    "funDef": "Gâcher par mauvais usage, art de galvauder le mot « génial » à force de l'employer pour un café, une réunion, un trombone, jusqu'à ce qu'il ne signifie plus, dans le bureau, strictement rien du tout."
+  },
+  {
+    "w": "Imbroglio",
+    "funDef": "Embrouillamini inextricable, imbroglio administratif où le service A attend la validation du service B, lequel attend celle du service A, le tout depuis si longtemps que plus personne ne se souvient de l'objet initial."
+  },
+  {
+    "w": "Tarabiscoter",
+    "funDef": "Compliquer à plaisir, manie de tarabiscoter la moindre procédure jusqu'à exiger, pour réserver une salle de réunion d'une heure, un formulaire, deux validations et l'aval écrit d'un responsable parti en congé."
+  },
+  {
+    "w": "Chiliade",
+    "funDef": "Ensemble de mille items, chiliade parfaitement atteinte au terme d'un projet qu'on croyait « rapide » en janvier, mais qui aura absorbé douze sprints, vingt-trois réunions de cadrage et un pivot stratégique en cours de route."
+  },
+  {
+    "w": "Adynaton",
+    "funDef": "Formule du type 'quand les poules auront des dents', employée par tous ceux qui n'ont pas l'intention de tenir leur promesse."
+  },
+  {
+    "w": "Agrégatif",
+    "funDef": "Être livide et épuisé dont les cernes attestent qu'il a lu Spinoza trois fois depuis dimanche."
+  },
+  {
+    "w": "Allélopathie",
+    "funDef": "Guerre chimique silencieuse que le noyer mène contre ses voisins, façon de garder le jardin pour soi."
+  },
+  {
+    "w": "Anastrophe",
+    "funDef": "Construction inversée que Yoda affectionne et que les poètes du XVIIe siècle pratiquaient sans vergogne pour combler une rime."
+  },
+  {
+    "w": "Anémophile",
+    "funDef": "Fleur qui confie sa descendance au vent et rend allergiques tous ses voisins sans le moindre remords."
+  },
+  {
+    "w": "Anthologie",
+    "funDef": "Compilation de textes que l'éditeur rassemble pour vendre en une fois ce qu'il aurait eu du mal à écouler en vingt volumes séparés."
+  },
+  {
+    "w": "Antinomie",
+    "funDef": "Incompatibilité logique que le juriste invoque pour ne pas appliquer la loi qui le dérange."
+  },
+  {
+    "w": "Aphasie",
+    "funDef": "Perte soudaine des mots qui frappe le conférencier dès que le directeur entre dans la salle."
+  },
+  {
+    "w": "Apocryphe",
+    "funDef": "Texte dont personne ne connaît vraiment l'auteur mais que tout le monde cite quand même en faisant la moue."
+  },
+  {
+    "w": "Archétype",
+    "funDef": "Original parfait dont chaque copie ne fait que démontrer l'infériorité de l'imitateur."
+  },
+  {
+    "w": "Asyndète",
+    "funDef": "Procédé consistant à enchaîner des idées sans mot de liaison, créant un effet de rapidité, de force, d'urgence."
+  },
+  {
+    "w": "Atavisme",
+    "funDef": "Façon élégante d'expliquer qu'on tient de son grand-père son mauvais caractère et son penchant pour la charcuterie."
+  },
+  {
+    "w": "Bathymétrie",
+    "funDef": "Science qui prend le pouls des abysses, pour les navigateurs et les câblo-opérateurs qui ont perdu un câble."
+  },
+  {
+    "w": "Bibliomane",
+    "funDef": "Collectionneur de livres qu'il n'a pas tous lus mais dont il ne se séparera pour rien au monde, surtout pas au déménagement."
+  },
+  {
+    "w": "Calamistrer",
+    "funDef": "Opération de frisage intensif qui transforme une chevelure ordinaire en œuvre d'art baroque de la vanité."
+  },
+  {
+    "w": "Calomniateur",
+    "funDef": "Empoisonneur de réputation qui distille ses mensonges avec l'air navré de celui qui ne fait que répéter ce qu'il a entendu."
+  },
+  {
+    "w": "Catabole",
+    "funDef": "Processus par lequel votre muscle se décompose en énergie, surtout la nuit quand vous n'avez pas mangé."
+  },
+  {
+    "w": "Chlorophylle",
+    "funDef": "Substance verte responsable de la couleur des salades que l'on mange sans y penser et des arbres que l'on regarde en méditant."
+  },
+  {
+    "w": "Chrématistique",
+    "funDef": "Science de l'enrichissement que le philosophe grec critiquait et que Wall Street pratique sans complexe."
+  },
+  {
+    "w": "Circumlocution",
+    "funDef": "Art d'entourer un sujet de tant de mots qu'on finit par l'étouffer avant d'avoir dit quoi que ce soit."
+  },
+  {
+    "w": "Clivage",
+    "funDef": "Fracture sociale ou géologique qui sépare des blocs autrefois solidaires avec une netteté déconcertante."
+  },
+  {
+    "w": "Conciliabule",
+    "funDef": "Petit comité discret tenu à l'abri des oreilles officielles, spécialité des couloirs de ministères et des pauses café."
+  },
+  {
+    "w": "Conglobation",
+    "funDef": "Entassement rhétorique de preuves dont la quantité est censée suppléer à la qualité de chacune."
+  },
+  {
+    "w": "Contumace",
+    "funDef": "Dérobade judiciaire du prévenu qui préfère rester introuvable plutôt que de s'expliquer devant ses juges."
+  },
+  {
+    "w": "Démagogie",
+    "funDef": "Art de promettre ce que la foule veut entendre, avec la ferme intention de ne rien tenir une fois élu."
+  },
+  {
+    "w": "Euristique",
+    "funDef": "Façon d'avancer à l'aveugle mais avec méthode, stratégie que les chefs de projet rebaptisent 'approche agile'."
+  },
+  {
+    "w": "Flagrant",
+    "funDef": "Tellement visible qu'il faudrait beaucoup d'imagination pour prétendre ne pas l'avoir remarqué."
+  },
+  {
+    "w": "Fulgurance",
+    "funDef": "Éclair d'intelligence que l'on décrit ainsi pour se distinguer de ceux qui ont eu la même idée cinq minutes avant."
+  },
+  {
+    "w": "Généalogie",
+    "funDef": "Art de remonter aux ancêtres jusqu'à trouver un ancêtre noble, ou jusqu'à perdre le fil dans les registres paroissiaux."
+  },
+  {
+    "w": "Hémistiche",
+    "funDef": "Moitié de vers que l'on apprend à identifier en cours de français et qu'on oublie aussitôt le bac passé."
+  },
+  {
+    "w": "Hypocondrie",
+    "funDef": "Conviction permanente d'être gravement malade, entretenue par les sites médicaux qui diagnostiquent le pire à chaque symptôme."
+  },
+  {
+    "w": "Lézarder",
+    "funDef": "S'étaler au soleil comme un reptile, l'esprit vide, les membres mous, le téléphone loin."
+  },
+  {
+    "w": "Tautologie",
+    "funDef": "Façon de dire deux fois la même chose différemment pour avoir l'air d'avoir dit deux choses."
+  },
+  {
+    "w": "Épopée",
+    "funDef": "Récit grandiloquent de hauts faits, dont l'auteur oublie de préciser que le héros a surtout souffert du froid et de la mauvaise nourriture."
+  },
+  {
+    "w": "Éphémère",
+    "funDef": "D'une durée scandaleusement courte, comme cette application que l'équipe a mis six mois à développer et que le client a cessé d'utiliser en trois jours."
+  },
+  {
+    "w": "Frivole",
+    "funDef": "Superficiel et distrait, le frivole qui passe d'une idée à l'autre comme d'une page à l'autre, sans jamais finir quoi que ce soit."
+  },
+  {
+    "w": "Laconique",
+    "funDef": "D'une concision brutale, comme la réponse du manager au mail de cinq paragraphes : 'ok'."
+  },
+  {
+    "w": "Nonchalance",
+    "funDef": "Indolence élégante de celui qui fait tout lentement mais avec un tel aplomb qu'on finit par croire que c'est du style."
+  },
+  {
+    "w": "Quintessence",
+    "funDef": "Ce qu'il reste quand on a tout enlevé sauf ce qui compte, exercice auquel personne ne se livre jamais assez tôt."
+  },
+  {
+    "w": "Prosaïque",
+    "funDef": "D'un réalisme décevant, comme la réponse prosaïque au rêve le plus ambitieux : 'oui mais le budget ?'."
+  },
+  {
+    "w": "Tergiversation",
+    "funDef": "Art de tourner autour du pot si longtemps que le problème initial se résout tout seul, souvent par abandon général."
+  },
+  {
+    "w": "Ubiquitaire",
+    "funDef": "Omniprésent jusqu'à l'obsession, qualité de ce collègue dont le nom apparaît sur chaque CC, chaque slack et chaque réunion sans qu'on sache jamais ce qu'il y fait."
+  },
+  {
+    "w": "Vernaculaire",
+    "funDef": "Local et populaire, terme vernaculaire que personne hors du village ne comprend mais que tout le monde y emploie avec fierté."
+  },
+  {
+    "w": "Zéphyr",
+    "funDef": "Brise caressante dont le nom seul donne envie de s'allonger dans l'herbe avec un livre qu'on n'ouvrira pas."
+  },
+  {
+    "w": "Kafkaïen",
+    "funDef": "D'une absurdité administrative si profonde qu'on ne sait plus si c'est un roman ou un formulaire de remboursement de frais."
+  },
+  {
+    "w": "Calembredaine",
+    "funDef": "Baliverne débitée avec aplomb, calembredaine du vendeur qui explique que son produit 'se rentabilise tout seul en trois mois'."
+  },
+  {
+    "w": "Flibustier",
+    "funDef": "Pirate des mers chaudes qui pillait les navires espagnols avec une liberté que les start-up appellent aujourd'hui 'disruption'."
+  },
+  {
+    "w": "Hoplite",
+    "funDef": "Soldat grec cuirassé de la tête aux pieds, ancêtre du manager qui arrive en réunion avec un diaporama de quarante slides et un tableur de sauvegarde."
+  },
+  {
+    "w": "Interlope",
+    "funDef": "De légitimité floue, qualité de ce commerce interlope installé entre deux boutiques honnêtes et qui n'a jamais l'air d'avoir de clients mais ne ferme jamais."
+  },
+  {
+    "w": "Mirobolant",
+    "funDef": "Si avantageux qu'il est forcément suspect, offre mirobolante de ce commercial qui promet le double de résultats pour la moitié du prix."
+  },
+  {
+    "w": "Noctambule",
+    "funDef": "Créature de la nuit qui s'éveille à 22h et trouve incompréhensible que le reste du monde dorme avant minuit."
+  },
+  {
+    "w": "Coruscant",
+    "funDef": "D'un éclat éblouissant, qualité coruscante du nouveau logo qu'une agence a facturé une fortune et qui n'est qu'un cercle légèrement plus brillant."
+  },
+  {
+    "w": "Bilieux",
+    "funDef": "Coléreux chronique, profil du collègue bilieux dont la tension monte d'un cran à chaque notification et explose à la moindre faute de frappe."
+  },
+  {
+    "w": "Susurrer",
+    "funDef": "Chuchoter en douce, art de susurrer du collègue qui glisse à l'oreille de son voisin, en pleine réunion, les commentaires qu'il n'oserait jamais formuler à voix haute devant le chef."
+  },
+  {
+    "w": "Zinzolin",
+    "funDef": "D'un violet rougeâtre subtil, nuance zinzolin qu'un graphiste défend bec et ongles contre le « mauve » réclamé par le client, déclenchant un débat chromatique de trois réunions et zéro accord."
+  },
+  {
+    "w": "Sycophante",
+    "funDef": "Délateur empressé, profil du sycophante du bureau qui rapporte au chef les retards de chacun, les pauses trop longues et les mails « pas assez professionnels », toujours « pour le bien de l'équipe »."
+  },
+  {
+    "w": "Turpitude",
+    "funDef": "Bassesse honteuse, turpitude du collègue qui s'attribue le projet réussi en réunion, oublie les noms de ceux qui l'ont mené, et propose même de « partager les bonnes pratiques » comme s'il les avait inventées."
+  },
+  {
+    "w": "Palimpseste",
+    "funDef": "Support réutilisé à l'économie, comme ce CV que le candidat a manifestement recyclé d'un emploi précédent en changeant seulement le nom de l'entreprise."
+  },
+  {
+    "w": "Phylactère",
+    "funDef": "Bulle de dialogue qui sort de la bouche du personnage, preuve que les moines enlumineurs avaient inventé la bande dessinée avant tout le monde."
+  },
+  {
+    "w": "Sophrosyne",
+    "funDef": "Sagesse mesurée que les Grecs opposaient à l'excès, vertu rare chez celui qui commande le menu dégustation et finit quand même par demander le dessert."
+  }
+]
