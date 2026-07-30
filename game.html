@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://www.dicobluff.fr https://www.google-analytics.com; connect-src 'self' https://*.firebaseio.com https://*.googleapis.com wss://*.firebaseio.com https://*.firebasedatabase.app wss://*.firebasedatabase.app https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com; script-src 'self' 'unsafe-inline' https://www.gstatic.com https://www.googletagmanager.com; worker-src 'self'; frame-ancestors 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://www.dicobluff.fr; connect-src 'self' https://*.firebaseio.com https://*.googleapis.com wss://*.firebaseio.com https://*.firebasedatabase.app wss://*.firebasedatabase.app https://identitytoolkit.googleapis.com https://securetoken.googleapis.com; script-src 'self' 'unsafe-inline' https://www.gstatic.com; worker-src 'self'; frame-ancestors 'none'">
 <meta name="description" content="Le jeu de bluff littéraire. Invente la définition la plus convaincante pour piéger tes adversaires.">
 <link rel="canonical" href="https://www.dicobluff.fr/game.html">
 
@@ -6231,7 +6231,7 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
         <div style="font-family:'Manrope',sans-serif;font-weight:700;font-size:.82rem;color:var(--cream);margin-bottom:4px;">Données et confidentialité</div>
         <div class="muted small" style="line-height:1.6;">En mode solo, votre pseudo, vos statistiques, votre carnet de mots et vos préférences sont stockés uniquement en local sur votre appareil via localStorage. Aucune donnée de jeu n'est transmise à un serveur tiers.</div>
         <div class="muted small" style="line-height:1.6;margin-top:8px;">En mode multijoueur, votre pseudo et les définitions saisies transitent par Firebase Realtime Database (serveurs Google, zone europe-west1). Ces données sont temporaires et supprimées à la fin de la partie.</div>
-        <div class="muted small" style="line-height:1.6;margin-top:8px;">Dans tous les modes, l'application envoie des statistiques d'usage anonymisées (ouverture de l'application, parties lancées ou terminées, etc.) via Firebase Analytics (Google), afin de mesurer et d'améliorer le jeu.</div>
+        <div class="muted small" style="line-height:1.6;margin-top:8px;">Dans l'application Android, Dicobluff envoie des statistiques d'usage anonymisées (ouverture de l'application, parties lancées ou terminées, etc.) via Firebase Analytics (Google), afin de mesurer et d'améliorer le jeu. Cette collecte ne s'applique pas à la version jouable dans un navigateur.</div>
       </div>
       <div>
         <div style="font-family:'Manrope',sans-serif;font-weight:700;font-size:.82rem;color:var(--cream);margin-bottom:4px;">Contenu</div>
@@ -8610,63 +8610,23 @@ function initFirebase(){
   } catch(e) { console.warn('Firebase init failed:',e.message); }
 }
 
-/* ── Analytics (Firebase Analytics) — chargement autonome et léger,
-   indépendant de la base multijoueur (réutilise la même app si elle
-   existe déjà, la crée sinon). Chaque partie solo hors ligne reste
-   jouable même si ce chargement échoue ou est bloqué. ── */
-let fbAnalytics = null;
-let _analyticsLoading = false;
-let _trackQueue = [];
-function _flushTrackQueue(){
-  if(!fbAnalytics || !_trackQueue.length) return;
-  const q = _trackQueue; _trackQueue = [];
-  q.forEach(({name,params}) => { try { fbAnalytics.logEvent(name, params); } catch(e){} });
-}
-function loadFirebaseAnalytics(){
-  if(fbAnalytics){ _flushTrackQueue(); return; }
-  if(typeof firebase !== 'undefined' && firebase.analytics){
-    try {
-      fbApp = (firebase.apps && firebase.apps.length) ? firebase.app() : firebase.initializeApp(firebaseConfig);
-      fbAnalytics = firebase.analytics();
-      _flushTrackQueue();
-    } catch(e) { console.warn('[Analytics] init failed:', e.message); }
-    return;
-  }
-  if(_analyticsLoading) return;
-  _analyticsLoading = true;
-  const SCRIPTS = (typeof firebase !== 'undefined') ? [
-    'https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics-compat.js',
-  ] : [
-    'https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js',
-    'https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics-compat.js',
-  ];
-  let loaded = 0;
-  SCRIPTS.forEach(src => {
-    const s = document.createElement('script');
-    s.src = src;
-    s.onload = () => { if(++loaded === SCRIPTS.length){
-      try {
-        fbApp = (firebase.apps && firebase.apps.length) ? firebase.app() : firebase.initializeApp(firebaseConfig);
-        fbAnalytics = firebase.analytics();
-        _flushTrackQueue();
-      } catch(e) { console.warn('[Analytics] init failed:', e.message); }
-    }};
-    s.onerror = () => { console.warn('[Analytics] échec de chargement du script', src); };
-    document.head.appendChild(s);
-  });
-}
-/* Helper unique et défensif à appeler partout : un échec d'analytics
-   ne doit jamais casser une partie, notamment hors ligne. */
+/* ── Analytics (plugin natif @capacitor-firebase/analytics) ──
+   Aucun SDK web, aucun script distant : passe par le pont natif Capacitor,
+   exactement comme LocalNotifications ou App plus bas dans ce fichier.
+   N'existe que dans l'app Android empaquetée — no-op silencieux sur le
+   site joué dans un navigateur (pas de Capacitor.Plugins là-bas). */
 function track(name, params){
   try {
-    if(fbAnalytics){ fbAnalytics.logEvent(name, params); return; }
-    _trackQueue.push({name, params});
-    loadFirebaseAnalytics();
+    if(typeof Capacitor === 'undefined' || !Capacitor.isNativePlatform()) return;
+    const FirebaseAnalytics = Capacitor.Plugins && Capacitor.Plugins.FirebaseAnalytics;
+    if(!FirebaseAnalytics) return;
+    const p = FirebaseAnalytics.logEvent({ name, params: params||{} });
+    if(p && typeof p.catch === 'function') p.catch(()=>{});
   } catch(e){}
 }
 
-/* Pré-chauffe la base multijoueur (DB + Auth) sur hover du bouton, chargée à part d'Analytics
-   qui, lui, se charge dès app_open — voir track() / loadFirebaseAnalytics() */
+/* Pré-chauffe la base multijoueur (DB + Auth) sur hover du bouton — indépendant
+   d'Analytics, qui passe désormais par le plugin natif ci-dessus, pas par ce SDK web. */
 let _fbWarmed=false;
 function warmFirebase(){
   if(_fbWarmed)return; _fbWarmed=true;
