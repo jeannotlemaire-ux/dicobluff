@@ -80,7 +80,9 @@
       --ease-soft:  cubic-bezier(.2,.8,.3,1);
     }
 
-    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: no-preference) {
+      html { scroll-behavior: smooth; }
+    }
 
     body {
       font-family: 'Manrope', sans-serif;
@@ -252,7 +254,7 @@
       line-height: 1.6; margin-bottom: 36px;
     }
     .hero-stats {
-      display: flex; gap: 32px; margin-bottom: 44px;
+      display: flex; gap: 32px; margin-bottom: 36px;
     }
     .hero-stat {}
     .stat-n {
@@ -1069,14 +1071,6 @@
           <div class="stat-n" aria-hidden="true" data-count-to="1000">0</div>
           <div class="stat-l" aria-hidden="true">Mots rares</div>
         </div>
-        <div class="hero-stat" aria-label="12 personnages">
-          <div class="stat-n" aria-hidden="true" data-count-to="12">0</div>
-          <div class="stat-l" aria-hidden="true">Personnages</div>
-        </div>
-        <div class="hero-stat" aria-label="100 % hors ligne">
-          <div class="stat-n" aria-hidden="true" data-count-to="100" data-suffix="%">0</div>
-          <div class="stat-l" aria-hidden="true">Hors ligne</div>
-        </div>
       </div>
       <div class="store-row reveal" style="transition-delay:.26s">
         <a href="https://play.google.com/store/apps/details?id=com.dicobluff.app"
@@ -1473,7 +1467,7 @@
         <div class="carnet-feat-ico">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
         </div>
-        <div class="carnet-feat-name">Révision active</div>
+        <div class="carnet-feat-name">Révision active <span class="mode-badge badge-premium" style="margin-bottom:0;vertical-align:middle">✦ Premium</span></div>
         <p class="carnet-feat-desc">Reviens sur tes mots entre les parties. Une répétition régulière ancre durablement le vocabulaire — chaque session devient un gain de culture générale.</p>
       </div>
     </div>
@@ -1497,6 +1491,7 @@
       <h3 class="mode-name">Solo</h3>
       <p class="mode-desc">Affronte seul jusqu'à 4 personnages aux personnalités tranchées. Le mode parfait pour progresser à son rythme.</p>
       <ul class="mode-feats">
+        <li>Parties illimitées</li>
         <li>12 personnages jouables</li>
         <li>Difficulté ajustable</li>
         <li>Mot du jour inclus</li>
@@ -1509,7 +1504,7 @@
         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
       </svg>
       <h3 class="mode-name">Multijoueur</h3>
-      <p class="mode-desc">2 à 8 joueurs en temps réel, à distance. Génère un code de partie, partage-le à tes amis — le bluff peut commencer.</p>
+      <p class="mode-desc">2 à 10 joueurs en temps réel, à distance. Génère un code de partie, partage-le à tes amis — le bluff peut commencer.</p>
       <ul class="mode-feats">
         <li>Parties privées avec code</li>
         <li>Chat intégré entre les manches</li>
@@ -1522,13 +1517,13 @@
       <svg class="mode-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:var(--gold)">
         <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
       </svg>
-      <h3 class="mode-name">Carnet &amp; Révision</h3>
-      <p class="mode-desc">Sauvegarde les mots qui t'ont marqué. Reviens les réviser sous forme de quiz pour les ancrer durablement.</p>
+      <h3 class="mode-name">Mode Révision</h3>
+      <p class="mode-desc">Transforme tes parties en apprentissage réel. Les mots que tu découvres reviennent sous forme de quiz, jusqu'à ce qu'ils soient acquis.</p>
       <ul class="mode-feats">
-        <li class="g">Carnet de mots personnel</li>
         <li class="g">Quiz de révision adaptatif</li>
         <li class="g">Suivi de progression par mot</li>
-        <li class="g">Parties illimitées chaque jour</li>
+        <li class="g">Focus sur tes points faibles</li>
+        <li class="g">Défis sur les mots légendaires</li>
       </ul>
     </div>
   </div>
@@ -1542,7 +1537,7 @@
     <div>
       <div class="sec-head">
         <h2 class="sec-title reveal">Prêt en <em>30 secondes</em></h2>
-        <p class="sec-sub reveal" style="transition-delay:.12s">Pas de compte, pas de tutoriel. Lance une partie et bluffe immédiatement.</p>
+        <p class="sec-sub reveal" style="transition-delay:.12s">Pas de compte, pas d'inscription. Lance une partie et bluffe immédiatement.</p>
       </div>
       <div class="howto-steps">
         <div class="howto-step reveal">
@@ -1609,7 +1604,7 @@
     <div>
       <h2 class="sec-title reveal">Joue avec tes <em>amis.</em></h2>
       <p class="sec-sub reveal" style="transition-delay:.12s;max-width:440px">
-        Invite tes amis avec un code de partie. 2 à 8 joueurs, à distance, en temps réel. Chacun invente une définition — et personne ne sait qui ment.
+        Invite tes amis avec un code de partie. 2 à 10 joueurs, à distance, en temps réel. Chacun invente une définition — et personne ne sait qui ment.
       </p>
       <a href="https://play.google.com/store/apps/details?id=com.dicobluff.app" target="_blank" rel="noopener" class="btn-store primary reveal" style="transition-delay:.16s;margin-bottom:24px;display:inline-flex">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
@@ -1693,7 +1688,7 @@
       </button>
     </div>
     <p class="dl-note reveal" style="transition-delay:.24s">
-      <span class="stars" aria-hidden="true">★★★★★</span>&ensp;Gratuit · Sans compte · 100&nbsp;% hors ligne
+      Gratuit · Sans compte · 100&nbsp;% hors ligne
     </p>
   </div>
 </section>
