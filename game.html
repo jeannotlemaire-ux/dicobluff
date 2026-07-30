@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://www.dicobluff.fr; connect-src 'self' https://*.firebaseio.com https://*.googleapis.com wss://*.firebaseio.com https://*.firebasedatabase.app wss://*.firebasedatabase.app https://identitytoolkit.googleapis.com https://securetoken.googleapis.com; script-src 'self' 'unsafe-inline' https://www.gstatic.com; worker-src 'self'; frame-ancestors 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://www.dicobluff.fr https://www.google-analytics.com; connect-src 'self' https://*.firebaseio.com https://*.googleapis.com wss://*.firebaseio.com https://*.firebasedatabase.app wss://*.firebasedatabase.app https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com; script-src 'self' 'unsafe-inline' https://www.gstatic.com https://www.googletagmanager.com; worker-src 'self'; frame-ancestors 'none'">
 <meta name="description" content="Le jeu de bluff littéraire. Invente la définition la plus convaincante pour piéger tes adversaires.">
 <link rel="canonical" href="https://www.dicobluff.fr/game.html">
 
@@ -5457,7 +5457,7 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
       <div class="premium-feature-row">Carnet de mots — sauvegarde et révise tes mots</div>
       <div class="premium-feature-row">Mode Révision — consolide ton vocabulaire</div>
     </div>
-    <button class="premium-btn-unlock" onclick="closeDailyLimitModal();showPremiumModal();">Débloquer Premium — 2,99 €</button>
+    <button class="premium-btn-unlock" onclick="closeDailyLimitModal();showPremiumModal('daily_limit');">Débloquer Premium — 2,99 €</button>
     <button class="premium-btn-close" onclick="closeDailyLimitModal()">Revenir demain</button>
   </div>
 </div>
@@ -6229,8 +6229,9 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
       </div>
       <div>
         <div style="font-family:'Manrope',sans-serif;font-weight:700;font-size:.82rem;color:var(--cream);margin-bottom:4px;">Données et confidentialité</div>
-        <div class="muted small" style="line-height:1.6;">En mode solo, toutes les données (pseudo, statistiques, carnet de mots, préférences) sont stockées uniquement en local sur votre appareil via localStorage. Aucune donnée n'est transmise à un serveur tiers.</div>
+        <div class="muted small" style="line-height:1.6;">En mode solo, votre pseudo, vos statistiques, votre carnet de mots et vos préférences sont stockés uniquement en local sur votre appareil via localStorage. Aucune donnée de jeu n'est transmise à un serveur tiers.</div>
         <div class="muted small" style="line-height:1.6;margin-top:8px;">En mode multijoueur, votre pseudo et les définitions saisies transitent par Firebase Realtime Database (serveurs Google, zone europe-west1). Ces données sont temporaires et supprimées à la fin de la partie.</div>
+        <div class="muted small" style="line-height:1.6;margin-top:8px;">Dans tous les modes, l'application envoie des statistiques d'usage anonymisées (ouverture de l'application, parties lancées ou terminées, etc.) via Firebase Analytics (Google), afin de mesurer et d'améliorer le jeu.</div>
       </div>
       <div>
         <div style="font-family:'Manrope',sans-serif;font-weight:700;font-size:.82rem;color:var(--cream);margin-bottom:4px;">Contenu</div>
@@ -8424,11 +8425,12 @@ function closePremiumSuccessModal(){
   if(m) m.classList.remove('open');
 }
 let _premiumTrap = null;
-function showPremiumModal(){
+function showPremiumModal(source){
   const m = document.getElementById('premium-modal');
   if(!m) return;
   m.classList.add('open');
   _premiumTrap = FocusTrap.activate(m, { onEscape: closePremiumModal });
+  track('paywall_view', {source: source||'unknown'});
   SFX.click();
 }
 function closePremiumModal(){
@@ -8486,7 +8488,10 @@ document.addEventListener('deviceready', function(){
     .approved(transaction => transaction.verify())
     .verified(receipt => {
       receipt.finish();
-      if(store.owned(PREMIUM_PRODUCT_ID)) unlockPremium();
+      if(store.owned(PREMIUM_PRODUCT_ID)){
+        track('purchase', {product_id: PREMIUM_PRODUCT_ID});
+        unlockPremium();
+      }
     });
   store.error(err => {
     console.error('[IAP]', err);
@@ -8594,7 +8599,7 @@ function initFirebase(){
   if(_fbInitDone) return;
   _fbInitDone = true;
   try {
-    fbApp = firebase.initializeApp(firebaseConfig);
+    fbApp = (firebase.apps && firebase.apps.length) ? firebase.app() : firebase.initializeApp(firebaseConfig);
     fbDb  = firebase.database();
     fbAuth= firebase.auth();
     fbAuth.signInAnonymously().then(c=>{
@@ -8605,7 +8610,63 @@ function initFirebase(){
   } catch(e) { console.warn('Firebase init failed:',e.message); }
 }
 
-/* Pré-chauffe Firebase sur hover du bouton (RGPD : déclenché par l'utilisateur, aucune donnée envoyée) */
+/* ── Analytics (Firebase Analytics) — chargement autonome et léger,
+   indépendant de la base multijoueur (réutilise la même app si elle
+   existe déjà, la crée sinon). Chaque partie solo hors ligne reste
+   jouable même si ce chargement échoue ou est bloqué. ── */
+let fbAnalytics = null;
+let _analyticsLoading = false;
+let _trackQueue = [];
+function _flushTrackQueue(){
+  if(!fbAnalytics || !_trackQueue.length) return;
+  const q = _trackQueue; _trackQueue = [];
+  q.forEach(({name,params}) => { try { fbAnalytics.logEvent(name, params); } catch(e){} });
+}
+function loadFirebaseAnalytics(){
+  if(fbAnalytics){ _flushTrackQueue(); return; }
+  if(typeof firebase !== 'undefined' && firebase.analytics){
+    try {
+      fbApp = (firebase.apps && firebase.apps.length) ? firebase.app() : firebase.initializeApp(firebaseConfig);
+      fbAnalytics = firebase.analytics();
+      _flushTrackQueue();
+    } catch(e) { console.warn('[Analytics] init failed:', e.message); }
+    return;
+  }
+  if(_analyticsLoading) return;
+  _analyticsLoading = true;
+  const SCRIPTS = (typeof firebase !== 'undefined') ? [
+    'https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics-compat.js',
+  ] : [
+    'https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js',
+    'https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics-compat.js',
+  ];
+  let loaded = 0;
+  SCRIPTS.forEach(src => {
+    const s = document.createElement('script');
+    s.src = src;
+    s.onload = () => { if(++loaded === SCRIPTS.length){
+      try {
+        fbApp = (firebase.apps && firebase.apps.length) ? firebase.app() : firebase.initializeApp(firebaseConfig);
+        fbAnalytics = firebase.analytics();
+        _flushTrackQueue();
+      } catch(e) { console.warn('[Analytics] init failed:', e.message); }
+    }};
+    s.onerror = () => { console.warn('[Analytics] échec de chargement du script', src); };
+    document.head.appendChild(s);
+  });
+}
+/* Helper unique et défensif à appeler partout : un échec d'analytics
+   ne doit jamais casser une partie, notamment hors ligne. */
+function track(name, params){
+  try {
+    if(fbAnalytics){ fbAnalytics.logEvent(name, params); return; }
+    _trackQueue.push({name, params});
+    loadFirebaseAnalytics();
+  } catch(e){}
+}
+
+/* Pré-chauffe la base multijoueur (DB + Auth) sur hover du bouton, chargée à part d'Analytics
+   qui, lui, se charge dès app_open — voir track() / loadFirebaseAnalytics() */
 let _fbWarmed=false;
 function warmFirebase(){
   if(_fbWarmed)return; _fbWarmed=true;
@@ -8635,11 +8696,14 @@ function _multiSetConnectError(){
 let _fbLoading = false;
 let _fbCallbacks = [];
 function loadFirebase(cb) {
-  if(typeof firebase !== 'undefined') { cb(); return; }
+  if(typeof firebase !== 'undefined' && firebase.database && firebase.auth) { cb(); return; }
   _fbCallbacks.push(cb);
   if(_fbLoading) return;
   _fbLoading = true;
-  const SCRIPTS = [
+  const SCRIPTS = (typeof firebase !== 'undefined') ? [
+    'https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js',
+    'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js',
+  ] : [
     'https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js',
     'https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js',
     'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js',
@@ -9270,6 +9334,7 @@ function canPlayToday(){
 function showDailyLimitModal(){
   const m = document.getElementById('daily-limit-modal');
   if(m) m.classList.add('open');
+  track('daily_limit_hit');
   SFX.click();
 }
 function closeDailyLimitModal(){
@@ -10647,7 +10712,7 @@ const App = {
   },
   showProfile() { renderProfile(); showScreen('profile'); clearPendingUnlocks(); _setNavActive('profile'); },
   showRevision() {
-    if(!isPremium()) { showPremiumModal(); return; }
+    if(!isPremium()) { showPremiumModal('revision'); return; }
     renderRevision(); showScreen('revision'); _setNavActive('revision');
   },
   startRevisionMode(mode) {
@@ -11091,6 +11156,7 @@ const App = {
     solo.round=0; solo.usedWords=[]; solo.sessionWordObjs=[]; solo.streak=0; solo.maxStreak=0;
     solo.sessionCorrect=0; solo.sessionFooled=0; solo.sessionRounds=0;
     solo.scores={player:0}; solo.aiOpponents.forEach(ai=>solo.scores[ai.id]=0);
+    track('game_start', {mode:'solo', nb_ai: solo.aiOpponents.length});
     SFX.newRound(); startSoloRound();
   },
 
@@ -11119,6 +11185,9 @@ const App = {
     document.getElementById('waiting-others').style.display='block';
     SFX.submit();
     fireBurst(document.getElementById('btn-confirm-vote'));
+    track('round_definition_submitted', solo.active
+      ? {round: solo.round, word_rarity: solo.wordObj?.r||'rare'}
+      : {round: gameState?.round, word_rarity: gameState?.currentRarity||'rare'});
     if(solo.active){stopTimer();setTimeout(()=>processSoloVotePhase(clean),1200);}
     else submitDefOnline(clean);
   },
@@ -11298,6 +11367,7 @@ const App = {
     const ps=gameState?.players||{};
     const onlinePlayers=Object.entries(ps).filter(([,p])=>p.online!==false);
     if(onlinePlayers.length<2){notify('Il faut au moins 2 joueurs en ligne !');return;}
+    track('game_start', {mode:'online', nb_ai: 0});
     multiStats={correct:0,fooled:0,rounds:0,streak:0,maxStreak:0};
     multiSessionWordObjs=[];
     resetMiniRank();
@@ -11331,18 +11401,19 @@ const App = {
     ov.setAttribute('aria-modal','true');
     ov.classList.add('open');
     App._renderTutorialStep();
-    App._tutTrap = FocusTrap.activate(ov, { onEscape: () => App.closeTutorial() });
+    App._tutTrap = FocusTrap.activate(ov, { onEscape: () => App.closeTutorial(true) });
     try { SFX.click(); } catch(e){}
   },
-  closeTutorial(){
+  closeTutorial(skipped){
     const ov = document.getElementById('tutorial-overlay');
     if(!ov) return;
     ov.classList.remove('open');
     ov.setAttribute('aria-hidden','true');
     if(App._tutTrap){ App._tutTrap.release(); App._tutTrap = null; }
     LS.set('tutorial_done', true);
+    track('tutorial_done', {skipped: !!skipped});
   },
-  skipTutorial(){ App.closeTutorial(); },
+  skipTutorial(){ App.closeTutorial(true); },
   tutorialNext(){
     const slides = document.querySelectorAll('#tutorial-slides .tut-slide');
     const total = slides.length;
@@ -11351,7 +11422,7 @@ const App = {
       App._renderTutorialStep();
       try { SFX.click(); } catch(e){}
     } else {
-      App.closeTutorial();
+      App.closeTutorial(false);
     }
   },
   _renderTutorialStep(){
@@ -12229,6 +12300,7 @@ function showSoloFinal(){
   ].sort((a,b)=>b.score-a.score);
   const winner=allSc[0],playerWon=winner.isPlayer;
   document.getElementById('final-subtitle').textContent=playerWon?'Félicitations, tu as gagné !':(`${winner.name} remporte la partie !`);
+  track('game_complete', {mode:'solo', rounds: solo.maxRounds, score: solo.scores.player, won: playerWon});
 
 
 
@@ -13059,6 +13131,7 @@ function renderFinalPhase(d){
   const ps=d.players||{},sorted=Object.entries(ps).sort(([,a],[,b])=>(b.score||0)-(a.score||0));
   const winner=sorted[0],playerWon=winner?.[0]===myUID;
   document.getElementById('final-subtitle').textContent=playerWon?'Félicitations, tu as gagné !':(`${sorted[0][1].name} remporte la partie !`);
+  track('game_complete', {mode:'online', rounds: gameState?.maxRounds, score: ps[myUID]?.score||0, won: playerWon});
 
   const fst=document.getElementById('final-stats');if(fst)fst.style.display='block';
   const myMultiStats=multiStats;
@@ -13283,6 +13356,7 @@ function runSplash(){
    🚀 INIT
 ══════════════════════════════════════════════════════ */
 SFX.init();
+track('app_open', {is_premium: isPremium()});
 runSplash();
 /* Injecte les SVG dans tous les éléments [data-icon] présents dans le DOM. */
 function injectIcons(root = document) {
