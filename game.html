@@ -5754,7 +5754,7 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
     </button>
 
     <div class="t-label" style="margin:24px 0 10px;">Joueurs aléatoires</div>
-    <button class="btn btn-gold home-cta" onclick="App.prepareQuickMatch()">
+    <button class="btn btn-ghost home-cta" onclick="App.prepareQuickMatch()">
       <span class="home-cta-row">
         <span class="home-cta-icon" data-icon="quick-match" data-icon-size="22" class="icon-inline"></span>
         <span class="home-cta-text">
@@ -8588,6 +8588,10 @@ const _reconnTimers={};    // uid → timeoutId (30s avant abandon)
 let _prevOnlineState={};   // uid → bool (pour détecter les changements)
 let pendingMode=null;
 let pendingRoomCode=null;
+let _lastGameWon=false;
+// Capturé une seule fois au chargement, avant que welcomeFirstLaunch() ne marque
+// "welcomed" — sert à ne jamais proposer la notation lors du tout premier lancement.
+const _isFirstEverSession=!LS.get('welcomed', false);
 let selectedVote=null;
 let quickMatchData=null;
 let multiStats={correct:0,fooled:0,rounds:0,streak:0,maxStreak:0};
@@ -10623,17 +10627,18 @@ const App = {
   },
   showHomeAfterGame() {
     this.showHome();
-    // Propose de noter l'app après ≥3 parties, une seule fois (ou re-propose 7j après snooze)
+    // Propose de noter l'app après une partie gagnée, une seule fois (ou re-propose
+    // 7j après snooze). Jamais au tout premier lancement, jamais pendant une partie
+    // (ce point n'est atteint qu'au retour à l'accueil depuis l'écran final).
     if(LS.get('db_rating_done', false)) return;
+    if(_isFirstEverSession) return;
+    if(!_lastGameWon) return;
     const snoozed = LS.get('db_rating_snoozed', 0);
     if(snoozed && Date.now() < snoozed) return;
-    const stats = LS.get('db_stats', { played: 0 });
-    if((stats.played || 0) >= 3) {
-      setTimeout(() => {
-        const ov = document.getElementById('rate-overlay');
-        if(ov) ov.classList.add('open');
-      }, 600);
-    }
+    setTimeout(() => {
+      const ov = document.getElementById('rate-overlay');
+      if(ov) ov.classList.add('open');
+    }, 600);
   },
   doRateApp() {
     const ov = document.getElementById('rate-overlay');
@@ -12304,6 +12309,7 @@ function showSoloFinal(){
     ...solo.aiOpponents.map(ai=>({name:ai.name,avatar:ai.id,color:ai.color,score:solo.scores[ai.id]||0,ai}))
   ].sort((a,b)=>b.score-a.score);
   const winner=allSc[0],playerWon=winner.isPlayer;
+  _lastGameWon=playerWon;
   document.getElementById('final-subtitle').textContent=playerWon?'Félicitations, tu as gagné !':(`${winner.name} remporte la partie !`);
   track('game_complete', {mode:'solo', rounds: solo.maxRounds, score: solo.scores.player, won: playerWon});
 
@@ -13129,6 +13135,7 @@ async function nextRoundOnline(){
 function renderFinalPhase(d){
   const ps=d.players||{},sorted=Object.entries(ps).sort(([,a],[,b])=>(b.score||0)-(a.score||0));
   const winner=sorted[0],playerWon=winner?.[0]===myUID;
+  _lastGameWon=playerWon;
   document.getElementById('final-subtitle').textContent=playerWon?'Félicitations, tu as gagné !':(`${sorted[0][1].name} remporte la partie !`);
   track('game_complete', {mode:'online', rounds: gameState?.maxRounds, score: ps[myUID]?.score||0, won: playerWon});
 
