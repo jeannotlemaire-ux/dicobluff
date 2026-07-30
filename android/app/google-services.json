@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "485052825851",
+    "firebase_url": "https://dicobluff-53fd9-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "dicobluff-53fd9",
+    "storage_bucket": "dicobluff-53fd9.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:485052825851:android:04e3c2f825b16ea091705e",
+        "android_client_info": {
+          "package_name": "com.dicobluff.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBuJtYXwniRTS1VJdMNCLffda3pG4XqlHs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
