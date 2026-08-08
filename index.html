@@ -413,6 +413,35 @@
     .vote-replay.shown { opacity: 1; pointer-events: auto; transform: translateY(0); }
     .vote-replay:hover { background: #1B2534; color: #F5EEDD; border-color: #1B2534; }
 
+    /* Révélations de manche — sobres, pas de rebond ni de clignotement */
+    .vote-underline { display: block; height: 2px; width: 0; margin-top: 7px; border-radius: 2px; background: linear-gradient(90deg, var(--gold), var(--gold-lt)); }
+    .vote-opt.real[data-answered] .vote-underline { animation: db-underline .45s var(--ease-expo) .1s both; }
+    .vote-opt.real.cascade[data-answered] { transition-delay: .15s; }
+    .vote-opt.real.cascade[data-answered] .vote-underline { animation-delay: .3s; }
+    .vote-opt.real.cascade[data-answered] .vote-badge { animation-delay: .32s; }
+    .vote-badge.real { animation: db-badge-in .3s var(--ease-soft) both; }
+    @keyframes db-underline { from { width: 0; } to { width: 56px; } }
+    @keyframes db-badge-in { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Écran final (5 manches) */
+    .vote-opts, .vote-hint, .vote-rule { transition: opacity .3s var(--ease-soft), transform .3s var(--ease-soft); }
+    .vote-opts.vote-fade-out, .vote-hint.vote-fade-out, .vote-rule.vote-fade-out { opacity: 0; transform: translateY(-6px); pointer-events: none; }
+    .vote-final { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; padding: 10px 0 4px; opacity: 0; transform: translateY(6px); transition: opacity .35s var(--ease-soft) .1s, transform .35s var(--ease-soft) .1s; }
+    .vote-final.revealed { opacity: 1; transform: translateY(0); }
+    .vote-final-label { font-family: 'Manrope', sans-serif; font-size: .66rem; letter-spacing: .18em; text-transform: uppercase; color: #A88C4E; }
+    .vote-final-score { font-family: 'Cormorant Garamond', serif; font-weight: 800; color: #1B2534; font-size: clamp(2.1rem, 4vw, 2.6rem); line-height: 1; }
+    .vote-final-line { height: 2px; width: 0; border-radius: 2px; background: linear-gradient(90deg, var(--gold), var(--gold-lt)); }
+    .vote-final.revealed .vote-final-line { animation: db-underline-final .5s var(--ease-expo) .25s both; }
+    @keyframes db-underline-final { from { width: 0; } to { width: 84px; } }
+    .vote-final-sub { font-family: 'Manrope', sans-serif; font-size: .8rem; color: #7a6a4a; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .vote-underline, .vote-badge.real, .vote-opts, .vote-hint, .vote-rule, .vote-final, .vote-final-line { transition: none !important; }
+      .vote-opt.real[data-answered] .vote-underline { animation: none !important; width: 56px; }
+      .vote-final.revealed .vote-final-line { animation: none !important; width: 84px; }
+      .vote-badge.real { animation: none !important; }
+    }
+
     /* Phone hero (hero visual) */
     .phone-hero {
       position: relative;
@@ -1101,7 +1130,7 @@
         <span class="vote-pill" id="vote-pill">À toi de voter</span>
         <div class="vote-head">
           <span>Mot du tour</span>
-          <span class="vote-round" id="vote-round">Manche 1</span>
+          <span class="vote-round" id="vote-round">Manche 1 / 5</span>
         </div>
         <div class="vote-word" id="vote-word">Blandice</div>
         <p class="vote-hint" id="vote-hint">Quatre définitions, une seule dit vrai. Vote pour la bonne.</p>
@@ -1123,6 +1152,12 @@
             <span class="vote-avatar" style="background-image:url('new-avatars/arseneluppin.png')"></span>
             <span><span class="vote-name">Arsène Lupin</span><span class="vote-text">Tranquillité absolue de l'âme, absence totale de trouble et de douleur selon les Épicuriens.</span></span>
           </button>
+        </div>
+        <div class="vote-final" id="vote-final" hidden>
+          <span class="vote-final-label">Score final</span>
+          <span class="vote-final-score" id="vote-final-score">0 / 10</span>
+          <span class="vote-final-line"></span>
+          <span class="vote-final-sub">Rejoue en illimité dans l'application.</span>
         </div>
         <div class="vote-footer">
           <p class="vote-result" id="vote-result" role="status">Choisis la définition que tu crois vraie ↑</p>
@@ -1802,12 +1837,16 @@
     });
   }
 
-  // Mot du jour interactif — le premier tour utilise le même algorithme de
-  // sélection que l'app (game.html : hash déterministe sur le pool des mots
-  // epic/legendary) ; les manches suivantes piochent au hasard dans ce même
-  // pool réel. Les 4 options viennent toutes de vrais mots du jeu (vraie
-  // définition + funDef authentique + 2 définitions réelles empruntées à
-  // d'autres mots comme leurres), attribuées à des personnages du jeu.
+  // Mot du jour interactif — la toute première manche affichée reprend
+  // EXACTEMENT le même hash que game.html (pool epic/legendary, index
+  // déterministe sur l'heure locale du jour). Ses leurres sont eux aussi
+  // dérivés du seed du jour (stables toute la journée, aucun Math.random ici) ;
+  // les manches suivantes ("Manche suivante"/"Recommencer") piochent librement
+  // au hasard dans le même pool réel pour varier la démo. Les 4 options d'une
+  // manche sont : la vraie définition du mot + 3 leurres qui sont les vraies
+  // définitions d'autres mots du pool (jamais de contenu inventé à part —
+  // wod-pool.json est généré depuis game.html par generate-wod-pool.js, seule
+  // source de vérité, jamais édité à la main).
   (function initVoteCard() {
     const CHARACTERS = [
       { slug: 'tartuffe', name: 'Tartuffe' }, { slug: 'cyrano', name: 'Cyrano' },
@@ -1817,40 +1856,63 @@
       { slug: 'dantes', name: 'Edmond Dantès' }, { slug: 'fogg', name: 'Phileas Fogg' },
       { slug: 'gavroche', name: 'Gavroche' }, { slug: 'donjuan', name: 'Don Juan' },
     ];
+    const MAX_ROUNDS = 5;
     const wordEl = document.getElementById('vote-word');
     const roundEl = document.getElementById('vote-round');
     const hintEl = document.getElementById('vote-hint');
+    const ruleEl = document.querySelector('#vote-card .vote-rule');
     const optsEl = document.getElementById('vote-opts');
     const resultEl = document.getElementById('vote-result');
     const pillEl = document.getElementById('vote-pill');
     const replayBtn = document.getElementById('vote-replay');
+    const finalEl = document.getElementById('vote-final');
+    const finalScoreEl = document.getElementById('vote-final-score');
     if (!wordEl || !optsEl) return;
 
-    let pool = null, round = 0, lastIdx = -1, answered = false;
+    let pool = null, round = 0, score = 0, lastIdx = -1, answered = false, finalShown = false;
 
     function localDayIdx() {
       const n = new Date();
       return Math.floor((n.getTime() - n.getTimezoneOffset() * 60000) / 86400000);
     }
+    // Même formule de hachage que game.html (renderHomeExtras) — appliquée ici
+    // au seed du jour pour le mot, et à des seeds dérivés pour les leurres.
+    function seededIndex(seed, n) {
+      return ((Math.imul(seed + 1, 2654435761) ^ Math.imul(seed ^ 0xDEAD, 1000003)) >>> 0) % n;
+    }
     function pick(n, avoid) { let i = Math.floor(Math.random() * n); if (n > 1) { let g = 0; while (i === avoid && g++ < 20) i = Math.floor(Math.random() * n); } return i; }
     function shuffle(arr) { for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
 
+    function pickDecoys(isDaily, seed, realIdx) {
+      const decoys = [];
+      let salt = 1, guard = 0;
+      while (decoys.length < 3 && guard++ < 50) {
+        const idx = isDaily ? seededIndex(seed + salt * 104729, pool.length) : pick(pool.length, realIdx);
+        salt++;
+        if (idx !== realIdx && decoys.indexOf(idx) === -1) decoys.push(idx);
+      }
+      // Filet de sécurité (improbable avec un pool de 667 mots) : complète séquentiellement.
+      let fallback = 0;
+      while (decoys.length < 3) {
+        if (fallback !== realIdx && decoys.indexOf(fallback) === -1) decoys.push(fallback);
+        fallback = (fallback + 1) % pool.length;
+      }
+      return decoys;
+    }
+
     function buildRound(isDaily) {
-      const wIdx = isDaily
-        ? ((Math.imul(localDayIdx() + 1, 2654435761) ^ Math.imul(localDayIdx() ^ 0xDEAD, 1000003)) >>> 0) % pool.length
-        : pick(pool.length, lastIdx);
+      const seed = localDayIdx();
+      const wIdx = isDaily ? seededIndex(seed, pool.length) : pick(pool.length, lastIdx);
       lastIdx = wIdx;
       const word = pool[wIdx];
+      const decoyIdxs = pickDecoys(isDaily, seed, wIdx);
 
       const chars = shuffle(CHARACTERS.slice()).slice(0, 4);
-      let d2 = pick(pool.length, wIdx), d3 = pick(pool.length, wIdx);
-      if (d3 === d2) d3 = (d3 + 1) % pool.length;
-
       const options = [
         { char: chars[0], text: word.d, real: true },
-        { char: chars[1], text: word.funDef, real: false },
-        { char: chars[2], text: pool[d2].d, real: false },
-        { char: chars[3], text: pool[d3].funDef, real: false },
+        { char: chars[1], text: pool[decoyIdxs[0]].d, real: false },
+        { char: chars[2], text: pool[decoyIdxs[1]].d, real: false },
+        { char: chars[3], text: pool[decoyIdxs[2]].d, real: false },
       ];
       shuffle(options);
       render(word.w, options);
@@ -1860,13 +1922,15 @@
       round++;
       answered = false;
       wordEl.textContent = word;
-      roundEl.textContent = 'Manche ' + round;
+      roundEl.textContent = 'Manche ' + round + ' / ' + MAX_ROUNDS;
       hintEl.textContent = 'Quatre définitions, une seule dit vrai. Vote pour la bonne.';
       resultEl.textContent = 'Choisis la définition que tu crois vraie ↑';
       resultEl.className = 'vote-result';
       pillEl.textContent = 'À toi de voter';
       pillEl.className = 'vote-pill';
+      pillEl.style.display = '';
       replayBtn.classList.remove('shown');
+      replayBtn.textContent = '↻ Manche suivante';
       optsEl.innerHTML = '';
       options.forEach(opt => {
         const btn = document.createElement('button');
@@ -1890,11 +1954,16 @@
       if (!btn || answered) return;
       answered = true;
       const win = btn.dataset.real === '1';
+      if (win) score += 2;
       optsEl.querySelectorAll('.vote-opt').forEach(b => {
         b.disabled = true;
         b.dataset.answered = '1';
         if (b.dataset.real === '1') {
           b.classList.add('real');
+          if (!win) b.classList.add('cascade');
+          const underline = document.createElement('span');
+          underline.className = 'vote-underline';
+          b.querySelector('.vote-text').after(underline);
           const badge = document.createElement('span');
           badge.className = 'vote-badge real';
           badge.textContent = '✓ VRAIE DÉFINITION';
@@ -1914,16 +1983,62 @@
         ? '✓ +2 points — tu as trouvé la vraie définition !'
         : "✗ 0 point — quelqu'un t'a piégé.";
       resultEl.className = 'vote-result ' + (win ? 'win' : 'lose');
+      if (!pool) return; // exemple statique (fetch échoué) : pas de suite possible
+      if (round >= MAX_ROUNDS) replayBtn.textContent = '↻ Recommencer';
       replayBtn.classList.add('shown');
     });
 
-    replayBtn.addEventListener('click', () => buildRound(false));
+    function showFinal() {
+      finalShown = true;
+      finalScoreEl.textContent = score + ' / ' + (MAX_ROUNDS * 2);
+      resultEl.textContent = 'Partie terminée — ' + score + ' sur ' + (MAX_ROUNDS * 2) + ' points.';
+      resultEl.className = 'vote-result';
+      pillEl.style.display = 'none';
+      finalEl.hidden = false;
+      requestAnimationFrame(() => finalEl.classList.add('revealed'));
+    }
+
+    function fadeToFinal() {
+      if (reduceMotion) {
+        optsEl.style.display = 'none';
+        hintEl.style.display = 'none';
+        if (ruleEl) ruleEl.style.display = 'none';
+        showFinal();
+        return;
+      }
+      [optsEl, hintEl, ruleEl].forEach(el => el && el.classList.add('vote-fade-out'));
+      setTimeout(() => {
+        optsEl.style.display = 'none';
+        hintEl.style.display = 'none';
+        if (ruleEl) ruleEl.style.display = 'none';
+        showFinal();
+      }, 300);
+    }
+
+    function restart() {
+      finalShown = false;
+      round = 0; score = 0;
+      finalEl.classList.remove('revealed');
+      finalEl.hidden = true;
+      [optsEl, hintEl, ruleEl].forEach(el => el && el.classList.remove('vote-fade-out'));
+      optsEl.style.display = '';
+      hintEl.style.display = '';
+      if (ruleEl) ruleEl.style.display = '';
+      buildRound(false);
+    }
+
+    replayBtn.addEventListener('click', () => {
+      if (!pool) return; // exemple statique (fetch échoué) : bouton inerte
+      if (finalShown) { restart(); return; }
+      if (round >= MAX_ROUNDS) { fadeToFinal(); return; }
+      buildRound(false);
+    });
 
     fetch('wod-pool.json').then(r => r.ok ? r.json() : Promise.reject()).then(json => {
       if (!Array.isArray(json) || !json.length) return;
       pool = json;
       buildRound(true);
-    }).catch(() => { /* keep the static example already in the markup */ });
+    }).catch(() => { /* garde l'exemple statique déjà présent dans le markup */ });
   })();
 
   if (!reduceMotion && matchMedia('(pointer: fine)').matches) {

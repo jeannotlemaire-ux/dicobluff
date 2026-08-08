@@ -6,7 +6,8 @@
   "scripts": {
     "build": "node build.js",
     "sync": "node build.js && npx cap sync android",
-    "open": "npx cap open android"
+    "open": "npx cap open android",
+    "generate:wod": "node generate-wod-pool.js"
   },
   "keywords": [],
   "author": "",
