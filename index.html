@@ -1983,10 +1983,30 @@
         ? '✓ +2 points — tu as trouvé la vraie définition !'
         : "✗ 0 point — quelqu'un t'a piégé.";
       resultEl.className = 'vote-result ' + (win ? 'win' : 'lose');
-      if (!pool) return; // exemple statique (fetch échoué) : pas de suite possible
-      if (round >= MAX_ROUNDS) replayBtn.textContent = '↻ Recommencer';
+      // Le bouton reste toujours affiché, même sans pool chargé (voir replayBtn
+      // ci-dessous) : jamais de cul-de-sac, quitte à rejouer l'exemple statique.
+      if (pool && round >= MAX_ROUNDS) replayBtn.textContent = '↻ Recommencer';
       replayBtn.classList.add('shown');
     });
+
+    // Remet les 4 boutons statiques du markup dans leur état "non répondu",
+    // sans les régénérer : utilisé quand pool ne charge toujours pas après
+    // une nouvelle tentative, pour qu'il y ait toujours quelque chose à rejouer.
+    function resetStaticExample() {
+      answered = false;
+      optsEl.querySelectorAll('.vote-opt').forEach(b => {
+        b.disabled = false;
+        delete b.dataset.answered;
+        b.classList.remove('real', 'wrong', 'cascade');
+        b.querySelectorAll('.vote-badge, .vote-underline').forEach(el => el.remove());
+      });
+      hintEl.textContent = 'Quatre définitions, une seule dit vrai. Vote pour la bonne.';
+      resultEl.textContent = 'Choisis la définition que tu crois vraie ↑';
+      resultEl.className = 'vote-result';
+      pillEl.textContent = 'À toi de voter';
+      pillEl.className = 'vote-pill';
+      replayBtn.classList.remove('shown');
+    }
 
     function showFinal() {
       finalShown = true;
@@ -2027,18 +2047,33 @@
       buildRound(false);
     }
 
+    // cache: 'reload' force une revalidation réseau à chaque tentative — évite
+    // qu'une réponse mise en cache par le navigateur (ex. un 404 obtenu avant
+    // que le fichier n'existe encore côté serveur) ne reste servie telle quelle.
+    function loadPool() {
+      return fetch('wod-pool.json', { cache: 'reload' })
+        .then(r => r.ok ? r.json() : Promise.reject())
+        .then(json => { if (Array.isArray(json) && json.length) pool = json; })
+        .catch(() => {});
+    }
+
     replayBtn.addEventListener('click', () => {
-      if (!pool) return; // exemple statique (fetch échoué) : bouton inerte
+      if (!pool) {
+        // Le premier chargement a échoué (réseau, propagation CDN...) : on retente
+        // une fois avant de conclure. Jamais de cul-de-sac dans tous les cas —
+        // au pire on rejoue l'exemple statique déjà présent dans le markup.
+        loadPool().then(() => {
+          if (pool) { buildRound(true); return; }
+          resetStaticExample();
+        });
+        return;
+      }
       if (finalShown) { restart(); return; }
       if (round >= MAX_ROUNDS) { fadeToFinal(); return; }
       buildRound(false);
     });
 
-    fetch('wod-pool.json').then(r => r.ok ? r.json() : Promise.reject()).then(json => {
-      if (!Array.isArray(json) || !json.length) return;
-      pool = json;
-      buildRound(true);
-    }).catch(() => { /* garde l'exemple statique déjà présent dans le markup */ });
+    loadPool().then(() => { if (pool) buildRound(true); });
   })();
 
   if (!reduceMotion && matchMedia('(pointer: fine)').matches) {
