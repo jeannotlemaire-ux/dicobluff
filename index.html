@@ -433,7 +433,17 @@
     .vote-final-line { height: 2px; width: 0; border-radius: 2px; background: linear-gradient(90deg, var(--gold), var(--gold-lt)); }
     .vote-final.revealed .vote-final-line { animation: db-underline-final .5s var(--ease-expo) .25s both; }
     @keyframes db-underline-final { from { width: 0; } to { width: 84px; } }
-    .vote-final-sub { font-family: 'Manrope', sans-serif; font-size: .8rem; color: #7a6a4a; }
+    .vote-final-sub { font-family: 'Manrope', sans-serif; font-size: .8rem; color: #7a6a4a; max-width: 260px; }
+    .vote-final-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'Manrope', sans-serif; font-size: .82rem; font-weight: 700;
+      color: #07101A; background: var(--gold);
+      padding: 10px 18px; border-radius: 999px; text-decoration: none;
+      box-shadow: 0 8px 20px rgba(203,164,90,.35); margin-top: 4px;
+      transition: transform .25s var(--ease-expo), box-shadow .25s var(--ease-expo), background .25s var(--ease-expo);
+    }
+    .vote-final-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(203,164,90,.45); background: var(--gold-lt); }
+    .vote-final-cta svg { flex-shrink: 0; }
 
     @media (prefers-reduced-motion: reduce) {
       .vote-underline, .vote-badge.real, .vote-opts, .vote-hint, .vote-rule, .vote-final, .vote-final-line { transition: none !important; }
@@ -1157,7 +1167,13 @@
           <span class="vote-final-label">Score final</span>
           <span class="vote-final-score" id="vote-final-score">0 / 10</span>
           <span class="vote-final-line"></span>
-          <span class="vote-final-sub">Rejoue en illimité dans l'application.</span>
+          <p class="vote-final-sub">Ce n'était qu'un aperçu. 1&nbsp;000 mots t'attendent dans le jeu complet.</p>
+          <a href="https://play.google.com/store/apps/details?id=com.dicobluff.app" class="vote-final-cta" target="_blank" rel="noopener noreferrer">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M3.18 23.76a2.4 2.4 0 0 0 1.32-.38l13.12-7.58-2.82-2.82L3.18 23.76zM1.56 3.39a2.4 2.4 0 0 0-.06.54v16.14c0 .18.02.36.06.54l9.78-9.78L1.56 3.39zm20.1 8.31-2.88-1.68-3.18 2.98 3.18 3.18 2.88-1.68c.84-.48.84-1.32 0-1.8zM4.5.62l10.3 6.2L11.94 9.7 1.56.94A2.4 2.4 0 0 1 4.5.62z"/>
+            </svg>
+            Télécharger Dicobluff
+          </a>
         </div>
         <div class="vote-footer">
           <p class="vote-result" id="vote-result" role="status">Choisis la définition que tu crois vraie ↑</p>
@@ -1743,6 +1759,12 @@
   <p class="footer-copy">&copy; 2026 Dicobluff. Fait avec passion en France.</p>
 </footer>
 
+<!-- WOD-DATA:START — généré par generate-wod-pool.js depuis game.html, NE PAS ÉDITER À LA MAIN -->
+<script>
+const WOD_DAYS = [{"day":20673,"w":"Démagogie","d":"Politique qui flatte les passions populaires pour s'attirer la faveur des masses"},{"day":20674,"w":"Apophtegme","d":"Parole brève et mémorable, souvent sentencieuse, attribuée à un grand personnage de l'Histoire."},{"day":20675,"w":"Prédestination","d":"Doctrine théologique selon laquelle Dieu a déterminé d'avance le salut ou la damnation de chacun"},{"day":20676,"w":"Ingambe","d":"Qui a l'usage alerte de ses jambes ; vif et dispos malgré l'âge"},{"day":20677,"w":"Vociférer","d":"Parler en criant et avec colère ; hurler des paroles violentes"},{"day":20678,"w":"Illuminisme","d":"Doctrine de sectes mystiques prétendant à une connaissance directe et surnaturelle de Dieu"},{"day":20679,"w":"Roide","d":"Forme ancienne de raide ; rigide, inflexible, abrupt."},{"day":20680,"w":"Patibulaire","d":"Qui a une apparence sinistre, inquiétante ; qui semble destiné à la potence."},{"day":20681,"w":"Théodicée","d":"Tentative de justifier la bonté de Dieu face à l'existence du mal dans le monde"},{"day":20682,"w":"Catachrèse","d":"Figure consistant à détourner un mot de son sens propre pour désigner un objet sans nom attitré"},{"day":20683,"w":"Prédestination","d":"Doctrine théologique selon laquelle Dieu a déterminé d'avance le salut ou la damnation de chacun"},{"day":20684,"w":"Acrimonie","d":"Aigreur, animosité qui se manifeste dans l'humeur, les paroles ou les écrits"},{"day":20685,"w":"Théogonie","d":"Récit de l'origine et de la généalogie des dieux dans une mythologie."},{"day":20686,"w":"Occultation","d":"Action de cacher ou de dissimuler, passage d'un astre derrière un autre"},{"day":20687,"w":"Prévarication","d":"Manquement grave aux devoirs d'une charge publique commis par un fonctionnaire à des fins personnelles"},{"day":20688,"w":"Asymptote","d":"Qui s'approche indéfiniment d'une limite sans jamais parvenir à la rejoindre"},{"day":20689,"w":"Anachorète","d":"Religieux qui s'est retiré dans la solitude la plus complète pour se vouer à la contemplation."},{"day":20690,"w":"Mellifluité","d":"Douceur coulante et suave d'un discours, abondance de paroles aussi douces que le miel."},{"day":20691,"w":"Lippu","d":"Qui a de grosses lèvres épaisses et saillantes"},{"day":20692,"w":"Achéropoiète","d":"Se dit d'une image sacrée dont l'origine est attribuée à un miracle divin, non à la main de l'homme"},{"day":20693,"w":"Goguenard","d":"Qui se moque avec une ironie narquoise ; railleur et persifleur"},{"day":20694,"w":"Ubiquitaire","d":"Qui est ou semble être présent partout en même temps"},{"day":20695,"w":"Obérer","d":"Accabler de dettes ou de charges ; compromettre par un poids financier"},{"day":20696,"w":"Psychopompe","d":"Qui a pour fonction de conduire les âmes des morts vers le séjour de l'au-delà"},{"day":20697,"w":"Muliebrité","d":"Ensemble des caractères propres à la femme, féminité (terme savant et rare)"},{"day":20698,"w":"Prévarication","d":"Manquement grave aux devoirs d'une charge publique commis par un fonctionnaire à des fins personnelles"},{"day":20699,"w":"Fuligineux","d":"Qui rappelle la suie par sa couleur sombre, ou qui est d'une obscurité confuse"},{"day":20700,"w":"Contingence","d":"Caractère de ce qui pourrait ne pas être ou être autrement, ce qui n'est pas nécessaire."},{"day":20701,"w":"Madré","d":"Rusé et retors, qui dissimule sa finesse sous des dehors simples"},{"day":20702,"w":"Faquin","d":"Homme méprisable et impudent ; coquin sans honneur (vieilli)"}];
+</script>
+<!-- WOD-DATA:END -->
+
 <script>
   const nav = document.getElementById('nav');
   const progress = document.getElementById('scroll-progress');
@@ -1837,16 +1859,14 @@
     });
   }
 
-  // Mot du jour interactif — la toute première manche affichée reprend
-  // EXACTEMENT le même hash que game.html (pool epic/legendary, index
-  // déterministe sur l'heure locale du jour). Ses leurres sont eux aussi
-  // dérivés du seed du jour (stables toute la journée, aucun Math.random ici) ;
-  // les manches suivantes ("Manche suivante"/"Recommencer") piochent librement
-  // au hasard dans le même pool réel pour varier la démo. Les 4 options d'une
-  // manche sont : la vraie définition du mot + 3 leurres qui sont les vraies
-  // définitions d'autres mots du pool (jamais de contenu inventé à part —
-  // wod-pool.json est généré depuis game.html par generate-wod-pool.js, seule
-  // source de vérité, jamais édité à la main).
+  // Mot du jour interactif — entièrement autonome, AUCUN réseau. Les 30
+  // prochains jours (mot + définition) sont injectés statiquement dans
+  // WOD_DAYS ci-dessus par generate-wod-pool.js depuis game.html (seule
+  // source de vérité, jamais éditée à la main) : même pool epic/legendary,
+  // même formule de hachage sur l'index du jour que game.html. La manche 1
+  // retrouve son entrée par correspondance exacte sur le jour local ; ses
+  // leurres sont dérivés du même seed (stables toute la journée). Les manches
+  // 2 à 5 piochent librement au hasard dans ce même bloc de 30 jours.
   (function initVoteCard() {
     const CHARACTERS = [
       { slug: 'tartuffe', name: 'Tartuffe' }, { slug: 'cyrano', name: 'Cyrano' },
@@ -1869,14 +1889,24 @@
     const finalScoreEl = document.getElementById('vote-final-score');
     if (!wordEl || !optsEl) return;
 
-    let pool = null, round = 0, score = 0, lastIdx = -1, answered = false, finalShown = false;
+    // Filet de sécurité théorique (bloc WOD-DATA absent/corrompu) — ne devrait
+    // jamais se produire en pratique puisque les données sont embarquées au
+    // build, pas chargées au runtime. `days` reste null, resetStaticExample()
+    // prend le relais plus bas pour ne jamais bloquer le bouton.
+    const days = (typeof WOD_DAYS !== 'undefined' && Array.isArray(WOD_DAYS) && WOD_DAYS.length >= 4) ? WOD_DAYS : null;
+
+    let round = 0, score = 0, lastIdx = -1, answered = false, finalShown = false;
 
     function localDayIdx() {
       const n = new Date();
       return Math.floor((n.getTime() - n.getTimezoneOffset() * 60000) / 86400000);
     }
-    // Même formule de hachage que game.html (renderHomeExtras) — appliquée ici
-    // au seed du jour pour le mot, et à des seeds dérivés pour les leurres.
+    // Uniquement pour dériver les leurres de la manche 1 (stables toute la
+    // journée) — le mot du jour lui-même vient d'une correspondance exacte sur
+    // WOD_DAYS[].day, pas d'un recalcul de hash ici (le tableau injecté ne
+    // fait que 30 entrées, pas les 667 du pool complet de game.html : un
+    // seededIndex(_, days.length) ne donnerait pas le même résultat que
+    // game.html, d'où le pré-calcul fait une fois pour toutes par le générateur).
     function seededIndex(seed, n) {
       return ((Math.imul(seed + 1, 2654435761) ^ Math.imul(seed ^ 0xDEAD, 1000003)) >>> 0) % n;
     }
@@ -1887,32 +1917,37 @@
       const decoys = [];
       let salt = 1, guard = 0;
       while (decoys.length < 3 && guard++ < 50) {
-        const idx = isDaily ? seededIndex(seed + salt * 104729, pool.length) : pick(pool.length, realIdx);
+        const idx = isDaily ? seededIndex(seed + salt * 104729, days.length) : pick(days.length, realIdx);
         salt++;
         if (idx !== realIdx && decoys.indexOf(idx) === -1) decoys.push(idx);
       }
-      // Filet de sécurité (improbable avec un pool de 667 mots) : complète séquentiellement.
       let fallback = 0;
       while (decoys.length < 3) {
         if (fallback !== realIdx && decoys.indexOf(fallback) === -1) decoys.push(fallback);
-        fallback = (fallback + 1) % pool.length;
+        fallback = (fallback + 1) % days.length;
       }
       return decoys;
     }
 
     function buildRound(isDaily) {
-      const seed = localDayIdx();
-      const wIdx = isDaily ? seededIndex(seed, pool.length) : pick(pool.length, lastIdx);
-      lastIdx = wIdx;
-      const word = pool[wIdx];
-      const decoyIdxs = pickDecoys(isDaily, seed, wIdx);
+      const todayIdx = localDayIdx();
+      let realIdx;
+      if (isDaily) {
+        realIdx = days.findIndex(d => d.day === todayIdx);
+        if (realIdx === -1) realIdx = 0; // fenêtre de 30 jours dépassée (générateur pas relancé) : repli sur la 1ère entrée plutôt qu'un trou
+      } else {
+        realIdx = pick(days.length, lastIdx);
+      }
+      lastIdx = realIdx;
+      const word = days[realIdx];
+      const decoyIdxs = pickDecoys(isDaily, todayIdx, realIdx);
 
       const chars = shuffle(CHARACTERS.slice()).slice(0, 4);
       const options = [
         { char: chars[0], text: word.d, real: true },
-        { char: chars[1], text: pool[decoyIdxs[0]].d, real: false },
-        { char: chars[2], text: pool[decoyIdxs[1]].d, real: false },
-        { char: chars[3], text: pool[decoyIdxs[2]].d, real: false },
+        { char: chars[1], text: days[decoyIdxs[0]].d, real: false },
+        { char: chars[2], text: days[decoyIdxs[1]].d, real: false },
+        { char: chars[3], text: days[decoyIdxs[2]].d, real: false },
       ];
       shuffle(options);
       render(word.w, options);
@@ -1983,15 +2018,15 @@
         ? '✓ +2 points — tu as trouvé la vraie définition !'
         : "✗ 0 point — quelqu'un t'a piégé.";
       resultEl.className = 'vote-result ' + (win ? 'win' : 'lose');
-      // Le bouton reste toujours affiché, même sans pool chargé (voir replayBtn
-      // ci-dessous) : jamais de cul-de-sac, quitte à rejouer l'exemple statique.
-      if (pool && round >= MAX_ROUNDS) replayBtn.textContent = '↻ Recommencer';
+      // Le bouton reste toujours affiché, même sans WOD_DAYS exploitable (voir
+      // replayBtn ci-dessous) : jamais de cul-de-sac, quitte à rejouer l'exemple statique.
+      if (days && round >= MAX_ROUNDS) replayBtn.textContent = '↻ Recommencer';
       replayBtn.classList.add('shown');
     });
 
     // Remet les 4 boutons statiques du markup dans leur état "non répondu",
-    // sans les régénérer : utilisé quand pool ne charge toujours pas après
-    // une nouvelle tentative, pour qu'il y ait toujours quelque chose à rejouer.
+    // sans les régénérer : filet de sécurité théorique si WOD_DAYS est absent
+    // ou corrompu, pour qu'il y ait toujours quelque chose à rejouer.
     function resetStaticExample() {
       answered = false;
       optsEl.querySelectorAll('.vote-opt').forEach(b => {
@@ -2047,33 +2082,14 @@
       buildRound(false);
     }
 
-    // cache: 'reload' force une revalidation réseau à chaque tentative — évite
-    // qu'une réponse mise en cache par le navigateur (ex. un 404 obtenu avant
-    // que le fichier n'existe encore côté serveur) ne reste servie telle quelle.
-    function loadPool() {
-      return fetch('wod-pool.json', { cache: 'reload' })
-        .then(r => r.ok ? r.json() : Promise.reject())
-        .then(json => { if (Array.isArray(json) && json.length) pool = json; })
-        .catch(() => {});
-    }
-
     replayBtn.addEventListener('click', () => {
-      if (!pool) {
-        // Le premier chargement a échoué (réseau, propagation CDN...) : on retente
-        // une fois avant de conclure. Jamais de cul-de-sac dans tous les cas —
-        // au pire on rejoue l'exemple statique déjà présent dans le markup.
-        loadPool().then(() => {
-          if (pool) { buildRound(true); return; }
-          resetStaticExample();
-        });
-        return;
-      }
+      if (!days) { resetStaticExample(); return; } // filet de sécurité théorique, voir plus haut
       if (finalShown) { restart(); return; }
       if (round >= MAX_ROUNDS) { fadeToFinal(); return; }
       buildRound(false);
     });
 
-    loadPool().then(() => { if (pool) buildRound(true); });
+    if (days) buildRound(true); // synchrone, aucune attente réseau — sinon l'exemple statique du markup reste affiché tel quel
   })();
 
   if (!reduceMotion && matchMedia('(pointer: fine)').matches) {

@@ -1,48 +1,103 @@
-// generate-wod-pool.js — régénère wod-pool.json à partir du tableau WORDS de game.html.
+// generate-wod-pool.js — régénère le bloc WOD-DATA d'index.html à partir du
+// tableau WORDS de game.html.
 //
-// game.html est la source de vérité unique du dictionnaire : ce script ne fait
-// qu'extraire le sous-ensemble utile au widget "mot du jour" de la landing page
-// (index.html), qui charge wod-pool.json en fetch() différé.
+// game.html est la source de vérité unique du dictionnaire. Ce script calcule,
+// pour chaque jour des 30 prochains jours, EXACTEMENT le même mot que game.html
+// afficherait ce jour-là (même pool epic/legendary dans le même ordre, même
+// formule de hachage sur l'index du jour), puis injecte ces 30 paires
+// {jour, mot, définition} DIRECTEMENT dans index.html, entre les marqueurs
+// <!-- WOD-DATA:START --> et <!-- WOD-DATA:END -->. Aucun fetch, aucun fichier
+// externe : le site n'a plus aucune dépendance réseau pour ce widget.
 //
-// À relancer à chaque fois que le tableau WORDS de game.html change (mot
-// ajouté/retiré/modifié parmi les registres epic/legendary) :
+// Pourquoi 30 jours et pas les 667 mots en entier : embarquer le pool complet
+// gonflerait inutilement le poids de la landing page (SEO/vitrine). 30 jours
+// couvre largement l'intervalle entre deux relances de ce script.
+//
+// À RELANCER TOUS LES 30 JOURS (sinon le site retombe sur la 1ère entrée du
+// bloc au-delà de la fenêtre couverte — dégradation silencieuse, pas de crash,
+// mais le mot du jour du site cesse de coller à celui de l'app) :
 //   node generate-wod-pool.js
 //
-// Le fichier généré ne contient que {w, d} : le registre (r) et l'étymologie (h)
-// ne sont pas utilisés par le widget, donc pas exportés. L'ORDRE du tableau est
-// préservé tel quel — le widget recalcule le même index que game.html à partir
-// de ce même ordre, un tri le romprait.
+// Automatisation possible plus tard : un workflow GitHub Actions avec un
+// déclencheur `schedule` (cron mensuel, ex. "0 6 1 * *") qui checkout le repo,
+// lance `node generate-wod-pool.js`, puis commit+push automatiquement si le
+// bloc a changé. Pas mis en place ici — à faire dans .github/workflows/ le
+// jour où on veut ne plus y penser.
 
 const fs = require('fs');
 const path = require('path');
 
 const GAME_HTML = path.join(__dirname, 'game.html');
-const OUT_JSON = path.join(__dirname, 'wod-pool.json');
+const INDEX_HTML = path.join(__dirname, 'index.html');
+const DAYS_AHEAD = 30;
+const START_MARKER = '<!-- WOD-DATA:START — généré par generate-wod-pool.js depuis game.html, NE PAS ÉDITER À LA MAIN -->';
+const END_MARKER = '<!-- WOD-DATA:END -->';
 
-const src = fs.readFileSync(GAME_HTML, 'utf8');
+function extractWords(gameHtmlSrc) {
+  const startMarker = 'const WORDS = [';
+  const start = gameHtmlSrc.indexOf(startMarker);
+  if (start === -1) throw new Error('Tableau WORDS introuvable dans game.html');
 
-const startMarker = 'const WORDS = [';
-const start = src.indexOf(startMarker);
-if (start === -1) throw new Error('Tableau WORDS introuvable dans game.html');
+  let depth = 0, i = start + startMarker.length - 1, end = -1;
+  for (; i < gameHtmlSrc.length; i++) {
+    const c = gameHtmlSrc[i];
+    if (c === '[') depth++;
+    else if (c === ']') { depth--; if (depth === 0) { end = i + 1; break; } }
+  }
+  if (end === -1) throw new Error('Fin du tableau WORDS introuvable');
 
-// Recherche de la fermeture du tableau par comptage de crochets (le tableau
-// contient des chaînes avec apostrophes échappées mais jamais de crochets
-// littéraux dans le texte des mots/définitions/hints).
-let depth = 0, i = start + startMarker.length - 1, end = -1;
-for (; i < src.length; i++) {
-  const c = src[i];
-  if (c === '[') depth++;
-  else if (c === ']') { depth--; if (depth === 0) { end = i + 1; break; } }
+  const arrayLiteral = gameHtmlSrc.slice(start + 'const WORDS = '.length, end);
+  // eslint-disable-next-line no-new-func
+  return new Function('return ' + arrayLiteral)();
 }
-if (end === -1) throw new Error('Fin du tableau WORDS introuvable');
 
-const arrayLiteral = src.slice(start + 'const WORDS = '.length, end);
-// eslint-disable-next-line no-new-func
-const WORDS = new Function('return ' + arrayLiteral)();
+// Même formule que renderHomeExtras() dans game.html.
+function seededIndex(seed, n) {
+  return ((Math.imul(seed + 1, 2654435761) ^ Math.imul(seed ^ 0xDEAD, 1000003)) >>> 0) % n;
+}
 
-const pool = WORDS
-  .filter(w => w.r === 'epic' || w.r === 'legendary')
-  .map(w => ({ w: w.w, d: w.d }));
+// Index du jour Europe/Paris pour un instant UTC donné — indépendant du fuseau
+// de la machine qui exécute ce script (un runner CI est typiquement en UTC).
+// Reproduit l'arithmétique de localDayIdx() (game.html/index.html), qui elle
+// tourne dans le navigateur du joueur et utilise donc SON fuseau local — pour
+// une audience française, Europe/Paris est la bonne approximation au moment
+// de choisir QUELS 30 jours pré-calculer.
+function parisDayIdx(utcDate) {
+  const fmt = new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'Europe/Paris', year: 'numeric', month: '2-digit', day: '2-digit',
+    hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false,
+  });
+  const p = Object.fromEntries(fmt.formatToParts(utcDate).map(x => [x.type, x.value]));
+  const asUtc = Date.UTC(+p.year, +p.month - 1, +p.day, +p.hour, +p.minute, +p.second);
+  return Math.floor(asUtc / 86400000);
+}
 
-fs.writeFileSync(OUT_JSON, JSON.stringify(pool), 'utf8');
-console.log(`✓ wod-pool.json régénéré : ${pool.length} mots (epic + legendary) depuis game.html`);
+const gameHtmlSrc = fs.readFileSync(GAME_HTML, 'utf8');
+const WORDS = extractWords(gameHtmlSrc);
+const pool = WORDS.filter(w => w.r === 'epic' || w.r === 'legendary');
+
+const todayIdx = parisDayIdx(new Date());
+const days = [];
+for (let offset = 0; offset < DAYS_AHEAD; offset++) {
+  const dayIdx = todayIdx + offset;
+  const wIdx = seededIndex(dayIdx, pool.length);
+  const w = pool[wIdx];
+  days.push({ day: dayIdx, w: w.w, d: w.d });
+}
+
+const block = `${START_MARKER}
+<script>
+const WOD_DAYS = ${JSON.stringify(days)};
+</script>
+${END_MARKER}`;
+
+const indexSrc = fs.readFileSync(INDEX_HTML, 'utf8');
+const startIdx = indexSrc.indexOf(START_MARKER);
+const endIdx = indexSrc.indexOf(END_MARKER);
+if (startIdx === -1 || endIdx === -1) {
+  throw new Error('Marqueurs WOD-DATA introuvables dans index.html — voir generate-wod-pool.js pour le format attendu.');
+}
+const newIndexSrc = indexSrc.slice(0, startIdx) + block + indexSrc.slice(endIdx + END_MARKER.length);
+fs.writeFileSync(INDEX_HTML, newIndexSrc, 'utf8');
+
+console.log(`✓ index.html mis à jour : ${days.length} jours injectés (du ${days[0].day} au ${days[days.length - 1].day}), mot du jour = "${days[0].w}"`);

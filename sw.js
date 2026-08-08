@@ -7,7 +7,7 @@
    - Versioning : incrémente CACHE_VERSION pour forcer l'invalidation de tous les caches
 */
 
-const CACHE_VERSION = 'dicobluff-v34';
+const CACHE_VERSION = 'dicobluff-v35';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
@@ -18,7 +18,6 @@ const PRECACHE_URLS = [
   './game.html',
   './offline.html',
   './manifest.webmanifest',
-  './wod-pool.json',
   './assets/icons/icon-192.png',
   './assets/icons/icon-512.png',
   './assets/icons/favicon-32.png'
