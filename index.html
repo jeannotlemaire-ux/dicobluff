@@ -343,6 +343,7 @@
     .vote-pill.lose { background: #A8433B; color: #F5EEDD; }
     .vote-head {
       display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; row-gap: 3px;
       font-family: 'Manrope', sans-serif;
       font-size: .66rem; letter-spacing: .18em; text-transform: uppercase;
       color: #A88C4E;
@@ -1152,7 +1153,7 @@
       <div class="vote-card reveal" id="vote-card" style="transition-delay:.18s">
         <span class="vote-pill" id="vote-pill">À toi de voter</span>
         <div class="vote-head">
-          <span>Mot du tour</span>
+          <span id="vote-head-label">Mot du tour</span>
           <span class="vote-round" id="vote-round">Manche 1 / 5</span>
         </div>
         <div class="vote-word" id="vote-word">Blandice</div>
@@ -1193,7 +1194,7 @@
           <button type="button" class="vote-replay" id="vote-replay">↻ Manche suivante</button>
         </div>
       </div>
-      <p class="hero-visual-caption reveal" style="transition-delay:.26s">Un mot comme celui-ci arrive chaque matin à 8h dans l'app.</p>
+      <p class="hero-visual-caption reveal" style="transition-delay:.26s">Un mot comme celui-ci change chaque jour à minuit dans l'app.</p>
     </div>
   </div>
 </section>
@@ -1891,6 +1892,7 @@ const WOD_DAYS = [{"day":20673,"w":"Démagogie","d":"Politique qui flatte les pa
     ];
     const MAX_ROUNDS = 5;
     const wordEl = document.getElementById('vote-word');
+    const headLabelEl = document.getElementById('vote-head-label');
     const roundEl = document.getElementById('vote-round');
     const hintEl = document.getElementById('vote-hint');
     const ruleEl = document.querySelector('#vote-card .vote-rule');
@@ -1921,7 +1923,14 @@ const WOD_DAYS = [{"day":20673,"w":"Démagogie","d":"Politique qui flatte les pa
     // prend le relais plus bas pour ne jamais bloquer le bouton.
     const days = (typeof WOD_DAYS !== 'undefined' && Array.isArray(WOD_DAYS) && WOD_DAYS.length >= 4) ? WOD_DAYS : null;
 
-    let round = 0, score = 0, lastIdx = -1, answered = false, finalShown = false;
+    let round = 0, score = 0, answered = false, finalShown = false;
+    // Mots déjà servis (comme bonne réponse OU comme leurre) dans la partie en
+    // cours — jamais réutilisés, sinon le leurre d'une manche peut redevenir
+    // la bonne réponse d'une manche suivante (ou l'inverse). Déduplique par
+    // mot et pas par index de `days`, car deux jours différents du bloc
+    // WOD_DAYS peuvent retomber sur le même mot du pool (collision de hash).
+    // Réinitialisé à chaque nouvelle partie, voir restart().
+    let usedWords = new Set();
 
     function localDayIdx() {
       const n = new Date();
@@ -1936,21 +1945,62 @@ const WOD_DAYS = [{"day":20673,"w":"Démagogie","d":"Politique qui flatte les pa
     function seededIndex(seed, n) {
       return ((Math.imul(seed + 1, 2654435761) ^ Math.imul(seed ^ 0xDEAD, 1000003)) >>> 0) % n;
     }
-    function pick(n, avoid) { let i = Math.floor(Math.random() * n); if (n > 1) { let g = 0; while (i === avoid && g++ < 20) i = Math.floor(Math.random() * n); } return i; }
+    // Choisit un index de `days` dont le MOT n'est pas dans avoidWords ; se
+    // rabat sur un tirage aveugle si le pool est entièrement épuisé (ne
+    // devrait jamais arriver avec 30 entrées et 5 manches de 4 mots). On
+    // déduplique par mot, pas par index : le tirage journalier de
+    // generate-wod-pool.js peut faire retomber deux jours différents sur le
+    // même mot du pool (collision de hash sur 30 tirages parmi 667 mots), ce
+    // qui donnerait deux index distincts pour une définition identique.
+    function pickAvoidingWords(avoidWords) {
+      const candidates = [];
+      for (let i = 0; i < days.length; i++) if (!avoidWords.has(days[i].w)) candidates.push(i);
+      if (candidates.length === 0) return Math.floor(Math.random() * days.length);
+      return candidates[Math.floor(Math.random() * candidates.length)];
+    }
     function shuffle(arr) { for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
 
-    function pickDecoys(isDaily, seed, realIdx) {
-      const decoys = [];
-      let salt = 1, guard = 0;
-      while (decoys.length < 3 && guard++ < 50) {
-        const idx = isDaily ? seededIndex(seed + salt * 104729, days.length) : pick(days.length, realIdx);
-        salt++;
-        if (idx !== realIdx && decoys.indexOf(idx) === -1) decoys.push(idx);
+    // Manche 1 seulement : les leurres n'ont pas de thème renseigné dans les
+    // données (WOD_DAYS n'embarque que mot + définition), donc on approxime
+    // la distance sémantique par le vocabulaire partagé avec la vraie
+    // définition — les 3 définitions qui partagent le MOINS de mots-clés avec
+    // elle sont retenues. Sans ça, les leurres sont indiscernables pour un
+    // visiteur qui ne connaît pas déjà le mot (leurres = vraies définitions
+    // du dictionnaire, aussi denses que la bonne). Manches 2 à 5 : tirage
+    // aveugle inchangé, la difficulté reste entière.
+    const STOPWORDS = new Set(['dans','avec','pour','sans','plus','tres','cette','ceux','celle','leur','leurs','etre','avoir','fait','faire','selon','comme','tout','toute','tous','toutes','aussi','ainsi','dont','elle','elles','vers','chose','sorte','maniere','caractere']);
+    function keywordsOf(text) {
+      return text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-z\s]/g, ' ').split(/\s+/)
+        .filter(w => w.length > 3 && !STOPWORDS.has(w));
+    }
+    function sharedKeywordCount(defText, realKeywordSet) {
+      let shared = 0;
+      keywordsOf(defText).forEach(w => { if (realKeywordSet.has(w)) shared++; });
+      return shared;
+    }
+
+    function pickDecoys(isDaily, seed, realIdx, avoidWords) {
+      const realWord = days[realIdx].w;
+      if (isDaily) {
+        const realKeywordSet = new Set(keywordsOf(days[realIdx].d));
+        const ranked = days
+          .map((d, idx) => ({ idx, score: sharedKeywordCount(d.d, realKeywordSet) }))
+          // days[x.idx].w !== realWord exclut aussi un éventuel doublon du mot
+          // du jour ailleurs dans le bloc (même définition affichée deux fois).
+          .filter(x => x.idx !== realIdx && days[x.idx].w !== realWord)
+          .sort((a, b) => a.score - b.score || seededIndex(seed + a.idx * 104729, 97) - seededIndex(seed + b.idx * 104729, 97));
+        return ranked.slice(0, 3).map(x => x.idx);
       }
-      let fallback = 0;
+      // Manches 2 à 5 : tirage aveugle, en évitant tout mot déjà servi cette
+      // partie (bonne réponse ou leurre d'une manche précédente).
+      const decoys = [];
+      const avoid = new Set(avoidWords);
+      avoid.add(realWord);
       while (decoys.length < 3) {
-        if (fallback !== realIdx && decoys.indexOf(fallback) === -1) decoys.push(fallback);
-        fallback = (fallback + 1) % days.length;
+        const idx = pickAvoidingWords(avoid);
+        decoys.push(idx);
+        avoid.add(days[idx].w);
       }
       return decoys;
     }
@@ -1958,19 +2008,24 @@ const WOD_DAYS = [{"day":20673,"w":"Démagogie","d":"Politique qui flatte les pa
     function buildRound(isDaily) {
       const todayIdx = localDayIdx();
       let realIdx;
+      let isTodayWord = false;
       if (isDaily) {
         realIdx = days.findIndex(d => d.day === todayIdx);
+        isTodayWord = realIdx !== -1;
         // Fenêtre de 30 jours dépassée (générateur pas relancé, voir le workflow
         // GitHub Actions dans .github/workflows/) : plutôt qu'un mot figé pour de
         // bon sur la même entrée, on pioche quand même un mot qui varie chaque
         // jour dans le bloc existant — jamais d'écran vide, jamais bloqué.
+        // isTodayWord reste false : on ne peut pas garantir que c'est vraiment
+        // le mot du jour de l'app, donc pas d'étiquette "Mot du jour" + date.
         if (realIdx === -1) realIdx = seededIndex(todayIdx, days.length);
       } else {
-        realIdx = pick(days.length, lastIdx);
+        realIdx = pickAvoidingWords(usedWords);
       }
-      lastIdx = realIdx;
+      usedWords.add(days[realIdx].w);
       const word = days[realIdx];
-      const decoyIdxs = pickDecoys(isDaily, todayIdx, realIdx);
+      const decoyIdxs = pickDecoys(isDaily, todayIdx, realIdx, usedWords);
+      decoyIdxs.forEach(idx => usedWords.add(days[idx].w));
 
       const chars = shuffle(CHARACTERS.slice()).slice(0, 4);
       const options = [
@@ -1980,13 +2035,16 @@ const WOD_DAYS = [{"day":20673,"w":"Démagogie","d":"Politique qui flatte les pa
         { char: chars[3], text: days[decoyIdxs[2]].d, real: false },
       ];
       shuffle(options);
-      render(word.w, options);
+      render(word.w, options, isTodayWord);
     }
 
-    function render(word, options) {
+    function render(word, options, isTodayWord) {
       round++;
       answered = false;
       wordEl.textContent = word;
+      headLabelEl.textContent = isTodayWord
+        ? 'Mot du jour · ' + new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' })
+        : 'Mot du tour';
       roundEl.textContent = 'Manche ' + round + ' / ' + MAX_ROUNDS + ' · Score ' + score;
       hintEl.textContent = 'Quatre définitions, une seule dit vrai. Vote pour la bonne.';
       resultEl.textContent = 'Choisis la définition que tu crois vraie ↑';
@@ -2118,6 +2176,7 @@ const WOD_DAYS = [{"day":20673,"w":"Démagogie","d":"Politique qui flatte les pa
     function restart() {
       finalShown = false;
       round = 0; score = 0;
+      usedWords = new Set();
       finalEl.classList.remove('revealed');
       finalEl.hidden = true;
       [optsEl, hintEl, ruleEl].forEach(el => el && el.classList.remove('vote-fade-out'));
