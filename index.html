@@ -1178,9 +1178,9 @@
         </div>
         <div class="vote-final" id="vote-final" hidden>
           <span class="vote-final-label">Score final</span>
-          <span class="vote-final-score" id="vote-final-score">0 / 10</span>
+          <span class="vote-final-score" id="vote-final-score">0 / 5</span>
           <span class="vote-final-line"></span>
-          <p class="vote-final-sub">Ce n'était qu'un aperçu. 1&nbsp;000 mots t'attendent dans le jeu complet.</p>
+          <p class="vote-final-sub" id="vote-final-sub">Ce n'était qu'un aperçu. 1&nbsp;000 mots t'attendent dans le jeu complet.</p>
           <a href="https://play.google.com/store/apps/details?id=com.dicobluff.app" class="vote-final-cta" target="_blank" rel="noopener noreferrer">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path d="M3.18 23.76a2.4 2.4 0 0 0 1.32-.38l13.12-7.58-2.82-2.82L3.18 23.76zM1.56 3.39a2.4 2.4 0 0 0-.06.54v16.14c0 .18.02.36.06.54l9.78-9.78L1.56 3.39zm20.1 8.31-2.88-1.68-3.18 2.98 3.18 3.18 2.88-1.68c.84-.48.84-1.32 0-1.8zM4.5.62l10.3 6.2L11.94 9.7 1.56.94A2.4 2.4 0 0 1 4.5.62z"/>
@@ -1900,7 +1900,20 @@ const WOD_DAYS = [{"day":20673,"w":"Démagogie","d":"Politique qui flatte les pa
     const replayBtn = document.getElementById('vote-replay');
     const finalEl = document.getElementById('vote-final');
     const finalScoreEl = document.getElementById('vote-final-score');
+    const finalSubEl = document.getElementById('vote-final-sub');
     if (!wordEl || !optsEl) return;
+
+    // Un message par score (0 à 5) — un score bas doit intriguer et donner
+    // envie de rejouer, jamais ressembler à un échec ; un score haut doit être
+    // valorisé. Chacun garde l'accroche vers l'appli complète.
+    const SCORE_MESSAGES = [
+      "0 sur 5 — ces mots sont conçus pour tromper. Belle résistance. 1 000 autres t'attendent dans l'appli.",
+      "1 sur 5 — un éclair de lucidité au milieu du bluff. 1 000 autres pièges à démêler dans l'appli.",
+      "2 sur 5 — l'instinct s'aiguise. Teste-le sur les 1 000 mots de l'appli complète.",
+      "3 sur 5 — un score solide, tu sens où se cachent les fausses pistes. La suite dans l'appli.",
+      "4 sur 5 — un flair redoutable, à un mot du sans-faute. De quoi tenter les 1 000 autres.",
+      "5 sur 5 — sans-faute. Le dictionnaire n'a plus de secrets... pour l'instant. 995 de plus t'attendent.",
+    ];
 
     // Filet de sécurité théorique (bloc WOD-DATA absent/corrompu) — ne devrait
     // jamais se produire en pratique puisque les données sont embarquées au
@@ -1974,7 +1987,7 @@ const WOD_DAYS = [{"day":20673,"w":"Démagogie","d":"Politique qui flatte les pa
       round++;
       answered = false;
       wordEl.textContent = word;
-      roundEl.textContent = 'Manche ' + round + ' / ' + MAX_ROUNDS;
+      roundEl.textContent = 'Manche ' + round + ' / ' + MAX_ROUNDS + ' · Score ' + score;
       hintEl.textContent = 'Quatre définitions, une seule dit vrai. Vote pour la bonne.';
       resultEl.textContent = 'Choisis la définition que tu crois vraie ↑';
       resultEl.className = 'vote-result';
@@ -2006,7 +2019,8 @@ const WOD_DAYS = [{"day":20673,"w":"Démagogie","d":"Politique qui flatte les pa
       if (!btn || answered) return;
       answered = true;
       const win = btn.dataset.real === '1';
-      if (win) score += 2;
+      if (win) score += 1;
+      roundEl.textContent = 'Manche ' + round + ' / ' + MAX_ROUNDS + ' · Score ' + score;
       optsEl.querySelectorAll('.vote-opt').forEach(b => {
         b.disabled = true;
         b.dataset.answered = '1';
@@ -2029,10 +2043,10 @@ const WOD_DAYS = [{"day":20673,"w":"Démagogie","d":"Politique qui flatte les pa
         }
       });
       hintEl.textContent = 'Manche révélée — voici qui bluffait.';
-      pillEl.textContent = win ? '+2 PTS' : 'RATÉ';
+      pillEl.textContent = win ? '+1 PT' : 'RATÉ';
       pillEl.className = 'vote-pill ' + (win ? 'win' : 'lose');
       resultEl.textContent = win
-        ? '✓ +2 points — tu as trouvé la vraie définition !'
+        ? '✓ +1 point — tu as trouvé la vraie définition !'
         : "✗ 0 point — quelqu'un t'a piégé.";
       resultEl.className = 'vote-result ' + (win ? 'win' : 'lose');
       // Le bouton reste toujours affiché, même sans WOD_DAYS exploitable (voir
@@ -2060,14 +2074,28 @@ const WOD_DAYS = [{"day":20673,"w":"Démagogie","d":"Politique qui flatte les pa
       replayBtn.classList.remove('shown');
     }
 
+    // Décompte le score final au lieu de l'afficher d'un coup — sobre, un cran
+    // par manche gagnée (au plus 5 étapes de 160ms). Respecte prefers-reduced-motion.
+    function revealFinalScore(target) {
+      if (reduceMotion || target === 0) { finalScoreEl.textContent = target + ' / ' + MAX_ROUNDS; return; }
+      finalScoreEl.textContent = '0 / ' + MAX_ROUNDS;
+      let n = 0;
+      (function step() {
+        n++;
+        finalScoreEl.textContent = n + ' / ' + MAX_ROUNDS;
+        if (n < target) setTimeout(step, 160);
+      })();
+    }
+
     function showFinal() {
       finalShown = true;
-      finalScoreEl.textContent = score + ' / ' + (MAX_ROUNDS * 2);
-      resultEl.textContent = 'Partie terminée — ' + score + ' sur ' + (MAX_ROUNDS * 2) + ' points.';
+      finalSubEl.textContent = SCORE_MESSAGES[score];
+      resultEl.textContent = 'Partie terminée — ' + score + ' sur ' + MAX_ROUNDS + ' points.';
       resultEl.className = 'vote-result';
       pillEl.style.display = 'none';
       finalEl.hidden = false;
       requestAnimationFrame(() => finalEl.classList.add('revealed'));
+      revealFinalScore(score);
     }
 
     function fadeToFinal() {
