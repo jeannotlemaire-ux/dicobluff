@@ -375,7 +375,15 @@
       background-size: cover; background-position: center;
     }
     .vote-name { display: block; font-family: 'Manrope', sans-serif; font-size: .72rem; font-weight: 600; color: #8a7757; margin-bottom: 3px; }
-    .vote-text { display: block; font-family: 'Manrope', sans-serif; font-size: .86rem; line-height: 1.36; color: #3a4250; }
+    /* Hauteur bornée à 4 lignes (jamais dépassée par une définition réelle du
+       pool, sauf la plus longue sur téléphone étroit <376px) + min-height sur
+       ces mêmes 4 lignes : les 4 boutons gardent une hauteur uniforme d'un
+       jour à l'autre, quelle que soit la longueur du texte du jour. */
+    .vote-text {
+      display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 4; line-clamp: 4;
+      overflow: hidden; font-family: 'Manrope', sans-serif; font-size: .86rem; line-height: 1.36; color: #3a4250;
+      min-height: calc(1.36em * 4);
+    }
     .vote-opt[data-answered] { opacity: .42; filter: saturate(.55); }
     .vote-opt.real[data-answered] {
       opacity: 1; filter: none; transform: translateY(-2px);
@@ -427,6 +435,11 @@
     .vote-opts, .vote-hint, .vote-rule { transition: opacity .3s var(--ease-soft), transform .3s var(--ease-soft); }
     .vote-opts.vote-fade-out, .vote-hint.vote-fade-out, .vote-rule.vote-fade-out { opacity: 0; transform: translateY(-6px); pointer-events: none; }
     .vote-final { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; padding: 10px 0 4px; opacity: 0; transform: translateY(6px); transition: opacity .35s var(--ease-soft) .1s, transform .35s var(--ease-soft) .1s; }
+    /* [hidden] a la même spécificité que .vote-final : sans cette règle,
+       display:flex (règle auteur) gagne quand même sur display:none (règle
+       navigateur) et la carte réserve l'espace de l'écran final pendant tout
+       le vote — c'était la cause du grand vide sous les 4 propositions. */
+    .vote-final[hidden] { display: none; }
     .vote-final.revealed { opacity: 1; transform: translateY(0); }
     .vote-final-label { font-family: 'Manrope', sans-serif; font-size: .66rem; letter-spacing: .18em; text-transform: uppercase; color: #A88C4E; }
     .vote-final-score { font-family: 'Cormorant Garamond', serif; font-weight: 800; color: #1B2534; font-size: clamp(2.1rem, 4vw, 2.6rem); line-height: 1; }
