@@ -1934,7 +1934,11 @@ const WOD_DAYS = [{"day":20673,"w":"Démagogie","d":"Politique qui flatte les pa
       let realIdx;
       if (isDaily) {
         realIdx = days.findIndex(d => d.day === todayIdx);
-        if (realIdx === -1) realIdx = 0; // fenêtre de 30 jours dépassée (générateur pas relancé) : repli sur la 1ère entrée plutôt qu'un trou
+        // Fenêtre de 30 jours dépassée (générateur pas relancé, voir le workflow
+        // GitHub Actions dans .github/workflows/) : plutôt qu'un mot figé pour de
+        // bon sur la même entrée, on pioche quand même un mot qui varie chaque
+        // jour dans le bloc existant — jamais d'écran vide, jamais bloqué.
+        if (realIdx === -1) realIdx = seededIndex(todayIdx, days.length);
       } else {
         realIdx = pick(days.length, lastIdx);
       }

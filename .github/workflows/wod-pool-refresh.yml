@@ -1,0 +1,39 @@
+name: Régénération mensuelle du mot du jour
+
+# Relance generate-wod-pool.js (voir ce fichier pour le détail) et pousse le
+# résultat si le bloc WOD-DATA d'index.html a changé. Sans ce workflow, le
+# bloc ne couvre que 30 jours et le widget "mot du jour" de la landing page
+# retombe sur un mot qui ne suit plus vraiment le calendrier (filet de
+# sécurité côté widget : voir buildRound() dans index.html).
+
+on:
+  schedule:
+    - cron: '0 6 1 * *' # le 1er de chaque mois à 6h UTC
+  workflow_dispatch: # déclenchement manuel depuis l'onglet Actions
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - run: node generate-wod-pool.js
+
+      - name: Commit et push si le bloc a changé
+        run: |
+          if git diff --quiet -- index.html; then
+            echo "Rien à faire — bloc WOD-DATA déjà à jour."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "chore: régénère le bloc WOD-DATA (mot du jour, 30 prochains jours)"
+          git push
