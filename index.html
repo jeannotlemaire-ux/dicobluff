@@ -375,7 +375,25 @@
       flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%;
       background-size: cover; background-position: center;
     }
+    /* Pendant le vote : une simple lettre (A/B/C/D), comme dans game.html —
+       jamais d'auteur avant la révélation, c'est le principe du bluff. */
+    .vote-avatar.letter {
+      display: flex; align-items: center; justify-content: center;
+      background: #EDE3CB; border: 1px solid #e2d6b4; color: #8a7757;
+      font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1rem;
+    }
+    /* À la révélation, la vraie définition n'a pas d'auteur-personnage : elle
+       vient du dictionnaire (voir authorName:'Vrai dictionnaire' / affichage
+       "Dictionnaire" dans game.html). */
+    .vote-avatar.dict {
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(203,164,90,.18); border: 1px solid rgba(203,164,90,.4); color: var(--gold);
+    }
     .vote-name { display: block; font-family: 'Manrope', sans-serif; font-size: .72rem; font-weight: 600; color: #8a7757; margin-bottom: 3px; }
+    /* Le nom (personnage ou "Dictionnaire") reste dans le DOM dès le rendu de
+       la manche pour ne pas faire varier la hauteur du bouton à la révélation
+       (voir le correctif de hauteur stable), mais invisible tant qu'on vote. */
+    .vote-name.hidden-until-reveal { visibility: hidden; }
     /* Hauteur bornée à 4 lignes (jamais dépassée par une définition réelle du
        pool, sauf la plus longue sur téléphone étroit <376px) + min-height sur
        ces mêmes 4 lignes : les 4 boutons gardent une hauteur uniforme d'un
@@ -1160,21 +1178,21 @@
         <p class="vote-hint" id="vote-hint">Quatre définitions, une seule dit vrai. Vote pour la bonne.</p>
         <div class="vote-rule"></div>
         <div class="vote-opts" id="vote-opts">
-          <button type="button" class="vote-opt" data-real="0">
-            <span class="vote-avatar" style="background-image:url('new-avatars/cyrano.png')"></span>
-            <span><span class="vote-name">Cyrano</span><span class="vote-text">Flatterie douce que le commercial vous distille pour vous vendre une assurance avant que vous compreniez ce que vous achetez.</span></span>
+          <button type="button" class="vote-opt" data-real="0" data-char-slug="cyrano" data-char-name="Cyrano">
+            <span class="vote-avatar letter">A</span>
+            <span><span class="vote-name hidden-until-reveal">Cyrano</span><span class="vote-text">Flatterie douce que le commercial vous distille pour vous vendre une assurance avant que vous compreniez ce que vous achetez.</span></span>
           </button>
-          <button type="button" class="vote-opt" data-real="1">
-            <span class="vote-avatar" style="background-image:url('new-avatars/tartuffe.png')"></span>
-            <span><span class="vote-name">Tartuffe</span><span class="vote-text">Charme trompeur, flatterie douce et insidieuse visant à séduire ou corrompre.</span></span>
+          <button type="button" class="vote-opt" data-real="1" data-char-slug="tartuffe" data-char-name="Tartuffe">
+            <span class="vote-avatar letter">B</span>
+            <span><span class="vote-name hidden-until-reveal">Dictionnaire</span><span class="vote-text">Charme trompeur, flatterie douce et insidieuse visant à séduire ou corrompre.</span></span>
           </button>
-          <button type="button" class="vote-opt" data-real="0">
-            <span class="vote-avatar" style="background-image:url('new-avatars/figaro.png')"></span>
-            <span><span class="vote-name">Figaro</span><span class="vote-text">Impasse logique insoluble, difficulté philosophique sans issue.</span></span>
+          <button type="button" class="vote-opt" data-real="0" data-char-slug="figaro" data-char-name="Figaro">
+            <span class="vote-avatar letter">C</span>
+            <span><span class="vote-name hidden-until-reveal">Figaro</span><span class="vote-text">Impasse logique insoluble, difficulté philosophique sans issue.</span></span>
           </button>
-          <button type="button" class="vote-opt" data-real="0">
-            <span class="vote-avatar" style="background-image:url('new-avatars/arseneluppin.png')"></span>
-            <span><span class="vote-name">Arsène Lupin</span><span class="vote-text">Tranquillité absolue de l'âme, absence totale de trouble et de douleur selon les Épicuriens.</span></span>
+          <button type="button" class="vote-opt" data-real="0" data-char-slug="arseneluppin" data-char-name="Arsène Lupin">
+            <span class="vote-avatar letter">D</span>
+            <span><span class="vote-name hidden-until-reveal">Arsène Lupin</span><span class="vote-text">Tranquillité absolue de l'âme, absence totale de trouble et de douleur selon les Épicuriens.</span></span>
           </button>
         </div>
         <div class="vote-final" id="vote-final" hidden>
@@ -2055,17 +2073,27 @@ const WOD_DAYS = [{"day":20673,"w":"Démagogie","d":"Politique qui flatte les pa
       replayBtn.classList.remove('shown');
       replayBtn.textContent = '↻ Manche suivante';
       optsEl.innerHTML = '';
-      options.forEach(opt => {
+      // Pendant le vote, seule une lettre distingue les options — aucun nom,
+      // aucun avatar : dans game.html, l'attribution n'apparaît qu'à la
+      // révélation (renderResults/ai-author-row), jamais pendant le vote.
+      options.forEach((opt, i) => {
         const btn = document.createElement('button');
         btn.type = 'button';
         btn.className = 'vote-opt';
         btn.dataset.real = opt.real ? '1' : '0';
+        btn.dataset.charSlug = opt.char.slug;
+        btn.dataset.charName = opt.char.name;
         const av = document.createElement('span');
-        av.className = 'vote-avatar';
-        av.style.backgroundImage = `url('new-avatars/${opt.char.slug}.png')`;
+        av.className = 'vote-avatar letter';
+        av.textContent = String.fromCharCode(65 + i);
         const body = document.createElement('span');
-        body.innerHTML = `<span class="vote-name"></span><span class="vote-text"></span>`;
-        body.querySelector('.vote-name').textContent = opt.char.name;
+        body.innerHTML = `<span class="vote-name hidden-until-reveal"></span><span class="vote-text"></span>`;
+        // Le nom est déjà là (masqué) pour ne pas faire varier la hauteur du
+        // bouton quand il apparaît à la révélation. La vraie définition n'a
+        // jamais d'auteur-personnage dans le jeu : "Dictionnaire", pas Emma
+        // Bovary ou qui que ce soit d'autre (voir authorName:'Vrai
+        // dictionnaire' dans game.html).
+        body.querySelector('.vote-name').textContent = opt.real ? 'Dictionnaire' : opt.char.name;
         body.querySelector('.vote-text').textContent = opt.text;
         btn.append(av, body);
         optsEl.appendChild(btn);
@@ -2079,9 +2107,26 @@ const WOD_DAYS = [{"day":20673,"w":"Démagogie","d":"Politique qui flatte les pa
       const win = btn.dataset.real === '1';
       if (win) score += 1;
       roundEl.textContent = 'Manche ' + round + ' / ' + MAX_ROUNDS + ' · Score ' + score;
+      const DICT_ICON = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5c2-1 5-1 8 .5 3-1.5 6-1.5 8-.5v13c-2-1-5-1-8 .5-3-1.5-6-1.5-8-.5z"/><path d="M12 6v13"/></svg>';
       optsEl.querySelectorAll('.vote-opt').forEach(b => {
         b.disabled = true;
         b.dataset.answered = '1';
+        // Révélation de l'identité — jamais avant : la vraie définition
+        // n'a pas d'auteur-personnage (icône dictionnaire), les leurres
+        // révèlent enfin l'avatar et le nom du personnage qui bluffait.
+        const nameEl = b.querySelector('.vote-name');
+        if (nameEl) nameEl.classList.remove('hidden-until-reveal');
+        const avEl = b.querySelector('.vote-avatar');
+        if (avEl) {
+          avEl.classList.remove('letter');
+          avEl.textContent = '';
+          if (b.dataset.real === '1') {
+            avEl.classList.add('dict');
+            avEl.innerHTML = DICT_ICON;
+          } else {
+            avEl.style.backgroundImage = `url('new-avatars/${b.dataset.charSlug}.png')`;
+          }
+        }
         if (b.dataset.real === '1') {
           b.classList.add('real');
           if (!win) b.classList.add('cascade');
@@ -2118,11 +2163,21 @@ const WOD_DAYS = [{"day":20673,"w":"Démagogie","d":"Politique qui flatte les pa
     // ou corrompu, pour qu'il y ait toujours quelque chose à rejouer.
     function resetStaticExample() {
       answered = false;
-      optsEl.querySelectorAll('.vote-opt').forEach(b => {
+      optsEl.querySelectorAll('.vote-opt').forEach((b, i) => {
         b.disabled = false;
         delete b.dataset.answered;
         b.classList.remove('real', 'wrong', 'cascade');
         b.querySelectorAll('.vote-badge, .vote-underline').forEach(el => el.remove());
+        // Remasque l'identité — jamais d'auteur visible avant la révélation.
+        const nameEl = b.querySelector('.vote-name');
+        if (nameEl) nameEl.classList.add('hidden-until-reveal');
+        const avEl = b.querySelector('.vote-avatar');
+        if (avEl) {
+          avEl.classList.remove('dict');
+          avEl.classList.add('letter');
+          avEl.style.backgroundImage = '';
+          avEl.textContent = String.fromCharCode(65 + i);
+        }
       });
       hintEl.textContent = 'Quatre définitions, une seule dit vrai. Vote pour la bonne.';
       resultEl.textContent = 'Choisis la définition que tu crois vraie ↑';
