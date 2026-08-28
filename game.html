@@ -11044,6 +11044,7 @@ const App = {
     // Tire 3 IA initiales si vide
     if(!solo.aiOpponents || !solo.aiOpponents.length) solo.aiOpponents = pickAIOpponents();
     showScreen('solo-setup');
+    track('solo_config_shown');
     // Tutoriel au premier lancement, quand le joueur s'engage dans une partie
     if(!LS.get('tutorial_done', false)){
       setTimeout(()=>{ if(typeof App!=='undefined' && App.openTutorial) App.openTutorial(); }, 400);
@@ -13785,12 +13786,14 @@ const LottieAnims = {
       const key = btn.dataset.key;
       if(!key) return;
       LS.set('avatar', key);
+      track('onboarding_avatar_done', {avatar: key});
       try{ SFX.submit && SFX.submit(); }catch(e){}
       // Passer à l'étape 2 : saisie du prénom
       const stepAv = document.getElementById('starter-step-avatar');
       const stepName = document.getElementById('starter-step-name');
       if(stepAv) stepAv.style.display='none';
       if(stepName) stepName.style.display='block';
+      track('onboarding_name_shown');
       setTimeout(()=>{ const inp=document.getElementById('starter-name-input'); if(inp) inp.focus(); },100);
       if(typeof updateXPDisplay === 'function') updateXPDisplay();
       if(typeof updateHomeChip === 'function') updateHomeChip();
@@ -13804,6 +13807,7 @@ const LottieAnims = {
       const val = nameInput.value.trim();
       if(val) LS.set('pseudo', val);
       LS.set('starter_chosen', true);
+      track('onboarding_name_done', {has_name: !!val});
       ov.classList.remove('open');
       ov.setAttribute('aria-hidden','true');
       if(typeof updateXPDisplay === 'function') updateXPDisplay();
@@ -13816,6 +13820,7 @@ const LottieAnims = {
   setTimeout(()=>{
     ov.classList.add('open');
     ov.setAttribute('aria-hidden','false');
+    track('onboarding_avatar_shown');
   }, 150);
 })();
 
