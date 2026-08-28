@@ -5905,7 +5905,7 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
   <div id="player-def-section">
     <div class="muted small center" style="margin-bottom:12px;font-family:'Manrope',sans-serif;">Invente une <strong style="color:var(--gold2);">fausse définition</strong> convaincante !</div>
     <label for="input-def" class="sr-only">Ta fausse définition</label>
-    <textarea id="input-def" placeholder="Action de… / Personne qui… / Région où l'on…" maxlength="220" minlength="15" autocomplete="off" oninput="App.onDefInput()" onkeydown="if((event.key==='Enter'&&(event.ctrlKey||event.metaKey))||(event.key==='Enter'&&!event.shiftKey&&this.value.trim().length>=15)){event.preventDefault();const b=document.getElementById('btn-submit-def');if(b&&!b.disabled)App.submitDefinition();}" aria-label="Invente une fausse définition (Entrée pour soumettre, Maj+Entrée pour aller à la ligne)" aria-describedby="def-char-hint"></textarea>
+    <textarea id="input-def" placeholder="Action de… / Personne qui… / Région où l'on…" maxlength="220" minlength="15" autocomplete="off" oninput="App.onDefInput()" onfocus="App.onDefFocus()" onkeydown="if((event.key==='Enter'&&(event.ctrlKey||event.metaKey))||(event.key==='Enter'&&!event.shiftKey&&this.value.trim().length>=15)){event.preventDefault();const b=document.getElementById('btn-submit-def');if(b&&!b.disabled)App.submitDefinition();}" aria-label="Invente une fausse définition (Entrée pour soumettre, Maj+Entrée pour aller à la ligne)" aria-describedby="def-char-hint"></textarea>
     <div class="char-count" id="def-char-hint"><span id="def-chars">0</span>/220 <span id="def-min-hint" style="margin-left:6px;color:var(--text3);">· minimum 15</span></div>
     <div class="def-min-progress" id="def-min-progress" aria-hidden="true"><div class="def-min-progress-fill" id="def-min-progress-fill"></div></div>
     <div class="gap-16"></div>
@@ -8635,6 +8635,22 @@ function track(name, params){
   } catch(e){}
 }
 
+/* Renvoie {round, phase, mode} si une partie est en cours (solo ou salon en ligne),
+   sinon null. Sert à instrumenter game_abandoned, aussi bien depuis le bouton
+   "Quitter la partie" que depuis une fermeture silencieuse de l'app (pagehide). */
+function _abandonParams(){
+  try {
+    const scr = document.querySelector('.screen.active');
+    const scrId = scr ? scr.id.replace('screen-','') : null;
+    const scrPhase = scrId==='word' ? 'writing' : scrId==='vote' ? 'voting' : scrId==='results' ? 'results' : scrId;
+    if(solo.active && solo.round>0) return {round: solo.round, phase: scrPhase, mode:'solo'};
+    if(roomRef && gameState && gameState.round>0 && ['writing','voting'].includes(gameState.phase)){
+      return {round: gameState.round, phase: gameState.phase, mode:'online'};
+    }
+    return null;
+  } catch(e){ return null; }
+}
+
 /* Pré-chauffe la base multijoueur (DB + Auth) sur hover du bouton — indépendant
    d'Analytics, qui passe désormais par le plugin natif ci-dessus, pas par ce SDK web. */
 let _fbWarmed=false;
@@ -10675,6 +10691,8 @@ const App = {
     const ov = document.getElementById('quit-overlay');
     if(this._quitTrap){ this._quitTrap.release(); this._quitTrap = null; }
     if(ov) ov.classList.remove('open');
+    const _ab = _abandonParams();
+    if(_ab) track('game_abandoned', _ab);
     stopTimer();
     if(solo.active){ solo.active = false; }
     if(typeof cleanupRoom === 'function') cleanupRoom();
@@ -11165,6 +11183,8 @@ const App = {
     SFX.newRound(); startSoloRound();
   },
 
+  onDefFocus(){ track('definition_input_focused'); },
+
   onDefInput(){
     const v=document.getElementById('input-def').value;
     document.getElementById('def-chars').textContent=v.length;
@@ -11378,6 +11398,7 @@ const App = {
     const onlinePlayers=Object.entries(ps).filter(([,p])=>p.online!==false);
     if(onlinePlayers.length<2){notify('Il faut au moins 2 joueurs en ligne !');return;}
     track('game_start', {mode:'online', nb_ai: 0});
+    track('round_started', {round: 1, mode:'online'});
     multiStats={correct:0,fooled:0,rounds:0,streak:0,maxStreak:0};
     multiSessionWordObjs=[];
     resetMiniRank();
@@ -11411,6 +11432,7 @@ const App = {
     ov.classList.add('open');
     App._renderTutorialStep();
     App._tutTrap = FocusTrap.activate(ov, { onEscape: () => App.closeTutorial(true) });
+    track('tutorial_shown');
     try { SFX.click(); } catch(e){}
   },
   closeTutorial(skipped){
@@ -11507,6 +11529,7 @@ function startSoloRound(){
   solo.round++;
   if(!solo.maxRounds) solo.maxRounds = 5;
   if(solo.round>solo.maxRounds){showSoloFinal();return;}
+  track('round_started', {round: solo.round, mode:'solo'});
   solo.wordObj=pickWord(solo.usedWords);solo.usedWords.push(solo.wordObj.w);markWordSeen(solo.wordObj.w);
   // Trace pour le récap quiz de fin de partie
   if(!solo.sessionWordObjs) solo.sessionWordObjs = [];
@@ -13115,6 +13138,7 @@ async function nextRoundOnline(){
     await update(roomRef,{phase:'final'});
     return;
   }
+  track('round_started', {round, mode:'online'});
   const word = pickWord([]);
   markWordSeen(word.w);
   const roundUpdates = {
@@ -13376,6 +13400,13 @@ function runSplash(){
 ══════════════════════════════════════════════════════ */
 SFX.init();
 track('app_open', {is_premium: isPremium()});
+/* Abandon silencieux (fermeture d'onglet/app, va-et-vient en arrière-plan) :
+   pagehide ne se déclenche que sur une vraie sortie de page, jamais sur un
+   simple changement d'écran interne à la SPA (showScreen ne le déclenche pas). */
+window.addEventListener('pagehide', function(){
+  const _ab = _abandonParams();
+  if(_ab) track('game_abandoned', _ab);
+});
 runSplash();
 /* Injecte les SVG dans tous les éléments [data-icon] présents dans le DOM. */
 function injectIcons(root = document) {

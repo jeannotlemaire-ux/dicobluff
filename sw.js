@@ -7,7 +7,7 @@
    - Versioning : incrémente CACHE_VERSION pour forcer l'invalidation de tous les caches
 */
 
-const CACHE_VERSION = 'dicobluff-v35';
+const CACHE_VERSION = 'dicobluff-v36';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
