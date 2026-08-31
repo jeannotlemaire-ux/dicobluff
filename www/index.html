@@ -10165,6 +10165,59 @@ let blitzMode=false;
 /* ══════════════════════════════════════════════════════
    🏠 HOME EXTRAS — mot du jour + stats
 ══════════════════════════════════════════════════════ */
+// Pool du mot du jour : uniquement les mots légendaires (les plus difficiles),
+// dédupliqué par texte du mot (quelques entrées légendaires du dictionnaire
+// existent deux fois avec des définitions légèrement différentes — on garde la
+// première occurrence pour garantir qu'un même mot n'apparaît jamais deux fois
+// dans la rotation).
+const WOD_POOL = (() => {
+  const seen = new Set();
+  const out = [];
+  for (const w of WORDS) {
+    if (w.r !== 'legendary' || seen.has(w.w)) continue;
+    seen.add(w.w);
+    out.push(w);
+  }
+  return out;
+})();
+
+// PRNG déterministe (mulberry32), utilisé une seule fois pour calculer l'ordre
+// de rotation ci-dessous.
+function wodMulberry32(seed) {
+  let a = seed >>> 0;
+  return function() {
+    a |= 0; a = (a + 0x6D2B79F5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+// Ordre de rotation FIXE (mélange déterministe du pool, calculé une seule fois
+// au chargement). Le mot du jour d'un index de jour dIdx est WOD_ORDER[dIdx mod
+// WOD_POOL.length] : la séquence est donc purement périodique, de période
+// WOD_POOL.length. Conséquence : N'IMPORTE QUELLE fenêtre de WOD_POOL.length
+// jours consécutifs — quel que soit son jour de départ — contient chaque mot du
+// pool EXACTEMENT une fois. Deux occurrences d'un même mot sont donc toujours
+// espacées d'exactement WOD_POOL.length jours, jamais moins.
+const WOD_ORDER = (() => {
+  const rnd = wodMulberry32(0x9E3779B9);
+  const order = WOD_POOL.map((_, i) => i);
+  for (let i = order.length - 1; i > 0; i--) {
+    const j = Math.floor(rnd() * (i + 1));
+    const tmp = order[i]; order[i] = order[j]; order[j] = tmp;
+  }
+  return order;
+})();
+
+// Mot du jour pour un index de jour donné (peut être négatif). Déterministe :
+// même dIdx → toujours le même mot.
+function wodWordForDay(dIdx) {
+  const n = WOD_ORDER.length;
+  const pos = ((dIdx % n) + n) % n;
+  return WOD_POOL[WOD_ORDER[pos]];
+}
+
 function renderHomeExtras() {
   // Mot du jour (déterministe selon la date locale) + carrousel 30 jours
   const carousel = document.getElementById('home-wod-carousel');
@@ -10183,11 +10236,7 @@ function renderHomeExtras() {
     const frag = document.createDocumentFragment();
     for(let offset = DAYS_BACK - 1; offset >= -1; offset--) {
       const dIdx = todayIdx - offset;
-      // Hash déterministe : même jour → même mot, mais ordre non-alphabétique
-      // Filtrer les mots trop courants : uniquement epic + legendary pour le WOD
-      const wodPool = WORDS.filter(w => w.r === 'epic' || w.r === 'legendary');
-      const wIdx = ((Math.imul(dIdx + 1, 2654435761) ^ Math.imul(dIdx ^ 0xDEAD, 1000003)) >>> 0) % wodPool.length;
-      const w = wodPool[wIdx];
+      const w = wodWordForDay(dIdx);
       // Construit la date locale du jour visé (midi local pour éviter tout effet DST aux bords)
       const d = new Date();
       d.setHours(12, 0, 0, 0);
@@ -10420,7 +10469,6 @@ async function scheduleWODLocalNotif() {
       notifications: [8001,8002,8003,8004,8005,8006,8007].map(id => ({ id }))
     }).catch(() => {});
 
-    const wodPool = WORDS.filter(w => w.r === 'epic' || w.r === 'legendary');
     const notifications = [];
     const now = new Date();
 
@@ -10431,8 +10479,7 @@ async function scheduleWODLocalNotif() {
       if (fireAt <= now) continue; // déjà passé aujourd'hui
 
       const dIdx = Math.floor((fireAt.getTime() - fireAt.getTimezoneOffset() * 60000) / 86400000);
-      const wIdx = ((Math.imul(dIdx + 1, 2654435761) ^ Math.imul(dIdx ^ 0xDEAD, 1000003)) >>> 0) % wodPool.length;
-      const word = wodPool[wIdx];
+      const word = wodWordForDay(dIdx);
 
       notifications.push({
         id: 8001 + offset,
@@ -11514,8 +11561,7 @@ App.toggleNotif = async function() {
       registerPeriodicSync();
       const n = new Date();
       const dIdx = Math.floor((n.getTime() - n.getTimezoneOffset() * 60000) / 86400000);
-      const wIdx = ((Math.imul(dIdx + 1, 2654435761) ^ Math.imul(dIdx ^ 0xDEAD, 1000003)) >>> 0) % WORDS.length;
-      storeDailyWordForNotif(WORDS[wIdx]);
+      storeDailyWordForNotif(wodWordForDay(dIdx));
     } else {
       notify('Notifications refusées.', 2500);
     }

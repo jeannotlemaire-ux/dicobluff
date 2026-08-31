@@ -3,11 +3,11 @@
 //
 // game.html est la source de vérité unique du dictionnaire. Ce script calcule,
 // pour chaque jour des 30 prochains jours, EXACTEMENT le même mot que game.html
-// afficherait ce jour-là (même pool epic/legendary dans le même ordre, même
-// formule de hachage sur l'index du jour), puis injecte ces 30 paires
-// {jour, mot, définition} DIRECTEMENT dans index.html, entre les marqueurs
-// <!-- WOD-DATA:START --> et <!-- WOD-DATA:END -->. Aucun fetch, aucun fichier
-// externe : le site n'a plus aucune dépendance réseau pour ce widget.
+// afficherait ce jour-là (même pool legendary dans le même ordre, même rotation
+// par cycle mélangé), puis injecte ces 30 paires {jour, mot, définition}
+// DIRECTEMENT dans index.html, entre les marqueurs <!-- WOD-DATA:START --> et
+// <!-- WOD-DATA:END -->. Aucun fetch, aucun fichier externe : le site n'a plus
+// aucune dépendance réseau pour ce widget.
 //
 // Pourquoi 30 jours et pas les 667 mots en entier : embarquer le pool complet
 // gonflerait inutilement le poids de la landing page (SEO/vitrine). 30 jours
@@ -51,9 +51,35 @@ function extractWords(gameHtmlSrc) {
   return new Function('return ' + arrayLiteral)();
 }
 
-// Même formule que renderHomeExtras() dans game.html.
-function seededIndex(seed, n) {
-  return ((Math.imul(seed + 1, 2654435761) ^ Math.imul(seed ^ 0xDEAD, 1000003)) >>> 0) % n;
+// Même formule que WOD_ORDER/wodWordForDay() dans game.html : un ordre de
+// rotation FIXE (mélange déterministe, calculé une seule fois), indexé par
+// dayIdx % poolSize. La séquence est donc purement périodique (période =
+// poolSize) : n'importe quelle fenêtre de poolSize jours consécutifs, quel que
+// soit son jour de départ, contient chaque mot du pool exactement une fois.
+function mulberry32(seed) {
+  let a = seed >>> 0;
+  return function () {
+    a |= 0; a = (a + 0x6D2B79F5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+function buildWodOrder(poolSize) {
+  const rnd = mulberry32(0x9E3779B9);
+  const order = Array.from({ length: poolSize }, (_, i) => i);
+  for (let i = order.length - 1; i > 0; i--) {
+    const j = Math.floor(rnd() * (i + 1));
+    const tmp = order[i]; order[i] = order[j]; order[j] = tmp;
+  }
+  return order;
+}
+
+function wodIndexForDay(dayIdx, wodOrder) {
+  const n = wodOrder.length;
+  const pos = ((dayIdx % n) + n) % n;
+  return wodOrder[pos];
 }
 
 // Index du jour Europe/Paris pour un instant UTC donné — indépendant du fuseau
@@ -74,13 +100,23 @@ function parisDayIdx(utcDate) {
 
 const gameHtmlSrc = fs.readFileSync(GAME_HTML, 'utf8');
 const WORDS = extractWords(gameHtmlSrc);
-const pool = WORDS.filter(w => w.r === 'epic' || w.r === 'legendary');
+// Dédupliqué par texte du mot : quelques entrées légendaires du dictionnaire
+// existent deux fois avec des définitions légèrement différentes — on garde la
+// première occurrence, comme WOD_POOL dans game.html.
+const seen = new Set();
+const pool = [];
+for (const w of WORDS) {
+  if (w.r !== 'legendary' || seen.has(w.w)) continue;
+  seen.add(w.w);
+  pool.push(w);
+}
+const wodOrder = buildWodOrder(pool.length);
 
 const todayIdx = parisDayIdx(new Date());
 const days = [];
 for (let offset = 0; offset < DAYS_AHEAD; offset++) {
   const dayIdx = todayIdx + offset;
-  const wIdx = seededIndex(dayIdx, pool.length);
+  const wIdx = wodIndexForDay(dayIdx, wodOrder);
   const w = pool[wIdx];
   days.push({ day: dayIdx, w: w.w, d: w.d });
 }
