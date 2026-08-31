@@ -364,7 +364,7 @@
     .vote-opt {
       width: 100%; position: relative; text-align: left; cursor: pointer;
       border-radius: 12px; padding: 12px 14px;
-      display: flex; gap: 11px; align-items: flex-start;
+      display: flex; gap: 11px; align-items: center;
       border: 1px solid #e2d6b4; background: #fff;
       font-family: 'Manrope', sans-serif;
       transition: transform .35s var(--ease-expo), background .35s var(--ease-expo), border-color .35s var(--ease-expo), opacity .35s var(--ease-expo), box-shadow .35s var(--ease-expo);
@@ -700,7 +700,8 @@
     .char-card {
       border-radius: 14px; overflow: hidden;
       border: 1px solid rgba(245,238,221,.08);
-      position: relative;
+      background: var(--bg2);
+      display: flex; flex-direction: column;
       transition: transform .32s var(--ease-expo), border-color .32s var(--ease-expo), box-shadow .32s var(--ease-expo);
     }
     .char-card:hover {
@@ -718,18 +719,19 @@
       filter: sepia(0) contrast(1.07) saturate(1.06);
       transform: scale(1.05);
     }
-    .char-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(10,22,38,.92) 0%, rgba(10,22,38,.2) 50%, transparent 100%);
-      display: flex; flex-direction: column;
-      justify-content: flex-end;
-      padding: 14px 10px 12px;
+    /* Légende SOUS le portrait, jamais dessus : les visages des personnages
+       remplissent presque tout le cadre carré, un texte en overlay sur
+       l'image leur mangeait dessus (moustache, menton, yeux couverts par le
+       nom/surnom sur plusieurs cartes). */
+    .char-caption {
+      padding: 10px 10px 12px;
     }
     .char-name {
       font-family: 'Cormorant Garamond', serif;
       font-size: .98rem; font-weight: 600; line-height: 1.1;
+      color: var(--cream);
     }
-    .char-role { font-size: .58rem; color: var(--gold); font-weight: 600; letter-spacing: .04em; margin-top: 3px; }
+    .char-role { font-size: .58rem; color: var(--cream-dim); font-weight: 600; letter-spacing: .04em; margin-top: 3px; }
 
     /* ─── HOW TO PLAY ─── */
     .howto-grid {
@@ -1274,84 +1276,84 @@
       <source srcset="new-avatars/tartuffe.webp" type="image/webp">
       <img src="new-avatars/tartuffe.png" alt="Tartuffe" class="char-img" loading="lazy" width="100" height="100">
     </picture>
-      <div class="char-overlay"><div class="char-name">Tartuffe</div><div class="char-role">Le Faux Dévot</div></div>
+      <div class="char-caption"><div class="char-name">Tartuffe</div><div class="char-role">Le Faux Dévot</div></div>
     </div>
     <div class="char-card reveal" style="transition-delay:.04s">
       <picture>
       <source srcset="new-avatars/cyrano.webp" type="image/webp">
       <img src="new-avatars/cyrano.png" alt="Cyrano de Bergerac" class="char-img" loading="lazy" width="100" height="100">
     </picture>
-      <div class="char-overlay"><div class="char-name">Cyrano</div><div class="char-role">Le Maître du Verbe</div></div>
+      <div class="char-caption"><div class="char-name">Cyrano</div><div class="char-role">Le Maître du Verbe</div></div>
     </div>
     <div class="char-card reveal" style="transition-delay:.08s">
       <picture>
       <source srcset="new-avatars/figaro.webp" type="image/webp">
       <img src="new-avatars/figaro.png" alt="Figaro" class="char-img" loading="lazy" width="100" height="100">
     </picture>
-      <div class="char-overlay"><div class="char-name">Figaro</div><div class="char-role">Le Valet Subversif</div></div>
+      <div class="char-caption"><div class="char-name">Figaro</div><div class="char-role">Le Valet Subversif</div></div>
     </div>
     <div class="char-card reveal" style="transition-delay:.12s">
       <picture>
       <source srcset="new-avatars/arseneluppin.webp" type="image/webp">
       <img src="new-avatars/arseneluppin.png" alt="Arsène Lupin" class="char-img" loading="lazy" width="100" height="100">
     </picture>
-      <div class="char-overlay"><div class="char-name">Arsène Lupin</div><div class="char-role">Le Gentleman Cambrioleur</div></div>
+      <div class="char-caption"><div class="char-name">Arsène Lupin</div><div class="char-role">Le Gentleman Cambrioleur</div></div>
     </div>
     <div class="char-card reveal" style="transition-delay:.16s">
       <picture>
       <source srcset="new-avatars/petitprince.webp" type="image/webp">
       <img src="new-avatars/petitprince.png" alt="Le Petit Prince" class="char-img" loading="lazy" width="100" height="100">
     </picture>
-      <div class="char-overlay"><div class="char-name">Le Petit Prince</div><div class="char-role">L'Ingénu Céleste</div></div>
+      <div class="char-caption"><div class="char-name">Le Petit Prince</div><div class="char-role">L'Ingénu Céleste</div></div>
     </div>
     <div class="char-card reveal" style="transition-delay:.2s">
       <picture>
       <source srcset="new-avatars/esmeralda.webp" type="image/webp">
       <img src="new-avatars/esmeralda.png" alt="Esmeralda" class="char-img" loading="lazy" width="100" height="100">
     </picture>
-      <div class="char-overlay"><div class="char-name">Esmeralda</div><div class="char-role">La Libre Bohémienne</div></div>
+      <div class="char-caption"><div class="char-name">Esmeralda</div><div class="char-role">La Libre Bohémienne</div></div>
     </div>
     <div class="char-card reveal" style="transition-delay:.24s">
       <picture>
       <source srcset="new-avatars/bovary.webp" type="image/webp">
       <img src="new-avatars/bovary.png" alt="Madame Bovary" class="char-img" loading="lazy" width="100" height="100">
     </picture>
-      <div class="char-overlay"><div class="char-name">Emma Bovary</div><div class="char-role">La Romantique Désenchantée</div></div>
+      <div class="char-caption"><div class="char-name">Emma Bovary</div><div class="char-role">La Romantique Désenchantée</div></div>
     </div>
     <div class="char-card reveal" style="transition-delay:.28s">
       <picture>
       <source srcset="new-avatars/nemo.webp" type="image/webp">
       <img src="new-avatars/nemo.png" alt="Capitaine Nemo" class="char-img" loading="lazy" width="100" height="100">
     </picture>
-      <div class="char-overlay"><div class="char-name">Capitaine Nemo</div><div class="char-role">L'Énigmatique des Abysses</div></div>
+      <div class="char-caption"><div class="char-name">Capitaine Nemo</div><div class="char-role">L'Énigmatique des Abysses</div></div>
     </div>
     <div class="char-card reveal" style="transition-delay:.32s">
       <picture>
       <source srcset="new-avatars/dantes.webp" type="image/webp">
       <img src="new-avatars/dantes.png" alt="Edmond Dantès" class="char-img" loading="lazy" width="100" height="100">
     </picture>
-      <div class="char-overlay"><div class="char-name">Edmond Dantès</div><div class="char-role">Le Comte Vengeur</div></div>
+      <div class="char-caption"><div class="char-name">Edmond Dantès</div><div class="char-role">Le Comte Vengeur</div></div>
     </div>
     <div class="char-card reveal" style="transition-delay:.36s">
       <picture>
       <source srcset="new-avatars/fogg.webp" type="image/webp">
       <img src="new-avatars/fogg.png" alt="Phileas Fogg" class="char-img" loading="lazy" width="100" height="100">
     </picture>
-      <div class="char-overlay"><div class="char-name">Phileas Fogg</div><div class="char-role">Le Voyageur Méthodique</div></div>
+      <div class="char-caption"><div class="char-name">Phileas Fogg</div><div class="char-role">Le Voyageur Méthodique</div></div>
     </div>
     <div class="char-card reveal" style="transition-delay:.4s">
       <picture>
       <source srcset="new-avatars/gavroche.webp" type="image/webp">
       <img src="new-avatars/gavroche.png" alt="Gavroche" class="char-img" loading="lazy" width="100" height="100">
     </picture>
-      <div class="char-overlay"><div class="char-name">Gavroche</div><div class="char-role">L'Enfant des Barricades</div></div>
+      <div class="char-caption"><div class="char-name">Gavroche</div><div class="char-role">L'Enfant des Barricades</div></div>
     </div>
     <div class="char-card reveal" style="transition-delay:.44s">
       <picture>
       <source srcset="new-avatars/donjuan.webp" type="image/webp">
       <img src="new-avatars/donjuan.png" alt="Don Juan" class="char-img" loading="lazy" width="100" height="100">
     </picture>
-      <div class="char-overlay"><div class="char-name">Don Juan</div><div class="char-role">Le Séducteur Imposteur</div></div>
+      <div class="char-caption"><div class="char-name">Don Juan</div><div class="char-role">Le Séducteur Imposteur</div></div>
     </div>
   </div>
 </section>
@@ -1792,7 +1794,7 @@
     <span class="footer-logo-text">Dicobluff</span>
   </a>
   <ul class="footer-links">
-    <li><a href="game.html">Jouer en ligne</a></li>
+    <li><a href="https://play.google.com/store/apps/details?id=com.dicobluff.app" target="_blank" rel="noopener noreferrer">Jouer sur Android</a></li>
     <li><a href="privacy.html">Politique de confidentialité</a></li>
   </ul>
   <p class="footer-copy">&copy; 2026 Dicobluff. Fait avec passion en France.</p>
