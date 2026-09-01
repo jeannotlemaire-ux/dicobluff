@@ -7,17 +7,16 @@
    - Versioning : incrémente CACHE_VERSION pour forcer l'invalidation de tous les caches
 */
 
-const CACHE_VERSION = 'dicobluff-v40';
+const CACHE_VERSION = 'dicobluff-v41';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
-// Précache minimal : le shell HTML + manifest + icônes critiques + page offline.
+// Précache minimal : le shell HTML + icônes critiques + page offline.
 const PRECACHE_URLS = [
   './',
   './index.html',
   './game.html',
   './offline.html',
-  './manifest.webmanifest',
   './assets/icons/icon-192.png',
   './assets/icons/icon-512.png',
   './assets/icons/favicon-32.png'
