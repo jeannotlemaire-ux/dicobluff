@@ -14,43 +14,6 @@
   "theme_color": "#1B2534",
   "prefer_related_applications": false,
   "categories": ["games", "education", "entertainment"],
-  "screenshots": [
-    {
-      "src": "store-screenshots/playstore__1-accroche.png",
-      "sizes": "1080x1920",
-      "type": "image/png",
-      "form_factor": "narrow",
-      "label": "Le jeu de bluff littéraire"
-    },
-    {
-      "src": "store-screenshots/playstore__2-adversaires-ia.png",
-      "sizes": "1080x1920",
-      "type": "image/png",
-      "form_factor": "narrow",
-      "label": "Adversaires aux personnalités tranchées"
-    },
-    {
-      "src": "store-screenshots/playstore__3-fonctionnalite.png",
-      "sizes": "1080x1920",
-      "type": "image/png",
-      "form_factor": "narrow",
-      "label": "Invente la définition parfaite"
-    },
-    {
-      "src": "store-screenshots/playstore__4-le-concept.png",
-      "sizes": "1080x1920",
-      "type": "image/png",
-      "form_factor": "narrow",
-      "label": "Le concept du jeu"
-    },
-    {
-      "src": "store-screenshots/playstore__5-verdict.png",
-      "sizes": "1080x1920",
-      "type": "image/png",
-      "form_factor": "narrow",
-      "label": "Le verdict"
-    }
-  ],
   "shortcuts": [
     {
       "name": "Jouer Solo",
