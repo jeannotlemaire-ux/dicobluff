@@ -7,6 +7,25 @@
 <meta name="description" content="Le jeu de bluff littéraire. Invente la définition la plus convaincante pour piéger tes adversaires.">
 <meta name="robots" content="noindex, nofollow">
 
+<!-- Accès restreint : cette page ne doit être jouable que depuis l'app native
+     (Capacitor, hostname=localhost) ou via un lien interne du site portant
+     ?src=offline (fallback hors-ligne, voir offline.html). Toute visite directe
+     de l'URL (ex. un lien "site web" sur une fiche store) rebondit vers le
+     Play Store — game.html ne doit jamais servir de distribution parallèle. -->
+<script>
+(function(){
+  var h = location.hostname;
+  if (h === 'localhost' || h === '127.0.0.1') return;
+  try {
+    if (new URLSearchParams(location.search).get('src') === 'offline' || sessionStorage.getItem('dbEntry') === '1') {
+      sessionStorage.setItem('dbEntry', '1');
+      return;
+    }
+  } catch(e) { return; }
+  location.replace('https://play.google.com/store/apps/details?id=com.dicobluff.app');
+})();
+</script>
+
 <!-- Open Graph / réseaux sociaux -->
 <meta property="og:type"        content="website">
 <meta property="og:url"         content="https://www.dicobluff.fr/">

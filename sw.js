@@ -7,7 +7,7 @@
    - Versioning : incrémente CACHE_VERSION pour forcer l'invalidation de tous les caches
 */
 
-const CACHE_VERSION = 'dicobluff-v41';
+const CACHE_VERSION = 'dicobluff-v42';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
@@ -79,7 +79,8 @@ self.addEventListener('fetch', (event) => {
   // Bypass des requêtes non-http (ex: chrome-extension://)
   if (!url.protocol.startsWith('http')) return;
 
-  // HTML principal → stale-while-revalidate
+  // HTML principal → stale-while-revalidate (ignoreSearch : game.html?src=offline
+  // doit retrouver le même cache que game.html précaché sans query string)
   if (req.mode === 'navigate' || (req.destination === 'document') || url.pathname.endsWith('.html')) {
     event.respondWith(staleWhileRevalidate(req));
     return;
@@ -128,7 +129,7 @@ async function networkFirst(req) {
 
 async function staleWhileRevalidate(req) {
   const cache = await caches.open(STATIC_CACHE);
-  const cached = await cache.match(req);
+  const cached = await cache.match(req, { ignoreSearch: true });
   const networkPromise = fetch(req)
     .then((fresh) => {
       if (fresh && fresh.status === 200) cache.put(req, fresh.clone());
