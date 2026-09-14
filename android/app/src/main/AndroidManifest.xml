@@ -19,6 +19,9 @@
         <meta-data
             android:name="com.facebook.sdk.AutoLogAppEventsEnabled"
             android:value="true" />
+        <meta-data
+            android:name="com.facebook.sdk.AdvertiserIDCollectionEnabled"
+            android:value="true" />
 
         <activity
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode|navigation|density"
