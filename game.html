@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://www.dicobluff.fr; connect-src 'self' https://*.firebaseio.com https://*.googleapis.com wss://*.firebaseio.com https://*.firebasedatabase.app wss://*.firebasedatabase.app https://identitytoolkit.googleapis.com https://securetoken.googleapis.com; script-src 'self' 'unsafe-inline' https://www.gstatic.com; worker-src 'self'; frame-ancestors 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://www.dicobluff.fr; connect-src 'self' https://*.firebaseio.com https://*.googleapis.com wss://*.firebaseio.com https://*.firebasedatabase.app wss://*.firebasedatabase.app https://identitytoolkit.googleapis.com https://securetoken.googleapis.com; script-src 'self' 'unsafe-inline' https://www.gstatic.com https://*.firebaseio.com https://*.firebasedatabase.app; frame-src https://*.firebaseio.com https://*.firebasedatabase.app; worker-src 'self'; frame-ancestors 'none'">
 <meta name="description" content="Le jeu de bluff littéraire. Invente la définition la plus convaincante pour piéger tes adversaires.">
 <meta name="robots" content="noindex, nofollow">
 
@@ -8633,6 +8633,17 @@ function initFirebase(){
   } catch(e) { console.warn('Firebase init failed:',e.message); }
 }
 
+// signInAnonymously() ne se relance jamais tout seul si elle échoue (pas juste lente) —
+// sans ça, un rejet transitoire laisse isOnline=false pour le reste de la session.
+function retryFirebaseAuth(){
+  if(isOnline || !fbAuth) return;
+  fbAuth.signInAnonymously().then(c=>{
+    myUID=c.user.uid; isOnline=true;
+    _fbReady=true;
+    _fbReadyQueue.forEach(fn=>fn()); _fbReadyQueue=[];
+  }).catch(e=>{console.warn('Auth retry failed:',e.message);});
+}
+
 /* ── Analytics (plugin natif @capacitor-firebase/analytics) ──
    Aucun SDK web, aucun script distant : passe par le pont natif Capacitor,
    exactement comme LocalNotifications ou App plus bas dans ce fichier.
@@ -11379,8 +11390,8 @@ const App = {
     if(!isOnline){
       notify('Connexion en cours…',1500);
       let waited=0;
-      while(!isOnline && waited<8000){ await new Promise(r=>setTimeout(r,100)); waited+=100; }
-      if(!isOnline){ notify('❌ Connexion Firebase échouée — vérifie ta connexion'); return; }
+      while(!isOnline && waited<20000){ await new Promise(r=>setTimeout(r,100)); waited+=100; }
+      if(!isOnline){ notify('⏳ Connexion plus lente que prévu — retente dans un instant'); retryFirebaseAuth(); return; }
     }
     const myAv=LS.get('avatar','georgesand'),myCo=rand(COLORS),code=genCode();
     roomId=code; roomRef=ref(fbDb,'rooms/'+code);
@@ -11422,8 +11433,8 @@ const App = {
     if(!isOnline){
       notify('Connexion en cours…',1500);
       let waited=0;
-      while(!isOnline && waited<8000){ await new Promise(r=>setTimeout(r,100)); waited+=100; }
-      if(!isOnline){ notify('❌ Connexion Firebase échouée — vérifie ta connexion'); return; }
+      while(!isOnline && waited<20000){ await new Promise(r=>setTimeout(r,100)); waited+=100; }
+      if(!isOnline){ notify('⏳ Connexion plus lente que prévu — retente dans un instant'); retryFirebaseAuth(); return; }
     }
     const myAv=LS.get('avatar','georgesand'),myCo=rand(COLORS);
     roomId=code;roomRef=ref(fbDb,'rooms/'+code);
