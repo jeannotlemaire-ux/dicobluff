@@ -7,15 +7,20 @@ const OUT = path.join(__dirname, 'www');
 
 // game.html → www/index.html pour Capacitor ; index.html = landing web uniquement
 const FILES = ['sw.js', 'manifest.webmanifest', 'offline.html', 'privacy.html'];
-const DIRS  = ['assets', 'new-avatars', 'store-screenshots'];
+const DIRS  = ['assets', 'new-avatars'];
 
-function copyDir(src, dst) {
+// Exclus du bundle : PNG sources des avatars (remplacés par .webp), logo 1024px (→ logo-192.png), doublons/brouillons assets
+const EXCLUDE = new Set([path.join('assets', 'logo.png'), path.join('assets', '1 - copie.png'), path.join('assets', 'logo.png.png')]);
+const isExcluded = (rel) => EXCLUDE.has(rel) || (rel.startsWith('new-avatars' + path.sep) && rel.endsWith('.png'));
+
+function copyDir(src, dst, rel = path.basename(src)) {
   fs.mkdirSync(dst, { recursive: true });
   for (const entry of fs.readdirSync(src, { withFileTypes: true })) {
     const s = path.join(src, entry.name);
     const d = path.join(dst, entry.name);
-    if (entry.isDirectory()) copyDir(s, d);
-    else fs.copyFileSync(s, d);
+    const r = path.join(rel, entry.name);
+    if (entry.isDirectory()) copyDir(s, d, r);
+    else if (!isExcluded(r)) fs.copyFileSync(s, d);
   }
 }
 
