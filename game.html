@@ -3585,6 +3585,24 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
 .home-cta-card:active .home-cta-arrow {
   transform: scale(.95);
 }
+/* Lien discret sous les CTAs : accès à Rejoindre / Partie rapide */
+.home-cta-link {
+  align-self: center;
+  min-height: 44px;
+  padding: 8px 16px;
+  background: none;
+  border: none;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text2);
+  text-decoration: underline;
+  text-decoration-color: var(--gold-a40);
+  text-underline-offset: 4px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.home-cta-link:hover { color: var(--gold2); }
 
 /* ─── Tagline sous le wordmark ─── */
 .home-tagline {
@@ -3839,6 +3857,22 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
   opacity: .9;
 }
 [data-theme="light"] .profile-title { color: var(--gold); }
+/* Badge discret des joueurs ayant soutenu le jeu (achat premiumunlock) */
+.profile-supporter {
+  display: inline-flex; align-items: center; gap: 4px;
+  margin: 0 0 10px;
+  padding: 2px 10px;
+  border: 1px solid var(--gold-a40);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-body);
+  font-size: var(--text-2xs);
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--gold2);
+}
+.profile-supporter[hidden] { display: none; }
+[data-theme="light"] .profile-supporter { color: var(--gold); }
 
 /* Cadre d'or (N6) : bordure dorée animée + halo */
 .profile-identity.has-gold-frame {
@@ -5349,6 +5383,7 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
   <button onclick="App.closeSettings();App.showRules();" class="row" role="menuitem"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Comment jouer ?</button>
   <button onclick="App.closeSettings();App.showCGU();" class="row" role="menuitem"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg> Conditions d'utilisation</button>
   <button onclick="App.closeSettings();App.openRatePage();" class="row" role="menuitem"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> Noter Dicobluff</button>
+  <button onclick="App.closeSettings();showPremiumModal('settings');" class="row" role="menuitem"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> Soutenir le développeur</button>
   <button onclick="App.closeSettings();restorePremiumPurchase();" class="row" role="menuitem"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> Restaurer mes achats</button>
 </div>
 <div id="notif" class="notif" role="alert" aria-live="polite" aria-atomic="true"></div>
@@ -5433,12 +5468,12 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
   <div class="premium-sheet">
     <button type="button" class="modal-close-btn" onclick="closePremiumModal()" aria-label="Fermer">&times;</button>
     <div class="premium-sheet-icon">✦</div>
-    <div class="premium-sheet-title" id="premium-title">Dicobluff Premium</div>
-    <div class="premium-sheet-body">Enrichis ton vocabulaire avec les outils de progression.</div>
+    <div class="premium-sheet-title" id="premium-title">Soutenir le développeur</div>
+    <div class="premium-sheet-body">Tout Dicobluff est gratuit. Si le jeu te plaît, tu peux soutenir son développement par un achat unique.</div>
     <div class="premium-features">
-      <div class="premium-feature-row">Mode Révision — quiz, consolidation, légendaires</div>
+      <div class="premium-feature-row">Un badge « Soutien » sur ton profil, en guise de merci</div>
     </div>
-    <button class="premium-btn-unlock" onclick="triggerPremiumPurchase()">Débloquer — 2,99 €</button>
+    <button class="premium-btn-unlock" onclick="triggerPremiumPurchase()">Soutenir — 2,99 €</button>
     <button class="premium-btn-close" onclick="restorePremiumPurchase()">Restaurer mes achats</button>
     <button class="premium-btn-close" onclick="closePremiumModal()">Pas maintenant</button>
   </div>
@@ -5450,9 +5485,9 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
 <div id="premium-success-modal" role="dialog" aria-modal="true" aria-labelledby="premium-success-title">
   <div class="premium-success-sheet">
     <div class="premium-success-icon" id="premium-success-icon">✦</div>
-    <div class="premium-success-title" id="premium-success-title">Bienvenue dans Premium !</div>
-    <div class="premium-success-body">Merci pour ton soutien ! Parties illimitées, Carnet de mots et mode Révision sont maintenant débloqués.</div>
-    <button class="premium-btn-unlock" onclick="closePremiumSuccessModal()">C'est parti !</button>
+    <div class="premium-success-title" id="premium-success-title">Merci pour ton soutien !</div>
+    <div class="premium-success-body">Ton geste aide Dicobluff à grandir. Le badge « Soutien » apparaît désormais sur ton profil.</div>
+    <button class="premium-btn-unlock" onclick="closePremiumSuccessModal()">Avec plaisir !</button>
   </div>
 </div>
 
@@ -5575,7 +5610,7 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
     </button>
 
     <!-- Droite : Réviser -->
-    <button type="button" class="nav-side is-locked" id="nav-tab-revision" onclick="App.showRevision()" aria-label="Réviser (Premium)">
+    <button type="button" class="nav-side" id="nav-tab-revision" onclick="App.showRevision()" aria-label="Réviser">
       <div class="nav-side-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></div>
       <div class="nav-side-label">Réviser</div>
     </button>
@@ -5614,32 +5649,33 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
       <span class="home-divider-glyph">✦</span>
     </div>
 
-    <!-- CTAs empilés : Solo = primaire (gold plein), En ligne = secondaire (outlined) -->
+    <!-- CTAs empilés : Jouer avec des amis = primaire (gold plein), Solo = secondaire (outlined) -->
     <div class="home-ctas-stack">
-      <button class="home-cta-card primary" onclick="App.goSolo()">
+      <button class="home-cta-card primary" onclick="App.playWithFriends()" onmouseenter="warmFirebase()" ontouchstart="warmFirebase()">
+        <span class="home-cta-badge" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </span>
+        <span class="home-cta-text">
+          <span class="home-cta-title">Jouer avec des amis</span>
+          <span class="home-cta-sub">Crée un salon et invite-les</span>
+        </span>
+        <span class="home-cta-arrow" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </span>
+      </button>
+      <button class="home-cta-card secondary" onclick="App.goSolo()">
         <span class="home-cta-badge" aria-hidden="true">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
         </span>
         <span class="home-cta-text">
-          <span class="home-cta-title">Jouer Solo</span>
+          <span class="home-cta-title">S'entraîner en solo</span>
           <span class="home-cta-sub">Affronte les grands personnages</span>
         </span>
         <span class="home-cta-arrow" aria-hidden="true">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
         </span>
       </button>
-      <button class="home-cta-card secondary" onclick="App.showMultiplayer()" onmouseenter="warmFirebase()" ontouchstart="warmFirebase()">
-        <span class="home-cta-badge" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        </span>
-        <span class="home-cta-text">
-          <span class="home-cta-title">Jouer en ligne</span>
-          <span class="home-cta-sub">Bluff en temps réel</span>
-        </span>
-        <span class="home-cta-arrow" aria-hidden="true">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-        </span>
-      </button>
+      <button type="button" class="home-cta-link" onclick="App.showMultiplayer()" onmouseenter="warmFirebase()" ontouchstart="warmFirebase()">Rejoindre un salon · Partie rapide</button>
     </div>
 
     <!-- Quick stats : streak quotidien + progression XP -->
@@ -5850,9 +5886,9 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
     <div class="muted small" style="margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em;">Code du salon</div>
     <div id="display-room-code" class="room-code-display">——</div>
     <div class="gap-10"></div>
-    <button onclick="App.copyCode()" class="t-body" style="display:inline-flex;align-items:center;gap:8px;background:var(--gold-a12);border:1px solid var(--gold-a40);color:var(--gold2);font-size:.9rem;font-weight:600;padding:10px 22px;border-radius:100px;cursor:pointer;-webkit-tap-highlight-color:transparent;">
-      <span data-icon="copy" data-icon-size="16" class="icon-inline"></span>
-      Copier le code
+    <button onclick="App.inviteFriends()" class="t-body" style="display:inline-flex;align-items:center;gap:8px;background:var(--gold-a12);border:1px solid var(--gold-a40);color:var(--gold2);font-size:.9rem;font-weight:600;padding:10px 22px;border-radius:100px;cursor:pointer;-webkit-tap-highlight-color:transparent;">
+      <span data-icon="share" data-icon-size="16" class="icon-inline"></span>
+      Inviter
     </button>
   </div>
   <div class="card" style="flex-shrink:0;overflow:visible;">
@@ -6433,6 +6469,7 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
       <span id="profile-name-text">Joueur</span>
     </div>
     <div id="profile-title" class="profile-title" style="display:none;"></div>
+    <div id="profile-supporter" class="profile-supporter" hidden title="Merci d'avoir soutenu Dicobluff">✦ Soutien</div>
     <input id="profile-name-input" type="text" maxlength="20" autocomplete="off" autocorrect="off" class="profile-name-input" style="display:none;" aria-label="Modifier ton pseudo">
 
     <div class="profile-level-row">
@@ -7874,6 +7911,8 @@ const ICONS = {
 
   copy: `<rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/>`,
 
+  share: `<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="13.5" x2="15.4" y2="17.5"/><line x1="15.4" y1="6.5" x2="8.6" y2="10.5"/>`,
+
   home: `<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>`,
 
   /* ─── Petit guillemet français (ornement profil N3+) ─── */
@@ -8408,6 +8447,10 @@ function updateGameProgress() {
 ══════════════════════════════════════════════ */
 const PREMIUM_PRODUCT_ID = 'premiumunlock';
 function isPremium(){ return LS.get('premium', false); }
+function applySupporterBadge(){
+  const b = document.getElementById('profile-supporter');
+  if(b) b.hidden = !isPremium();
+}
 function unlockPremium(opts){
   opts = opts || {};
   const already = isPremium();
@@ -8417,8 +8460,7 @@ function unlockPremium(opts){
     el.classList.remove('is-locked');
     el.querySelectorAll('.feature-lock-overlay, .badge-premium').forEach(n => n.remove());
   });
-  const revTab = document.getElementById('nav-tab-revision');
-  if(revTab){ revTab.setAttribute('aria-label','Réviser'); revTab.querySelector('.nav-side-label').textContent = 'Réviser'; }
+  applySupporterBadge();
   if(!already && opts.silent !== true){
     closePremiumModal();
     closeDailyLimitModal();
@@ -8444,6 +8486,7 @@ function closePremiumSuccessModal(){
 }
 let _premiumTrap = null;
 function showPremiumModal(source){
+  if(isPremium()){ notify('✦ Merci, tu soutiens déjà Dicobluff !', 2500); return; }
   const m = document.getElementById('premium-modal');
   if(!m) return;
   m.classList.add('open');
@@ -8456,11 +8499,15 @@ function closePremiumModal(){
   if(_premiumTrap){ _premiumTrap.release(); _premiumTrap = null; }
   if(m) m.classList.remove('open');
 }
+// true quand le joueur vient de lancer un achat ou une restauration : receiptUpdated
+// affiche alors le remerciement, sinon (sync au démarrage) le badge est appliqué en silence.
+let _iapUserAction = false;
 function triggerPremiumPurchase(){
   if(window.CdvPurchase){
     const product = CdvPurchase.store.get(PREMIUM_PRODUCT_ID);
     const offer = product && product.getOffer();
     if(offer){
+      _iapUserAction = true;
       notify('Paiement en cours…', 2000);
       CdvPurchase.store.order(offer).catch(err => {
         notify(err && err.message ? err.message : 'Achat annulé', 2500);
@@ -8472,11 +8519,12 @@ function triggerPremiumPurchase(){
     // Hors app native, en local uniquement : déverrouille directement pour pouvoir tester l'UI
     unlockPremium(); closePremiumModal();
   } else {
-    notify('Premium est disponible dans l\'application Android', 2500);
+    notify('Le soutien est disponible dans l\'application Android', 2500);
   }
 }
 function restorePremiumPurchase(){
   if(window.CdvPurchase){
+    _iapUserAction = true;
     notify('Recherche de tes achats…', 2000);
     CdvPurchase.store.restorePurchases();
   } else {
@@ -8489,8 +8537,7 @@ function restorePremiumPurchase(){
   document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.is-locked').forEach(el => el.classList.remove('is-locked'));
     document.querySelectorAll('.feature-lock-overlay, .badge-premium').forEach(n => n.remove());
-    const revTab = document.getElementById('nav-tab-revision');
-    if(revTab){ revTab.setAttribute('aria-label','Réviser'); revTab.querySelector('.nav-side-label').textContent = 'Réviser'; }
+    applySupporterBadge();
   });
 })();
 // Initialise Google Play Billing (cordova-plugin-purchase) — no-op hors app native
@@ -8511,6 +8558,14 @@ document.addEventListener('deviceready', function(){
         unlockPremium();
       }
     });
+  // Un achat déjà acquitté (réinstallation, « Effacer les données ») ne repasse pas par
+  // approved/verified : il n'apparaît que via la mise à jour des reçus. On n'enlève
+  // jamais le badge ici, on ne fait que l'accorder.
+  store.when().receiptUpdated(() => {
+    if(store.owned(PREMIUM_PRODUCT_ID) && !isPremium()){
+      unlockPremium({silent: !_iapUserAction});
+    }
+  });
   store.error(err => {
     console.error('[IAP]', err);
   });
@@ -9460,6 +9515,9 @@ function renderProfile() {
       if(existing) existing.remove();
     }
   }
+
+  // 1ter) Badge de soutien (achat premiumunlock)
+  applySupporterBadge();
 
   // 1bis) Titre (N2+) sous le pseudo
   const titleEl = document.getElementById('profile-title');
@@ -10779,7 +10837,6 @@ const App = {
   },
   showProfile() { renderProfile(); showScreen('profile'); clearPendingUnlocks(); _setNavActive('profile'); },
   showRevision() {
-    if(!isPremium()) { showPremiumModal('revision'); return; }
     renderRevision(); showScreen('revision'); _setNavActive('revision');
   },
   startRevisionMode(mode) {
@@ -11039,6 +11096,13 @@ const App = {
     LS.set('hasPlayed', true);
     showScreen('multi');
     App._connectMultiplayer();
+  },
+  // CTA principal de l'accueil : va droit à la création de salon
+  // (même schéma que le deep link ?room= : warmFirebase puis écran pseudo).
+  playWithFriends() {
+    LS.set('hasPlayed', true);
+    warmFirebase();
+    App.prepareCreate();
   },
   _connectMultiplayer(){
     const spinner=document.getElementById('multi-connect-spinner');
@@ -11398,6 +11462,7 @@ const App = {
     try{
       await set(roomRef,{code,host:myUID,phase:'lobby',round:0,maxRounds:5,mode:'private',gameMode:'classic',created:Date.now(),players:{[myUID]:{name,avatar:myAv,color:myCo,score:0,ready:false,isHost:true,online:true}}});
       fbDb.ref('rooms/'+code+'/players/'+myUID+'/online').onDisconnect().set(false);
+      track('room_created');
       multiStats={correct:0,fooled:0,rounds:0,streak:0,maxStreak:0};multiSessionWordObjs=[];listenToRoom();showScreen('lobby');SFX.lobby();
     }catch(e){console.warn(e);notify('❌ Erreur Firebase — vérifie les règles de la base de données');}
   },
@@ -11445,11 +11510,30 @@ const App = {
       if(Object.keys(d.players||{}).length>=10){notify('🚫 Salon complet (10 max)');return;}
       await update(ref(fbDb,'rooms/'+code+'/players/'+myUID),{name,avatar:myAv,color:myCo,score:0,ready:false,isHost:false,online:true});
       fbDb.ref('rooms/'+code+'/players/'+myUID+'/online').onDisconnect().set(false);
+      track('room_joined', {via:'code'});
       multiStats={correct:0,fooled:0,rounds:0,streak:0,maxStreak:0};multiSessionWordObjs=[];listenToRoom();showScreen('lobby');SFX.lobby();
     }catch(e){console.warn(e);notify('❌ Erreur Firebase — vérifie les règles de la base de données');}
   },
 
-  copyCode(){const msg=`Rejoins ma partie sur Dicobluff : https://www.dicobluff.fr/?room=${roomId}`;navigator.clipboard.writeText(msg).then(()=>{notify('📋 Lien d\'invitation copié !');SFX.copy();});},
+  // Bouton « Inviter » du lobby : feuille de partage Android via @capacitor/share (la WebView
+  // n'expose pas navigator.share), sinon Web Share API (navigateur), sinon copie du message.
+  // Le lien Play Store est dans le texte (pas en `url`) pour que toutes les applis le gardent.
+  inviteFriends(){
+    const msg=`Viens jouer à Dicobluff avec moi, c'est le jeu du dictionnaire : on invente des fausses définitions et on essaie de piéger les autres.\nRejoins ma partie avec le code ${roomId}\nhttps://play.google.com/store/apps/details?id=com.dicobluff.app`;
+    const copyFallback=()=>{
+      if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(msg).then(()=>{notify('📋 Invitation copiée !');SFX.copy();}).catch(()=>notify('Code du salon : '+roomId,3000));
+      } else notify('Code du salon : '+roomId,3000);
+    };
+    const NativeShare=(typeof Capacitor!=='undefined'&&Capacitor.isNativePlatform&&Capacitor.isNativePlatform()&&Capacitor.Plugins)?Capacitor.Plugins.Share:null;
+    track('invite_clicked', {method: (NativeShare||navigator.share) ? 'share' : 'copy'});
+    if(NativeShare){
+      // Annulation par l'utilisateur = rejet "Share canceled" : pas de copie dans ce cas
+      NativeShare.share({title:'Dicobluff', text:msg, dialogTitle:'Inviter des amis'}).catch(err=>{ if(!/cancel/i.test((err&&err.message)||'')) copyFallback(); });
+    } else if(navigator.share){
+      navigator.share({title:'Dicobluff', text:msg}).catch(err=>{ if(!err||err.name!=='AbortError') copyFallback(); });
+    } else copyFallback();
+  },
 
   setMultiRounds(n){
     if(!roomRef)return;update(roomRef,{maxRounds:n});
@@ -11470,6 +11554,7 @@ const App = {
     const onlinePlayers=Object.entries(ps).filter(([,p])=>p.online!==false);
     if(onlinePlayers.length<2){notify('Il faut au moins 2 joueurs en ligne !');return;}
     track('game_start', {mode:'online', nb_ai: 0});
+    track('multiplayer_game_started', {nb_players: onlinePlayers.length});
     track('round_started', {round: 1, mode:'online'});
     multiStats={correct:0,fooled:0,rounds:0,streak:0,maxStreak:0};
     multiSessionWordObjs=[];
@@ -12735,6 +12820,7 @@ async function joinMatchedRoom(code,name,myAv,myCo){
       if(quickMatchData.inviteRef&&quickMatchData.inviteListener)try{quickMatchData.inviteRef.off('value',quickMatchData.inviteListener);}catch(e){}
       if(quickMatchData.matchTimer)clearTimeout(quickMatchData.matchTimer);
     }
+    track('room_joined', {via:'quick'});
     quickMatchData=null;listenToRoom();showScreen('lobby');SFX.lobby();notify('🎲 Match trouvé !',2500);
   }catch(e){console.warn('Quick match join failed:',e);notify('❌ Erreur de connexion');App.cancelQueue();}
 }
