@@ -84,8 +84,11 @@
   --safe-bottom: var(--safe-area-inset-bottom, env(safe-area-inset-bottom, 0px));
   /* Hauteur de la surface de la bottom nav (hors marge/safe-area) */
   --nav-h: 72px;
-  /* Espace réservé sous le contenu des écrans à nav : nav + marge + safe-area + respiration */
-  --nav-clearance: calc(var(--nav-h) + max(16px, var(--safe-bottom)) + 24px);
+  /* Décalage de la nav : 16px mini, et toujours 8px au-dessus de la zone système
+     (sinon elle colle à la barre 3 boutons d'Android) */
+  --nav-offset: max(16px, calc(var(--safe-bottom) + 8px));
+  /* Espace réservé sous le contenu des écrans à nav : nav + décalage + respiration */
+  --nav-clearance: calc(var(--nav-h) + var(--nav-offset) + 24px);
   /* Backgrounds — légèrement réchauffés : moins de dominante teal, plus encre marine */
   --bg:       #0f1d31;
   --bg2:      #17273A;
@@ -2903,7 +2906,7 @@ input::placeholder, textarea::placeholder { color: var(--text3); font-style: ita
   transform: translateX(-50%);
   width: 100%; max-width: 430px;
   z-index: 40;
-  padding: 0 16px max(16px, var(--safe-bottom));
+  padding: 0 16px var(--nav-offset);
   pointer-events: none;
 }
 /* Barre unifiée moderne : une seule surface, 4 boutons internes séparés par des micro-gaps */
