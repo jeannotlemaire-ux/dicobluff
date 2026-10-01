@@ -79,6 +79,13 @@
 ═══════════════════════════════════════════════════════════════ */
 :root {
   --safe-top: env(safe-area-inset-top, 0px);
+  /* Bas : Capacitor 8 (SystemBars, WebView < 140) injecte --safe-area-inset-bottom
+     car env() y renvoie 0 en edge-to-edge ; ailleurs on lit env() (viewport-fit=cover). */
+  --safe-bottom: var(--safe-area-inset-bottom, env(safe-area-inset-bottom, 0px));
+  /* Hauteur de la surface de la bottom nav (hors marge/safe-area) */
+  --nav-h: 72px;
+  /* Espace réservé sous le contenu des écrans à nav : nav + marge + safe-area + respiration */
+  --nav-clearance: calc(var(--nav-h) + max(16px, var(--safe-bottom)) + 24px);
   /* Backgrounds — légèrement réchauffés : moins de dominante teal, plus encre marine */
   --bg:       #0f1d31;
   --bg2:      #17273A;
@@ -2896,7 +2903,7 @@ input::placeholder, textarea::placeholder { color: var(--text3); font-style: ita
   transform: translateX(-50%);
   width: 100%; max-width: 430px;
   z-index: 40;
-  padding: 0 16px max(16px, env(safe-area-inset-bottom, 16px));
+  padding: 0 16px max(16px, var(--safe-bottom));
   pointer-events: none;
 }
 /* Barre unifiée moderne : une seule surface, 4 boutons internes séparés par des micro-gaps */
@@ -2963,9 +2970,11 @@ input::placeholder, textarea::placeholder { color: var(--text3); font-style: ita
 
 /* Home screen content adapté */
 #screen-home {
-  padding-bottom: max(120px, calc(env(safe-area-inset-bottom,0px) + 120px));
   position: relative;
-  overflow: hidden;
+  /* Défile verticalement comme les autres écrans (.screen) : seul l'axe X est coupé
+     pour contenir le carrousel du mot du jour. */
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 #screen-solo-setup {
   overflow-y: hidden;
@@ -2988,9 +2997,10 @@ input::placeholder, textarea::placeholder { color: var(--text3); font-style: ita
 #bottom-nav { display: none; }
 
 /* Padding bas pour les écrans avec nav (éviter que le contenu passe dessous) */
+#screen-home,
 #screen-profile,
 #screen-carnet,
-#screen-revision { padding-bottom: max(120px, calc(env(safe-area-inset-bottom,0px) + 120px)); }
+#screen-revision { padding-bottom: var(--nav-clearance); }
 
 /* ═══════════════════════════════════════════════════
    🎖 BANNIÈRE DE DÉBLOCAGE — éditoriale, plume & masque
@@ -3302,7 +3312,8 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 8px 22px max(20px, calc(env(safe-area-inset-bottom, 0px) + 16px));
+  /* Le dégagement sous la nav est porté par #screen-home (--nav-clearance) */
+  padding: 8px 22px 0;
   gap: 0;
 }
 
@@ -3585,24 +3596,6 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
 .home-cta-card:active .home-cta-arrow {
   transform: scale(.95);
 }
-/* Lien discret sous les CTAs : accès à Rejoindre / Partie rapide */
-.home-cta-link {
-  align-self: center;
-  min-height: 44px;
-  padding: 8px 16px;
-  background: none;
-  border: none;
-  font-family: var(--font-body);
-  font-size: var(--text-sm);
-  font-weight: 600;
-  color: var(--text2);
-  text-decoration: underline;
-  text-decoration-color: var(--gold-a40);
-  text-underline-offset: 4px;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-}
-.home-cta-link:hover { color: var(--gold2); }
 
 /* ─── Tagline sous le wordmark ─── */
 .home-tagline {
@@ -5675,7 +5668,18 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
         </span>
       </button>
-      <button type="button" class="home-cta-link" onclick="App.showMultiplayer()" onmouseenter="warmFirebase()" ontouchstart="warmFirebase()">Rejoindre un salon · Partie rapide</button>
+      <button class="home-cta-card secondary" onclick="App.joinWithCode()" onmouseenter="warmFirebase()" ontouchstart="warmFirebase()">
+        <span class="home-cta-badge" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+        </span>
+        <span class="home-cta-text">
+          <span class="home-cta-title">Rejoindre un salon</span>
+          <span class="home-cta-sub">Tu as reçu un code ?</span>
+        </span>
+        <span class="home-cta-arrow" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </span>
+      </button>
     </div>
 
     <!-- Quick stats : streak quotidien + progression XP -->
@@ -11103,6 +11107,13 @@ const App = {
     LS.set('hasPlayed', true);
     warmFirebase();
     App.prepareCreate();
+  },
+  // 3e carte de l'accueil : droit à la saisie du code (la Partie rapide
+  // n'est accessible que depuis l'écran Multijoueur).
+  joinWithCode() {
+    LS.set('hasPlayed', true);
+    warmFirebase();
+    App.prepareJoin();
   },
   _connectMultiplayer(){
     const spinner=document.getElementById('multi-connect-spinner');
