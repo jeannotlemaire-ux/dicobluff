@@ -3344,23 +3344,27 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
 /* Divider haut du WoD : même style que .home-divider, gap plus large, chevron légèrement abaissé */
 .home-wod-top-divider {
   width: 100%;
-  margin: 4px 0 14px;
-  gap: 18px;
   pointer-events: none;
 }
+/* Même distance trait → carte que le séparateur du bas : sa marge (20px) plus
+   la demi-hauteur de son losange (.4rem), moins celle du chevron (4px). */
+.home-divider.home-wod-top-divider { margin-bottom: calc(16px + .4rem); }
 .home-wod-top-glyph {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   color: var(--gold);
   opacity: .85;
-  transform: translateY(3px);
 }
 
 /* Carrousel : carte centrée sous le chevron, peek de la veille à gauche et lendemain à droite (en fondu). */
 .home-wod-carousel {
   width: 100%;
   display: flex;
+  /* Chaque slide garde sa propre hauteur, et les cartes voisines sont plafonnées
+     à celle de la carte centrée (voir syncCarouselHeight) : le carrousel prend
+     donc la hauteur du mot affiché, pas celle de la plus haute des 31 cartes. */
+  align-items: flex-start;
   gap: 16px;
   overflow-x: auto;
   overflow-y: visible;
@@ -3383,6 +3387,7 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
   align-items: stretch;
 }
 /* Slide "demain" : non-cliquable et non-snap (résistance élastique gérée en JS) */
+.home-wod-slide:not(.is-active) .home-wod-hero { max-height: var(--wod-card-h, none); }
 .home-wod-slide.is-tomorrow {
   scroll-snap-align: none;
   scroll-snap-stop: normal;
@@ -10290,7 +10295,53 @@ function renderHomeExtras() {
       if(best && best.dataset.label && eyebrow.textContent !== best.dataset.label) {
         eyebrow.textContent = best.dataset.label;
       }
+      centeredSlide = best;
     };
+    // Le carrousel prend la hauteur de la carte centrée : les autres cartes sont
+    // plafonnées à cette hauteur (--wod-card-h). Sans ça il prend celle de la
+    // plus haute des 31 slides : un mot long d'un autre jour, qui passe sur deux
+    // lignes, laissait un vide sous le mot du jour.
+    // Le plafond ne change JAMAIS pendant un défilement : toute modification de
+    // mise en page à l'intérieur du carrousel fait re-snapper le navigateur et
+    // interrompt l'animation en cours (dont le centrage initial sur aujourd'hui).
+    let centeredSlide = null, activeSlide = null, wodScrolling = false, settleTimer = 0;
+    const naturalHeight = (sl) => {
+      const card = sl && sl.firstElementChild;
+      return card ? card.scrollHeight + card.offsetHeight - card.clientHeight : 0;
+    };
+    const setCardCap = (h) => {
+      if(h) carousel.style.setProperty('--wod-card-h', h + 'px');
+      else carousel.style.removeProperty('--wod-card-h'); // accueil masqué
+    };
+    // Au repos : plafond = hauteur exacte de la carte centrée
+    const syncCarouselHeight = () => {
+      if(wodScrolling) return;
+      for(const sl of carousel.children) sl.classList.toggle('is-active', sl === activeSlide);
+      const card = activeSlide && activeSlide.firstElementChild;
+      setCardCap(card ? card.getBoundingClientRect().height : 0);
+    };
+    // Début de glissement : si une voisine immédiate est plus haute, on relève le
+    // plafond tout de suite pour qu'elle arrive entière, jamais coupée.
+    const onWodScrollStart = () => {
+      if(!activeSlide) return;
+      const cur = activeSlide.firstElementChild.getBoundingClientRect().height;
+      const h = Math.max(cur, naturalHeight(activeSlide.previousElementSibling), naturalHeight(activeSlide.nextElementSibling));
+      if(h > cur) setCardCap(h);
+    };
+    const onWodScrollSettle = () => {
+      wodScrolling = false;
+      activeSlide = centeredSlide;
+      syncCarouselHeight();
+    };
+    const armWodSettle = () => {
+      clearTimeout(settleTimer);
+      settleTimer = setTimeout(onWodScrollSettle, 140);
+    };
+    // Révélation de la définition, rotation, retour sur l'accueil : la carte change de hauteur
+    if(typeof ResizeObserver !== 'undefined') {
+      const ro = new ResizeObserver(syncCarouselHeight);
+      carousel.querySelectorAll('.home-wod-hero').forEach(c => ro.observe(c));
+    }
     // Limite stricte : tout petit jeu (60px) au-delà d'aujourd'hui centrée. Pas plus.
     let scrollRaf = 0;
     const todaySlide = carousel.querySelector('.home-wod-slide[data-day-offset="0"]');
@@ -10308,6 +10359,8 @@ function renderHomeExtras() {
     };
     carousel.addEventListener('scroll', () => {
       clampNow();
+      if(!wodScrolling) { wodScrolling = true; onWodScrollStart(); }
+      armWodSettle();
       if(scrollRaf) return;
       scrollRaf = requestAnimationFrame(() => { scrollRaf = 0; updateEyebrow(); clampNow(); });
     }, { passive: true });
@@ -10355,6 +10408,7 @@ function renderHomeExtras() {
         carousel.scrollLeft = todaySlide.offsetLeft - (carousel.clientWidth - todaySlide.clientWidth) / 2;
       }
       updateEyebrow();
+      armWodSettle(); // au cas où le centrage n'a déclenché aucun scroll
     });
   }
 
