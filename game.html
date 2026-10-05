@@ -6610,6 +6610,8 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
      JS — INTACT depuis v7-10
 ══════════════════════════════════════════════════════════════ -->
 <script src="./assets/lottie.min.js" defer></script>
+<!-- Mot du jour : implémentation unique partagée avec le site (voir wod.js) -->
+<script src="./wod.js"></script>
 
 <script>
 /* ══════════════════════════════════════════════════════
@@ -10254,78 +10256,25 @@ let blitzMode=false;
 /* ══════════════════════════════════════════════════════
    🏠 HOME EXTRAS — mot du jour + stats
 ══════════════════════════════════════════════════════ */
-// Pool du mot du jour : uniquement les mots légendaires (les plus difficiles),
-// dédupliqué par texte du mot (quelques entrées légendaires du dictionnaire
-// existent deux fois avec des définitions légèrement différentes — on garde la
-// première occurrence pour garantir qu'un même mot n'apparaît jamais deux fois
-// dans la rotation).
-const WOD_POOL = (() => {
-  const seen = new Set();
-  const out = [];
-  for (const w of WORDS) {
-    if (w.r !== 'legendary' || seen.has(w.w)) continue;
-    seen.add(w.w);
-    out.push(w);
-  }
-  return out;
-})();
-
-// PRNG déterministe (mulberry32), utilisé une seule fois pour calculer l'ordre
-// de rotation ci-dessous.
-function wodMulberry32(seed) {
-  let a = seed >>> 0;
-  return function() {
-    a |= 0; a = (a + 0x6D2B79F5) | 0;
-    let t = Math.imul(a ^ (a >>> 15), 1 | a);
-    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-}
-
-// Ordre de rotation FIXE (mélange déterministe du pool, calculé une seule fois
-// au chargement). Le mot du jour d'un index de jour dIdx est WOD_ORDER[dIdx mod
-// WOD_POOL.length] : la séquence est donc purement périodique, de période
-// WOD_POOL.length. Conséquence : N'IMPORTE QUELLE fenêtre de WOD_POOL.length
-// jours consécutifs — quel que soit son jour de départ — contient chaque mot du
-// pool EXACTEMENT une fois. Deux occurrences d'un même mot sont donc toujours
-// espacées d'exactement WOD_POOL.length jours, jamais moins.
-const WOD_ORDER = (() => {
-  const rnd = wodMulberry32(0x9E3779B9);
-  const order = WOD_POOL.map((_, i) => i);
-  for (let i = order.length - 1; i > 0; i--) {
-    const j = Math.floor(rnd() * (i + 1));
-    const tmp = order[i]; order[i] = order[j]; order[j] = tmp;
-  }
-  return order;
-})();
-
-// Mot du jour pour un index de jour donné (peut être négatif). Déterministe :
-// même dIdx → toujours le même mot.
-function wodWordForDay(dIdx) {
-  const n = WOD_ORDER.length;
-  const pos = ((dIdx % n) + n) % n;
-  return WOD_POOL[WOD_ORDER[pos]];
-}
+// Mot du jour : toute la logique (pool légendaire dédupliqué, rotation fixe,
+// index du jour local) vit dans wod.js, partagé avec le site (index.html) —
+// ne rien recalculer ici. WOD reste null si wod.js n'a pas pu être chargé :
+// l'accueil s'affiche alors sans mot du jour plutôt que de planter tout le jeu.
+const WOD = (typeof DicoWOD !== 'undefined') ? DicoWOD.create(DicoWOD.buildPool(WORDS)) : null;
 
 function renderHomeExtras() {
   // Mot du jour (déterministe selon la date locale) + carrousel 30 jours
   const carousel = document.getElementById('home-wod-carousel');
-  // dayIdx = nombre de jours depuis l'epoch en heure LOCALE (pas UTC)
-  // → garantit qu'à minuit local on bascule de mot, peu importe le fuseau
-  const localDayIdx = () => {
-    const n = new Date();
-    return Math.floor((n.getTime() - n.getTimezoneOffset() * 60000) / 86400000);
-  };
-  const todayIdx = localDayIdx();
+  const todayIdx = WOD ? DicoWOD.localDayIdx() : 0;
   // Reconstruit le carrousel à chaque changement de jour
-  if(carousel && carousel.dataset.builtForDay !== String(todayIdx)) {
+  if(WOD && carousel && carousel.dataset.builtForDay !== String(todayIdx)) {
     carousel.innerHTML = '';
     const DAYS_BACK = 30;
     const MS_DAY = 86400000;
     const frag = document.createDocumentFragment();
     for(let offset = DAYS_BACK - 1; offset >= -1; offset--) {
       const dIdx = todayIdx - offset;
-      const w = wodWordForDay(dIdx);
+      const w = WOD.wordForDay(dIdx);
       // Construit la date locale du jour visé (midi local pour éviter tout effet DST aux bords)
       const d = new Date();
       d.setHours(12, 0, 0, 0);
@@ -10567,8 +10516,7 @@ async function scheduleWODLocalNotif() {
       fireAt.setHours(8, 0, 0, 0);
       if (fireAt <= now) continue; // déjà passé aujourd'hui
 
-      const dIdx = Math.floor((fireAt.getTime() - fireAt.getTimezoneOffset() * 60000) / 86400000);
-      const word = wodWordForDay(dIdx);
+      const word = WOD.wordForDay(DicoWOD.localDayIdx(fireAt));
 
       notifications.push({
         id: 8001 + offset,
@@ -11682,9 +11630,7 @@ App.toggleNotif = async function() {
     if (result === 'granted') {
       notify('✓ Notifications activées !', 3000);
       registerPeriodicSync();
-      const n = new Date();
-      const dIdx = Math.floor((n.getTime() - n.getTimezoneOffset() * 60000) / 86400000);
-      storeDailyWordForNotif(wodWordForDay(dIdx));
+      if(WOD) storeDailyWordForNotif(WOD.today());
     } else {
       notify('Notifications refusées.', 2500);
     }

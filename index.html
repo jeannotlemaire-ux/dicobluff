@@ -1806,11 +1806,10 @@
   </a>
 </footer>
 
-<!-- WOD-DATA:START — généré par generate-wod-pool.js depuis game.html, NE PAS ÉDITER À LA MAIN -->
-<script>
-const WOD_DAYS = [{"day":20727,"w":"Lénitif","d":"Qui adoucit, calme la douleur ; au figuré, apaisant pour l'esprit"},{"day":20728,"w":"Ribauderie","d":"Conduite déréglée, débauche ; propos ou actes licencieux (vieilli)"},{"day":20729,"w":"Latrie","d":"Culte d'adoration absolue réservé à Dieu seul, par opposition au culte des saints"},{"day":20730,"w":"Paternoster","d":"Formule répétée rituellement ou mécaniquement, ou ascenseur à cabines défilant en continu"},{"day":20731,"w":"Échauguette","d":"Petite tour de guet en surplomb, placée à l'angle d'une fortification pour surveiller les alentours"},{"day":20732,"w":"Cryptogamie","d":"Propriété des plantes dites cryptogames qui se reproduisent sans fleurs ni graines visibles"},{"day":20733,"w":"Leucocratie","d":"Gouvernement par les blancs ou par une ethnie dominante se définissant par sa couleur"},{"day":20734,"w":"Solipsisme","d":"Doctrine philosophique radicale selon laquelle le moi est la seule réalité dont on puisse être absolument certain."},{"day":20735,"w":"Guéable","d":"Que l'on peut traverser à gué, sans avoir besoin de nager ni de pont"},{"day":20736,"w":"Tarabuster","d":"Importuner, harceler de questions ou de demandes ; tracasser sans répit."},{"day":20737,"w":"Interlope","d":"D'une légitimité douteuse ; qui opère de façon suspecte ou clandestine"},{"day":20738,"w":"Fielleusement","d":"Avec amertume et méchanceté venimeuse ; de façon haineuse et perfide"},{"day":20739,"w":"Catabase","d":"Descente aux enfers d'un vivant dans la mythologie, ou voyage initiatique vers les profondeurs."},{"day":20740,"w":"Aléthique","d":"Qui se rapporte à la vérité, ou qui qualifie les modalités du possible et du nécessaire en logique"},{"day":20741,"w":"Asyndète","d":"Figure de style consistant à supprimer les conjonctions de coordination entre des propositions juxtaposées"},{"day":20742,"w":"Éidétique","d":"Qualifiant une mémoire capable de restituer une image mentale avec une précision quasi photographique"},{"day":20743,"w":"Picrochole","d":"Personnage rabelaisien colérique et conquérant imaginaire, symbole de la querelle absurde"},{"day":20744,"w":"Kaïros","d":"Moment opportun et décisif, instant fugace qu'il faut saisir, notion centrale de la rhétorique grecque"},{"day":20745,"w":"Catabole","d":"Ensemble des réactions biochimiques de dégradation des molécules organiques dans l'organisme"},{"day":20746,"w":"Haplologie","d":"Omission involontaire d'une syllabe répétée dans un mot, simplification phonétique par suppression"},{"day":20747,"w":"Esculape","d":"Médecin (par allusion au dieu romain de la médecine) ; figure tutélaire de l'art médical"},{"day":20748,"w":"Noctule","d":"Grande chauve-souris insectivore d'Europe et d'Asie, l'une des plus grandes d'Europe"},{"day":20749,"w":"Abscission","d":"Séparation naturelle d'un organe végétal de la plante qui le porte, comme la chute des feuilles"},{"day":20750,"w":"Hypocoristique","d":"Qui exprime une intention de tendresse et de caresse, comme un diminutif affectueux."},{"day":20751,"w":"Prolégomènes","d":"Longue introduction exposant les notions préalables nécessaires à l'étude d'un sujet"},{"day":20752,"w":"Tracassier","d":"Qui aime à tracasser, à créer des difficultés mesquines ; chicaneur."},{"day":20753,"w":"Gandin","d":"Jeune élégant qui affecte des manières recherchées ; dandy ridicule"},{"day":20754,"w":"Voltigeur","d":"Acrobate qui exécute des sauts ; soldat d'infanterie légère (histoire militaire)"},{"day":20755,"w":"Allégorèse","d":"Méthode d'interprétation qui cherche le sens allégorique caché sous le sens littéral d'un texte"},{"day":20756,"w":"Aulique","d":"Qui se rapporte à la cour d'un prince et à ses usages cérémonieux."}];
-</script>
-<!-- WOD-DATA:END -->
+<!-- Mot du jour : même module que le jeu (wod.js) + pool généré depuis game.html
+     par generate-wod-pool.js (wod-pool.js, NE PAS ÉDITER À LA MAIN). -->
+<script src="/wod.js"></script>
+<script src="/wod-pool.js"></script>
 
 <script>
   const nav = document.getElementById('nav');
@@ -1906,16 +1905,12 @@ const WOD_DAYS = [{"day":20727,"w":"Lénitif","d":"Qui adoucit, calme la douleur
     });
   }
 
-  // Mot du jour interactif — entièrement autonome, AUCUN réseau. Les 30
-  // prochains jours (mot + définition) sont injectés statiquement dans
-  // WOD_DAYS ci-dessus par generate-wod-pool.js depuis game.html (seule
-  // source de vérité, jamais éditée à la main) : même pool legendary
-  // dédupliqué, même rotation fixe et périodique sur l'index du jour que
-  // game.html (WOD_ORDER/wodWordForDay — garantit qu'un mot ne revient jamais
-  // avant que tout le pool soit passé). La manche 1 retrouve son entrée par
-  // correspondance exacte sur le jour local ; ses leurres sont dérivés du même
-  // seed (stables toute la journée). Les manches 2 à 5 piochent librement au
-  // hasard dans ce même bloc de 30 jours.
+  // Mot du jour interactif. Le mot est calculé à la volée par wod.js — le
+  // MÊME module que game.html, pas une copie — sur le pool de wod-pool.js
+  // (généré depuis game.html, sans aucune date : rien n'expire). La manche 1
+  // sert le mot du jour ; ses leurres sont dérivés du même seed (stables toute
+  // la journée). Les manches 2 à 5 piochent librement au hasard parmi les
+  // mots des 30 jours à venir.
   (function initVoteCard() {
     const CHARACTERS = [
       { slug: 'tartuffe', name: 'Tartuffe' }, { slug: 'cyrano', name: 'Cyrano' },
@@ -1952,33 +1947,32 @@ const WOD_DAYS = [{"day":20727,"w":"Lénitif","d":"Qui adoucit, calme la douleur
       "5 sur 5 — sans-faute. Le dictionnaire n'a plus de secrets... pour l'instant. 995 de plus t'attendent.",
     ];
 
-    // Filet de sécurité théorique (bloc WOD-DATA absent/corrompu) — ne devrait
-    // jamais se produire en pratique puisque les données sont embarquées au
-    // build, pas chargées au runtime. `days` reste null, resetStaticExample()
-    // prend le relais plus bas pour ne jamais bloquer le bouton.
-    const days = (typeof WOD_DAYS !== 'undefined' && Array.isArray(WOD_DAYS) && WOD_DAYS.length >= 4) ? WOD_DAYS : null;
+    // `wod` reste null si wod.js ou wod-pool.js n'a pas pu être chargé :
+    // resetStaticExample() prend le relais plus bas pour ne jamais bloquer le
+    // bouton.
+    const DAYS_AHEAD = 30;
+    const wod = (typeof DicoWOD !== 'undefined' && Array.isArray(self.WOD_POOL_DATA) && self.WOD_POOL_DATA.length > DAYS_AHEAD)
+      ? DicoWOD.create(self.WOD_POOL_DATA) : null;
+    // Le mot du jour (days[0]) suivi de ceux des jours suivants — réserve de
+    // leurres et de mots pour les manches 2 à 5.
+    function buildDays(todayIdx) {
+      return Array.from({ length: DAYS_AHEAD }, (_, i) => {
+        const w = wod.wordForDay(todayIdx + i);
+        return { day: todayIdx + i, w: w.w, d: w.d };
+      });
+    }
+    let days = wod ? buildDays(DicoWOD.localDayIdx()) : null;
 
     let round = 0, score = 0, answered = false, finalShown = false;
     // Mots déjà servis (comme bonne réponse OU comme leurre) dans la partie en
     // cours — jamais réutilisés, sinon le leurre d'une manche peut redevenir
     // la bonne réponse d'une manche suivante (ou l'inverse). Déduplique par
-    // mot et pas par index de `days` par prudence (la rotation de
-    // game.html garantit déjà l'unicité sur 30 jours, mais rien n'empêche par
-    // ex. deux jours du bloc injecté de partager un mot si DAYS_AHEAD dépassait
-    // un jour la taille du pool). Réinitialisé à chaque nouvelle partie, voir
-    // restart().
+    // mot, pas par index de `days`. Réinitialisé à chaque nouvelle partie,
+    // voir restart().
     let usedWords = new Set();
 
-    function localDayIdx() {
-      const n = new Date();
-      return Math.floor((n.getTime() - n.getTimezoneOffset() * 60000) / 86400000);
-    }
-    // Uniquement pour dériver les leurres de la manche 1 (stables toute la
-    // journée) — le mot du jour lui-même vient d'une correspondance exacte sur
-    // WOD_DAYS[].day, pas d'un recalcul ici (le tableau injecté ne fait que 30
-    // entrées, pas les ~330 mots du pool légendaire complet de game.html : un
-    // seededIndex(_, days.length) ne donnerait pas le même résultat que
-    // game.html, d'où le pré-calcul fait une fois pour toutes par le générateur).
+    // Uniquement pour départager les leurres de la manche 1 (stables toute la
+    // journée) — jamais pour choisir le mot du jour, qui vient de wod.js.
     function seededIndex(seed, n) {
       return ((Math.imul(seed + 1, 2654435761) ^ Math.imul(seed ^ 0xDEAD, 1000003)) >>> 0) % n;
     }
@@ -1997,7 +1991,7 @@ const WOD_DAYS = [{"day":20727,"w":"Lénitif","d":"Qui adoucit, calme la douleur
     function shuffle(arr) { for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
 
     // Manche 1 seulement : les leurres n'ont pas de thème renseigné dans les
-    // données (WOD_DAYS n'embarque que mot + définition), donc on approxime
+    // données (le pool du site n'embarque que mot + définition), donc on approxime
     // la distance sémantique par le vocabulaire partagé avec la vraie
     // définition — les 3 définitions qui partagent le MOINS de mots-clés avec
     // elle sont retenues. Sans ça, les leurres sont indiscernables pour un
@@ -2042,19 +2036,12 @@ const WOD_DAYS = [{"day":20727,"w":"Lénitif","d":"Qui adoucit, calme la douleur
     }
 
     function buildRound(isDaily) {
-      const todayIdx = localDayIdx();
+      const todayIdx = DicoWOD.localDayIdx();
       let realIdx;
-      let isTodayWord = false;
       if (isDaily) {
-        realIdx = days.findIndex(d => d.day === todayIdx);
-        isTodayWord = realIdx !== -1;
-        // Fenêtre de 30 jours dépassée (générateur pas relancé, voir le workflow
-        // GitHub Actions dans .github/workflows/) : plutôt qu'un mot figé pour de
-        // bon sur la même entrée, on pioche quand même un mot qui varie chaque
-        // jour dans le bloc existant — jamais d'écran vide, jamais bloqué.
-        // isTodayWord reste false : on ne peut pas garantir que c'est vraiment
-        // le mot du jour de l'app, donc pas d'étiquette "Mot du jour" + date.
-        if (realIdx === -1) realIdx = seededIndex(todayIdx, days.length);
+        // Onglet resté ouvert après minuit : on repart du nouveau jour.
+        if (days[0].day !== todayIdx) days = buildDays(todayIdx);
+        realIdx = 0;
       } else {
         realIdx = pickAvoidingWords(usedWords);
       }
@@ -2071,7 +2058,7 @@ const WOD_DAYS = [{"day":20727,"w":"Lénitif","d":"Qui adoucit, calme la douleur
         { char: chars[3], text: days[decoyIdxs[2]].d, real: false },
       ];
       shuffle(options);
-      render(word.w, options, isTodayWord);
+      render(word.w, options, isDaily);
     }
 
     function render(word, options, isTodayWord) {
@@ -2170,14 +2157,14 @@ const WOD_DAYS = [{"day":20727,"w":"Lénitif","d":"Qui adoucit, calme la douleur
         ? '✓ +1 point — tu as trouvé la vraie définition !'
         : "✗ 0 point — quelqu'un t'a piégé.";
       resultEl.className = 'vote-result ' + (win ? 'win' : 'lose');
-      // Le bouton reste toujours affiché, même sans WOD_DAYS exploitable (voir
+      // Le bouton reste toujours affiché, même sans pool exploitable (voir
       // replayBtn ci-dessous) : jamais de cul-de-sac, quitte à rejouer l'exemple statique.
       if (days && round >= MAX_ROUNDS) replayBtn.textContent = '↻ Recommencer';
       replayBtn.classList.add('shown');
     });
 
     // Remet les 4 boutons statiques du markup dans leur état "non répondu",
-    // sans les régénérer : filet de sécurité théorique si WOD_DAYS est absent
+    // sans les régénérer : filet de sécurité théorique si le pool est absent
     // ou corrompu, pour qu'il y ait toujours quelque chose à rejouer.
     function resetStaticExample() {
       answered = false;

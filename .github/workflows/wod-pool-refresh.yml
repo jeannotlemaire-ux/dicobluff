@@ -1,14 +1,17 @@
-name: Régénération mensuelle du mot du jour
+name: Synchronisation du pool du mot du jour
 
-# Relance generate-wod-pool.js (voir ce fichier pour le détail) et pousse le
-# résultat si le bloc WOD-DATA d'index.html a changé. Sans ce workflow, le
-# bloc ne couvre que 30 jours et le widget "mot du jour" de la landing page
-# retombe sur un mot qui ne suit plus vraiment le calendrier (filet de
-# sécurité côté widget : voir buildRound() dans index.html).
+# Relance generate-wod-pool.js et pousse wod-pool.js s'il a changé. Le fichier
+# ne contient aucune date (le site calcule le mot à la volée avec wod.js, comme
+# le jeu) : il n'y a donc plus rien à rafraîchir périodiquement, seulement à
+# resynchroniser quand les mots de game.html changent.
 
 on:
-  schedule:
-    - cron: '0 6 1 * *' # le 1er de chaque mois à 6h UTC
+  push:
+    branches: [main]
+    paths:
+      - game.html
+      - wod.js
+      - generate-wod-pool.js
   workflow_dispatch: # déclenchement manuel depuis l'onglet Actions
 
 permissions:
@@ -26,14 +29,14 @@ jobs:
 
       - run: node generate-wod-pool.js
 
-      - name: Commit et push si le bloc a changé
+      - name: Commit et push si le pool a changé
         run: |
-          if git diff --quiet -- index.html; then
-            echo "Rien à faire — bloc WOD-DATA déjà à jour."
+          if [ -z "$(git status --porcelain -- wod-pool.js)" ]; then
+            echo "Rien à faire — wod-pool.js déjà à jour."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add index.html
-          git commit -m "chore: régénère le bloc WOD-DATA (mot du jour, 30 prochains jours)"
+          git add wod-pool.js
+          git commit -m "chore: resynchronise wod-pool.js (pool du mot du jour)"
           git push

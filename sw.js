@@ -7,7 +7,7 @@
    - Versioning : incrémente CACHE_VERSION pour forcer l'invalidation de tous les caches
 */
 
-const CACHE_VERSION = 'dicobluff-v46';
+const CACHE_VERSION = 'dicobluff-v47';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
@@ -17,6 +17,8 @@ const PRECACHE_URLS = [
   './index.html',
   './game.html',
   './offline.html',
+  './wod.js',
+  './wod-pool.js',
   './assets/icons/icon-192.png',
   './assets/icons/icon-512.png',
   './assets/icons/favicon-32.png'
@@ -86,6 +88,14 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
+  // Mot du jour (algorithme + pool) → réseau d'abord. En cache-first, un pool
+  // régénéré après l'installation du SW ne serait jamais revu et le site
+  // afficherait un autre mot que le jeu.
+  if (url.pathname.endsWith('/wod.js') || url.pathname.endsWith('/wod-pool.js')) {
+    event.respondWith(networkFirst(req));
+    return;
+  }
+
   // Assets statiques (icônes, manifest, images, css, js, fonts) → cache-first
   if (
     ['image', 'style', 'script', 'font', 'manifest'].includes(req.destination) ||
@@ -121,7 +131,8 @@ async function networkFirst(req) {
     if (fresh && fresh.status === 200) cache.put(req, fresh.clone());
     return fresh;
   } catch (e) {
-    const cached = await cache.match(req);
+    // caches.match : retombe aussi sur le précache (STATIC_CACHE)
+    const cached = (await cache.match(req)) || (await caches.match(req));
     if (cached) return cached;
     return new Response('', { status: 504, statusText: 'Offline' });
   }

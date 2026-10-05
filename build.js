@@ -6,7 +6,7 @@ const SRC = __dirname;
 const OUT = path.join(__dirname, 'www');
 
 // game.html → www/index.html pour Capacitor ; index.html = landing web uniquement
-const FILES = ['sw.js', 'manifest.webmanifest', 'offline.html', 'privacy.html'];
+const FILES = ['sw.js', 'wod.js', 'manifest.webmanifest', 'offline.html', 'privacy.html'];
 const DIRS  = ['assets', 'new-avatars'];
 
 // Exclus du bundle : PNG sources des avatars (remplacés par .webp), logo 1024px (→ logo-192.png), doublons/brouillons assets
