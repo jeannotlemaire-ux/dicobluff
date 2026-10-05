@@ -4558,20 +4558,6 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
   max-width: 300px; margin-left: auto; margin-right: auto;
 }
 
-/* Daily limit modal */
-#daily-limit-modal {
-  position: fixed; inset: 0;
-  z-index: var(--z-modal);
-  background: rgba(14,26,34,.82);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  display: none;
-  align-items: flex-end; justify-content: center;
-  padding: 20px;
-}
-#daily-limit-modal.open { display: flex; animation: screenIn .35s var(--ease-expo) both; }
-
-
 /* Barre de progression carnet */
 .carnet-progress-bar-wrap {
   height: 6px;
@@ -5494,25 +5480,6 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
 </div>
 
 <!-- ═══════════════════════════════════════════════
-     DAILY LIMIT MODAL
-═══════════════════════════════════════════════ -->
-<div id="daily-limit-modal" role="dialog" aria-modal="true" aria-labelledby="daily-limit-title">
-  <div class="premium-sheet">
-    <button type="button" class="modal-close-btn" onclick="closeDailyLimitModal()" aria-label="Fermer">&times;</button>
-    <div class="premium-sheet-icon">🌙</div>
-    <div class="premium-sheet-title" id="daily-limit-title">À demain !</div>
-    <div class="premium-sheet-body">Tu as joué tes <strong>3 parties gratuites</strong> du jour. Reviens demain pour 3 nouvelles parties — ou passe à Premium.</div>
-    <div class="premium-features">
-      <div class="premium-feature-row">Parties illimitées chaque jour</div>
-      <div class="premium-feature-row">Carnet de mots — sauvegarde et révise tes mots</div>
-      <div class="premium-feature-row">Mode Révision — consolide ton vocabulaire</div>
-    </div>
-    <button class="premium-btn-unlock" onclick="closeDailyLimitModal();showPremiumModal('daily_limit');">Débloquer Premium — 2,99 €</button>
-    <button class="premium-btn-close" onclick="closeDailyLimitModal()">Revenir demain</button>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════════════
      STARTER PICKER — première ouverture uniquement
 ═══════════════════════════════════════════════ -->
 <div id="starter-overlay" role="dialog" aria-modal="true" aria-labelledby="starter-title" aria-hidden="true">
@@ -6283,6 +6250,7 @@ body:has(#screen-revision.active) #bottom-nav { display: block; }
         <div class="muted small" style="line-height:1.6;">En mode solo, votre pseudo, vos statistiques, votre carnet de mots et vos préférences sont stockés uniquement en local sur votre appareil via localStorage. Aucune donnée de jeu n'est transmise à un serveur tiers.</div>
         <div class="muted small" style="line-height:1.6;margin-top:8px;">En mode multijoueur, votre pseudo et les définitions saisies transitent par Firebase Realtime Database (serveurs Google, zone europe-west1). Ces données sont temporaires et supprimées à la fin de la partie.</div>
         <div class="muted small" style="line-height:1.6;margin-top:8px;">Dans l'application Android, Dicobluff envoie des statistiques d'usage anonymisées (ouverture de l'application, parties lancées ou terminées, etc.) via Firebase Analytics (Google), afin de mesurer et d'améliorer le jeu. Cette collecte ne s'applique pas à la version jouable dans un navigateur.</div>
+        <div class="muted small" style="line-height:1.6;margin-top:8px;">Dans l'application Android, Dicobluff utilise le SDK Meta (Facebook) à des fins de mesure de performance publicitaire. Ce SDK collecte l'identifiant publicitaire Android (Advertising ID / AAID) de votre appareil, un identifiant qui n'est pas lié à votre identité civile. Il est partagé avec Meta Platforms, Inc., dans le seul but de mesurer la performance de nos campagnes publicitaires. Vous pouvez le réinitialiser ou en limiter la collecte depuis les paramètres Google de votre appareil.</div>
       </div>
       <div>
         <div style="font-family:'Manrope',sans-serif;font-weight:700;font-size:.82rem;color:var(--cream);margin-bottom:4px;">Contenu</div>
@@ -8462,7 +8430,6 @@ function unlockPremium(opts){
   applySupporterBadge();
   if(!already && opts.silent !== true){
     closePremiumModal();
-    closeDailyLimitModal();
     showPremiumSuccessModal();
     SFX.win();
   }
@@ -9386,31 +9353,6 @@ function tickDailyStreak() {
   const updated = { count: newCount, lastDay: today };
   LS.set('dailyStreak', updated);
   return updated;
-}
-
-/* ── Quota quotidien de parties gratuites ── */
-const DAILY_FREE_GAMES = 999;
-function getDailyGames(){
-  const d = LS.get('dailyGames', {date:'', count:0});
-  if(d.date !== todayKey()) return {date:todayKey(), count:0};
-  return d;
-}
-function tickDailyGame(){
-  const d = getDailyGames();
-  LS.set('dailyGames', {date:todayKey(), count:(d.count||0)+1});
-}
-function canPlayToday(){
-  return isPremium() || getDailyGames().count < DAILY_FREE_GAMES;
-}
-function showDailyLimitModal(){
-  const m = document.getElementById('daily-limit-modal');
-  if(m) m.classList.add('open');
-  track('daily_limit_hit');
-  SFX.click();
-}
-function closeDailyLimitModal(){
-  const m = document.getElementById('daily-limit-modal');
-  if(m) m.classList.remove('open');
 }
 
 function getDailyStreakDisplay() {
@@ -11253,7 +11195,6 @@ const App = {
   toggleAIOpponent(id){ /* auto-pick, no manual toggle */ },
 
   startSoloGame(){
-    if(!canPlayToday()){ showDailyLimitModal(); return; }
     // Le pseudo et l'avatar viennent du profil ; les choix de la page sont déjà dans solo.*
     const name = (LS.get('pseudo','').trim()) || 'Joueur';
     solo.name = name;
@@ -11334,7 +11275,6 @@ const App = {
   nextRound(){ if(solo.active) startSoloRound(); else nextRoundOnline(); },
   playAgain(){
     if(roomRef){ playAgainOnline(); return; }
-    if(!canPlayToday()){ showDailyLimitModal(); return; }
     solo.round=0; solo.usedWords=[]; solo.sessionWordObjs=[];
     solo.streak=0; solo.maxStreak=0;
     solo.sessionCorrect=0; solo.sessionFooled=0; solo.sessionRounds=0; solo.sessionFooledNames=[];
@@ -11501,7 +11441,6 @@ const App = {
 
   async startGame(){
     if(!roomRef)return;
-    if(!canPlayToday()){ showDailyLimitModal(); return; }
     const ps=gameState?.players||{};
     const onlinePlayers=Object.entries(ps).filter(([,p])=>p.online!==false);
     if(onlinePlayers.length<2){notify('Il faut au moins 2 joueurs en ligne !');return;}
@@ -12491,7 +12430,7 @@ function showSoloFinal(){
   // Persist stats
   const prevSt=getStats();
   const newSt={games:(prevSt.games||0)+1,wins:(prevSt.wins||0)+(playerWon?1:0),correct:(prevSt.correct||0)+solo.sessionCorrect,fooled:(prevSt.fooled||0)+solo.sessionFooled,streak:Math.max(prevSt.streak||0,solo.maxStreak),quizPerfect:prevSt.quizPerfect||0};
-  saveStats(newSt);checkAvatarUnlocks(prevSt);tickDailyStreak();tickDailyGame();
+  saveStats(newSt);checkAvatarUnlocks(prevSt);tickDailyStreak();
   if(typeof PWA !== 'undefined') PWA.maybePromptAfterGame();
   const _xpGain = solo.sessionCorrect*10+(playerWon?25:0)+solo.sessionFooled*5;
   addXP(_xpGain);
@@ -13304,7 +13243,7 @@ function renderFinalPhase(d){
 
   const prevSt=getStats();
   const newSt={games:(prevSt.games||0)+1,wins:(prevSt.wins||0)+(playerWon?1:0),correct:(prevSt.correct||0)+myMultiStats.correct,fooled:(prevSt.fooled||0)+myMultiStats.fooled,streak:Math.max(prevSt.streak||0,myMultiStats.maxStreak),quizPerfect:prevSt.quizPerfect||0};
-  saveStats(newSt);checkAvatarUnlocks(prevSt);tickDailyStreak();tickDailyGame();
+  saveStats(newSt);checkAvatarUnlocks(prevSt);tickDailyStreak();
   if(typeof PWA !== 'undefined') PWA.maybePromptAfterGame();
   const _xpGainMulti = myMultiStats.correct*10+(playerWon?25:0)+myMultiStats.fooled*5;
   addXP(_xpGainMulti);
