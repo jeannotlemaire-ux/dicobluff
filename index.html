@@ -5,20 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https://www.dicobluff.fr; connect-src 'self'; script-src 'self' 'unsafe-inline'; frame-ancestors 'none'">
   <title>Dicobluff — Le jeu de bluff littéraire</title>
-  <meta name="description" content="1000 mots rares. Des adversaires aux personnalités tranchées. Un seul vrai. Invente la définition parfaite pour piéger tes adversaires.">
+  <meta name="description" content="Le jeu de bluff de définitions à jouer entre amis. 1000 mots rares, une seule vraie définition : invente la tienne pour piéger tes amis en ligne, ou entraîne-toi en solo.">
   <meta name="theme-color" content="#0f1d31">
   <meta name="color-scheme" content="dark">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.dicobluff.fr/">
   <meta property="og:title" content="Dicobluff — Le jeu de bluff littéraire">
-  <meta property="og:description" content="1000 mots rares. Des adversaires retors. Un seul vrai.">
+  <meta property="og:description" content="1000 mots rares. Tes amis à piéger. Une seule vraie définition.">
   <meta property="og:image" content="https://www.dicobluff.fr/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:locale" content="fr_FR">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Dicobluff — Le jeu de bluff littéraire">
-  <meta name="twitter:description" content="1000 mots rares. Des adversaires retors. Un seul vrai.">
+  <meta name="twitter:description" content="1000 mots rares. Tes amis à piéger. Une seule vraie définition.">
   <meta name="twitter:image" content="https://www.dicobluff.fr/og-image.png">
   <link rel="canonical" href="https://www.dicobluff.fr/">
   <link rel="icon" type="image/svg+xml" href="assets/icon.svg">
@@ -28,7 +28,7 @@
     "@context": "https://schema.org",
     "@type": "MobileApplication",
     "name": "Dicobluff",
-    "description": "Jeu de bluff de définitions en français — invente la définition la plus convaincante pour piéger tes adversaires. 1000 mots rares, 12 personnages littéraires.",
+    "description": "Jeu de bluff de définitions en français — invente la définition la plus convaincante pour piéger tes amis en multijoueur en ligne, ou 12 personnages littéraires en solo. 1000 mots rares.",
     "operatingSystem": "Android, iOS",
     "applicationCategory": "GameApplication",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
@@ -1142,7 +1142,7 @@
         Triomphez.
       </h1>
       <p class="hero-desc reveal" style="transition-delay:.14s">
-        1&nbsp;000 mots rares. Des personnages aux personnalités tranchées.<br>
+        1&nbsp;000 mots rares. Tes amis à piéger, en ligne et en temps réel.<br>
         Une seule vraie définition — sauras-tu la reconnaître&nbsp;?
       </p>
       <div class="hero-stats reveal" style="transition-delay:.2s">
@@ -1574,7 +1574,20 @@
     <p class="sec-sub reveal" style="transition-delay:.12s">Du débutant en quête de fun au bluffeur aguerri qui veut le défi ultime.</p>
   </div>
   <div class="modes-grid">
-    <div class="mode-card reveal">
+    <div class="mode-card multi reveal">
+      <span class="mode-badge" style="background:rgba(42,157,143,.14);color:var(--teal);border:1px solid rgba(42,157,143,.3)">En ligne</span>
+      <svg class="mode-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:var(--teal)">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+      </svg>
+      <h3 class="mode-name">Multijoueur</h3>
+      <p class="mode-desc">2 à 10 joueurs en temps réel, à distance. Génère un code de partie, partage-le à tes amis — le bluff peut commencer.</p>
+      <ul class="mode-feats">
+        <li>Parties privées avec code</li>
+        <li>Classement en direct</li>
+        <li>Synchronisation temps réel</li>
+      </ul>
+    </div>
+    <div class="mode-card reveal" style="transition-delay:.1s">
       <span class="mode-badge badge-free">Gratuit</span>
       <svg class="mode-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.44L4.5 5a2.5 2.5 0 0 1 5-1z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.44L19.5 5a2.5 2.5 0 0 0-5-1z"/>
@@ -1587,20 +1600,6 @@
         <li>Difficulté ajustable</li>
         <li>Mot du jour inclus</li>
         <li>Carnet &amp; historique</li>
-      </ul>
-    </div>
-    <div class="mode-card multi reveal" style="transition-delay:.1s">
-      <span class="mode-badge" style="background:rgba(42,157,143,.14);color:var(--teal);border:1px solid rgba(42,157,143,.3)">En ligne</span>
-      <svg class="mode-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:var(--teal)">
-        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-      </svg>
-      <h3 class="mode-name">Multijoueur</h3>
-      <p class="mode-desc">2 à 10 joueurs en temps réel, à distance. Génère un code de partie, partage-le à tes amis — le bluff peut commencer.</p>
-      <ul class="mode-feats">
-        <li>Parties privées avec code</li>
-        <li>Chat intégré entre les manches</li>
-        <li>Classement en direct</li>
-        <li>Synchronisation temps réel</li>
       </ul>
     </div>
     <div class="mode-card premium reveal" style="transition-delay:.2s">
@@ -1628,49 +1627,49 @@
     <div>
       <div class="sec-head">
         <h2 class="sec-title reveal">Prêt en <em>30 secondes</em></h2>
-        <p class="sec-sub reveal" style="transition-delay:.12s">Pas de compte, pas d'inscription. Lance une partie et bluffe immédiatement.</p>
+        <p class="sec-sub reveal" style="transition-delay:.12s">Pas de compte, pas d'inscription. Crée un salon, partage le code, et bluffez ensemble.</p>
       </div>
       <div class="howto-steps">
         <div class="howto-step reveal">
           <div class="howto-num">1</div>
           <div class="howto-body">
             <div class="howto-step-name">Installe l'application</div>
-            <p class="howto-step-desc">Télécharge Dicobluff depuis le Play Store.</p>
+            <p class="howto-step-desc">Télécharge Dicobluff depuis le Play Store. Tes amis font de même.</p>
           </div>
         </div>
         <div class="howto-step reveal" style="transition-delay:.05s">
           <div class="howto-num">2</div>
           <div class="howto-body">
-            <div class="howto-step-name">Choisis tes adversaires</div>
-            <p class="howto-step-desc">Sélectionne 1 à 4 personnages parmi les 12 disponibles. Chacun a sa propre façon de bluffer.</p>
+            <div class="howto-step-name">Crée un salon</div>
+            <p class="howto-step-desc">Touche « Jouer entre amis ». Un salon s'ouvre aussitôt, avec son code à 4 caractères.</p>
           </div>
         </div>
         <div class="howto-step reveal" style="transition-delay:.1s">
           <div class="howto-num">3</div>
           <div class="howto-body">
-            <div class="howto-step-name">Lis le mot rare</div>
-            <p class="howto-step-desc">Un terme obscur apparaît. Tu as quelques secondes pour l'assimiler avant d'inventer ta définition.</p>
+            <div class="howto-step-name">Invite tes amis</div>
+            <p class="howto-step-desc">Envoie-leur le code depuis le bouton « Inviter ». Ils le saisissent dans « Rejoindre un salon » et arrivent dans ta partie.</p>
           </div>
         </div>
         <div class="howto-step reveal" style="transition-delay:.15s">
           <div class="howto-num">4</div>
           <div class="howto-body">
-            <div class="howto-step-name">Écris ta définition</div>
-            <p class="howto-step-desc">Rédige une définition convaincante. Plus elle ressemble à la vraie, plus tu marques de points.</p>
+            <div class="howto-step-name">Écrivez vos définitions</div>
+            <p class="howto-step-desc">Un mot rare apparaît. Chacun invente, de son côté, la définition la plus crédible possible.</p>
           </div>
         </div>
         <div class="howto-step reveal" style="transition-delay:.2s">
           <div class="howto-num">5</div>
           <div class="howto-body">
-            <div class="howto-step-name">Vote pour la vraie</div>
-            <p class="howto-step-desc">Toutes les définitions s'affichent mélangées. Repère la vraie parmi les fausses — personnages et joueurs confondus.</p>
+            <div class="howto-step-name">Votez pour la vraie</div>
+            <p class="howto-step-desc">Toutes les définitions s'affichent mélangées, sans signature. La vraie se cache parmi celles de tes amis.</p>
           </div>
         </div>
         <div class="howto-step reveal" style="transition-delay:.25s">
           <div class="howto-num">6</div>
           <div class="howto-body">
             <div class="howto-step-name">Le verdict</div>
-            <p class="howto-step-desc">Découvre qui a trompé qui. Accumule les points, gagne de l'XP et gravis les rangs.</p>
+            <p class="howto-step-desc">Découvrez qui a trompé qui. Le classement bouge après chaque manche, jusqu'au dernier mot.</p>
           </div>
         </div>
       </div>
@@ -1709,15 +1708,6 @@
           <div>
             <div class="multi-feat-name">Code de partie instantané</div>
             <p class="multi-feat-desc">Génère un code en un clic, partage-le à tes amis — la partie commence en secondes.</p>
-          </div>
-        </div>
-        <div class="multi-feat">
-          <div class="multi-feat-ico">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-          </div>
-          <div>
-            <div class="multi-feat-name">Réactions en live des adversaires</div>
-            <p class="multi-feat-desc">Cyrano ricane, Tartuffe feint l'étonnement. Les personnages réagissent à chaque vote — en temps réel.</p>
           </div>
         </div>
         <div class="multi-feat">
